@@ -1,0 +1,72 @@
+\documentclass[a4paper,12pt,spanish]{article}
+
+% Fonts.
+\usepackage{mathpazo}
+\usepackage[scaled=1.03,varqu]{zi4}
+%\usepackage[scaled=0.92]{luximono}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+
+% Format.
+\usepackage{geometry}
+\geometry{verbose,tmargin=3cm,bmargin=3cm,lmargin=3cm,rmargin=3cm}
+\usepackage{setspace}
+\onehalfspacing
+
+% Referències.
+\usepackage[unicode=true,
+        bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+        breaklinks=false,pdfborder={0 0 0},backref=false,colorlinks=false]
+    {hyperref}
+\hypersetup{pdfauthor={Gispert Sánchez, Francesc; Lorente García, Ester; Martín Alaminos, David}}
+
+% Gràfics.
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{standalone}
+
+
+\begin{document}
+
+\title{
+    Inteligencia artificial\\ 
+    Sistemas basados en el conocimiento
+}
+
+\author{
+    Gispert Sánchez, Francesc-Xavier\\
+    Lorente García, Ester\\
+    Martín Alaminos, David
+}
+
+\maketitle
+
+\noindent \rule[0.5ex]{1\columnwidth}{1pt}
+
+\tableofcontents
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{introduccion}
+
+\input{identificacion}
+
+\input{conceptualizacion}
+
+\input{formalizacion}
+
+\input{implementacion}
+
+\input{prueba}
+
+\input{conclusion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
+
+
