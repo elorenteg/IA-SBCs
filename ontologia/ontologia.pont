@@ -1,0 +1,411 @@
+; Sat Apr 25 00:00:00 CEST 2015
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+
+(defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
+	(is-a USER)
+	(role abstract)
+	(single-slot horario_conv
+;+		(comment "Horario de la convocatoria de examen")
+		(type INSTANCE)
+;+		(allowed-classes Horario)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot nombre_tema
+;+		(comment "Nombre del tema")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot cuatrimestre
+;+		(comment "Cuatrimestre de convocatoria")
+		(type SYMBOL)
+		(allowed-values 1 2)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot id
+;+		(comment "Identificador del alumno (DNI)")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot intereses
+;+		(comment "Conjunto de intereses temáticos")
+		(type INSTANCE)
+;+		(allowed-classes Tema)
+		(create-accessor read-write))
+	(single-slot nombre_comp
+;+		(comment "Nombre de la competencia")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot especialidad_asig
+;+		(comment "Especialidad asociada a la asignatura")
+		(type INSTANCE)
+;+		(allowed-classes Especialidad)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot competencias
+;+		(comment "Conjunto de competencias desarrolladas en la asignatura")
+		(type INSTANCE)
+;+		(allowed-classes Competencia)
+		(cardinality 1 ?VARIABLE)
+		(create-accessor read-write))
+	(single-slot inter%C3%A9s_compl_esp
+;+		(comment "Interés por completar la especialidad en la matrícula actual")
+		(type SYMBOL)
+		(allowed-values ninguno medio alto)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot matriculados_ant
+;+		(comment "Número de estudiantes matriculados el cuatrimestre anterior")
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot curso
+;+		(comment "Año del plan de estudios en que se cursa la asignatura")
+		(type SYMBOL)
+		(allowed-values 1 2 3 4)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot aprobados_ant
+;+		(comment "Porcentaje de estudiantes aprobados el cuatrimestre anterior")
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot convocatorias
+;+		(comment "Conjunto de convocatorias de examen registradas en el expediente")
+		(type INSTANCE)
+;+		(allowed-classes Convocatoria)
+		(create-accessor read-write))
+	(multislot temas_incluidos
+;+		(comment "Conjunto de temas especializados que incluye la especialidad")
+		(type INSTANCE)
+;+		(allowed-classes Especializado)
+		(create-accessor read-write))
+	(single-slot calificaci%C3%B3n
+;+		(comment "Puntuación obtenida en el examen")
+		(type FLOAT)
+		(range 0.0 10.0)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot nivel
+;+		(comment "Nivel de la competencia")
+		(type SYMBOL)
+		(allowed-values 1 2 3)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot horarios
+;+		(comment "Horarios de impartición de clases")
+		(type INSTANCE)
+;+		(allowed-classes Horario)
+		(cardinality 1 2)
+		(create-accessor read-write))
+	(multislot temas
+;+		(comment "Conjunto de temas en los que se ubica la asignatura")
+		(type INSTANCE)
+;+		(allowed-classes Tema)
+		(cardinality 1 ?VARIABLE)
+		(create-accessor read-write))
+	(multislot temas_afines
+;+		(comment "Conjunto de temas (especializados) afines")
+		(type INSTANCE)
+;+		(allowed-classes Especializado)
+		(create-accessor read-write))
+	(single-slot asignatura_conv
+;+		(comment "Asignatura que convoca el examen")
+		(type INSTANCE)
+;+		(allowed-classes Asignatura)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot prerrequisitos
+;+		(comment "Conjunto de asignaturas que se debe haber aprovado previamente")
+		(type INSTANCE)
+;+		(allowed-classes Asignatura)
+		(create-accessor read-write))
+	(single-slot volumen_trabajo
+;+		(comment "Volumen de trabajo que puede asumir")
+		(type SYMBOL)
+		(allowed-values alto medio bajo)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot tiempo_dedicaci%C3%B3n
+;+		(comment "Tiempo de dedicación permitido")
+		(type SYMBOL)
+		(allowed-values alto medio bajo)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot es_proyecto
+;+		(comment "Si la asignatura es de proyecto")
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot nombre_esp
+;+		(comment "Nombre de la especialidad")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot especialidad
+;+		(comment "Especialidad principal")
+		(type INSTANCE)
+;+		(allowed-classes Especialidad)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot correquisitos
+;+		(comment "Conjunto de asignaturas que se debe haber aprobado o matriculado")
+		(type INSTANCE)
+;+		(allowed-classes Asignatura)
+		(create-accessor read-write))
+	(single-slot nombre
+;+		(comment "Siglas del nombre")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot horario
+;+		(comment "Nombre de la franja horaria")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot num_creditos
+;+		(comment "Número de créditos ECTS")
+		(type FLOAT)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot dificultad
+;+		(comment "Dificultad en los estudios que puede asumir un alumno")
+		(type SYMBOL)
+		(allowed-values alta media)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Asignatura "Asignatura del plan de estudios"
+	(is-a USER)
+	(role abstract)
+	(multislot competencias
+;+		(comment "Conjunto de competencias desarrolladas en la asignatura")
+		(type INSTANCE)
+;+		(allowed-classes Competencia)
+		(cardinality 1 ?VARIABLE)
+		(create-accessor read-write))
+	(multislot correquisitos
+;+		(comment "Conjunto de asignaturas que se debe haber aprobado o matriculado")
+		(type INSTANCE)
+;+		(allowed-classes Asignatura)
+		(create-accessor read-write))
+	(single-slot matriculados_ant
+;+		(comment "Número de estudiantes matriculados el cuatrimestre anterior")
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot horarios
+;+		(comment "Horarios de impartición de clases")
+		(type INSTANCE)
+;+		(allowed-classes Horario)
+		(cardinality 1 2)
+		(create-accessor read-write))
+	(single-slot nombre
+;+		(comment "Siglas del nombre")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot temas
+;+		(comment "Conjunto de temas en los que se ubica la asignatura")
+		(type INSTANCE)
+;+		(allowed-classes Tema)
+		(cardinality 1 ?VARIABLE)
+		(create-accessor read-write))
+	(single-slot num_creditos
+;+		(comment "Número de créditos ECTS")
+		(type FLOAT)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot prerrequisitos
+;+		(comment "Conjunto de asignaturas que se debe haber aprovado previamente")
+		(type INSTANCE)
+;+		(allowed-classes Asignatura)
+		(create-accessor read-write))
+	(single-slot curso
+;+		(comment "Año del plan de estudios en que se cursa la asignatura")
+		(type SYMBOL)
+		(allowed-values 1 2 3 4)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot aprobados_ant
+;+		(comment "Porcentaje de estudiantes aprobados el cuatrimestre anterior")
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot es_proyecto
+;+		(comment "Si la asignatura es de proyecto")
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Obligatoria "Asignatura obligatoria (troncal) para todos los estudiantes"
+	(is-a Asignatura)
+	(role concrete))
+
+(defclass Especializada "Asignatura que forma parte de una especialidad"
+	(is-a Asignatura)
+	(role concrete)
+	(single-slot especialidad_asig
+;+		(comment "Especialidad asociada a la asignatura")
+		(type INSTANCE)
+;+		(allowed-classes Especialidad)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Optativa "Asignatura optativa"
+	(is-a Asignatura)
+	(role concrete))
+
+(defclass Libre_elecci%C3%B3n "Asignatura de libre elección"
+	(is-a Asignatura)
+	(role concrete))
+
+(defclass Convocatoria "Convocatoria de examen"
+	(is-a USER)
+	(role concrete)
+	(single-slot calificaci%C3%B3n
+;+		(comment "Puntuación obtenida en el examen")
+		(type FLOAT)
+		(range 0.0 10.0)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot horario_conv
+;+		(comment "Horario de la convocatoria de examen")
+		(type INSTANCE)
+;+		(allowed-classes Horario)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot cuatrimestre
+;+		(comment "Cuatrimestre de convocatoria")
+		(type SYMBOL)
+		(allowed-values 1 2)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot asignatura_conv
+;+		(comment "Asignatura que convoca el examen")
+		(type INSTANCE)
+;+		(allowed-classes Asignatura)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Horario "Franja horaria"
+	(is-a USER)
+	(role concrete)
+	(single-slot horario
+;+		(comment "Nombre de la franja horaria")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Especialidad "Especialización del plan de estudios"
+	(is-a USER)
+	(role concrete)
+	(multislot temas_incluidos
+;+		(comment "Conjunto de temas especializados que incluye la especialidad")
+		(type INSTANCE)
+;+		(allowed-classes Especializado)
+		(create-accessor read-write))
+	(single-slot nombre_esp
+;+		(comment "Nombre de la especialidad")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Competencia "Competencias genéricas y transversales que intentan validar y mejorar aptitudes personales"
+	(is-a USER)
+	(role concrete)
+	(single-slot nivel
+;+		(comment "Nivel de la competencia")
+		(type SYMBOL)
+		(allowed-values 1 2 3)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot nombre_comp
+;+		(comment "Nombre de la competencia")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Tema "Clasificación de un conjunto de disciplinas, campos de estudio y/o actividades bajo un nombre común"
+	(is-a USER)
+	(role abstract)
+	(single-slot nombre_tema
+;+		(comment "Nombre del tema")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass General "Conceptos y temáticas genéricas de la informática"
+	(is-a Tema)
+	(role concrete))
+
+(defclass Especializado "Subdisciplina más acotada y especializada"
+	(is-a Tema)
+	(role concrete)
+	(multislot temas_afines
+;+		(comment "Conjunto de temas (especializados) afines")
+		(type INSTANCE)
+;+		(allowed-classes Especializado)
+		(create-accessor read-write)))
+
+(defclass No_inform%C3%A1tico "Actividad o campo no directamente relacionado con la informática"
+	(is-a Tema)
+	(role concrete))
+
+(defclass Expediente "Expediente académico de un alumno"
+	(is-a USER)
+	(role concrete)
+	(multislot convocatorias
+;+		(comment "Conjunto de convocatorias de examen registradas en el expediente")
+		(type INSTANCE)
+;+		(allowed-classes Convocatoria)
+		(create-accessor read-write)))
+
+(defclass Alumno "Representación de un alumno de la Facultat d'Informàtica de Barcelona"
+	(is-a USER)
+	(role concrete)
+	(single-slot especialidad
+;+		(comment "Especialidad principal")
+		(type INSTANCE)
+;+		(allowed-classes Especialidad)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot inter%C3%A9s_compl_esp
+;+		(comment "Interés por completar la especialidad en la matrícula actual")
+		(type SYMBOL)
+		(allowed-values ninguno medio alto)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot id
+;+		(comment "Identificador del alumno (DNI)")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot volumen_trabajo
+;+		(comment "Volumen de trabajo que puede asumir")
+		(type SYMBOL)
+		(allowed-values alto medio bajo)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot tiempo_dedicaci%C3%B3n
+;+		(comment "Tiempo de dedicación permitido")
+		(type SYMBOL)
+		(allowed-values alto medio bajo)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot intereses
+;+		(comment "Conjunto de intereses temáticos")
+		(type INSTANCE)
+;+		(allowed-classes Tema)
+		(create-accessor read-write))
+	(single-slot dificultad
+;+		(comment "Dificultad en los estudios que puede asumir un alumno")
+		(type SYMBOL)
+		(allowed-values alta media)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))

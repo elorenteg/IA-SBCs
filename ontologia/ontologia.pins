@@ -1,0 +1,355 @@
+; Sat Apr 25 00:00:00 CEST 2015
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+([ontologia_Class0] of  %3APAL-CONSTRAINT
+
+	(%3APAL-NAME "asd")
+	(%3APAL-RANGE "sdfsdf")
+	(%3APAL-STATEMENT "asdsd"))
+
+([ontologia_Class10000] of  No_inform%C3%A1tico
+
+	(nombre_tema "Organización de empresas"))
+
+([ontologia_Class26] of  Obligatoria
+
+	(curso 1)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "F")
+	(num_creditos 7.5)
+	(temas [ontologia_Class57]))
+
+([ontologia_Class27] of  Obligatoria
+
+	(curso 1)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "FM")
+	(num_creditos 7.5)
+	(temas [ontologia_Class56]))
+
+([ontologia_Class28] of  Obligatoria
+
+	(curso 1)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "IC")
+	(num_creditos 7.5)
+	(temas [ontologia_Class55]))
+
+([ontologia_Class29] of  Obligatoria
+
+	(curso 1)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "PRO2")
+	(num_creditos 7.5)
+	(temas [ontologia_Class49]))
+
+([ontologia_Class30] of  Obligatoria
+
+	(curso 1)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "EC")
+	(num_creditos 7.5)
+	(temas [ontologia_Class55]))
+
+([ontologia_Class31] of  Obligatoria
+
+	(curso 1)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "M1")
+	(num_creditos 7.5)
+	(temas [ontologia_Class56]))
+
+([ontologia_Class32] of  Obligatoria
+
+	(curso 1)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "M2")
+	(num_creditos 7.5)
+	(temas [ontologia_Class56]))
+
+([ontologia_Class33] of  Obligatoria
+
+	(curso 1)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "PRO1")
+	(num_creditos 7.5)
+	(temas [ontologia_Class49]))
+
+([ontologia_Class34] of  Obligatoria
+
+	(curso 2)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "BD")
+	(num_creditos 6.0)
+	(temas [ontologia_Class51]))
+
+([ontologia_Class35] of  Obligatoria
+
+	(curso 2)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "PE")
+	(num_creditos 6.0)
+	(temas [ontologia_Class56]))
+
+([ontologia_Class36] of  Obligatoria
+
+	(curso 2)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "SO")
+	(num_creditos 6.0)
+	(temas
+		[ontologia_Class55]
+		[ontologia_Class49]))
+
+([ontologia_Class37] of  Obligatoria
+
+	(curso 2)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "EDA")
+	(num_creditos 6.0)
+	(temas [ontologia_Class49]))
+
+([ontologia_Class38] of  Obligatoria
+
+	(curso 2)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "CI")
+	(num_creditos 6.0)
+	(temas [ontologia_Class55]))
+
+([ontologia_Class39] of  Obligatoria
+
+	(curso 2)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "EEE")
+	(num_creditos 6.0)
+	(temas [ontologia_Class10000]))
+
+([ontologia_Class40] of  Obligatoria
+
+	(curso 2)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "IES")
+	(num_creditos 6.0)
+	(temas [ontologia_Class50]))
+
+([ontologia_Class41] of  Obligatoria
+
+	(curso 2)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "XC")
+	(num_creditos 6.0)
+	(temas [ontologia_Class54]))
+
+([ontologia_Class42] of  Obligatoria
+
+	(curso 2)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "AC")
+	(num_creditos 6.0)
+	(temas [ontologia_Class55]))
+
+([ontologia_Class43] of  Obligatoria
+
+	(curso 2)
+	(es_proyecto TRUE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "PROP")
+	(num_creditos 6.0)
+	(temas
+		[ontologia_Class50]
+		[ontologia_Class49]))
+
+([ontologia_Class44] of  Obligatoria
+
+	(curso 3)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "PAR")
+	(num_creditos 6.0)
+	(temas [ontologia_Class55]))
+
+([ontologia_Class45] of  Obligatoria
+
+	(curso 3)
+	(es_proyecto FALSE)
+	(horarios
+		[ontologia_Class46]
+		[ontologia_Class47])
+	(nombre "IDI")
+	(num_creditos 6.0)
+	(temas
+		[ontologia_Class49]
+		[ontologia_Class59]))
+
+([ontologia_Class46] of  Horario
+
+	(horario "Mañana"))
+
+([ontologia_Class47] of  Horario
+
+	(horario "Tarde"))
+
+([ontologia_Class49] of  General
+
+	(nombre_tema "Programación"))
+
+([ontologia_Class50] of  General
+
+	(nombre_tema "Ingeniería de software"))
+
+([ontologia_Class51] of  General
+
+	(nombre_tema "Bases de datos"))
+
+([ontologia_Class52] of  Especializado
+
+	(nombre_tema "Inteligencia artifical")
+	(temas_afines
+		[ontologia_Class63]
+		[ontologia_Class61]))
+
+([ontologia_Class53] of  Especializado
+
+	(nombre_tema "Cálculo numérico"))
+
+([ontologia_Class54] of  General
+
+	(nombre_tema "Redes"))
+
+([ontologia_Class55] of  General
+
+	(nombre_tema "Arquitectura de computadores"))
+
+([ontologia_Class56] of  General
+
+	(nombre_tema "Matemáticas"))
+
+([ontologia_Class57] of  General
+
+	(nombre_tema "Física"))
+
+([ontologia_Class58] of  Especializado
+
+	(nombre_tema "Lenguajes de programación"))
+
+([ontologia_Class59] of  Especializado
+
+	(nombre_tema "Gráficos")
+	(temas_afines [ontologia_Class62]))
+
+([ontologia_Class60] of  Especializado
+
+	(nombre_tema "Investigación operativa")
+	(temas_afines [ontologia_Class53]))
+
+([ontologia_Class61] of  Especializado
+
+	(nombre_tema "Tratamiento de datos"))
+
+([ontologia_Class62] of  Especializado
+
+	(nombre_tema "Geometría computacional"))
+
+([ontologia_Class63] of  Especializado
+
+	(nombre_tema "Lógica"))
+
+([ontologia_Class64] of  No_inform%C3%A1tico
+
+	(nombre_tema "Lúdica"))
+
+([ontologia_Class65] of  No_inform%C3%A1tico
+
+	(nombre_tema "Cultural"))
+
+([ontologia_Class66] of  No_inform%C3%A1tico
+
+	(nombre_tema "Divulgación científica"))
+
+([ontologia_Class68] of  Especialidad
+
+	(nombre_esp "Computación")
+	(temas_incluidos
+		[ontologia_Class53]
+		[ontologia_Class62]
+		[ontologia_Class59]
+		[ontologia_Class52]
+		[ontologia_Class60]
+		[ontologia_Class58]
+		[ontologia_Class63]
+		[ontologia_Class61]))
+
+([ontologia_Class69] of  Especialidad
+
+	(nombre_esp "Ingeniería de computadores"))
+
+([ontologia_Class70] of  Especialidad
+
+	(nombre_esp "Ingeniería del software"))
+
+([ontologia_Class71] of  Especialidad
+
+	(nombre_esp "Sistemas de información")
+	(temas_incluidos [ontologia_Class61]))
+
+([ontologia_Class72] of  Especialidad
+
+	(nombre_esp "Tecnologías de la información"))
