@@ -1,7 +1,36 @@
 
 \section{Introducción} \label{sec:intro}
 
-%%% TODO %%%
+Algunos problemas no se pueden resolver satisfactoriamente con algoritmos de
+carácter general, sino que su resolución requiere de conocimiento específico 
+sobre elementos del dominio de definición del problema que permita tomar 
+decisiones adecuadas. Por ello, la inteligencia artificial hace uso de 
+sistemas basados en el conocimiento para solucionar problemas de alta 
+complejidad.
+
+En este trabajo, lo ejemplificamos mediante la implementación de un sistemaa 
+de recomendación de asignaturas de la FIB a sus alumnos teniendo en cuenta sus 
+preferencias y las restricciones sobre las asignaturas de la FIB, entre otros 
+criterios. Esta tarea es altamente dependiente de la información disponible 
+sobre la estructura de las asignaturas y sobre las características propias de 
+los alumnos. Se trata, pues, de un problema para el cual tiene mucho sentido 
+el uso de un sistema basado en el conocimiento, separando así el tratamiento 
+de la información subyacente de los algoritmos de razonamiento que generan 
+las recomendaciones.
+
+Se desarrolla, pues, una ontología que almacena la información sobre las 
+asignaturas y los estudiantes usando \texttt{Protégé} y un sistema de reglas 
+que describen el proceso de toma de decisiones usando \texttt{CLIPS}. El 
+desarrollo de la práctica, así como la estructura de este informe, siguen un 
+modelo esencialmente en cascada basado en la ingeniería del conocimiento y 
+que se divide en las siguientes fases: identificación del problema, 
+conceptualización, formalización, implementación y prueba. A pesar de la 
+dimensión reducida de esta práctica, sin embargo, hemos iterado algunas veces 
+sobre este esquema, volviendo a fases anteriores para mejorar el diseño de 
+nuestra solución.
+
+En el resto de este documento, explicamos los pasos del desarrollo de nuestra 
+solución y mostramos y analizamos los resultados obtenidos.
 
 \clearpage
 
