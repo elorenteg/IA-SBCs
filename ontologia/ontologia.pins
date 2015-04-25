@@ -1,4 +1,4 @@
-; Sat Apr 25 04:44:29 CEST 2015
+; Sat Apr 25 14:21:51 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -723,6 +723,9 @@
 		[ontologia_Class47])
 	(nombre "BD")
 	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class33]
+		[ontologia_Class29])
 	(temas [ontologia_Class51]))
 
 ([ontologia_Class35] of  Obligatoria
@@ -734,6 +737,9 @@
 		[ontologia_Class47])
 	(nombre "PE")
 	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class31]
+		[ontologia_Class32])
 	(temas [ontologia_Class56]))
 
 ([ontologia_Class36] of  Obligatoria
@@ -745,6 +751,9 @@
 		[ontologia_Class47])
 	(nombre "SO")
 	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class30]
+		[ontologia_Class28])
 	(temas
 		[ontologia_Class55]
 		[ontologia_Class49]))
@@ -758,6 +767,9 @@
 		[ontologia_Class47])
 	(nombre "EDA")
 	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class33]
+		[ontologia_Class29])
 	(temas [ontologia_Class49]))
 
 ([ontologia_Class38] of  Obligatoria
@@ -769,6 +781,10 @@
 		[ontologia_Class47])
 	(nombre "CI")
 	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class30]
+		[ontologia_Class26]
+		[ontologia_Class28])
 	(temas [ontologia_Class55]))
 
 ([ontologia_Class39] of  Obligatoria
@@ -784,6 +800,7 @@
 
 ([ontologia_Class40] of  Obligatoria
 
+	(correquisitos [ontologia_Class37])
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -791,10 +808,12 @@
 		[ontologia_Class47])
 	(nombre "IES")
 	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class34])
 	(temas [ontologia_Class50]))
 
 ([ontologia_Class41] of  Obligatoria
 
+	(correquisitos [ontologia_Class36])
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -806,6 +825,7 @@
 
 ([ontologia_Class42] of  Obligatoria
 
+	(correquisitos [ontologia_Class35])
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -813,10 +833,16 @@
 		[ontologia_Class47])
 	(nombre "AC")
 	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class30]
+		[ontologia_Class36])
 	(temas [ontologia_Class55]))
 
 ([ontologia_Class43] of  Obligatoria
 
+	(correquisitos
+		[ontologia_Class34]
+		[ontologia_Class40])
 	(curso 2)
 	(es_proyecto TRUE)
 	(horarios
@@ -824,6 +850,7 @@
 		[ontologia_Class47])
 	(nombre "PROP")
 	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class37])
 	(temas
 		[ontologia_Class50]
 		[ontologia_Class49]))
@@ -837,6 +864,10 @@
 		[ontologia_Class47])
 	(nombre "PAR")
 	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class42]
+		[ontologia_Class37]
+		[ontologia_Class36])
 	(temas [ontologia_Class55]))
 
 ([ontologia_Class45] of  Obligatoria
@@ -848,6 +879,9 @@
 		[ontologia_Class47])
 	(nombre "IDI")
 	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class37]
+		[ontologia_Class31])
 	(temas
 		[ontologia_Class49]
 		[ontologia_Class59]))
