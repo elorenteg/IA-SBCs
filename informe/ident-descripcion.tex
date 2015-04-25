@@ -1,0 +1,77 @@
+
+\subsection{Descripción del problema} \label{sec:descripcion}
+
+El proceso de matriculación de asignaturas en la FIB por parte de los 
+estudiantes requiere de la consideración de una multitud de factores muy 
+variados e interdependientes. La gran diversidad de asignaturas con sus 
+distintos requisitos, horarios y grupos puede plantear un reto a la hora de 
+elegir un subconjunto de ellas adecuado a la situación y a la predilección 
+por algunos temas del alumno. Con el objetivo de simplificar al máximo este 
+trámite, se plantea el desarrollo de una aplicación de recomendación de 
+asignaturas que tenga en cuenta todas estas variables.
+
+El sistema empleado para hacer la recomendación se basa en las características 
+de las asignaturas. Además, el sistema dispone de los expedientes de los 
+alumnos de la FIB y se sirve de datos adicionales recopilados mediante 
+preguntas a los usuarios (estudiantes) para aumentar la base de datos sobre 
+estos. A partir de esta información, pues, se pueden construir recomendaciones 
+personalizadas más ajustadas a la realidad individual del estudiante.
+
+En particular, para cada asignatura de la FIB se almacena su nombre, el curso 
+en el que está ubicada según el plan de estudios, el número de créditos a los 
+que corresponde, su distribución en clases de teoría, problemas y laboratorio, 
+si es de proyecto, si es obligatoria, de especialidad (y, en este caso, a qué 
+especialidad corresponde) u optativa, qué temas trata, las competencias 
+transversales asociadas a esta, los horarios en los que está disponible, el 
+número de matriculados y de aprobados del cuatrimestre anterior, ...
+%%% TODO : ¿Qué elementos tiene que haber exactamente en esta lista? %%%
+
+Se dispone además de conjuntos de temas generales, especializados y no 
+informáticos que engloban algunas asignaturas. De entre estos, los temas 
+especializados se relacionan entre sí según un grado de afinidad. Esta 
+clasificación de las asignaturas en temas permite ofrecer recomendaciones 
+adecuadas a los intereses de los alumnos.
+
+El sistema contiene también los expedientes académicos de los alumnos, 
+estructurados según las convocatorias a las que se han presentado de cada 
+asignatura: para cada una de estas, se almacena el cuadrimestre y el horario 
+en el que se cursó la asignatura y la calificación final obtenida.
+
+Además de la información contenida en el sistema, se ofrece la posibilidad de 
+que el alumno añada información adicional sobre sus intereses y restricciones 
+que conciernen a la elección de las asignaturas. En particular, este puede 
+especificar un número máximo de asignaturas a mostrar, un máximo de horas de 
+dedicación esperadas o de dedicación a prácticas esperadas, los horarios en 
+los que puede asistir a clase, los temas de su interés, un interés en terminar 
+la especialidad o en adquirir determinadas competencias transversales, un 
+nivel de dificultad aceptable para las asignaturas recomendadas, ...
+
+Sin embargo, el alumno no tiene la obligación de introducir todos estos datos. 
+En tal caso, algunas de estas preferencias y restricciones son inferidas por 
+el sistema a partir de los datos de los que se dispone: su expediente hasta 
+el momento y los datos sobre las asignaturas y el sistema docente de la FIB. 
+Es decir, en ausencia de información explícitamente proporcionada por el
+propio alumno, el sistema toma decisiones sobre sus preferencias y 
+restricciones basándose en la información previa (o sea, aquella proveniente 
+de un análisis del expediente del alumno) y del conocimiento sobre el dominio 
+(o sea, sobre las asignaturas disponibles y sus características y relaciones 
+con los distintos elementos del plan de estudios de la FIB).
+%%% TODO : ¿Qué elementos tiene que haber exactamente en esta lista? %%%
+
+El conocimiento inferido se estructura según unos parámetros que permiten 
+relacionar un alumno con distintas asignaturas para determinar la 
+recomendación final: su disponibilidad horaria, la dedicación posible, el 
+volumen de trabajo que puede asumir, la lista de temas de su interés, la 
+especialidad que cursa, su interés por terminarla, ...
+%%% TODO : ¿Qué elementos tiene que haber exactamente en esta lista? %%%
+
+A partir de los parámetros descritos, es posible realizar una búsqueda sobre 
+las asignaturas disponibles y asociar a cada una de ellas un grado de afinidad 
+con el alumno para la recomendación (es decir, un índice que estima cuán 
+apropiada es cada asignatura para el alumno). Finalmente, una vez determinados 
+estos, se escogen hasta un máximo de seis asignaturas (aquellas que el sistema 
+ha señalado más adecuadas) para elaborar la recomendación final, que incluye 
+asimismo un grado de recomendación para cada una de ellas y los motivos que 
+han conducido al sistema a recomendar esas asignaturas.
+
+
