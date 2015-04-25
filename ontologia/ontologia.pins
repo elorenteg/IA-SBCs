@@ -1,4 +1,4 @@
-; Sat Apr 25 00:00:00 CEST 2015
+; Sat Apr 25 04:44:29 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -12,6 +12,619 @@
 ([ontologia_Class10000] of  No_inform%C3%A1tico
 
 	(nombre_tema "Organización de empresas"))
+
+([ontologia_Class20026] of  Especializado
+
+	(nombre_tema "Diseño de algoritmos"))
+
+([ontologia_Class20027] of  Especializada
+
+	(correquisitos
+		[ontologia_Class35]
+		[ontologia_Class43])
+	(curso 3)
+	(especialidad_asig [ontologia_Class68])
+	(horarios [ontologia_Class47])
+	(nombre "A")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class37]
+		[ontologia_Class35]
+		[ontologia_Class43])
+	(temas [ontologia_Class20026]))
+
+([ontologia_Class20029] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class68])
+	(horarios [ontologia_Class47])
+	(nombre "G")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class45]
+		[ontologia_Class43])
+	(temas
+		[ontologia_Class59]
+		[ontologia_Class58]
+		[ontologia_Class49]))
+
+([ontologia_Class20031] of  Especializada
+
+	(correquisitos [ontologia_Class43])
+	(curso 3)
+	(especialidad_asig [ontologia_Class68])
+	(horarios [ontologia_Class47])
+	(nombre "IA")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class37]
+		[ontologia_Class43])
+	(temas
+		[ontologia_Class52]
+		[ontologia_Class49]
+		[ontologia_Class58]))
+
+([ontologia_Class20032] of  Especializada
+
+	(correquisitos [ontologia_Class43])
+	(curso 3)
+	(especialidad_asig [ontologia_Class68])
+	(horarios [ontologia_Class47])
+	(nombre "LI")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class37]
+		[ontologia_Class43])
+	(temas
+		[ontologia_Class63]
+		[ontologia_Class58]
+		[ontologia_Class49]))
+
+([ontologia_Class20033] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class68])
+	(horarios [ontologia_Class47])
+	(nombre "LP")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class43])
+	(temas
+		[ontologia_Class58]
+		[ontologia_Class49]))
+
+([ontologia_Class20034] of  Especializada
+
+	(correquisitos [ontologia_Class43])
+	(curso 3)
+	(especialidad_asig [ontologia_Class68])
+	(horarios [ontologia_Class47])
+	(nombre "TC")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class37]
+		[ontologia_Class43])
+	(temas [ontologia_Class20026]))
+
+([ontologia_Class20035] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class68])
+	(horarios [ontologia_Class47])
+	(nombre "AA")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class20027])
+	(temas [ontologia_Class20026]))
+
+([ontologia_Class20036] of  Especializada
+
+	(correquisitos [ontologia_Class43])
+	(curso 3)
+	(especialidad_asig [ontologia_Class68])
+	(horarios [ontologia_Class47])
+	(nombre "APA")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class35]
+		[ontologia_Class43])
+	(temas [ontologia_Class61]))
+
+([ontologia_Class20037] of  Especializada
+
+	(correquisitos [ontologia_Class43])
+	(curso 3)
+	(especialidad_asig [ontologia_Class68])
+	(horarios [ontologia_Class47])
+	(nombre "CAIM")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class34]
+		[ontologia_Class35])
+	(temas [ontologia_Class61]))
+
+([ontologia_Class20038] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class68])
+	(horarios [ontologia_Class47])
+	(nombre "CL")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class20034])
+	(temas
+		[ontologia_Class58]
+		[ontologia_Class49]))
+
+([ontologia_Class20039] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class68])
+	(horarios [ontologia_Class47])
+	(nombre "CN")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class31]
+		[ontologia_Class32])
+	(temas [ontologia_Class53]))
+
+([ontologia_Class20040] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class68])
+	(horarios [ontologia_Class47])
+	(nombre "IO")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class35])
+	(temas [ontologia_Class60]))
+
+([ontologia_Class20041] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class68])
+	(horarios [ontologia_Class47])
+	(nombre "SID")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class20031])
+	(temas [ontologia_Class60]))
+
+([ontologia_Class20043] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class69])
+	(horarios [ontologia_Class46])
+	(nombre "AC2")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class42])
+	(temas [ontologia_Class55]))
+
+([ontologia_Class20044] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class69])
+	(horarios [ontologia_Class46])
+	(nombre "DSBM")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class38])
+	(temas [ontologia_Class55]))
+
+([ontologia_Class20045] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class69])
+	(horarios [ontologia_Class47])
+	(nombre "MP")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class44]
+		[ontologia_Class20043])
+	(temas [ontologia_Class55]))
+
+([ontologia_Class20046] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class69])
+	(horarios [ontologia_Class46])
+	(nombre "PEC")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class20043]
+		[ontologia_Class20044]
+		[ontologia_Class20047])
+	(temas [ontologia_Class55]))
+
+([ontologia_Class20047] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class69])
+	(horarios [ontologia_Class46])
+	(nombre "SO2")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class36])
+	(temas [ontologia_Class20048]))
+
+([ontologia_Class20048] of  Especializado
+
+	(nombre_tema "Sistemas operativos"))
+
+([ontologia_Class20049] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class69])
+	(horarios [ontologia_Class46])
+	(nombre "XC2")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class41])
+	(temas
+		[ontologia_Class55]
+		[ontologia_Class54]))
+
+([ontologia_Class20050] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class69])
+	(horarios [ontologia_Class46])
+	(nombre "PAP")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class44])
+	(temas
+		[ontologia_Class55]
+		[ontologia_Class49]))
+
+([ontologia_Class20051] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class69])
+	(horarios [ontologia_Class46])
+	(nombre "PCA")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class42])
+	(temas
+		[ontologia_Class55]
+		[ontologia_Class49]))
+
+([ontologia_Class20052] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class69])
+	(horarios [ontologia_Class46])
+	(nombre "PDS")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class38])
+	(temas
+		[ontologia_Class55]
+		[ontologia_Class20053]))
+
+([ontologia_Class20053] of  Especializado
+
+	(nombre_tema "Procesadores"))
+
+([ontologia_Class20054] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class69])
+	(horarios [ontologia_Class46])
+	(nombre "STR")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class20044]
+		[ontologia_Class36]))
+
+([ontologia_Class20055] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class69])
+	(horarios [ontologia_Class46])
+	(nombre "VLSI")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class20043])
+	(temas
+		[ontologia_Class20053]
+		[ontologia_Class55]))
+
+([ontologia_Class20057] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class70])
+	(horarios [ontologia_Class47])
+	(nombre "AS")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class40])
+	(temas
+		[ontologia_Class51]
+		[ontologia_Class50]))
+
+([ontologia_Class20058] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class70])
+	(horarios [ontologia_Class47])
+	(nombre "ASW")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class20057])
+	(temas
+		[ontologia_Class51]
+		[ontologia_Class50]
+		[ontologia_Class20059]))
+
+([ontologia_Class20059] of  Especializado
+
+	(nombre_tema "Aplicaciones web"))
+
+([ontologia_Class20060] of  Especializada
+
+	(correquisitos [ontologia_Class40])
+	(curso 3)
+	(especialidad_asig [ontologia_Class70])
+	(horarios [ontologia_Class47])
+	(nombre "DBD")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class34]
+		[ontologia_Class40])
+	(temas
+		[ontologia_Class51]
+		[ontologia_Class50]))
+
+([ontologia_Class20061] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class70])
+	(horarios [ontologia_Class47])
+	(nombre "ER")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class39]
+		[ontologia_Class40])
+	(temas
+		[ontologia_Class50]
+		[ontologia_Class51]))
+
+([ontologia_Class20062] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class70])
+	(horarios [ontologia_Class47])
+	(nombre "GPS")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class39]
+		[ontologia_Class40])
+	(temas
+		[ontologia_Class51]
+		[ontologia_Class50]))
+
+([ontologia_Class20063] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class70])
+	(horarios [ontologia_Class47])
+	(nombre "PES")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class20057]
+		[ontologia_Class20061]
+		[ontologia_Class20062])
+	(temas
+		[ontologia_Class51]
+		[ontologia_Class50]
+		[ontologia_Class49]))
+
+([ontologia_Class20064] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class70])
+	(horarios [ontologia_Class47])
+	(nombre "CAP")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class40]
+		[ontologia_Class43])
+	(temas
+		[ontologia_Class50]
+		[ontologia_Class49]))
+
+([ontologia_Class20065] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class70])
+	(horarios [ontologia_Class47])
+	(nombre "CBDE")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class20060]
+		[ontologia_Class20068])
+	(temas [ontologia_Class51]))
+
+([ontologia_Class20068] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class71])
+	(horarios [ontologia_Class47])
+	(nombre "ABD")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class34])
+	(temas
+		[ontologia_Class51]
+		[ontologia_Class50]
+		[ontologia_Class10000]))
+
+([ontologia_Class20069] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class70])
+	(horarios [ontologia_Class47])
+	(nombre "CSI")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class34]
+		[ontologia_Class39])
+	(temas [ontologia_Class61]))
+
+([ontologia_Class20070] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class70])
+	(horarios [ontologia_Class47])
+	(nombre "ECSDI")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class20057])
+	(temas [ontologia_Class50]))
+
+([ontologia_Class20072] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class70])
+	(horarios [ontologia_Class47])
+	(nombre "SIM")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class35])
+	(temas [ontologia_Class50]))
+
+([ontologia_Class20073] of  Especializada
+
+	(curso 3)
+	(especialidad_asig [ontologia_Class70])
+	(horarios [ontologia_Class47])
+	(nombre "SOAD")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class36])
+	(temas
+		[ontologia_Class50]
+		[ontologia_Class20059]
+		[ontologia_Class20048]))
+
+([ontologia_Class20075] of  Competencia
+
+	(nivel 1)
+	(nombre_comp "1.Emprendeduría e innovación"))
+
+([ontologia_Class20076] of  Competencia
+
+	(nivel 1)
+	(nombre_comp "2.Sostenibilidad y compromiso social"))
+
+([ontologia_Class20077] of  Competencia
+
+	(nivel 1)
+	(nombre_comp "3.Tercera lengua"))
+
+([ontologia_Class20078] of  Competencia
+
+	(nivel 1)
+	(nombre_comp "5.Trabajo en equipo"))
+
+([ontologia_Class20079] of  Competencia
+
+	(nivel 1)
+	(nombre_comp "4.Comunicación eficaz oral y escrita"))
+
+([ontologia_Class20080] of  Competencia
+
+	(nivel 1)
+	(nombre_comp "6.Uso solvente de los resursos de información"))
+
+([ontologia_Class20081] of  Competencia
+
+	(nivel 1)
+	(nombre_comp "7.Aprendizaje autónomo"))
+
+([ontologia_Class20082] of  Competencia
+
+	(nivel 1)
+	(nombre_comp "8.Actitud adecuada delante del trabajo"))
+
+([ontologia_Class20083] of  Competencia
+
+	(nivel 1)
+	(nombre_comp "9.Razonamiento"))
+
+([ontologia_Class20084] of  Competencia
+
+	(nivel 2)
+	(nombre_comp "1.Emprendeduría e innovación"))
+
+([ontologia_Class20085] of  Competencia
+
+	(nivel 3)
+	(nombre_comp "1.Emprendeduría e innovación"))
+
+([ontologia_Class20086] of  Competencia
+
+	(nivel 2)
+	(nombre_comp "2.Sostenibilidad y compromiso social"))
+
+([ontologia_Class20087] of  Competencia
+
+	(nivel 3)
+	(nombre_comp "2.Sostenibilidad y compromiso social"))
+
+([ontologia_Class20088] of  Competencia
+
+	(nivel 2)
+	(nombre_comp "3.Tercera lengua"))
+
+([ontologia_Class20089] of  Competencia
+
+	(nivel 3)
+	(nombre_comp "3.Tercera lengua"))
+
+([ontologia_Class20090] of  Competencia
+
+	(nivel 2)
+	(nombre_comp "4.Comunicación eficaz oral y escrita"))
+
+([ontologia_Class20091] of  Competencia
+
+	(nivel 3)
+	(nombre_comp "4.Comunicación eficaz oral y escrita"))
+
+([ontologia_Class20092] of  Competencia
+
+	(nivel 2)
+	(nombre_comp "5.Trabajo en equipo"))
+
+([ontologia_Class20093] of  Competencia
+
+	(nivel 3)
+	(nombre_comp "6.Uso solvente de los resursos de información"))
+
+([ontologia_Class20094] of  Competencia
+
+	(nivel 3)
+	(nombre_comp "5.Trabajo en equipo"))
+
+([ontologia_Class20095] of  Competencia
+
+	(nivel 2)
+	(nombre_comp "6.Uso solvente de los resursos de información"))
+
+([ontologia_Class20096] of  Competencia
+
+	(nivel 2)
+	(nombre_comp "7.Aprendizaje autónomo"))
+
+([ontologia_Class20097] of  Competencia
+
+	(nivel 3)
+	(nombre_comp "7.Aprendizaje autónomo"))
+
+([ontologia_Class20098] of  Competencia
+
+	(nivel 2)
+	(nombre_comp "8.Actitud adecuada delante del trabajo"))
+
+([ontologia_Class20099] of  Competencia
+
+	(nivel 3)
+	(nombre_comp "8.Actitud adecuada delante del trabajo"))
+
+([ontologia_Class20100] of  Competencia
+
+	(nivel 2)
+	(nombre_comp "9.Razonamiento"))
+
+([ontologia_Class20101] of  Competencia
+
+	(nivel 3)
+	(nombre_comp "9.Razonamiento"))
 
 ([ontologia_Class26] of  Obligatoria
 
