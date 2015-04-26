@@ -1,4 +1,4 @@
-; Sun Apr 26 17:33:39 CEST 2015
+; Sun Apr 26 17:51:55 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -21,17 +21,17 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[ontologia_ProjectKB_Class20089]
-		[ontologia_ProjectKB_Class20090]
-		[ontologia_ProjectKB_Class20091]
-		[ontologia_ProjectKB_Class20092]
-		[ontologia_ProjectKB_Class20093]
-		[ontologia_ProjectKB_Class20094]
-		[ontologia_ProjectKB_Class20095]
-		[ontologia_ProjectKB_Class20096]
-		[ontologia_ProjectKB_Class20097]
-		[ontologia_ProjectKB_Class20098]
-		[ontologia_ProjectKB_Class20099]))
+		[ontologia_ProjectKB_Class20137]
+		[ontologia_ProjectKB_Class20138]
+		[ontologia_ProjectKB_Class20139]
+		[ontologia_ProjectKB_Class20140]
+		[ontologia_ProjectKB_Class20141]
+		[ontologia_ProjectKB_Class20142]
+		[ontologia_ProjectKB_Class20143]
+		[ontologia_ProjectKB_Class20144]
+		[ontologia_ProjectKB_Class20145]
+		[ontologia_ProjectKB_Class20146]
+		[ontologia_ProjectKB_Class20147]))
 
 ([CLSES_TAB] of  Widget
 
@@ -84,11 +84,11 @@
 ([KB_111590_Class1] of  Map
 
 	(entries
-		[ontologia_ProjectKB_Class20100]
-		[ontologia_ProjectKB_Class20101]
-		[ontologia_ProjectKB_Class20103]
-		[ontologia_ProjectKB_Class20104])
-	(referenced_maps [ontologia_ProjectKB_Class20102]))
+		[ontologia_ProjectKB_Class20148]
+		[ontologia_ProjectKB_Class20149]
+		[ontologia_ProjectKB_Class20151]
+		[ontologia_ProjectKB_Class20152])
+	(referenced_maps [ontologia_ProjectKB_Class20150]))
 
 ([KB_111590_Class10] of  Boolean
 
@@ -292,86 +292,86 @@
 ([ontologia_ProjectKB_Class20072] of  Property_List
 )
 
-([ontologia_ProjectKB_Class20089] of  String
+([ontologia_ProjectKB_Class20137] of  String
 
 	(name "Obligatoria")
 	(string_value "nombre"))
 
-([ontologia_ProjectKB_Class20090] of  String
+([ontologia_ProjectKB_Class20138] of  String
 
 	(name ":INSTANCE-ANNOTATION")
 	(string_value "%3AANNOTATION-TEXT"))
 
-([ontologia_ProjectKB_Class20091] of  String
+([ontologia_ProjectKB_Class20139] of  String
 
 	(name "Especializado")
 	(string_value "nombre_tema"))
 
-([ontologia_ProjectKB_Class20092] of  String
+([ontologia_ProjectKB_Class20140] of  String
 
 	(name "Especializada")
 	(string_value "nombre"))
 
-([ontologia_ProjectKB_Class20093] of  String
+([ontologia_ProjectKB_Class20141] of  String
 
 	(name "No_informático")
 	(string_value "nombre_tema"))
 
-([ontologia_ProjectKB_Class20094] of  String
+([ontologia_ProjectKB_Class20142] of  String
 
 	(name "Horario")
 	(string_value "horario"))
 
-([ontologia_ProjectKB_Class20095] of  String
+([ontologia_ProjectKB_Class20143] of  String
 
 	(name ":META-CLASS")
 	(string_value "%3ANAME"))
 
-([ontologia_ProjectKB_Class20096] of  String
+([ontologia_ProjectKB_Class20144] of  String
 
 	(name ":PAL-CONSTRAINT")
 	(string_value "%3APAL-NAME"))
 
-([ontologia_ProjectKB_Class20097] of  String
+([ontologia_ProjectKB_Class20145] of  String
 
 	(name "Competencia")
 	(string_value "{G}nombre_comp{.}nivel"))
 
-([ontologia_ProjectKB_Class20098] of  String
+([ontologia_ProjectKB_Class20146] of  String
 
 	(name "General")
 	(string_value "nombre_tema"))
 
-([ontologia_ProjectKB_Class20099] of  String
+([ontologia_ProjectKB_Class20147] of  String
 
 	(name "Especialidad")
 	(string_value "nombre_esp"))
 
-([ontologia_ProjectKB_Class20100] of  Map_Entry
+([ontologia_ProjectKB_Class20148] of  Map_Entry
 
 	(key "add_name_on_instance_form")
 	(key_class "java.lang.String")
 	(value "false")
 	(value_class "java.lang.String"))
 
-([ontologia_ProjectKB_Class20101] of  Map_Entry
+([ontologia_ProjectKB_Class20149] of  Map_Entry
 
 	(key "change_tracking_active")
 	(key_class "java.lang.String")
 	(value "false")
 	(value_class "java.lang.String"))
 
-([ontologia_ProjectKB_Class20102] of  Map
+([ontologia_ProjectKB_Class20150] of  Map
 )
 
-([ontologia_ProjectKB_Class20103] of  Map_Entry
+([ontologia_ProjectKB_Class20151] of  Map_Entry
 
 	(key "InstanceDisplay.yellow_stickies")
 	(key_class "java.lang.String")
-	(value "ontologia_ProjectKB_Class20102")
+	(value "ontologia_ProjectKB_Class20150")
 	(value_class "java.util.Map"))
 
-([ontologia_ProjectKB_Class20104] of  Map_Entry
+([ontologia_ProjectKB_Class20152] of  Map_Entry
 
 	(key "suppress_instance_counting")
 	(key_class "java.lang.String")

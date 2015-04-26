@@ -1,4 +1,4 @@
-; Sun Apr 26 17:33:39 CEST 2015
+; Sun Apr 26 17:51:55 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -633,6 +633,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 14.0)
+	(horas_prob 28.0)
+	(horas_teor%C3%ADa 28.0)
 	(nombre "F")
 	(num_creditos 7.5)
 	(temas [ontologia_Class57]))
@@ -644,6 +647,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 45.0)
 	(nombre "FM")
 	(num_creditos 7.5)
 	(temas [ontologia_Class56]))
@@ -655,6 +661,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 15.0)
+	(horas_prob 30.0)
+	(horas_teor%C3%ADa 30.0)
 	(nombre "IC")
 	(num_creditos 7.5)
 	(temas [ontologia_Class55]))
@@ -666,6 +675,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 45.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 30.0)
 	(nombre "PRO2")
 	(num_creditos 7.5)
 	(temas [ontologia_Class49]))
@@ -677,6 +689,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 15.0)
+	(horas_prob 19.5)
+	(horas_teor%C3%ADa 40.5)
 	(nombre "EC")
 	(num_creditos 7.5)
 	(temas [ontologia_Class55]))
@@ -688,6 +703,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 26.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 39.0)
 	(nombre "M1")
 	(num_creditos 7.5)
 	(temas [ontologia_Class56]))
@@ -699,6 +717,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 45.0)
 	(nombre "M2")
 	(num_creditos 7.5)
 	(temas [ontologia_Class56]))
@@ -710,6 +731,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 45.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 30.0)
 	(nombre "PRO1")
 	(num_creditos 7.5)
 	(temas [ontologia_Class49]))
@@ -721,6 +745,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 22.0)
+	(horas_prob 13.0)
+	(horas_teor%C3%ADa 15.0)
 	(nombre "BD")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -735,6 +762,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 30.0)
+	(horas_prob 15.0)
+	(horas_teor%C3%ADa 15.0)
 	(nombre "PE")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -749,6 +779,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 26.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 26.0)
 	(nombre "SO")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -765,6 +798,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 14.0)
+	(horas_prob 14.0)
+	(horas_teor%C3%ADa 28.0)
 	(nombre "EDA")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -779,6 +815,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 24.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 26.0)
 	(nombre "CI")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -794,6 +833,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 11.5)
+	(horas_prob 1.0)
+	(horas_teor%C3%ADa 44.5)
 	(nombre "EEE")
 	(num_creditos 6.0)
 	(temas [ontologia_Class10000]))
@@ -806,6 +848,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 0.0)
+	(horas_prob 30.0)
+	(horas_teor%C3%ADa 34.0)
 	(nombre "IES")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class34])
@@ -819,6 +864,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 14.0)
+	(horas_prob 15.0)
+	(horas_teor%C3%ADa 30.0)
 	(nombre "XC")
 	(num_creditos 6.0)
 	(temas [ontologia_Class54]))
@@ -831,6 +879,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 13.0)
+	(horas_prob 13.0)
+	(horas_teor%C3%ADa 28.0)
 	(nombre "AC")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -848,6 +899,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 30.0)
 	(nombre "PROP")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class37])
@@ -862,6 +916,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 28.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 30.0)
 	(nombre "PAR")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -877,6 +934,9 @@
 	(horarios
 		[ontologia_Class46]
 		[ontologia_Class47])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 30.0)
 	(nombre "IDI")
 	(num_creditos 6.0)
 	(prerrequisitos
