@@ -1,4 +1,4 @@
-; Mon Apr 27 00:14:28 CEST 2015
+; Mon Apr 27 00:56:08 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -15,17 +15,18 @@
 
 ([ontologia_Class20000] of  Especializada
 
-	(aprobados_ant 83.33)
+	(aprobados_ant 90.91)
 	(competencias
 		[ontologia_Class20088]
 		[ontologia_Class20101])
 	(curso 3)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class71])
 	(horarios [ontologia_Class47])
 	(horas_lab 30.0)
 	(horas_prob 0.0)
 	(horas_teor%C3%ADa 30.0)
-	(matriculados_ant 18)
+	(matriculados_ant 11)
 	(nombre "ADEI")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -42,6 +43,7 @@
 	(aprobados_ant 100.0)
 	(competencias [ontologia_Class20097])
 	(curso 3)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class71])
 	(horarios [ontologia_Class47])
 	(horas_lab 0.0)
@@ -51,7 +53,140 @@
 	(nombre "DSI")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class40])
-	(temas [ontologia_Class50]))
+	(temas
+		[ontologia_Class50]
+		[ontologia_Class20004]))
+
+([ontologia_Class20002] of  Especializada
+
+	(aprobados_ant 100.0)
+	(competencias
+		[ontologia_Class20085]
+		[ontologia_Class20099])
+	(curso 3)
+	(es_proyecto FALSE)
+	(especialidad_asig [ontologia_Class71])
+	(horarios [ontologia_Class47])
+	(horas_lab 24.0)
+	(horas_prob 15.0)
+	(horas_teor%C3%ADa 16.5)
+	(matriculados_ant 12)
+	(nombre "NE")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class20003])
+	(temas
+		[ontologia_Class10000]
+		[ontologia_Class20004]))
+
+([ontologia_Class20003] of  Especializada
+
+	(aprobados_ant 100.0)
+	(competencias [ontologia_Class20087])
+	(curso 3)
+	(es_proyecto FALSE)
+	(especialidad_asig [ontologia_Class71])
+	(horarios [ontologia_Class47])
+	(horas_lab 30.0)
+	(horas_prob 15.0)
+	(horas_teor%C3%ADa 15.0)
+	(matriculados_ant 30)
+	(nombre "SIO")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class34]
+		[ontologia_Class39])
+	(temas
+		[ontologia_Class10000]
+		[ontologia_Class20004]))
+
+([ontologia_Class20004] of  Especializado
+
+	(nombre_tema "Sistemas de información")
+	(temas_afines [ontologia_Class61]))
+
+([ontologia_Class20005] of  Especializada
+
+	(aprobados_ant 100.0)
+	(competencias
+		[ontologia_Class20091]
+		[ontologia_Class20094])
+	(correquisitos
+		[ontologia_Class20061]
+		[ontologia_Class20002])
+	(curso 3)
+	(es_proyecto TRUE)
+	(especialidad_asig [ontologia_Class71])
+	(horarios [ontologia_Class47])
+	(horas_lab 60.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 0.0)
+	(matriculados_ant 7)
+	(nombre "PSI")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class20001])
+	(temas
+		[ontologia_Class20004]
+		[ontologia_Class50]
+		[ontologia_Class10000]))
+
+([ontologia_Class20007] of  Especializada
+
+	(aprobados_ant 81.82)
+	(competencias
+		[ontologia_Class20085]
+		[ontologia_Class20091])
+	(correquisitos [ontologia_Class20002])
+	(curso 3)
+	(es_proyecto FALSE)
+	(especialidad_asig [ontologia_Class71])
+	(horarios [ontologia_Class47])
+	(horas_lab 30.0)
+	(horas_prob 15.0)
+	(horas_teor%C3%ADa 15.0)
+	(matriculados_ant 11)
+	(nombre "EDO")
+	(num_creditos 6.0)
+	(temas [ontologia_Class10000]))
+
+([ontologia_Class20008] of  Especializada
+
+	(aprobados_ant 100.0)
+	(competencias [ontologia_Class20101])
+	(curso 3)
+	(es_proyecto FALSE)
+	(especialidad_asig [ontologia_Class71])
+	(horarios [ontologia_Class47])
+	(horas_lab 18.0)
+	(horas_prob 15.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 24)
+	(nombre "MI")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class39])
+	(temas [ontologia_Class20009]))
+
+([ontologia_Class20009] of  No_inform%C3%A1tico
+
+	(nombre_tema "Marketing"))
+
+([ontologia_Class20010] of  Especializada
+
+	(aprobados_ant 100.0)
+	(competencias
+		[ontologia_Class20075]
+		[ontologia_Class20084])
+	(curso 3)
+	(es_proyecto TRUE)
+	(especialidad_asig [ontologia_Class71])
+	(horarios [ontologia_Class47])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 19)
+	(nombre "VPE")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class39])
+	(temas [ontologia_Class10000]))
 
 ([ontologia_Class20026] of  Especializado
 
@@ -170,10 +305,19 @@
 
 ([ontologia_Class20037] of  Especializada
 
+	(aprobados_ant 94.74)
+	(competencias [ontologia_Class20097])
 	(correquisitos [ontologia_Class43])
 	(curso 3)
-	(especialidad_asig [ontologia_Class68])
+	(es_proyecto FALSE)
+	(especialidad_asig
+		[ontologia_Class68]
+		[ontologia_Class71])
 	(horarios [ontologia_Class47])
+	(horas_lab 28.0)
+	(horas_prob 12.0)
+	(horas_teor%C3%ADa 25.0)
+	(matriculados_ant 19)
 	(nombre "CAIM")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -207,9 +351,20 @@
 
 ([ontologia_Class20040] of  Especializada
 
+	(aprobados_ant 63.64)
+	(competencias
+		[ontologia_Class20093]
+		[ontologia_Class20099])
 	(curso 3)
-	(especialidad_asig [ontologia_Class68])
+	(es_proyecto FALSE)
+	(especialidad_asig
+		[ontologia_Class68]
+		[ontologia_Class71])
 	(horarios [ontologia_Class47])
+	(horas_lab 15.0)
+	(horas_prob 14.0)
+	(horas_teor%C3%ADa 31.0)
+	(matriculados_ant 11)
 	(nombre "IO")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class35])
@@ -405,8 +560,10 @@
 
 ([ontologia_Class20061] of  Especializada
 
-	(aprobados_ant 91.67)
+	(aprobados_ant 90.91)
+	(competencias [ontologia_Class20093])
 	(curso 3)
+	(es_proyecto FALSE)
 	(especialidad_asig
 		[ontologia_Class70]
 		[ontologia_Class71])
@@ -414,7 +571,7 @@
 	(horas_lab 28.0)
 	(horas_prob 0.0)
 	(horas_teor%C3%ADa 28.0)
-	(matriculados_ant 60)
+	(matriculados_ant 33)
 	(nombre "ER")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -482,16 +639,20 @@
 
 ([ontologia_Class20068] of  Especializada
 
+	(aprobados_ant 90.0)
+	(competencias [ontologia_Class20077])
 	(curso 3)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class71])
 	(horarios [ontologia_Class47])
+	(horas_lab 26.0)
+	(horas_prob 2.0)
+	(horas_teor%C3%ADa 28.0)
+	(matriculados_ant 10)
 	(nombre "ABD")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class34])
-	(temas
-		[ontologia_Class51]
-		[ontologia_Class50]
-		[ontologia_Class10000]))
+	(temas [ontologia_Class51]))
 
 ([ontologia_Class20069] of  Especializada
 
@@ -566,7 +727,7 @@
 ([ontologia_Class20080] of  Competencia
 
 	(nivel 1)
-	(nombre_comp "6.Uso solvente de los resursos de información"))
+	(nombre_comp "6.Uso solvente de los recursos de información"))
 
 ([ontologia_Class20081] of  Competencia
 
@@ -576,7 +737,7 @@
 ([ontologia_Class20082] of  Competencia
 
 	(nivel 1)
-	(nombre_comp "8.Actitud adecuada delante del trabajo"))
+	(nombre_comp "8.Actitud frente al trabajo"))
 
 ([ontologia_Class20083] of  Competencia
 
@@ -631,7 +792,7 @@
 ([ontologia_Class20093] of  Competencia
 
 	(nivel 3)
-	(nombre_comp "6.Uso solvente de los resursos de información"))
+	(nombre_comp "6.Uso solvente de los recursos de información"))
 
 ([ontologia_Class20094] of  Competencia
 
@@ -641,7 +802,7 @@
 ([ontologia_Class20095] of  Competencia
 
 	(nivel 2)
-	(nombre_comp "6.Uso solvente de los resursos de información"))
+	(nombre_comp "6.Uso solvente de los recursos de información"))
 
 ([ontologia_Class20096] of  Competencia
 
@@ -656,12 +817,12 @@
 ([ontologia_Class20098] of  Competencia
 
 	(nivel 2)
-	(nombre_comp "8.Actitud adecuada delante del trabajo"))
+	(nombre_comp "8.Actitud frente al trabajo"))
 
 ([ontologia_Class20099] of  Competencia
 
 	(nivel 3)
-	(nombre_comp "8.Actitud adecuada delante del trabajo"))
+	(nombre_comp "8.Actitud frente al trabajo"))
 
 ([ontologia_Class20100] of  Competencia
 
