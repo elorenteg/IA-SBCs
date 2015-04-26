@@ -1,4 +1,4 @@
-; Sun Apr 26 17:16:50 CEST 2015
+; Sun Apr 26 17:33:39 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -34,8 +34,8 @@
 		(type INSTANCE)
 ;+		(allowed-classes Tema)
 		(create-accessor read-write))
-	(single-slot creds_teor%C3%ADa
-;+		(comment "Número de créditos ECTS por el concepto de carga de teoría")
+	(single-slot horas_lab
+;+		(comment "Número de horas por el concepto de carga de laboratorio")
 		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
@@ -75,11 +75,6 @@
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot creds_lab
-;+		(comment "Número de créditos ECTS por el concepto de carga de laboratorio")
-		(type FLOAT)
-;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot aprobados_ant
 ;+		(comment "Porcentaje de estudiantes aprobados el cuatrimestre anterior")
@@ -134,6 +129,11 @@
 ;+		(allowed-classes Especializado)
 		(cardinality 1 ?VARIABLE)
 		(create-accessor read-write))
+	(single-slot horas_prob
+;+		(comment "Número de horas por el concepto de carga de problemas")
+		(type FLOAT)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
 	(multislot temas
 ;+		(comment "Conjunto de temas en los que se ubica la asignatura")
 		(type INSTANCE)
@@ -149,6 +149,11 @@
 ;+		(comment "Asignatura que convoca el examen")
 		(type INSTANCE)
 ;+		(allowed-classes Asignatura)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot horas_teor%C3%ADa
+;+		(comment "Número de horas por el concepto de carga de teoría")
+		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot ontologia_Class20018
@@ -232,11 +237,6 @@
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot creds_prob
-;+		(comment "Número de créditos ECTS por el concepto de carga de problemas")
-		(type FLOAT)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(multislot competencia_preferida
 		(type INSTANCE)
 ;+		(allowed-classes Competencia)
@@ -284,11 +284,6 @@
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot creds_lab
-;+		(comment "Número de créditos ECTS por el concepto de carga de laboratorio")
-		(type FLOAT)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot aprobados_ant
 ;+		(comment "Porcentaje de estudiantes aprobados el cuatrimestre anterior")
 		(type FLOAT)
@@ -300,13 +295,13 @@
 		(allowed-values 1 2 3 4)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot creds_prob
-;+		(comment "Número de créditos ECTS por el concepto de carga de problemas")
+	(single-slot horas_teor%C3%ADa
+;+		(comment "Número de horas por el concepto de carga de teoría")
 		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot creds_teor%C3%ADa
-;+		(comment "Número de créditos ECTS por el concepto de carga de teoría")
+	(single-slot horas_lab
+;+		(comment "Número de horas por el concepto de carga de laboratorio")
 		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
@@ -330,6 +325,11 @@
 ;+		(comment "Si la asignatura es de proyecto")
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot horas_prob
+;+		(comment "Número de horas por el concepto de carga de problemas")
+		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
