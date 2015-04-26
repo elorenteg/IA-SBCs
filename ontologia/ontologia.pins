@@ -1,4 +1,4 @@
-; Sun Apr 26 19:00:36 CEST 2015
+; Mon Apr 27 00:14:28 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -12,6 +12,46 @@
 ([ontologia_Class10000] of  No_inform%C3%A1tico
 
 	(nombre_tema "Organización de empresas"))
+
+([ontologia_Class20000] of  Especializada
+
+	(aprobados_ant 83.33)
+	(competencias
+		[ontologia_Class20088]
+		[ontologia_Class20101])
+	(curso 3)
+	(especialidad_asig [ontologia_Class71])
+	(horarios [ontologia_Class47])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 18)
+	(nombre "ADEI")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class34]
+		[ontologia_Class39]
+		[ontologia_Class35])
+	(temas
+		[ontologia_Class51]
+		[ontologia_Class50]
+		[ontologia_Class61]))
+
+([ontologia_Class20001] of  Especializada
+
+	(aprobados_ant 100.0)
+	(competencias [ontologia_Class20097])
+	(curso 3)
+	(especialidad_asig [ontologia_Class71])
+	(horarios [ontologia_Class47])
+	(horas_lab 0.0)
+	(horas_prob 28.0)
+	(horas_teor%C3%ADa 29.0)
+	(matriculados_ant 19)
+	(nombre "DSI")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class40])
+	(temas [ontologia_Class50]))
 
 ([ontologia_Class20026] of  Especializado
 
@@ -365,9 +405,16 @@
 
 ([ontologia_Class20061] of  Especializada
 
+	(aprobados_ant 91.67)
 	(curso 3)
-	(especialidad_asig [ontologia_Class70])
+	(especialidad_asig
+		[ontologia_Class70]
+		[ontologia_Class71])
 	(horarios [ontologia_Class47])
+	(horas_lab 28.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 28.0)
+	(matriculados_ant 60)
 	(nombre "ER")
 	(num_creditos 6.0)
 	(prerrequisitos
