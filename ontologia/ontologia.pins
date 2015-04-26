@@ -1,4 +1,4 @@
-; Sun Apr 26 17:51:55 CEST 2015
+; Sun Apr 26 19:00:36 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -628,6 +628,7 @@
 
 ([ontologia_Class26] of  Obligatoria
 
+	(aprobados_ant 59.46)
 	(curso 1)
 	(es_proyecto FALSE)
 	(horarios
@@ -636,12 +637,14 @@
 	(horas_lab 14.0)
 	(horas_prob 28.0)
 	(horas_teor%C3%ADa 28.0)
+	(matriculados_ant 111)
 	(nombre "F")
 	(num_creditos 7.5)
 	(temas [ontologia_Class57]))
 
 ([ontologia_Class27] of  Obligatoria
 
+	(aprobados_ant 58.56)
 	(curso 1)
 	(es_proyecto FALSE)
 	(horarios
@@ -650,12 +653,14 @@
 	(horas_lab 30.0)
 	(horas_prob 0.0)
 	(horas_teor%C3%ADa 45.0)
+	(matriculados_ant 181)
 	(nombre "FM")
 	(num_creditos 7.5)
 	(temas [ontologia_Class56]))
 
 ([ontologia_Class28] of  Obligatoria
 
+	(aprobados_ant 74.0)
 	(curso 1)
 	(es_proyecto FALSE)
 	(horarios
@@ -664,12 +669,14 @@
 	(horas_lab 15.0)
 	(horas_prob 30.0)
 	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 142)
 	(nombre "IC")
 	(num_creditos 7.5)
 	(temas [ontologia_Class55]))
 
 ([ontologia_Class29] of  Obligatoria
 
+	(aprobados_ant 41.13)
 	(curso 1)
 	(es_proyecto FALSE)
 	(horarios
@@ -678,12 +685,14 @@
 	(horas_lab 45.0)
 	(horas_prob 0.0)
 	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 248)
 	(nombre "PRO2")
 	(num_creditos 7.5)
 	(temas [ontologia_Class49]))
 
 ([ontologia_Class30] of  Obligatoria
 
+	(aprobados_ant 65.0)
 	(curso 1)
 	(es_proyecto FALSE)
 	(horarios
@@ -692,12 +701,14 @@
 	(horas_lab 15.0)
 	(horas_prob 19.5)
 	(horas_teor%C3%ADa 40.5)
+	(matriculados_ant 260)
 	(nombre "EC")
 	(num_creditos 7.5)
 	(temas [ontologia_Class55]))
 
 ([ontologia_Class31] of  Obligatoria
 
+	(aprobados_ant 67.4)
 	(curso 1)
 	(es_proyecto FALSE)
 	(horarios
@@ -706,12 +717,14 @@
 	(horas_lab 26.0)
 	(horas_prob 0.0)
 	(horas_teor%C3%ADa 39.0)
+	(matriculados_ant 227)
 	(nombre "M1")
 	(num_creditos 7.5)
 	(temas [ontologia_Class56]))
 
 ([ontologia_Class32] of  Obligatoria
 
+	(aprobados_ant 60.89)
 	(curso 1)
 	(es_proyecto FALSE)
 	(horarios
@@ -720,12 +733,14 @@
 	(horas_lab 30.0)
 	(horas_prob 0.0)
 	(horas_teor%C3%ADa 45.0)
+	(matriculados_ant 248)
 	(nombre "M2")
 	(num_creditos 7.5)
 	(temas [ontologia_Class56]))
 
 ([ontologia_Class33] of  Obligatoria
 
+	(aprobados_ant 41.46)
 	(curso 1)
 	(es_proyecto FALSE)
 	(horarios
@@ -734,12 +749,14 @@
 	(horas_lab 45.0)
 	(horas_prob 0.0)
 	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 205)
 	(nombre "PRO1")
 	(num_creditos 7.5)
 	(temas [ontologia_Class49]))
 
 ([ontologia_Class34] of  Obligatoria
 
+	(aprobados_ant 78.0)
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -748,6 +765,7 @@
 	(horas_lab 22.0)
 	(horas_prob 13.0)
 	(horas_teor%C3%ADa 15.0)
+	(matriculados_ant 150)
 	(nombre "BD")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -757,6 +775,7 @@
 
 ([ontologia_Class35] of  Obligatoria
 
+	(aprobados_ant 79.81)
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -765,6 +784,7 @@
 	(horas_lab 30.0)
 	(horas_prob 15.0)
 	(horas_teor%C3%ADa 15.0)
+	(matriculados_ant 104)
 	(nombre "PE")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -774,6 +794,7 @@
 
 ([ontologia_Class36] of  Obligatoria
 
+	(aprobados_ant 76.0)
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -782,6 +803,7 @@
 	(horas_lab 26.0)
 	(horas_prob 0.0)
 	(horas_teor%C3%ADa 26.0)
+	(matriculados_ant 100)
 	(nombre "SO")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -793,6 +815,7 @@
 
 ([ontologia_Class37] of  Obligatoria
 
+	(aprobados_ant 38.62)
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -801,6 +824,7 @@
 	(horas_lab 14.0)
 	(horas_prob 14.0)
 	(horas_teor%C3%ADa 28.0)
+	(matriculados_ant 145)
 	(nombre "EDA")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -810,6 +834,7 @@
 
 ([ontologia_Class38] of  Obligatoria
 
+	(aprobados_ant 69.31)
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -818,6 +843,7 @@
 	(horas_lab 24.0)
 	(horas_prob 0.0)
 	(horas_teor%C3%ADa 26.0)
+	(matriculados_ant 101)
 	(nombre "CI")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -828,6 +854,7 @@
 
 ([ontologia_Class39] of  Obligatoria
 
+	(aprobados_ant 91.3)
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -836,12 +863,14 @@
 	(horas_lab 11.5)
 	(horas_prob 1.0)
 	(horas_teor%C3%ADa 44.5)
+	(matriculados_ant 184)
 	(nombre "EEE")
 	(num_creditos 6.0)
 	(temas [ontologia_Class10000]))
 
 ([ontologia_Class40] of  Obligatoria
 
+	(aprobados_ant 78.8)
 	(correquisitos [ontologia_Class37])
 	(curso 2)
 	(es_proyecto FALSE)
@@ -851,6 +880,7 @@
 	(horas_lab 0.0)
 	(horas_prob 30.0)
 	(horas_teor%C3%ADa 34.0)
+	(matriculados_ant 184)
 	(nombre "IES")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class34])
@@ -858,6 +888,7 @@
 
 ([ontologia_Class41] of  Obligatoria
 
+	(aprobados_ant 71.78)
 	(correquisitos [ontologia_Class36])
 	(curso 2)
 	(es_proyecto FALSE)
@@ -867,12 +898,14 @@
 	(horas_lab 14.0)
 	(horas_prob 15.0)
 	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 202)
 	(nombre "XC")
 	(num_creditos 6.0)
 	(temas [ontologia_Class54]))
 
 ([ontologia_Class42] of  Obligatoria
 
+	(aprobados_ant 83.96)
 	(correquisitos [ontologia_Class35])
 	(curso 2)
 	(es_proyecto FALSE)
@@ -882,6 +915,7 @@
 	(horas_lab 13.0)
 	(horas_prob 13.0)
 	(horas_teor%C3%ADa 28.0)
+	(matriculados_ant 187)
 	(nombre "AC")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -891,6 +925,7 @@
 
 ([ontologia_Class43] of  Obligatoria
 
+	(aprobados_ant 92.25)
 	(correquisitos
 		[ontologia_Class34]
 		[ontologia_Class40])
@@ -902,6 +937,7 @@
 	(horas_lab 30.0)
 	(horas_prob 0.0)
 	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 142)
 	(nombre "PROP")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class37])
@@ -911,6 +947,7 @@
 
 ([ontologia_Class44] of  Obligatoria
 
+	(aprobados_ant 78.38)
 	(curso 3)
 	(es_proyecto FALSE)
 	(horarios
@@ -919,6 +956,7 @@
 	(horas_lab 28.0)
 	(horas_prob 0.0)
 	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 148)
 	(nombre "PAR")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -929,6 +967,7 @@
 
 ([ontologia_Class45] of  Obligatoria
 
+	(aprobados_ant 65.64)
 	(curso 3)
 	(es_proyecto FALSE)
 	(horarios
@@ -937,6 +976,7 @@
 	(horas_lab 30.0)
 	(horas_prob 0.0)
 	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 163)
 	(nombre "IDI")
 	(num_creditos 6.0)
 	(prerrequisitos
