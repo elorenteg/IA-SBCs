@@ -1,6 +1,49 @@
 
 \subsection{Viabilidad del desarrollo} \label{sec:viabilidad}
 
-%%% TODO %%% 
+De la descripción hecha en la \autoref{sec:descripcion}, se deduce que el 
+problema tratado es esencialmente un problema de análisis: medianto el 
+conocimiento del que se dispone sobre las asignaturas y el estudiante, se 
+espera que el sistema evalúe su compatibilidad y, a partir de esta evaluación, 
+clasifique las asignaturas en recomendables (con ciertos grados) o no 
+recomendables.
+
+Por lo tanto, este problema no dispone de una solución algorítmica directa 
+usando los métodos clásicos, puesto que se trata de un problema complejo y 
+altamente dependiente del conocimiento sobre sus múltiples elementos 
+(esencialmente, las particularidades asociadas a las asignaturas y al plan de 
+estudios de la FIB y las necesidades y preferencias de los estudiantes). 
+Además, este conocimiento es inicialmente incompleto (por ejemplo, un 
+estudiante no tiene por qué rellenar todos los posibles campos a tener en 
+cuenta en la recomendación) y no hay un método exacto para establecer los 
+grados de recomendación de las asignaturas, sino que hay que usar métodos 
+heurísticos que aproximen los razonamientos lógicos que podría hacer una 
+persona (y sin disponer de un conocimiento completo).
+
+Por ende, parece una elección razonable modelar este problema como un problema 
+de clasificación heurística, que se puede resolver con un sistema basado en el 
+conocimiento. Este puede seguir un esquema basado en la abstracción de los 
+datos relevantes a partir de toda la información disponible para la creación 
+posterior de una cierta asociación de asignaturas al alumno con métodos 
+heurísticos de razonamiento, determinando así la recomendación final.
+
+Si bien es cierto que no se dispone de todo el conocimiento del problema, el 
+sistema almacena los datos de los elementos principales de la solución: las 
+asignaturas y los alumnos. Concretamente, hay toda una serie de 
+características y relaciones que describen (en algunos casos cualitativamente) 
+las asignaturas y las preferencias y necesidades de los alumnos, permitiendo 
+así razonar sobre estos para obtener un cierto conocimiento (aunque este puede 
+no ser del todo preciso ante la falta de datos en la entrada) para generar 
+una recomendación que se ajuste el máximo posible al alumno según la 
+información de la que se dispone.
+
+Los razonamientos que llevan a la recomendación de asignaturas según los 
+criterios establecidos se pueden emular usando las reglas de producción de 
+un sistema basado en el conocimiento.
+
+En conclusión, la implementación de un sistema basado en el conocimiento para 
+la resolución de este problema parece factible (puesto que se dispone de todos 
+los elementos necesarios para ello) y, por otra parte, no se conocen 
+algoritmos en el sentido ``clásico'' para tratarlo de forma exacta.
 
 
