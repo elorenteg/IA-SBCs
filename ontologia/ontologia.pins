@@ -1,4 +1,4 @@
-; Mon Apr 27 11:59:47 CEST 2015
+; Mon Apr 27 14:44:44 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -480,7 +480,8 @@
 
 ([ontologia_Class20053] of  Especializado
 
-	(nombre_tema "Procesadores"))
+	(nombre_tema "Procesadores")
+	(temas_afines [ontologia_Class40011]))
 
 ([ontologia_Class20054] of  Especializada
 
@@ -1339,6 +1340,7 @@
 	(num_creditos 6.0)
 	(temas
 		[ontologia_Class30005]
+		[ontologia_Class40013]
 		[ontologia_Class61]))
 
 ([ontologia_Class31] of  Obligatoria
@@ -1430,7 +1432,9 @@
 	(prerrequisitos
 		[ontologia_Class31]
 		[ontologia_Class32])
-	(temas [ontologia_Class56]))
+	(temas
+		[ontologia_Class56]
+		[ontologia_Class40005]))
 
 ([ontologia_Class36] of  Obligatoria
 
@@ -1530,6 +1534,235 @@
 	(precorrequisitos [ontologia_Class37])
 	(prerrequisitos [ontologia_Class34])
 	(temas [ontologia_Class50]))
+
+([ontologia_Class40000] of  Optativa
+
+	(aprobados_ant 80.0)
+	(competencias
+		[ontologia_Class20083]
+		[ontologia_Class20100]
+		[ontologia_Class20101])
+	(curso 4)
+	(es_proyecto FALSE)
+	(horarios [ontologia_Class46])
+	(horas_lab 60.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 0.0)
+	(matriculados_ant 15)
+	(nombre "DCS")
+	(num_creditos 6.0)
+	(temas
+		[ontologia_Class56]
+		[ontologia_Class59]
+		[ontologia_Class53]))
+
+([ontologia_Class40001] of  Optativa
+
+	(aprobados_ant 93.33)
+	(competencias [ontologia_Class20083])
+	(curso 4)
+	(es_proyecto FALSE)
+	(horarios [ontologia_Class47])
+	(horas_lab 15.0)
+	(horas_prob 15.0)
+	(horas_teor%C3%ADa 33.0)
+	(matriculados_ant 12)
+	(nombre "FOMAR")
+	(num_creditos 6.0)
+	(temas
+		[ontologia_Class57]
+		[ontologia_Class59]
+		[ontologia_Class53]))
+
+([ontologia_Class40003] of  Optativa
+
+	(aprobados_ant 41.67)
+	(competencias
+		[ontologia_Class20077]
+		[ontologia_Class20088]
+		[ontologia_Class20089])
+	(curso 4)
+	(es_proyecto FALSE)
+	(horas_lab 7.5)
+	(horas_prob 15.0)
+	(horas_teor%C3%ADa 37.5)
+	(matriculados_ant 12)
+	(nombre "GEOC")
+	(num_creditos 6.0)
+	(temas
+		[ontologia_Class56]
+		[ontologia_Class49]
+		[ontologia_Class62]
+		[ontologia_Class20026]))
+
+([ontologia_Class40004] of  Optativa
+
+	(aprobados_ant 96.88)
+	(competencias
+		[ontologia_Class20088]
+		[ontologia_Class20101])
+	(curso 4)
+	(es_proyecto FALSE)
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 32)
+	(nombre "MD")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class29]
+		[ontologia_Class35])
+	(temas
+		[ontologia_Class61]
+		[ontologia_Class51]
+		[ontologia_Class20026]
+		[ontologia_Class40005]))
+
+([ontologia_Class40005] of  General
+
+	(nombre_tema "Estadística"))
+
+([ontologia_Class40006] of  Optativa
+
+	(aprobados_ant 77.78)
+	(competencias
+		[ontologia_Class20078]
+		[ontologia_Class20081]
+		[ontologia_Class20096]
+		[ontologia_Class20097]
+		[ontologia_Class20099]
+		[ontologia_Class20083]
+		[ontologia_Class20100]
+		[ontologia_Class20101])
+	(curso 4)
+	(es_proyecto FALSE)
+	(horarios [ontologia_Class47])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 18)
+	(nombre "ROB")
+	(num_creditos 6.0)
+	(temas [ontologia_Class40007]))
+
+([ontologia_Class40007] of  Especializado
+
+	(nombre_tema "Robótica"))
+
+([ontologia_Class40008] of  Optativa
+
+	(aprobados_ant 100.0)
+	(competencias
+		[ontologia_Class20087]
+		[ontologia_Class20091])
+	(curso 4)
+	(es_proyecto FALSE)
+	(horarios [ontologia_Class47])
+	(horas_lab 28.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 28.0)
+	(matriculados_ant 20)
+	(nombre "SLDS")
+	(num_creditos 6.0)
+	(temas
+		[ontologia_Class49]
+		[ontologia_Class40009]))
+
+([ontologia_Class40009] of  Especializado
+
+	(nombre_tema "Software libre"))
+
+([ontologia_Class40010] of  Optativa
+
+	(aprobados_ant 100.0)
+	(competencias
+		[ontologia_Class20090]
+		[ontologia_Class20091]
+		[ontologia_Class20095]
+		[ontologia_Class20097])
+	(curso 4)
+	(es_proyecto FALSE)
+	(horarios [ontologia_Class47])
+	(horas_lab 26.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 31.0)
+	(matriculados_ant 40)
+	(nombre "TGA")
+	(num_creditos 6.0)
+	(temas
+		[ontologia_Class55]
+		[ontologia_Class40011]))
+
+([ontologia_Class40011] of  Especializado
+
+	(nombre_tema "Targetas gráficas")
+	(temas_afines
+		[ontologia_Class20053]
+		[ontologia_Class59]
+		[ontologia_Class40013]
+		[ontologia_Class40015]))
+
+([ontologia_Class40012] of  Optativa
+
+	(aprobados_ant 100.0)
+	(competencias [ontologia_Class20097])
+	(curso 4)
+	(es_proyecto FALSE)
+	(horarios [ontologia_Class46])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 19)
+	(nombre "VC")
+	(num_creditos 6.0)
+	(temas
+		[ontologia_Class49]
+		[ontologia_Class59]
+		[ontologia_Class40013]))
+
+([ontologia_Class40013] of  Especializado
+
+	(nombre_tema "Tratamiento de imágenes")
+	(temas_afines
+		[ontologia_Class59]
+		[ontologia_Class40011]))
+
+([ontologia_Class40014] of  Optativa
+
+	(aprobados_ant 93.33)
+	(competencias [ontologia_Class20094])
+	(curso 4)
+	(es_proyecto TRUE)
+	(horarios [ontologia_Class46])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 30)
+	(nombre "VJ")
+	(num_creditos 6.0)
+	(temas
+		[ontologia_Class49]
+		[ontologia_Class40015]))
+
+([ontologia_Class40015] of  Especializado
+
+	(nombre_tema "Videojuegos")
+	(temas_afines [ontologia_Class40011]))
+
+([ontologia_Class40016] of  Optativa
+
+	(aprobados_ant 85.71)
+	(competencias [ontologia_Class20089])
+	(curso 4)
+	(es_proyecto FALSE)
+	(horarios [ontologia_Class46])
+	(horas_lab 0.0)
+	(horas_prob 32.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 28)
+	(nombre "WSE")
+	(num_creditos 6.0)
+	(temas [ontologia_Class30023]))
 
 ([ontologia_Class41] of  Obligatoria
 
@@ -1695,7 +1928,10 @@
 ([ontologia_Class59] of  Especializado
 
 	(nombre_tema "Gráficos")
-	(temas_afines [ontologia_Class62]))
+	(temas_afines
+		[ontologia_Class62]
+		[ontologia_Class40011]
+		[ontologia_Class40013]))
 
 ([ontologia_Class60] of  Especializado
 
