@@ -1,4 +1,4 @@
-; Mon Apr 27 11:30:55 CEST 2015
+; Mon Apr 27 11:59:47 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -831,6 +831,7 @@
 ([ontologia_Class26] of  Obligatoria
 
 	(aprobados_ant 59.46)
+	(competencias [ontologia_Class20079])
 	(curso 1)
 	(es_proyecto FALSE)
 	(horarios
@@ -847,6 +848,7 @@
 ([ontologia_Class27] of  Obligatoria
 
 	(aprobados_ant 58.56)
+	(competencias [ontologia_Class20083])
 	(curso 1)
 	(es_proyecto FALSE)
 	(horarios
@@ -863,6 +865,7 @@
 ([ontologia_Class28] of  Obligatoria
 
 	(aprobados_ant 74.0)
+	(competencias [ontologia_Class20080])
 	(curso 1)
 	(es_proyecto FALSE)
 	(horarios
@@ -879,6 +882,7 @@
 ([ontologia_Class29] of  Obligatoria
 
 	(aprobados_ant 41.13)
+	(competencias [ontologia_Class20078])
 	(curso 1)
 	(es_proyecto FALSE)
 	(horarios
@@ -895,6 +899,7 @@
 ([ontologia_Class30] of  Obligatoria
 
 	(aprobados_ant 65.0)
+	(competencias [ontologia_Class20076])
 	(curso 1)
 	(es_proyecto FALSE)
 	(horarios
@@ -1339,6 +1344,7 @@
 ([ontologia_Class31] of  Obligatoria
 
 	(aprobados_ant 67.4)
+	(competencias [ontologia_Class20083])
 	(curso 1)
 	(es_proyecto FALSE)
 	(horarios
@@ -1355,6 +1361,7 @@
 ([ontologia_Class32] of  Obligatoria
 
 	(aprobados_ant 60.89)
+	(competencias [ontologia_Class20081])
 	(curso 1)
 	(es_proyecto FALSE)
 	(horarios
@@ -1371,6 +1378,7 @@
 ([ontologia_Class33] of  Obligatoria
 
 	(aprobados_ant 41.46)
+	(competencias [ontologia_Class20081])
 	(curso 1)
 	(es_proyecto FALSE)
 	(horarios
@@ -1387,6 +1395,7 @@
 ([ontologia_Class34] of  Obligatoria
 
 	(aprobados_ant 78.0)
+	(competencias [ontologia_Class20098])
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -1406,6 +1415,7 @@
 ([ontologia_Class35] of  Obligatoria
 
 	(aprobados_ant 79.81)
+	(competencias [ontologia_Class20100])
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -1425,6 +1435,7 @@
 ([ontologia_Class36] of  Obligatoria
 
 	(aprobados_ant 76.0)
+	(competencias [ontologia_Class20082])
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -1446,6 +1457,7 @@
 ([ontologia_Class37] of  Obligatoria
 
 	(aprobados_ant 38.62)
+	(competencias [ontologia_Class20095])
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -1465,6 +1477,7 @@
 ([ontologia_Class38] of  Obligatoria
 
 	(aprobados_ant 69.31)
+	(competencias [ontologia_Class20077])
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -1485,6 +1498,7 @@
 ([ontologia_Class39] of  Obligatoria
 
 	(aprobados_ant 91.3)
+	(competencias [ontologia_Class20075])
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -1501,6 +1515,7 @@
 ([ontologia_Class40] of  Obligatoria
 
 	(aprobados_ant 78.8)
+	(competencias [ontologia_Class20090])
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -1519,6 +1534,7 @@
 ([ontologia_Class41] of  Obligatoria
 
 	(aprobados_ant 71.78)
+	(competencias [ontologia_Class20096])
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -1538,6 +1554,7 @@
 ([ontologia_Class42] of  Obligatoria
 
 	(aprobados_ant 83.96)
+	(competencias [ontologia_Class20086])
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -1558,6 +1575,9 @@
 ([ontologia_Class43] of  Obligatoria
 
 	(aprobados_ant 92.25)
+	(competencias
+		[ontologia_Class20092]
+		[ontologia_Class20084])
 	(correquisitos [ontologia_Class40])
 	(curso 2)
 	(es_proyecto TRUE)
@@ -1579,6 +1599,7 @@
 ([ontologia_Class44] of  Obligatoria
 
 	(aprobados_ant 78.38)
+	(competencias [ontologia_Class20088])
 	(curso 3)
 	(es_proyecto FALSE)
 	(horarios
@@ -1599,6 +1620,7 @@
 ([ontologia_Class45] of  Obligatoria
 
 	(aprobados_ant 65.64)
+	(competencias [ontologia_Class20099])
 	(curso 3)
 	(es_proyecto FALSE)
 	(horarios
