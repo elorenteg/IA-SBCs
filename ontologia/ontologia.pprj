@@ -1,4 +1,4 @@
-; Mon Apr 27 10:49:22 CEST 2015
+; Mon Apr 27 11:30:55 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -21,18 +21,18 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[ontologia_ProjectKB_Class30311]
-		[ontologia_ProjectKB_Class30312]
-		[ontologia_ProjectKB_Class30313]
-		[ontologia_ProjectKB_Class30314]
-		[ontologia_ProjectKB_Class30315]
-		[ontologia_ProjectKB_Class30316]
-		[ontologia_ProjectKB_Class30317]
-		[ontologia_ProjectKB_Class30318]
-		[ontologia_ProjectKB_Class30319]
-		[ontologia_ProjectKB_Class30320]
-		[ontologia_ProjectKB_Class30321]
-		[ontologia_ProjectKB_Class30322]))
+		[ontologia_ProjectKB_Class20023]
+		[ontologia_ProjectKB_Class20024]
+		[ontologia_ProjectKB_Class20025]
+		[ontologia_ProjectKB_Class20026]
+		[ontologia_ProjectKB_Class20027]
+		[ontologia_ProjectKB_Class20028]
+		[ontologia_ProjectKB_Class20029]
+		[ontologia_ProjectKB_Class20030]
+		[ontologia_ProjectKB_Class20031]
+		[ontologia_ProjectKB_Class20032]
+		[ontologia_ProjectKB_Class20033]
+		[ontologia_ProjectKB_Class20034]))
 
 ([CLSES_TAB] of  Widget
 
@@ -85,11 +85,11 @@
 ([KB_111590_Class1] of  Map
 
 	(entries
-		[ontologia_ProjectKB_Class30323]
-		[ontologia_ProjectKB_Class30324]
-		[ontologia_ProjectKB_Class30326]
-		[ontologia_ProjectKB_Class30327])
-	(referenced_maps [ontologia_ProjectKB_Class30325]))
+		[ontologia_ProjectKB_Class20035]
+		[ontologia_ProjectKB_Class20036]
+		[ontologia_ProjectKB_Class20038]
+		[ontologia_ProjectKB_Class20039])
+	(referenced_maps [ontologia_ProjectKB_Class20037]))
 
 ([KB_111590_Class10] of  Boolean
 
@@ -206,7 +206,7 @@
 		[KB_111590_Class10]
 		[KB_111590_Class11]))
 
-([KB_787265_Class5] of  Map
+([KB_707177_Class5] of  Map
 )
 
 ([LAYOUT_PROPERTIES] of  Property_List
@@ -251,87 +251,96 @@
 ([ontologia_ProjectKB_Class12] of  Property_List
 )
 
-([ontologia_ProjectKB_Class20051] of  Widget
+([ontologia_ProjectKB_Class20023] of  String
 
-	(height 60)
-	(is_hidden FALSE)
-	(name "precorrequisitos")
-	(property_list [ontologia_ProjectKB_Class20052])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 360))
+	(name "Obligatoria")
+	(string_value "nombre"))
 
-([ontologia_ProjectKB_Class20052] of  Property_List
+([ontologia_ProjectKB_Class20024] of  String
+
+	(name "Especializado")
+	(string_value "nombre_tema"))
+
+([ontologia_ProjectKB_Class20025] of  String
+
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([ontologia_ProjectKB_Class20026] of  String
+
+	(name "Optativa")
+	(string_value "nombre"))
+
+([ontologia_ProjectKB_Class20027] of  String
+
+	(name "Especializada")
+	(string_value "nombre"))
+
+([ontologia_ProjectKB_Class20028] of  String
+
+	(name "No_informático")
+	(string_value "nombre_tema"))
+
+([ontologia_ProjectKB_Class20029] of  String
+
+	(name "Horario")
+	(string_value "horario"))
+
+([ontologia_ProjectKB_Class20030] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
+
+([ontologia_ProjectKB_Class20031] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([ontologia_ProjectKB_Class20032] of  String
+
+	(name "Competencia")
+	(string_value "{G}nombre_comp{.}nivel"))
+
+([ontologia_ProjectKB_Class20033] of  String
+
+	(name "General")
+	(string_value "nombre_tema"))
+
+([ontologia_ProjectKB_Class20034] of  String
+
+	(name "Especialidad")
+	(string_value "nombre_esp"))
+
+([ontologia_ProjectKB_Class20035] of  Map_Entry
+
+	(key "add_name_on_instance_form")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([ontologia_ProjectKB_Class20036] of  Map_Entry
+
+	(key "change_tracking_active")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([ontologia_ProjectKB_Class20037] of  Map
 )
 
-([ontologia_ProjectKB_Class20053] of  Widget
+([ontologia_ProjectKB_Class20038] of  Map_Entry
 
-	(height 60)
-	(is_hidden FALSE)
-	(name "precorrequisitos")
-	(property_list [ontologia_ProjectKB_Class20054])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 360))
+	(key "InstanceDisplay.yellow_stickies")
+	(key_class "java.lang.String")
+	(value "ontologia_ProjectKB_Class20037")
+	(value_class "java.util.Map"))
 
-([ontologia_ProjectKB_Class20054] of  Property_List
-)
+([ontologia_ProjectKB_Class20039] of  Map_Entry
 
-([ontologia_ProjectKB_Class20055] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "precorrequisitos")
-	(property_list [ontologia_ProjectKB_Class20056])
-	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
-	(width 200)
-	(x 0)
-	(y 360))
-
-([ontologia_ProjectKB_Class20056] of  Property_List
-
-	(properties
-		[ontologia_ProjectKB_Class20057]
-		[ontologia_ProjectKB_Class20058]))
-
-([ontologia_ProjectKB_Class20057] of  Boolean
-
-	(boolean_value FALSE)
-	(name "ButtonDisplayed-View References to Value"))
-
-([ontologia_ProjectKB_Class20058] of  Boolean
-
-	(boolean_value FALSE)
-	(name "ButtonDisplayed-Delete Instance"))
-
-([ontologia_ProjectKB_Class20059] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "precorrequisitos")
-	(property_list [ontologia_ProjectKB_Class20060])
-	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
-	(width 200)
-	(x 0)
-	(y 360))
-
-([ontologia_ProjectKB_Class20060] of  Property_List
-
-	(properties
-		[ontologia_ProjectKB_Class20061]
-		[ontologia_ProjectKB_Class20062]))
-
-([ontologia_ProjectKB_Class20061] of  Boolean
-
-	(boolean_value FALSE)
-	(name "ButtonDisplayed-View References to Value"))
-
-([ontologia_ProjectKB_Class20062] of  Boolean
-
-	(boolean_value FALSE)
-	(name "ButtonDisplayed-Delete Instance"))
+	(key "suppress_instance_counting")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
 
 ([ontologia_ProjectKB_Class20067] of  Widget
 
@@ -402,62 +411,6 @@
 	(boolean_value FALSE)
 	(name "ButtonDisplayed-Delete Instance"))
 
-([ontologia_ProjectKB_Class30071] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "orrequisitos")
-	(property_list [ontologia_ProjectKB_Class30072])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 480))
-
-([ontologia_ProjectKB_Class30072] of  Property_List
-)
-
-([ontologia_ProjectKB_Class30073] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "orrequisitos")
-	(property_list [ontologia_ProjectKB_Class30074])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 480))
-
-([ontologia_ProjectKB_Class30074] of  Property_List
-)
-
-([ontologia_ProjectKB_Class30075] of  Widget
-
-	(height 120)
-	(is_hidden FALSE)
-	(name "orrequisitos")
-	(property_list [ontologia_ProjectKB_Class30076])
-	(widget_class_name "edu.stanford.smi.protege.widget.StringListWidget")
-	(width 200)
-	(x 0)
-	(y 480))
-
-([ontologia_ProjectKB_Class30076] of  Property_List
-)
-
-([ontologia_ProjectKB_Class30077] of  Widget
-
-	(height 120)
-	(is_hidden FALSE)
-	(name "orrequisitos")
-	(property_list [ontologia_ProjectKB_Class30078])
-	(widget_class_name "edu.stanford.smi.protege.widget.StringListWidget")
-	(width 200)
-	(x 0)
-	(y 480))
-
-([ontologia_ProjectKB_Class30078] of  Property_List
-)
-
 ([ontologia_ProjectKB_Class30083] of  Widget
 
 	(height 120)
@@ -484,97 +437,6 @@
 
 	(boolean_value FALSE)
 	(name "ButtonDisplayed-Delete Instance"))
-
-([ontologia_ProjectKB_Class30311] of  String
-
-	(name "Obligatoria")
-	(string_value "nombre"))
-
-([ontologia_ProjectKB_Class30312] of  String
-
-	(name "Optativa")
-	(string_value "nombre"))
-
-([ontologia_ProjectKB_Class30313] of  String
-
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
-
-([ontologia_ProjectKB_Class30314] of  String
-
-	(name "Especializado")
-	(string_value "nombre_tema"))
-
-([ontologia_ProjectKB_Class30315] of  String
-
-	(name "Especializada")
-	(string_value "nombre"))
-
-([ontologia_ProjectKB_Class30316] of  String
-
-	(name "No_informático")
-	(string_value "nombre_tema"))
-
-([ontologia_ProjectKB_Class30317] of  String
-
-	(name "Horario")
-	(string_value "horario"))
-
-([ontologia_ProjectKB_Class30318] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
-([ontologia_ProjectKB_Class30319] of  String
-
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
-
-([ontologia_ProjectKB_Class30320] of  String
-
-	(name "Competencia")
-	(string_value "{G}nombre_comp{.}nivel"))
-
-([ontologia_ProjectKB_Class30321] of  String
-
-	(name "General")
-	(string_value "nombre_tema"))
-
-([ontologia_ProjectKB_Class30322] of  String
-
-	(name "Especialidad")
-	(string_value "nombre_esp"))
-
-([ontologia_ProjectKB_Class30323] of  Map_Entry
-
-	(key "add_name_on_instance_form")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([ontologia_ProjectKB_Class30324] of  Map_Entry
-
-	(key "change_tracking_active")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([ontologia_ProjectKB_Class30325] of  Map
-)
-
-([ontologia_ProjectKB_Class30326] of  Map_Entry
-
-	(key "InstanceDisplay.yellow_stickies")
-	(key_class "java.lang.String")
-	(value "ontologia_ProjectKB_Class30325")
-	(value_class "java.util.Map"))
-
-([ontologia_ProjectKB_Class30327] of  Map_Entry
-
-	(key "suppress_instance_counting")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
 
 ([ontologia_ProjectKB_Class4] of  Property_List
 
@@ -896,8 +758,8 @@
 	(customized_instance_widgets
 		[ontologia_ProjectKB_Class53]
 		[INSTANCE_ANNOTATION_FORM_WIDGET]
-		[STANDARD_FACET_FORM_WIDGET]
 		[STANDARD_SLOT_FORM_WIDGET]
+		[STANDARD_FACET_FORM_WIDGET]
 		[PAL_FORM_WIDGET]
 		[STANDARD_CLASS_FORM_WIDGET])
 	(default_cls_metaclass ":STANDARD-CLASS")
