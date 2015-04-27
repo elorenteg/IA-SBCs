@@ -1,4 +1,4 @@
-; Mon Apr 27 00:56:08 CEST 2015
+; Mon Apr 27 10:16:59 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -437,7 +437,8 @@
 
 ([ontologia_Class20048] of  Especializado
 
-	(nombre_tema "Sistemas operativos"))
+	(nombre_tema "Sistemas operativos")
+	(temas_afines [ontologia_Class30008]))
 
 ([ontologia_Class20049] of  Especializada
 
@@ -541,7 +542,10 @@
 
 ([ontologia_Class20059] of  Especializado
 
-	(nombre_tema "Aplicaciones web"))
+	(nombre_tema "Aplicaciones web")
+	(temas_afines
+		[ontologia_Class30006]
+		[ontologia_Class30012]))
 
 ([ontologia_Class20060] of  Especializada
 
@@ -914,6 +918,291 @@
 	(num_creditos 7.5)
 	(temas [ontologia_Class55]))
 
+([ontologia_Class30000] of  Especializada
+
+	(aprobados_ant 95.12)
+	(competencias [ontologia_Class20097])
+	(curso 3)
+	(es_proyecto FALSE)
+	(especialidad_asig [ontologia_Class72])
+	(horarios [ontologia_Class46])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 41)
+	(nombre "ASO")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class36]
+		[ontologia_Class41])
+	(temas [ontologia_Class20048]))
+
+([ontologia_Class30001] of  Especializada
+
+	(aprobados_ant 90.91)
+	(competencias [ontologia_Class20099])
+	(curso 3)
+	(es_proyecto FALSE)
+	(especialidad_asig [ontologia_Class72])
+	(horarios [ontologia_Class46])
+	(horas_lab 15.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 45.0)
+	(matriculados_ant 22)
+	(nombre "PI")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class41])
+	(temas
+		[ontologia_Class54]
+		[ontologia_Class30006]))
+
+([ontologia_Class30002] of  Especializada
+
+	(aprobados_ant 100.0)
+	(competencias
+		[ontologia_Class20084]
+		[ontologia_Class20091]
+		[ontologia_Class20094])
+	(curso 3)
+	(es_proyecto TRUE)
+	(especialidad_asig [ontologia_Class72])
+	(horarios [ontologia_Class46])
+	(horas_lab 42.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 3.0)
+	(matriculados_ant 15)
+	(nombre "PTI")
+	(num_creditos 6.0)
+	(precorrequisitos
+		[ontologia_Class30000]
+		[ontologia_Class30001])
+	(temas [ontologia_Class30005]))
+
+([ontologia_Class30005] of  General
+
+	(nombre_tema "Tecnologías de la información"))
+
+([ontologia_Class30006] of  Especializado
+
+	(nombre_tema "Protocolos")
+	(temas_afines
+		[ontologia_Class30008]
+		[ontologia_Class20059]))
+
+([ontologia_Class30007] of  Especializada
+
+	(aprobados_ant 96.36)
+	(competencias [ontologia_Class20093])
+	(curso 3)
+	(es_proyecto FALSE)
+	(especialidad_asig [ontologia_Class72])
+	(horarios [ontologia_Class46])
+	(horas_lab 15.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 47.0)
+	(matriculados_ant 55)
+	(nombre "SI")
+	(num_creditos 6.0)
+	(precorrequisitos
+		[ontologia_Class36]
+		[ontologia_Class41])
+	(temas
+		[ontologia_Class30005]
+		[ontologia_Class30008]
+		[ontologia_Class54]
+		[ontologia_Class30019]))
+
+([ontologia_Class30008] of  Especializado
+
+	(nombre_tema "Seguridad")
+	(temas_afines
+		[ontologia_Class30006]
+		[ontologia_Class20048]
+		[ontologia_Class30019]))
+
+([ontologia_Class30009] of  Especializada
+
+	(aprobados_ant 95.0)
+	(competencias [ontologia_Class20077])
+	(curso 3)
+	(es_proyecto FALSE)
+	(especialidad_asig [ontologia_Class72])
+	(horarios [ontologia_Class46])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 20)
+	(nombre "SOA")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class36])
+	(temas [ontologia_Class20048]))
+
+([ontologia_Class30010] of  Especializada
+
+	(aprobados_ant 89.47)
+	(competencias [ontologia_Class20101])
+	(curso 3)
+	(es_proyecto FALSE)
+	(especialidad_asig [ontologia_Class72])
+	(horarios [ontologia_Class46])
+	(horas_lab 0.0)
+	(horas_prob 7.5)
+	(horas_teor%C3%ADa 52.5)
+	(matriculados_ant 19)
+	(nombre "TXC")
+	(num_creditos 6.0)
+	(precorrequisitos [ontologia_Class41])
+	(temas
+		[ontologia_Class54]
+		[ontologia_Class30006]))
+
+([ontologia_Class30011] of  Especializada
+
+	(aprobados_ant 100.0)
+	(competencias
+		[ontologia_Class20085]
+		[ontologia_Class20099])
+	(curso 3)
+	(es_proyecto FALSE)
+	(especialidad_asig [ontologia_Class72])
+	(horarios [ontologia_Class46])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 22)
+	(nombre "AD")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class41])
+	(temas
+		[ontologia_Class54]
+		[ontologia_Class20059]
+		[ontologia_Class30012]))
+
+([ontologia_Class30012] of  Especializado
+
+	(nombre_tema "Aplicaciones móbiles")
+	(temas_afines [ontologia_Class20059]))
+
+([ontologia_Class30013] of  Especializada
+
+	(aprobados_ant 100.0)
+	(competencias [ontologia_Class20097])
+	(curso 3)
+	(es_proyecto FALSE)
+	(especialidad_asig
+		[ontologia_Class69]
+		[ontologia_Class72])
+	(horarios [ontologia_Class46])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 20)
+	(nombre "CASO")
+	(num_creditos 6.0)
+	(orrequisitos
+		[ontologia_Class20047]
+		[ontologia_Class30009])
+	(temas
+		[ontologia_Class55]
+		[ontologia_Class20048]))
+
+([ontologia_Class30014] of  Especializada
+
+	(aprobados_ant 100.0)
+	(competencias
+		[ontologia_Class20087]
+		[ontologia_Class20091])
+	(curso 3)
+	(es_proyecto FALSE)
+	(especialidad_asig
+		[ontologia_Class69]
+		[ontologia_Class72])
+	(horarios [ontologia_Class46])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 35)
+	(nombre "CPD")
+	(num_creditos 6.0)
+	(precorrequisitos [ontologia_Class36])
+	(prerrequisitos [ontologia_Class41])
+	(temas
+		[ontologia_Class54]
+		[ontologia_Class55]
+		[ontologia_Class30008]))
+
+([ontologia_Class30015] of  Especializada
+
+	(aprobados_ant 84.85)
+	(competencias [ontologia_Class20087])
+	(curso 3)
+	(es_proyecto FALSE)
+	(especialidad_asig [ontologia_Class72])
+	(horarios [ontologia_Class46])
+	(horas_lab 15.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 45.0)
+	(matriculados_ant 33)
+	(nombre "IM")
+	(num_creditos 6.0)
+	(prerrequisitos [ontologia_Class41])
+	(temas
+		[ontologia_Class30012]
+		[ontologia_Class54]
+		[ontologia_Class20009]
+		[ontologia_Class30006]))
+
+([ontologia_Class30016] of  Especializada
+
+	(aprobados_ant 100.0)
+	(competencias [ontologia_Class20077])
+	(curso 3)
+	(es_proyecto FALSE)
+	(especialidad_asig [ontologia_Class72])
+	(horarios [ontologia_Class46])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 9)
+	(nombre "SDX")
+	(num_creditos 6.0)
+	(precorrequisitos
+		[ontologia_Class30001]
+		[ontologia_Class36])
+	(prerrequisitos [ontologia_Class41])
+	(temas
+		[ontologia_Class54]
+		[ontologia_Class20059]
+		[ontologia_Class30006]))
+
+([ontologia_Class30018] of  Especializada
+
+	(aprobados_ant 68.42)
+	(competencias [ontologia_Class20093])
+	(curso 3)
+	(es_proyecto FALSE)
+	(especialidad_asig [ontologia_Class72])
+	(horarios [ontologia_Class46])
+	(horas_lab 15.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 45.0)
+	(matriculados_ant 19)
+	(nombre "TCI")
+	(num_creditos 6.0)
+	(prerrequisitos
+		[ontologia_Class27]
+		[ontologia_Class31]
+		[ontologia_Class32])
+	(temas
+		[ontologia_Class56]
+		[ontologia_Class30008]
+		[ontologia_Class30019]))
+
+([ontologia_Class30019] of  Especializado
+
+	(nombre_tema "Criptografía")
+	(temas_afines [ontologia_Class30008]))
+
 ([ontologia_Class31] of  Obligatoria
 
 	(aprobados_ant 67.4)
@@ -1079,7 +1368,6 @@
 ([ontologia_Class40] of  Obligatoria
 
 	(aprobados_ant 78.8)
-	(correquisitos [ontologia_Class37])
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -1091,13 +1379,13 @@
 	(matriculados_ant 184)
 	(nombre "IES")
 	(num_creditos 6.0)
+	(precorrequisitos [ontologia_Class37])
 	(prerrequisitos [ontologia_Class34])
 	(temas [ontologia_Class50]))
 
 ([ontologia_Class41] of  Obligatoria
 
 	(aprobados_ant 71.78)
-	(correquisitos [ontologia_Class36])
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -1109,12 +1397,14 @@
 	(matriculados_ant 202)
 	(nombre "XC")
 	(num_creditos 6.0)
-	(temas [ontologia_Class54]))
+	(precorrequisitos [ontologia_Class36])
+	(temas
+		[ontologia_Class54]
+		[ontologia_Class30006]))
 
 ([ontologia_Class42] of  Obligatoria
 
 	(aprobados_ant 83.96)
-	(correquisitos [ontologia_Class35])
 	(curso 2)
 	(es_proyecto FALSE)
 	(horarios
@@ -1126,6 +1416,7 @@
 	(matriculados_ant 187)
 	(nombre "AC")
 	(num_creditos 6.0)
+	(precorrequisitos [ontologia_Class35])
 	(prerrequisitos
 		[ontologia_Class30]
 		[ontologia_Class36])
@@ -1134,9 +1425,7 @@
 ([ontologia_Class43] of  Obligatoria
 
 	(aprobados_ant 92.25)
-	(correquisitos
-		[ontologia_Class34]
-		[ontologia_Class40])
+	(correquisitos [ontologia_Class40])
 	(curso 2)
 	(es_proyecto TRUE)
 	(horarios
@@ -1148,6 +1437,7 @@
 	(matriculados_ant 142)
 	(nombre "PROP")
 	(num_creditos 6.0)
+	(precorrequisitos [ontologia_Class34])
 	(prerrequisitos [ontologia_Class37])
 	(temas
 		[ontologia_Class50]
@@ -1192,7 +1482,8 @@
 		[ontologia_Class31])
 	(temas
 		[ontologia_Class49]
-		[ontologia_Class59]))
+		[ontologia_Class59]
+		[ontologia_Class30012]))
 
 ([ontologia_Class46] of  Horario
 
@@ -1223,7 +1514,8 @@
 
 ([ontologia_Class53] of  Especializado
 
-	(nombre_tema "Cálculo numérico"))
+	(nombre_tema "Cálculo numérico")
+	(temas_afines [ontologia_Class60]))
 
 ([ontologia_Class54] of  General
 
@@ -1257,15 +1549,18 @@
 
 ([ontologia_Class61] of  Especializado
 
-	(nombre_tema "Tratamiento de datos"))
+	(nombre_tema "Tratamiento de datos")
+	(temas_afines [ontologia_Class52]))
 
 ([ontologia_Class62] of  Especializado
 
-	(nombre_tema "Geometría computacional"))
+	(nombre_tema "Geometría computacional")
+	(temas_afines [ontologia_Class59]))
 
 ([ontologia_Class63] of  Especializado
 
-	(nombre_tema "Lógica"))
+	(nombre_tema "Lógica")
+	(temas_afines [ontologia_Class52]))
 
 ([ontologia_Class64] of  No_inform%C3%A1tico
 
