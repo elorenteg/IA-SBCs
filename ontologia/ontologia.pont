@@ -1,4 +1,4 @@
-; Mon Apr 27 10:24:47 CEST 2015
+; Mon Apr 27 10:49:21 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -358,11 +358,25 @@
 
 (defclass Obligatoria "Asignatura obligatoria (troncal) para todos los estudiantes"
 	(is-a Asignatura)
-	(role concrete))
+	(role concrete)
+	(single-slot curso
+;+		(comment "Año del plan de estudios en que se cursa la asignatura")
+		(type SYMBOL)
+		(allowed-values 1 2 3 4)
+		(default 1)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
 
 (defclass Especializada "Asignatura que forma parte de una especialidad"
 	(is-a Asignatura)
 	(role concrete)
+	(single-slot curso
+;+		(comment "Año del plan de estudios en que se cursa la asignatura")
+		(type SYMBOL)
+		(allowed-values 1 2 3 4)
+		(default 3)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
 	(multislot especialidad_asig
 ;+		(comment "Especialidad asociada a la asignatura")
 		(type INSTANCE)
@@ -372,7 +386,14 @@
 
 (defclass Optativa "Asignatura optativa"
 	(is-a Asignatura)
-	(role concrete))
+	(role concrete)
+	(single-slot curso
+;+		(comment "Año del plan de estudios en que se cursa la asignatura")
+		(type SYMBOL)
+		(allowed-values 1 2 3 4)
+		(default 4)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
 
 (defclass Libre_elecci%C3%B3n "Asignatura de libre elección"
 	(is-a Asignatura)

@@ -1,4 +1,4 @@
-; Mon Apr 27 10:24:47 CEST 2015
+; Mon Apr 27 10:49:22 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -1192,6 +1192,149 @@
 
 	(nombre_tema "Criptografía")
 	(temas_afines [ontologia_Class30008]))
+
+([ontologia_Class30020] of  Optativa
+
+	(aprobados_ant 94.44)
+	(competencias [ontologia_Class20087])
+	(curso 4)
+	(es_proyecto FALSE)
+	(horas_lab 4.0)
+	(horas_prob 0.0)
+	(horas_teor%C3%ADa 56.0)
+	(matriculados_ant 18)
+	(nombre "APC")
+	(num_creditos 6.0)
+	(temas
+		[ontologia_Class55]
+		[ontologia_Class30021]
+		[ontologia_Class20053]))
+
+([ontologia_Class30021] of  No_inform%C3%A1tico
+
+	(nombre_tema "Sostenibilidad"))
+
+([ontologia_Class30022] of  Optativa
+
+	(aprobados_ant 96.55)
+	(competencias [ontologia_Class20089])
+	(curso 4)
+	(es_proyecto FALSE)
+	(horarios [ontologia_Class46])
+	(horas_lab 0.0)
+	(horas_prob 30.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 29)
+	(nombre "APSS")
+	(num_creditos 6.0)
+	(temas [ontologia_Class30023]))
+
+([ontologia_Class30023] of  No_inform%C3%A1tico
+
+	(nombre_tema "Idiomas"))
+
+([ontologia_Class30024] of  Optativa
+
+	(aprobados_ant 96.15)
+	(competencias [ontologia_Class20089])
+	(curso 4)
+	(es_proyecto FALSE)
+	(horarios [ontologia_Class47])
+	(horas_lab 0.0)
+	(horas_prob 30.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 26)
+	(nombre "ASDP")
+	(num_creditos 6.0)
+	(temas [ontologia_Class30023]))
+
+([ontologia_Class30025] of  Optativa
+
+	(aprobados_ant 100.0)
+	(competencias
+		[ontologia_Class20076]
+		[ontologia_Class20086]
+		[ontologia_Class20087]
+		[ontologia_Class20090])
+	(curso 4)
+	(es_proyecto FALSE)
+	(horarios [ontologia_Class47])
+	(horas_lab 0.0)
+	(horas_prob 30.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 32)
+	(nombre "ASMI")
+	(num_creditos 6.0)
+	(temas
+		[ontologia_Class30021]
+		[ontologia_Class30026]))
+
+([ontologia_Class30026] of  No_inform%C3%A1tico
+
+	(nombre_tema "Derecho"))
+
+([ontologia_Class30027] of  Optativa
+
+	(aprobados_ant 82.35)
+	(competencias
+		[ontologia_Class20077]
+		[ontologia_Class20083])
+	(curso 4)
+	(es_proyecto FALSE)
+	(horarios [ontologia_Class46])
+	(horas_lab 16.0)
+	(horas_prob 15.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 17)
+	(nombre "C")
+	(num_creditos 6.0)
+	(temas
+		[ontologia_Class56]
+		[ontologia_Class30019]
+		[ontologia_Class30006]
+		[ontologia_Class30008]))
+
+([ontologia_Class30028] of  Optativa
+
+	(aprobados_ant 94.74)
+	(competencias [ontologia_Class20083])
+	(curso 4)
+	(es_proyecto FALSE)
+	(horas_lab 0.0)
+	(horas_prob 30.0)
+	(horas_teor%C3%ADa 30.0)
+	(matriculados_ant 19)
+	(nombre "CCQ")
+	(num_creditos 6.0)
+	(temas
+		[ontologia_Class57]
+		[ontologia_Class30019]
+		[ontologia_Class63]
+		[ontologia_Class20026]))
+
+([ontologia_Class30029] of  Optativa
+
+	(aprobados_ant 100.0)
+	(competencias
+		[ontologia_Class20077]
+		[ontologia_Class20088]
+		[ontologia_Class20079]
+		[ontologia_Class20081]
+		[ontologia_Class20096]
+		[ontologia_Class20097]
+		[ontologia_Class20083])
+	(curso 4)
+	(es_proyecto FALSE)
+	(horarios [ontologia_Class47])
+	(horas_lab 36.0)
+	(horas_prob 12.0)
+	(horas_teor%C3%ADa 24.0)
+	(matriculados_ant 18)
+	(nombre "CDI")
+	(num_creditos 6.0)
+	(temas
+		[ontologia_Class30005]
+		[ontologia_Class61]))
 
 ([ontologia_Class31] of  Obligatoria
 
