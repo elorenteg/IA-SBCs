@@ -1,6 +1,56 @@
 
 \subsection{Elementos del problema} \label{sec:elementos}
 
+Tal y como se ha explicado en la \autoref{sec:descripcion}, los elementos de 
+este problema se pueden clasificar en dos grandes grupos: por un lado están 
+las asignaturas, sus características particulares y las relaciones entre ellas 
+y con el plan de estudios; por otro lado hay los alumnos, sus expedientes y 
+sus restricciones y preferencias en cuanto a las asignaturas que pueden 
+cursar.
+
+Las asignaturas se identifican con las siglas de su nombre. Para cada 
+asignatura del grado, hay que tener una serie de datos sobre su lugar en el 
+plan de estudios y la cantidad de trabajo asociada, así como información 
+acerca de su contenido, para poder satisfacer las restricciones que pueda 
+imponer el alumno y tener en cuenta en la medida de lo posible sus 
+preferencias. 
+
+Así, se almacena para cada asignatura el curso en el que está planeada y el 
+tipo de asignatura de que se trata: obligatoria, de especialidad u optativa. 
+En el caso de las asignaturas de especialidad, se sabe también a qué 
+especialidades pertenecen. Con estos datos, se puede comprobar la adecuación 
+de la asignatura al alumno según su progreso en el plan de estudios 
+(por ejemplo, es importante saber si un alumno todavía tiene pendientes 
+algunas asignaturas obligatorias o si está en una determinada especialidad a 
+la hora de recomendarle asignaturas). Como el plan de estudios obliga a los 
+alumnos a cursar por lo menos una asignatura con el nivel tres de cada una de 
+las competencias transversales, se tiene en cuenta qué competencias 
+transversales y a qué nivel se desarrollan en cada asignatura: con esta 
+información, se puede ofrecer una recomendación que permita desarrollar las 
+competencias restantes a un alumno que esté en una fase avanzada del grado.
+Se considera también el número de créditos a los que corresponde cada 
+asignatura y la distribución de esta carga de trabajo en horas de teoría, de 
+problemas o de laboratorio, así como el número de matriculados y el 
+porcentaje de aprobados del cuatrimestre anterior. A partir de estos datos, 
+se puede hacer una estimación de la dificultad y el esfuerzo que conllevan 
+las asignaturas para ofrecer una recomendación razonable según las 
+capacidades y limitaciones del alumno en cuestión. Otro dato importante a 
+tener en cuenta es la disponibilidad horaria de las asignaturas (algunas se 
+ofrecen solo en horario de mañana o de tarde), puesto que habrá que respetar 
+las restricciones horarias del alumno.
+
+Hay que tener en cuenta asimismo el contenido de las asignaturas para hacer 
+una recomendación adecuada a los gustos e intereses del alumno. Para ello, 
+se tiene una clasificación de temas genéricos, especializados y no 
+informáticos. Algunos temas especializados están interrelacionados según su 
+afinidad. De este modo, se conocen los temas que trata cada asignatura y se 
+puede utilizar esta información, junto a los intereses mostrados por un 
+alumno, para ofrecerle una recomendación de asignaturas personalizada (es 
+decir, se intentará recomendar asignaturas que traten los temas en los que 
+el alumno está interesado o bien temas afines a estos). 
+
+%%% TODO : Alumnos - expediente, preferencias y restricciones %%%
+
 %%% TODO %%%
 
 
