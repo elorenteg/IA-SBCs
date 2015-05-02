@@ -49,8 +49,52 @@ alumno, para ofrecerle una recomendación de asignaturas personalizada (es
 decir, se intentará recomendar asignaturas que traten los temas en los que 
 el alumno está interesado o bien temas afines a estos). 
 
-%%% TODO : Alumnos - expediente, preferencias y restricciones %%%
+Los alumnos se identifican con su DNI. Para cada alumno, se dispone de su 
+expediente completo en la FIB y se le pregunta acerca de o se deducen una 
+serie de preferencias y restricciones sobre la matrícula de asignaturas con 
+el objetivo de ofrecer una recomendación adecuada.
 
-%%% TODO %%%
+Concretamente, el expediente de un alumno está formado por un registro de 
+todas las convocatorias de examen de todas las asignaturas en las que ha 
+estado matriculado. Para cada una de estas convocatorias, se conoce la 
+toda la información ya descrita de la asignatura a la que corresponde, en qué 
+cuatrimestre y con qué horario se cursó la asignatura y la calificación final 
+obtenida. A partir de estos datos se pueden inferir algunas preferencias o 
+restricciones del alumno: por ejemplo, se puede saber si está en alguna 
+especialidad en concreto (y, en este caso, qué asignaturas le quedan para 
+terminarla), los temas por los que ha mostrado interés hasta el momento, qué 
+comptencias transversales tiene evaluadas, o incluso se puede obtener una 
+estimación de la carga de trabajo que puede asumir o de su preferencia horaria 
+particular.
+
+Sin embargo, se dará la oportunidad al alumno de introducir sus restricciones 
+y preferencias de forma explícita, puesto que el conocimiento obtenido de este 
+modo es más fiable que el inferido a partir de los datos pasados y puede 
+marcar la diferencia con recomendaciones más precisas y ajustadas al perfil 
+del alumno. 
+
+Las restricciones son de obligado cumplimiento en las asignaturas 
+recomendadas, mientras que las preferencias afectan al grado de recomendación 
+pero no son estrictamente necesarias. Se consideran restricciones y 
+preferencias de distintos tipos. Por un lado, hay preferencias y restricciones 
+relacionadas con la carga de trabajo: un número máximo de asignaturas a 
+matricular, un número máximo de horas de dedicación o un número máximo de 
+horas dedicadas a laboratorios, o bien un nivel de dificultad máximo asumible 
+en las asignaturas. También hay preferencias y restricciones de tipo horario 
+(es decir, el alumno puede tener una mayor disponibilidad por la mañana o por 
+la tarde) y otras en relación al plan de estudios del grado: un nivel de 
+interés en terminar la especialidad cursada o algunas competencias 
+transversales que prefiera obtener. Finalmente, hay aquellas preferencias y 
+restricciones relacionadas con los temas tratados en las asignaturas (el 
+alumno puede preferir cursar asignaturas que traten determinados temas y, en 
+cambio, puede querer evitar otros temas).
+
+Como ya se ha mencionado anteriormente, el usuario tiene la posibilidad de 
+añadir todas estas preferencias y restricciones explícitamente para que el 
+sistema de recomendación las tenga en cuenta. En caso contrario, el sistema 
+inferirá algunas de estas (mayoritariamente en forma de preferencias) 
+basándose en el conocimiento disponible sobre los cuatrimestres pasados (es 
+decir, en el expediente del alumno).
+
 
 
