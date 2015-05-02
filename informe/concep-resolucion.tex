@@ -1,7 +1,55 @@
 
 \subsection{Proceso de resolución} \label{sec:desc-resolucion}
 
-%%% TODO %%%
+Como se ha explicado en la \autoref{sec:subproblemas}, el proceso de 
+resolución del problema empieza con una recopilación de información sobre las 
+preferencias del alumno y las restricciones que este impone en las asignaturas 
+que se le recomendarán. A tal efecto, se formulan una serie de preguntas para 
+determinar la carga máxima de trabajo y la dificultad de las asignaturas que 
+el alumno está dispuesto a asumir, sus preferencias o necesidades horarias, 
+si quiere empezar una cierta especialidad o, en caso de que ya la haya 
+empezado, si tiene especial interés en completarla, si da especial importancia 
+a las competencias transversales que aún no ha obtenido, cuáles temas le 
+interesan y cuáles no para las próximas asignaturas, ... El usuario puede 
+decidir no responder a algunas de estas preguntas, en cuyo caso se adaptarán 
+las preguntas restantes para evitar preguntar sobre temas similares a los 
+ignorados.
+
+Para todas aquellas preguntas que el usuario decida ignorar, se aplicará un 
+proceso de inferencia basado en su expediente para obtener un conocimiento 
+equivalente en la medida de lo posible. En particular, se observarán los 
+patrones en la carga de trabajo y la dificultad de las asignaturas cursadas 
+en cuatrimestres anteriores y los resultados académicos obtenidos para estimar 
+las capacidades y la dedicación del alumno, se buscarán algunos patrones 
+básicos en los horarios de estas asignaturas previas para deducir la 
+disponibilidad del alumno, se evaluará su progreso en el plan de estudios del 
+grado para determinar si le conviene cursar unas determinadas asignaturas 
+(por ejemplo, para terminar la especialidad o bien para completar todas las 
+competencias transversales y poder obtener el título del grado), se 
+considerarán los temas tratados en las asignaturas que haya elegido 
+previamente para determinar sus intereses, ...
+
+Tras la adquisición de todo el conocimiento necesario para resolver el 
+problema original, se procede a una abstracción de aquellas características 
+más relevantes del alumno para simplificar la evaluación de las asignaturas 
+recomendables. Es decir, planteamos la resolución de este problema usando las 
+técnicas de clasificación heurística.
+
+Posteriormente, las asignaturas se filtran en función de sus características 
+(horarios, dificultad, carga de trabajo, temas tratados, ...) con el objetivo 
+de retirar aquellas que no cumplen alguna de las restricciones impuestas por 
+el alumno. Finalmente, se valoran las asignaturas restantes mediante reglas 
+heurísticas de razonamiento y se les asigna una puntuación que estima cuán 
+recomendables son, incentivando la elección de aquellas que más se acercan 
+a las preferencias del usuario. Durante este proceso, se pueden almacenar 
+también los motivos que llevan al sistema a establecer las puntuaciones (es 
+decir, las reglas que se han podido aplicar en función de las preferencias 
+consideradas). Con esto, el problema ya está prácticamente resuelto y solo 
+queda mostrar al usuario aquellas asignaturas con una puntuación más elevada 
+(es decir, las más recomendables) junto a una calificación cualitativa del 
+grado de recomendación y los motivos por los que se recomiendan. 
+Concretamente, se eligen hasta un máximo de seis asignaturas y todas ellas 
+deben ser mínimamente apropiadas para el perfil del alumno.
 
 
 
