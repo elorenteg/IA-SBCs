@@ -1,7 +1,46 @@
 
 \subsection{Estructura del problema} \label{sec:subproblemas}
 
-%%% TODO %%%
+A fin de resolver este problema, en el que intervienen muchos elementos 
+altamente diferenciados, es importante descomponerlo en subproblemas más 
+simples que faciliten un tratamiento sistemático mediante razonamientos 
+sobre el conocimiento adquirido. 
+
+La descripción de los diversos elementos del problema en la 
+\autoref{sec:elementos} ya sugiere una cierta estructura en subproblemas 
+diferenciados que se pueden resolver de forma individual. 
+
+Primeramente, hay que obtener el máximo de información posible del usuario 
+(es decir, del alumno para el que hay que generar una recomendación de 
+asignaturas). Es decir, este subproblema consiste en consultar al usuario 
+sobre sus preferencias y las restricciones que quiera imponer a la 
+recomendación mediante un sistema de preguntas directas que se adapte con 
+nuevas preguntas en función de las respuestas obtenidas (de modo que el 
+usuario pueda ofrecer suficiente conocimiento útil respondiendo al mínimo 
+número de preguntas posible).
+
+En segundo lugar, se debe obtener el conocimiento faltante a partir del 
+expediente del alumno. Es decir, hay que inferir aquellas preferencias y 
+restricciones que el usuario ha omitido mediante un sistema de reglas de 
+razonamiento basadas en su expediente pasado. Con estas dos fases, se 
+determinan completamente las restricciones que deberán cumplir las asignaturas 
+recomendadas y las preferencias que guiarán el proceso de selección de 
+asignaturas. 
+
+El tercer subproblema consiste en abstraer de las restricciones y 
+preferencias del alumno obtenidas un conjunto de características clave 
+suficientemente descriptivas y que vengan determinadas por unos valores mucho 
+más restringidos. Esto facilitará la calificación de la adecuación de las 
+asignaturas al alumno (puesto que el tamaño de los datos a analizar será 
+menor).
+
+Finalmente, hay que asociar a cada asignatura disponible para la matrícula del 
+alumno un cierto grado de adecuación para la recomendación, basándose en las 
+características del alumno y las de la asignatura. Una vez calculados estos 
+niveles de recomendación, se puede elaborar la solución final seleccionando 
+aquellas asignaturas más idóneas (hasta un máximo de seis).
+
+
 
 
 
