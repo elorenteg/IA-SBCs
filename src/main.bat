@@ -1,5 +1,10 @@
 (clear)
+(reset)
 (load "../ontologia/ontologia.pont")
 (load-instances "../ontologia/ontologia.pins")
-(reset)
-;Las reglas van aqui
+
+(load "consultas.clp")
+
+(make-instance alumno-x of Alumno (id 111)) ;test
+
+;(run)
