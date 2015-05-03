@@ -22,9 +22,10 @@ de análisis).
 Además, partiendo de unos datos de entrada que proporcionan un conocimiento 
 incompleto hay que asociar a estos una solución mediante razonamientos 
 heurísticos. En conclusión, el método más adecuado para resolver este problema 
-es la clasificación heurística. 
+es la clasificación heurística. Para nuestro problema de recomendación la resolución consistirá en tres fases:
 
-%%% TODO : Fases de la classificació heurística - subproblemes. %%%
-
-
-
+\begin{enumerate}
+\item La \textbf{abstracción de datos} cosiste en pasar de un problema concreto, la situación de nuestro alumno, y pasarlo a un problema abstracto, una generalización para tratar a todos los alumnos. Si el alumno nos ha introducido preferencias y restricciones, la abstracción será sencilla porque ya tendremos toda la información que necesitaremos para el sistema. En caso contrario, deberemos deducir sus preferencias según su expediente.
+\item La \textbf{asociación herurística} consiste en pasar de un problema abstracto a una solución abstracta. En esta fase se quiere obtener una posible solución que normalmente ha funcionado para un mismo patrón de estudiantes y del que se genera una serie de recomentaciones de asingaturas según si son altamente recomendables o solo recomendables.
+\item El \textbf{Refinamiento} y la \textbf{adaptación} consiste en pasar de una solución abstracta a una solución concreta. De este modo, podremos pasar de una solución con distintas recomendaciones, que nos encajaría con el mismo tipo de estudiantes, a nuestro alumno. En esta fase, escogeremos hasta un máximo de seis asignaturas entre todas las recomendadas por el sistema según los datos concretos del alumno para poder depurar mejor la recomendación.
+\end{enumerate}
