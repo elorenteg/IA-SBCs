@@ -3,46 +3,61 @@
 ;;
 
 (deffunction pregunta
-    (?pregunta)
+    (?pregunta ?puede-omitir)
 
-    (format t ">> %s? " ?pregunta)
+    (if ?puede-omitir then (bind ?salida-opc "(opcional)")
+    else (bind ?salida-opc ""))
+
+    (format t ">> %s %s " ?pregunta ?salida-opc)
     (bind ?respuesta (lowcase (read)))
+
+    (if (and (eq ?respuesta -) ?puede-omitir) then (return nil)) ;permite omitir la pregunta
     ?respuesta
 )
 
-;;; TODO: indicar por la salida si una pregunta es opcional ;;;
 (deffunction pregunta-rango
     (?pregunta ?puede-omitir ?min ?max)
 
-    (format t ">> %s [%d, %d] " ?pregunta ?min ?max)
+    (if ?puede-omitir then (bind ?salida-opc "(opcional)")
+    else (bind ?salida-opc ""))
+
+    (format t ">> %s [%d, %d] %s " ?pregunta ?min ?max ?salida-opc)
     (bind ?respuesta (read))
+
     (if (and (eq ?respuesta -) ?puede-omitir) then (return nil)) ;permite omitir la pregunta
     (while (or (< ?respuesta ?min) (> ?respuesta ?max))
         (printout t "No se ha introducido una respuesta valida" crlf)
-        (format t ">> %s " ?pregunta)
+        (format t ">> %s [%d, %d] %s " ?pregunta ?min ?max ?salida-opc)
         (bind ?respuesta (read))
     )
     ?respuesta
 )
 
 (deffunction pregunta-cerrada
-    (?pregunta $?candidatos)
+    (?pregunta ?puede-omitir $?candidatos)
+
+    (if ?puede-omitir then (bind ?salida-opc "(opcional)")
+    else (bind ?salida-opc ""))
 
     (progn$ (?var ?candidatos) (lowcase ?var))
-    (format t ">> %s (%s) " ?pregunta (implode$ ?candidatos))
+    (format t ">> %s [%s] %s " ?pregunta (implode$ ?candidatos) ?salida-opc)
     (bind ?respuesta (read))
+
+    (if (and (eq ?respuesta -) ?puede-omitir) then (return nil)) ;permite omitir la pregunta
     (while (not (member (lowcase ?respuesta) ?candidatos)) do
         (printout t "No se ha introducido una respuesta valida" crlf)
-        (format t ">> %s (%s) " ?pregunta (implode$ ?candidatos))
+        (format t ">> %s [%s] %s " ?pregunta (implode$ ?candidatos) ?salida-opc)
         (bind ?respuesta (read))
     )
     ?respuesta
 )
 
 (deffunction pregunta-binaria
-    (?pregunta)
+    (?pregunta ?puede-omitir)
 
-    (bind ?respuesta (pregunta-cerrada ?pregunta si no s n))
+    (bind ?respuesta (pregunta-cerrada ?pregunta ?puede-omitir si no s n))
+    (if (and (eq ?respuesta -) ?puede-omitir) then (return nil)) ;permite omitir la pregunta
+
     (if (or (eq (lowcase ?respuesta) si) (eq (lowcase ?respuesta) s))
         then TRUE
         else FALSE
@@ -60,7 +75,6 @@
 )
 
 ;;; TODO: organizar reglas de "consulta al usuario" bajo un mismo módulo ;;;
-;;; TODO: mostrar pantalla de bienvenida antes de las preguntas ;;;
 
 (defrule main
     (initial-fact)
@@ -107,7 +121,7 @@
 
 (deffunction entrada-respref "Genera instancias de ResPref segun lo que pida diga el alumno"
     (?es-pref)
-    
+
 	;;; TODO: hacer que sean opcionales las respuestas y la creacion de instancias ;;;
     (bind ?ma (pregunta-rango ">> Cual es el numero maximo de asignaturas a matricular?" TRUE 1 8))
     (make-instance (sym-cat respref-ma- (gensym)) of Max_Asignaturas (es_preferencia ?es-pref) (max_asigns ?ma))
