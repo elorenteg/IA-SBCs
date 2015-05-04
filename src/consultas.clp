@@ -74,6 +74,12 @@
     )
 )
 
+(deffunction primera-mayus "Convierte un string para que la primera letra sea mayúscula"
+    (?str)
+
+    (str-cat (upcase (sub-string 0 1 ?str)) (sub-string 2 (length$ ?str) ?str))
+)
+
 ;;; TODO: organizar reglas de "consulta al usuario" bajo un mismo módulo ;;;
 
 (defrule main
@@ -122,13 +128,17 @@
 (deffunction entrada-respref "Genera instancias de ResPref segun lo que pida diga el alumno"
     (?es-pref)
 
-	;;; TODO: hacer que sean opcionales las respuestas y la creacion de instancias ;;;
     (bind ?ma (pregunta-rango ">> Cual es el numero maximo de asignaturas a matricular?" TRUE 1 8))
     (make-instance (sym-cat respref-ma- (gensym)) of Max_Asignaturas (es_preferencia ?es-pref) (max_asigns ?ma))
-    (bind ?mh (pregunta-rango ">> Cual es el numero maximo de horas de dedicacion semanales ?" TRUE 0 100))
+    (bind ?mh (pregunta-rango ">> Cual es el numero maximo de horas de dedicacion semanales?" TRUE 0 100))
     (make-instance (sym-cat respref-mh- (gensym)) of Max_Horas_Trabajo (es_preferencia ?es-pref) (max_horas_trabajo ?mh))
-    (bind ?ml (pregunta-rango ">> Cual es el numero maximo de horas de laboratorio semanales ?" TRUE 0 100))
+    (bind ?ml (pregunta-rango ">> Cual es el numero maximo de horas de laboratorio semanales?" TRUE 0 100))
     (make-instance (sym-cat respref-ml- (gensym)) of Max_Horas_Lab (es_preferencia ?es-pref) (max_horas_lab ?ml))
+
+    (bind ?th (pregunta-cerrada ">> Que horario se ajusta mejor a su disponibilidad?" TRUE manyana tarde))
+    (bind ?th-may (primera-mayus ?th))
+    (bind ?x (find-instance ((?ins Horario)) (eq ?ins:horario ?th-may))) ;no reconocerá el horario "Manyana"...
+    (make-instance (sym-cat respref-th- (gensym)) of Tipo_Horario (es_preferencia ?es-pref) (tipo_horario ?th))
 	;;; TODO: añadir mas preguntas de ResPref ;;;
 )
 
