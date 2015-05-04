@@ -106,22 +106,6 @@
     (assert (dni ?dni))
 )
 
-(defrule entrada-max-asigs
-    (e-dni ok) (no-match 0)
-    =>
-    (bind ?ma (pregunta-rango "Cual es el numero maximo de asignaturas a matricular?" TRUE 1 8))
-    (assert (e-max-asigs ok)) ;;; TODO: almacenar en una nueva instancia de ResPref ;;;
-    (assert (max-asigs ?ma))
-)
-
-(defrule entrada-max-horas
-    (e-dni ok) (no-match 0)
-    =>
-    (bind ?mh (pregunta-rango "Cual es el numero maximo de horas de dedicacion semanales ?" TRUE 0 100))
-    (assert (e-max-horas ok)) ;;; TODO: almacenar en una nueva instancia de ResPref ;;;
-    (assert (max-horas ?mh))
-)
-
 
 ;;; RESPREF
 
@@ -136,9 +120,9 @@
     (make-instance (sym-cat respref-ml- (gensym)) of Max_Horas_Lab (es_preferencia ?es-pref) (max_horas_lab ?ml))
 
     (bind ?th (pregunta-cerrada ">> Que horario se ajusta mejor a su disponibilidad?" TRUE manyana tarde))
-    (bind ?th-may (primera-mayus ?th))
-    (bind ?x (find-instance ((?ins Horario)) (eq ?ins:horario ?th-may))) ;no reconocerá el horario "Manyana"...
-    (make-instance (sym-cat respref-th- (gensym)) of Tipo_Horario (es_preferencia ?es-pref) (tipo_horario ?th))
+    (bind ?th-ins (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus ?th))))
+    (make-instance (sym-cat respref-th- (gensym)) of Tipo_Horario (es_preferencia ?es-pref) (tipo_horario ?th-ins))
+
 	;;; TODO: añadir mas preguntas de ResPref ;;;
 )
 
