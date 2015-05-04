@@ -1,11 +1,11 @@
-; Sat May 02 22:57:58 CEST 2015
+; Tue May 05 01:14:20 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
 
-([ontologia_Class10000] of  No_inform%C3%A1tico
+([ontologia_Class10000] of  No_informatico
 
-	(nombre_tema "Organización de empresas"))
+	(nombre_tema "Organizacion de empresas"))
 
 ([ontologia_Class20000] of  Especializada
 
@@ -19,7 +19,7 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 30.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 11)
 	(nombre "ADEI")
 	(num_creditos 6.0)
@@ -42,7 +42,7 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 0.0)
 	(horas_prob 28.0)
-	(horas_teor%C3%ADa 29.0)
+	(horas_teoria 29.0)
 	(matriculados_ant 19)
 	(nombre "DSI")
 	(num_creditos 6.0)
@@ -63,7 +63,7 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 24.0)
 	(horas_prob 15.0)
-	(horas_teor%C3%ADa 16.5)
+	(horas_teoria 16.5)
 	(matriculados_ant 12)
 	(nombre "NE")
 	(num_creditos 6.0)
@@ -82,7 +82,7 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 30.0)
 	(horas_prob 15.0)
-	(horas_teor%C3%ADa 15.0)
+	(horas_teoria 15.0)
 	(matriculados_ant 30)
 	(nombre "SIO")
 	(num_creditos 6.0)
@@ -95,7 +95,7 @@
 
 ([ontologia_Class20004] of  Especializado
 
-	(nombre_tema "Sistemas de información")
+	(nombre_tema "Sistemas de informacion")
 	(temas_afines [ontologia_Class61]))
 
 ([ontologia_Class20005] of  Especializada
@@ -113,7 +113,7 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 60.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 0.0)
+	(horas_teoria 0.0)
 	(matriculados_ant 7)
 	(nombre "PSI")
 	(num_creditos 6.0)
@@ -136,7 +136,7 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 30.0)
 	(horas_prob 15.0)
-	(horas_teor%C3%ADa 15.0)
+	(horas_teoria 15.0)
 	(matriculados_ant 11)
 	(nombre "EDO")
 	(num_creditos 6.0)
@@ -152,14 +152,14 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 18.0)
 	(horas_prob 15.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 24)
 	(nombre "MI")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class39])
 	(temas [ontologia_Class20009]))
 
-([ontologia_Class20009] of  No_inform%C3%A1tico
+([ontologia_Class20009] of  No_informatico
 
 	(nombre_tema "Marketing"))
 
@@ -175,7 +175,7 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 30.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 19)
 	(nombre "VPE")
 	(num_creditos 6.0)
@@ -184,7 +184,7 @@
 
 ([ontologia_Class20026] of  Especializado
 
-	(nombre_tema "Diseño de algoritmos"))
+	(nombre_tema "Disenyo de algoritmos"))
 
 ([ontologia_Class20027] of  Especializada
 
@@ -299,7 +299,7 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 28.0)
 	(horas_prob 12.0)
-	(horas_teor%C3%ADa 25.0)
+	(horas_teoria 25.0)
 	(matriculados_ant 19)
 	(nombre "CAIM")
 	(num_creditos 6.0)
@@ -346,7 +346,7 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 15.0)
 	(horas_prob 14.0)
-	(horas_teor%C3%ADa 31.0)
+	(horas_teoria 31.0)
 	(matriculados_ant 11)
 	(nombre "IO")
 	(num_creditos 6.0)
@@ -558,7 +558,7 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 28.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 28.0)
+	(horas_teoria 28.0)
 	(matriculados_ant 33)
 	(nombre "ER")
 	(num_creditos 6.0)
@@ -636,7 +636,7 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 26.0)
 	(horas_prob 2.0)
-	(horas_teor%C3%ADa 28.0)
+	(horas_teoria 28.0)
 	(matriculados_ant 10)
 	(nombre "ABD")
 	(num_creditos 6.0)
@@ -691,7 +691,7 @@
 ([ontologia_Class20075] of  Competencia
 
 	(nivel N1)
-	(nombre_comp "1.Emprendeduría e innovación"))
+	(nombre_comp "1.Emprendeduria e innovacion"))
 
 ([ontologia_Class20076] of  Competencia
 
@@ -711,17 +711,17 @@
 ([ontologia_Class20079] of  Competencia
 
 	(nivel N1)
-	(nombre_comp "4.Comunicación eficaz oral y escrita"))
+	(nombre_comp "4.Comunicacion eficaz oral y escrita"))
 
 ([ontologia_Class20080] of  Competencia
 
 	(nivel N1)
-	(nombre_comp "6.Uso solvente de los recursos de información"))
+	(nombre_comp "6.Uso solvente de los recursos de informacion"))
 
 ([ontologia_Class20081] of  Competencia
 
 	(nivel N1)
-	(nombre_comp "7.Aprendizaje autónomo"))
+	(nombre_comp "7.Aprendizaje autonomo"))
 
 ([ontologia_Class20082] of  Competencia
 
@@ -736,12 +736,12 @@
 ([ontologia_Class20084] of  Competencia
 
 	(nivel N2)
-	(nombre_comp "1.Emprendeduría e innovación"))
+	(nombre_comp "1.Emprendeduria e innovacion"))
 
 ([ontologia_Class20085] of  Competencia
 
 	(nivel N3)
-	(nombre_comp "1.Emprendeduría e innovación"))
+	(nombre_comp "1.Emprendeduria e innovacion"))
 
 ([ontologia_Class20086] of  Competencia
 
@@ -766,12 +766,12 @@
 ([ontologia_Class20090] of  Competencia
 
 	(nivel N2)
-	(nombre_comp "4.Comunicación eficaz oral y escrita"))
+	(nombre_comp "4.Comunicacion eficaz oral y escrita"))
 
 ([ontologia_Class20091] of  Competencia
 
 	(nivel N3)
-	(nombre_comp "4.Comunicación eficaz oral y escrita"))
+	(nombre_comp "4.Comunicacion eficaz oral y escrita"))
 
 ([ontologia_Class20092] of  Competencia
 
@@ -781,7 +781,7 @@
 ([ontologia_Class20093] of  Competencia
 
 	(nivel N3)
-	(nombre_comp "6.Uso solvente de los recursos de información"))
+	(nombre_comp "6.Uso solvente de los recursos de informacion"))
 
 ([ontologia_Class20094] of  Competencia
 
@@ -791,17 +791,17 @@
 ([ontologia_Class20095] of  Competencia
 
 	(nivel N2)
-	(nombre_comp "6.Uso solvente de los recursos de información"))
+	(nombre_comp "6.Uso solvente de los recursos de informacion"))
 
 ([ontologia_Class20096] of  Competencia
 
 	(nivel N2)
-	(nombre_comp "7.Aprendizaje autónomo"))
+	(nombre_comp "7.Aprendizaje autonomo"))
 
 ([ontologia_Class20097] of  Competencia
 
 	(nivel N3)
-	(nombre_comp "7.Aprendizaje autónomo"))
+	(nombre_comp "7.Aprendizaje autonomo"))
 
 ([ontologia_Class20098] of  Competencia
 
@@ -834,7 +834,7 @@
 		[ontologia_Class47])
 	(horas_lab 14.0)
 	(horas_prob 28.0)
-	(horas_teor%C3%ADa 28.0)
+	(horas_teoria 28.0)
 	(matriculados_ant 111)
 	(nombre "F")
 	(num_creditos 7.5)
@@ -851,7 +851,7 @@
 		[ontologia_Class47])
 	(horas_lab 30.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 45.0)
+	(horas_teoria 45.0)
 	(matriculados_ant 181)
 	(nombre "FM")
 	(num_creditos 7.5)
@@ -868,7 +868,7 @@
 		[ontologia_Class47])
 	(horas_lab 15.0)
 	(horas_prob 30.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 142)
 	(nombre "IC")
 	(num_creditos 7.5)
@@ -885,7 +885,7 @@
 		[ontologia_Class47])
 	(horas_lab 45.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 248)
 	(nombre "PRO2")
 	(num_creditos 7.5)
@@ -902,7 +902,7 @@
 		[ontologia_Class47])
 	(horas_lab 15.0)
 	(horas_prob 19.5)
-	(horas_teor%C3%ADa 40.5)
+	(horas_teoria 40.5)
 	(matriculados_ant 260)
 	(nombre "EC")
 	(num_creditos 7.5)
@@ -918,7 +918,7 @@
 	(horarios [ontologia_Class46])
 	(horas_lab 30.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 41)
 	(nombre "ASO")
 	(num_creditos 6.0)
@@ -937,7 +937,7 @@
 	(horarios [ontologia_Class46])
 	(horas_lab 15.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 45.0)
+	(horas_teoria 45.0)
 	(matriculados_ant 22)
 	(nombre "PI")
 	(num_creditos 6.0)
@@ -959,7 +959,7 @@
 	(horarios [ontologia_Class46])
 	(horas_lab 42.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 3.0)
+	(horas_teoria 3.0)
 	(matriculados_ant 15)
 	(nombre "PTI")
 	(num_creditos 6.0)
@@ -970,7 +970,7 @@
 
 ([ontologia_Class30005] of  General
 
-	(nombre_tema "Tecnologías de la información"))
+	(nombre_tema "Tecnologias de la informacion"))
 
 ([ontologia_Class30006] of  Especializado
 
@@ -989,7 +989,7 @@
 	(horarios [ontologia_Class46])
 	(horas_lab 15.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 47.0)
+	(horas_teoria 47.0)
 	(matriculados_ant 55)
 	(nombre "SI")
 	(num_creditos 6.0)
@@ -1020,7 +1020,7 @@
 	(horarios [ontologia_Class46])
 	(horas_lab 30.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 20)
 	(nombre "SOA")
 	(num_creditos 6.0)
@@ -1037,7 +1037,7 @@
 	(horarios [ontologia_Class46])
 	(horas_lab 0.0)
 	(horas_prob 7.5)
-	(horas_teor%C3%ADa 52.5)
+	(horas_teoria 52.5)
 	(matriculados_ant 19)
 	(nombre "TXC")
 	(num_creditos 6.0)
@@ -1058,7 +1058,7 @@
 	(horarios [ontologia_Class46])
 	(horas_lab 30.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 22)
 	(nombre "AD")
 	(num_creditos 6.0)
@@ -1070,7 +1070,7 @@
 
 ([ontologia_Class30012] of  Especializado
 
-	(nombre_tema "Aplicaciones móbiles")
+	(nombre_tema "Aplicaciones mobiles")
 	(temas_afines [ontologia_Class20059]))
 
 ([ontologia_Class30013] of  Especializada
@@ -1085,7 +1085,7 @@
 	(horarios [ontologia_Class46])
 	(horas_lab 30.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 20)
 	(nombre "CASO")
 	(num_creditos 6.0)
@@ -1110,7 +1110,7 @@
 	(horarios [ontologia_Class46])
 	(horas_lab 30.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 35)
 	(nombre "CPD")
 	(num_creditos 6.0)
@@ -1131,7 +1131,7 @@
 	(horarios [ontologia_Class46])
 	(horas_lab 15.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 45.0)
+	(horas_teoria 45.0)
 	(matriculados_ant 33)
 	(nombre "IM")
 	(num_creditos 6.0)
@@ -1152,7 +1152,7 @@
 	(horarios [ontologia_Class46])
 	(horas_lab 30.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 9)
 	(nombre "SDX")
 	(num_creditos 6.0)
@@ -1175,7 +1175,7 @@
 	(horarios [ontologia_Class46])
 	(horas_lab 15.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 45.0)
+	(horas_teoria 45.0)
 	(matriculados_ant 19)
 	(nombre "TCI")
 	(num_creditos 6.0)
@@ -1190,7 +1190,7 @@
 
 ([ontologia_Class30019] of  Especializado
 
-	(nombre_tema "Criptografía")
+	(nombre_tema "Criptografia")
 	(temas_afines [ontologia_Class30008]))
 
 ([ontologia_Class30020] of  Optativa
@@ -1201,7 +1201,7 @@
 	(es_proyecto FALSE)
 	(horas_lab 4.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 56.0)
+	(horas_teoria 56.0)
 	(matriculados_ant 18)
 	(nombre "APC")
 	(num_creditos 6.0)
@@ -1210,7 +1210,7 @@
 		[ontologia_Class30021]
 		[ontologia_Class20053]))
 
-([ontologia_Class30021] of  No_inform%C3%A1tico
+([ontologia_Class30021] of  No_informatico
 
 	(nombre_tema "Sostenibilidad"))
 
@@ -1223,13 +1223,13 @@
 	(horarios [ontologia_Class46])
 	(horas_lab 0.0)
 	(horas_prob 30.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 29)
 	(nombre "APSS")
 	(num_creditos 6.0)
 	(temas [ontologia_Class30023]))
 
-([ontologia_Class30023] of  No_inform%C3%A1tico
+([ontologia_Class30023] of  No_informatico
 
 	(nombre_tema "Idiomas"))
 
@@ -1242,7 +1242,7 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 0.0)
 	(horas_prob 30.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 26)
 	(nombre "ASDP")
 	(num_creditos 6.0)
@@ -1261,7 +1261,7 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 0.0)
 	(horas_prob 30.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 32)
 	(nombre "ASMI")
 	(num_creditos 6.0)
@@ -1269,7 +1269,7 @@
 		[ontologia_Class30021]
 		[ontologia_Class30026]))
 
-([ontologia_Class30026] of  No_inform%C3%A1tico
+([ontologia_Class30026] of  No_informatico
 
 	(nombre_tema "Derecho"))
 
@@ -1284,7 +1284,7 @@
 	(horarios [ontologia_Class46])
 	(horas_lab 16.0)
 	(horas_prob 15.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 17)
 	(nombre "C")
 	(num_creditos 6.0)
@@ -1302,7 +1302,7 @@
 	(es_proyecto FALSE)
 	(horas_lab 0.0)
 	(horas_prob 30.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 19)
 	(nombre "CCQ")
 	(num_creditos 6.0)
@@ -1328,7 +1328,7 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 36.0)
 	(horas_prob 12.0)
-	(horas_teor%C3%ADa 24.0)
+	(horas_teoria 24.0)
 	(matriculados_ant 18)
 	(nombre "CDI")
 	(num_creditos 6.0)
@@ -1348,7 +1348,7 @@
 		[ontologia_Class47])
 	(horas_lab 26.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 39.0)
+	(horas_teoria 39.0)
 	(matriculados_ant 227)
 	(nombre "M1")
 	(num_creditos 7.5)
@@ -1365,7 +1365,7 @@
 		[ontologia_Class47])
 	(horas_lab 30.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 45.0)
+	(horas_teoria 45.0)
 	(matriculados_ant 248)
 	(nombre "M2")
 	(num_creditos 7.5)
@@ -1382,7 +1382,7 @@
 		[ontologia_Class47])
 	(horas_lab 45.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 205)
 	(nombre "PRO1")
 	(num_creditos 7.5)
@@ -1399,7 +1399,7 @@
 		[ontologia_Class47])
 	(horas_lab 22.0)
 	(horas_prob 13.0)
-	(horas_teor%C3%ADa 15.0)
+	(horas_teoria 15.0)
 	(matriculados_ant 150)
 	(nombre "BD")
 	(num_creditos 6.0)
@@ -1419,7 +1419,7 @@
 		[ontologia_Class47])
 	(horas_lab 30.0)
 	(horas_prob 15.0)
-	(horas_teor%C3%ADa 15.0)
+	(horas_teoria 15.0)
 	(matriculados_ant 104)
 	(nombre "PE")
 	(num_creditos 6.0)
@@ -1441,7 +1441,7 @@
 		[ontologia_Class47])
 	(horas_lab 26.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 26.0)
+	(horas_teoria 26.0)
 	(matriculados_ant 100)
 	(nombre "SO")
 	(num_creditos 6.0)
@@ -1463,7 +1463,7 @@
 		[ontologia_Class47])
 	(horas_lab 14.0)
 	(horas_prob 14.0)
-	(horas_teor%C3%ADa 28.0)
+	(horas_teoria 28.0)
 	(matriculados_ant 145)
 	(nombre "EDA")
 	(num_creditos 6.0)
@@ -1483,7 +1483,7 @@
 		[ontologia_Class47])
 	(horas_lab 24.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 26.0)
+	(horas_teoria 26.0)
 	(matriculados_ant 101)
 	(nombre "CI")
 	(num_creditos 6.0)
@@ -1504,7 +1504,7 @@
 		[ontologia_Class47])
 	(horas_lab 11.5)
 	(horas_prob 1.0)
-	(horas_teor%C3%ADa 44.5)
+	(horas_teoria 44.5)
 	(matriculados_ant 184)
 	(nombre "EEE")
 	(num_creditos 6.0)
@@ -1521,7 +1521,7 @@
 		[ontologia_Class47])
 	(horas_lab 0.0)
 	(horas_prob 30.0)
-	(horas_teor%C3%ADa 34.0)
+	(horas_teoria 34.0)
 	(matriculados_ant 184)
 	(nombre "IES")
 	(num_creditos 6.0)
@@ -1541,7 +1541,7 @@
 	(horarios [ontologia_Class46])
 	(horas_lab 60.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 0.0)
+	(horas_teoria 0.0)
 	(matriculados_ant 15)
 	(nombre "DCS")
 	(num_creditos 6.0)
@@ -1559,7 +1559,7 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 15.0)
 	(horas_prob 15.0)
-	(horas_teor%C3%ADa 33.0)
+	(horas_teoria 33.0)
 	(matriculados_ant 12)
 	(nombre "FOMAR")
 	(num_creditos 6.0)
@@ -1579,7 +1579,7 @@
 	(es_proyecto FALSE)
 	(horas_lab 7.5)
 	(horas_prob 15.0)
-	(horas_teor%C3%ADa 37.5)
+	(horas_teoria 37.5)
 	(matriculados_ant 12)
 	(nombre "GEOC")
 	(num_creditos 6.0)
@@ -1599,7 +1599,7 @@
 	(es_proyecto FALSE)
 	(horas_lab 30.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 32)
 	(nombre "MD")
 	(num_creditos 6.0)
@@ -1614,7 +1614,7 @@
 
 ([ontologia_Class40005] of  General
 
-	(nombre_tema "Estadística"))
+	(nombre_tema "Estadistica"))
 
 ([ontologia_Class40006] of  Optativa
 
@@ -1633,7 +1633,7 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 30.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 18)
 	(nombre "ROB")
 	(num_creditos 6.0)
@@ -1641,7 +1641,7 @@
 
 ([ontologia_Class40007] of  Especializado
 
-	(nombre_tema "Robótica"))
+	(nombre_tema "Robotica"))
 
 ([ontologia_Class40008] of  Optativa
 
@@ -1654,7 +1654,7 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 28.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 28.0)
+	(horas_teoria 28.0)
 	(matriculados_ant 20)
 	(nombre "SLDS")
 	(num_creditos 6.0)
@@ -1679,7 +1679,7 @@
 	(horarios [ontologia_Class47])
 	(horas_lab 26.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 31.0)
+	(horas_teoria 31.0)
 	(matriculados_ant 40)
 	(nombre "TGA")
 	(num_creditos 6.0)
@@ -1689,7 +1689,7 @@
 
 ([ontologia_Class40011] of  Especializado
 
-	(nombre_tema "Targetas gráficas")
+	(nombre_tema "Targetas graficas")
 	(temas_afines
 		[ontologia_Class20053]
 		[ontologia_Class59]
@@ -1705,7 +1705,7 @@
 	(horarios [ontologia_Class46])
 	(horas_lab 30.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 19)
 	(nombre "VC")
 	(num_creditos 6.0)
@@ -1716,7 +1716,7 @@
 
 ([ontologia_Class40013] of  Especializado
 
-	(nombre_tema "Tratamiento de imágenes")
+	(nombre_tema "Tratamiento de imagenes")
 	(temas_afines
 		[ontologia_Class59]
 		[ontologia_Class40011]))
@@ -1730,7 +1730,7 @@
 	(horarios [ontologia_Class46])
 	(horas_lab 30.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 30)
 	(nombre "VJ")
 	(num_creditos 6.0)
@@ -1752,7 +1752,7 @@
 	(horarios [ontologia_Class46])
 	(horas_lab 0.0)
 	(horas_prob 32.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 28)
 	(nombre "WSE")
 	(num_creditos 6.0)
@@ -1769,7 +1769,7 @@
 		[ontologia_Class47])
 	(horas_lab 14.0)
 	(horas_prob 15.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 202)
 	(nombre "XC")
 	(num_creditos 6.0)
@@ -1789,7 +1789,7 @@
 		[ontologia_Class47])
 	(horas_lab 13.0)
 	(horas_prob 13.0)
-	(horas_teor%C3%ADa 28.0)
+	(horas_teoria 28.0)
 	(matriculados_ant 187)
 	(nombre "AC")
 	(num_creditos 6.0)
@@ -1813,7 +1813,7 @@
 		[ontologia_Class47])
 	(horas_lab 30.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 142)
 	(nombre "PROP")
 	(num_creditos 6.0)
@@ -1834,7 +1834,7 @@
 		[ontologia_Class47])
 	(horas_lab 28.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 148)
 	(nombre "PAR")
 	(num_creditos 6.0)
@@ -1855,7 +1855,7 @@
 		[ontologia_Class47])
 	(horas_lab 30.0)
 	(horas_prob 0.0)
-	(horas_teor%C3%ADa 30.0)
+	(horas_teoria 30.0)
 	(matriculados_ant 163)
 	(nombre "IDI")
 	(num_creditos 6.0)
@@ -1869,7 +1869,7 @@
 
 ([ontologia_Class46] of  Horario
 
-	(horario "Mañana"))
+	(horario "Manyana"))
 
 ([ontologia_Class47] of  Horario
 
@@ -1877,11 +1877,11 @@
 
 ([ontologia_Class49] of  General
 
-	(nombre_tema "Programación"))
+	(nombre_tema "Programacion"))
 
 ([ontologia_Class50] of  General
 
-	(nombre_tema "Ingeniería de software"))
+	(nombre_tema "Ingenieria de software"))
 
 ([ontologia_Class51] of  General
 
@@ -1896,7 +1896,7 @@
 
 ([ontologia_Class53] of  Especializado
 
-	(nombre_tema "Cálculo numérico")
+	(nombre_tema "Calculo numerico")
 	(temas_afines [ontologia_Class60]))
 
 ([ontologia_Class54] of  General
@@ -1909,19 +1909,19 @@
 
 ([ontologia_Class56] of  General
 
-	(nombre_tema "Matemáticas"))
+	(nombre_tema "Matematicas"))
 
 ([ontologia_Class57] of  General
 
-	(nombre_tema "Física"))
+	(nombre_tema "Fisica"))
 
 ([ontologia_Class58] of  Especializado
 
-	(nombre_tema "Lenguajes de programación"))
+	(nombre_tema "Lenguajes de programacion"))
 
 ([ontologia_Class59] of  Especializado
 
-	(nombre_tema "Gráficos")
+	(nombre_tema "Graficos")
 	(temas_afines
 		[ontologia_Class62]
 		[ontologia_Class40011]
@@ -1929,7 +1929,7 @@
 
 ([ontologia_Class60] of  Especializado
 
-	(nombre_tema "Investigación operativa")
+	(nombre_tema "Investigacion operativa")
 	(temas_afines [ontologia_Class53]))
 
 ([ontologia_Class61] of  Especializado
@@ -1939,29 +1939,29 @@
 
 ([ontologia_Class62] of  Especializado
 
-	(nombre_tema "Geometría computacional")
+	(nombre_tema "Geometria computacional")
 	(temas_afines [ontologia_Class59]))
 
 ([ontologia_Class63] of  Especializado
 
-	(nombre_tema "Lógica")
+	(nombre_tema "Logica")
 	(temas_afines [ontologia_Class52]))
 
-([ontologia_Class64] of  No_inform%C3%A1tico
+([ontologia_Class64] of  No_informatico
 
-	(nombre_tema "Lúdica"))
+	(nombre_tema "Ludica"))
 
-([ontologia_Class65] of  No_inform%C3%A1tico
+([ontologia_Class65] of  No_informatico
 
 	(nombre_tema "Cultural"))
 
-([ontologia_Class66] of  No_inform%C3%A1tico
+([ontologia_Class66] of  No_informatico
 
-	(nombre_tema "Divulgación científica"))
+	(nombre_tema "Divulgacion cientifica"))
 
 ([ontologia_Class68] of  Especialidad
 
-	(nombre_esp "Computación")
+	(nombre_esp "Computacion")
 	(temas_incluidos
 		[ontologia_Class53]
 		[ontologia_Class62]
@@ -1974,17 +1974,17 @@
 
 ([ontologia_Class69] of  Especialidad
 
-	(nombre_esp "Ingeniería de computadores"))
+	(nombre_esp "Ingenieria de computadores"))
 
 ([ontologia_Class70] of  Especialidad
 
-	(nombre_esp "Ingeniería del software"))
+	(nombre_esp "Ingenieria del software"))
 
 ([ontologia_Class71] of  Especialidad
 
-	(nombre_esp "Sistemas de información")
+	(nombre_esp "Sistemas de informacion")
 	(temas_incluidos [ontologia_Class61]))
 
 ([ontologia_Class72] of  Especialidad
 
-	(nombre_esp "Tecnologías de la información"))
+	(nombre_esp "Tecnologias de la informacion"))
