@@ -109,30 +109,56 @@
 
 ;;; RESPREF
 
-(deffunction entrada-respref "Genera instancias de ResPref segun lo que pida diga el alumno"
-    (?es-pref)
+(defrule entrada-respref "Genera instancias de ResPref segun lo que pida diga el alumno"
+    (ent-respref ?es-pref)
+	(dni ?dni)
+	?alumn <- (object (is-a Alumno) (id ?dni))  ; ?alumn es la instancia del alumno con id ?dni al que le queremos introducir las respref
+	
+	=>
+	
+	(if (eq ?es-pref TRUE)
+		then
+		(format t ">> Entrada de Preferencias%n")
+		else
+		(format t ">> Entrada de Restricciones%n")
+	)
+	(send ?alumn put-id 10) ; formato para cambiar un slot de una instancia
+	(printout t "prueba " (send ?alumn get-id) crlf) ; formato para obtener el valor de un slot de una instancia
 
     (bind ?ma (pregunta-rango ">> Cual es el numero maximo de asignaturas a matricular?" TRUE 1 8))
-    (make-instance (sym-cat respref-ma- (gensym)) of Max_Asignaturas (es_preferencia ?es-pref) (max_asigns ?ma))
+    (if (not(eq ?ma nil))
+         then
+         (bind ?maI (make-instance (sym-cat respref-ma- (gensym)) of Max_Asignaturas (es_preferencia ?es-pref) (max_asigns ?ma)))
+		 (slot-insert$ ?alumn respref_alumno 1 ?maI)
+    )
+	
     (bind ?mh (pregunta-rango ">> Cual es el numero maximo de horas de dedicacion semanales?" TRUE 0 100))
-    (make-instance (sym-cat respref-mh- (gensym)) of Max_Horas_Trabajo (es_preferencia ?es-pref) (max_horas_trabajo ?mh))
+    (if (not(eq ?mh nil))
+         then
+         (bind ?mhI (make-instance (sym-cat respref-mh- (gensym)) of Max_Horas_Trabajo (es_preferencia ?es-pref) (max_horas_trabajo ?mh)))
+		 (slot-insert$ ?alumn respref_alumno 1 ?mhI)
+    )
+	
     (bind ?ml (pregunta-rango ">> Cual es el numero maximo de horas de laboratorio semanales?" TRUE 0 100))
-    (make-instance (sym-cat respref-ml- (gensym)) of Max_Horas_Lab (es_preferencia ?es-pref) (max_horas_lab ?ml))
+    (if (not(eq ?ml nil))
+         then
+         (bind ?mlI (make-instance (sym-cat respref-ml- (gensym)) of Max_Horas_Lab (es_preferencia ?es-pref) (max_horas_lab ?ml)))
+		 (slot-insert$ ?alumn respref_alumno 1 ?mlI)
+    )
 
     (bind ?th (pregunta-cerrada ">> Que horario se ajusta mejor a su disponibilidad?" TRUE manyana tarde))
-    (bind ?th-ins (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus ?th))))
-    (make-instance (sym-cat respref-th- (gensym)) of Tipo_Horario (es_preferencia ?es-pref) (tipo_horario ?th-ins))
-
+	(if (not(eq ?th nil))
+         then
+		 (bind ?th-ins (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus ?th))))
+         (bind ?thI (make-instance (sym-cat respref-th- (gensym)) of Tipo_Horario (es_preferencia ?es-pref) (tipo_horario ?th-ins)))
+		 (slot-insert$ ?alumn respref_alumno 1 ?thI)
+    )
 	;;; TODO: añadir mas preguntas de ResPref ;;;
 )
 
 (defrule resfref "Pide las preferencias y las restricciones"
-    (e-dni ok)
+    (e-dni ok) (dni ?dni)
     =>
-    (format t ">> Entrada de Preferencias%n")
-    (entrada-respref TRUE)
-    (format t ">> Entrada de Restricciones%n")
-    (entrada-respref FALSE)
-    (assert (recomm ok))
+	(assert (ent-respref TRUE))
 )
 
