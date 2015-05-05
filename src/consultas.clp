@@ -116,6 +116,8 @@
 	
 	=>
 	
+	(printout t "facts en memoria " (facts) crlf)
+	
 	(if (eq ?es-pref TRUE)
 		then
 		(format t ">> Entrada de Preferencias%n")
@@ -160,5 +162,6 @@
     (e-dni ok) (dni ?dni)
     =>
 	(assert (ent-respref TRUE))
+	(assert (ent-respref FALSE))
 )
 
