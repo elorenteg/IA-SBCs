@@ -1,11 +1,32 @@
-; Tue May 05 01:14:20 CEST 2015
+; Tue May 05 13:52:35 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
 
+([ontologia_Class0] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class27])
+	(cuatrimestre A)
+	(horario_conv [ontologia_Class46])
+	(notas_conv
+		[ontologia_Class6]
+		[ontologia_Class8]))
+
+([ontologia_Class1] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class33])
+	(cuatrimestre A)
+	(horario_conv [ontologia_Class47])
+	(notas_conv [ontologia_Class7]))
+
 ([ontologia_Class10000] of  No_informatico
 
 	(nombre_tema "Organizacion de empresas"))
+
+([ontologia_Class2] of  Alumno
+
+	(expediente_alumno [ontologia_Class3])
+	(id "111"))
 
 ([ontologia_Class20000] of  Especializada
 
@@ -891,6 +912,13 @@
 	(num_creditos 7.5)
 	(temas [ontologia_Class49]))
 
+([ontologia_Class3] of  Expediente
+
+	(alumno_exp [ontologia_Class2])
+	(notas_exp
+		[ontologia_Class6]
+		[ontologia_Class7]))
+
 ([ontologia_Class30] of  Obligatoria
 
 	(aprobados_ant 65.0)
@@ -1510,6 +1538,11 @@
 	(num_creditos 6.0)
 	(temas [ontologia_Class10000]))
 
+([ontologia_Class4] of  Alumno
+
+	(expediente_alumno [ontologia_Class5])
+	(id "222"))
+
 ([ontologia_Class40] of  Obligatoria
 
 	(aprobados_ant 78.8)
@@ -1879,6 +1912,11 @@
 
 	(nombre_tema "Programacion"))
 
+([ontologia_Class5] of  Expediente
+
+	(alumno_exp [ontologia_Class4])
+	(notas_exp [ontologia_Class8]))
+
 ([ontologia_Class50] of  General
 
 	(nombre_tema "Ingenieria de software"))
@@ -1926,6 +1964,12 @@
 		[ontologia_Class62]
 		[ontologia_Class40011]
 		[ontologia_Class40013]))
+
+([ontologia_Class6] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class0])
+	(expediente_nota [ontologia_Class3])
+	(nota 7.5))
 
 ([ontologia_Class60] of  Especializado
 
@@ -1976,6 +2020,12 @@
 
 	(nombre_esp "Ingenieria de computadores"))
 
+([ontologia_Class7] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class1])
+	(expediente_nota [ontologia_Class3])
+	(nota 3.0))
+
 ([ontologia_Class70] of  Especialidad
 
 	(nombre_esp "Ingenieria del software"))
@@ -1988,3 +2038,9 @@
 ([ontologia_Class72] of  Especialidad
 
 	(nombre_esp "Tecnologias de la informacion"))
+
+([ontologia_Class8] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class0])
+	(expediente_nota [ontologia_Class5])
+	(nota 10.0))

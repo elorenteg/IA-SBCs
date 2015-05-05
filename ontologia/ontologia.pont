@@ -1,4 +1,4 @@
-; Tue May 05 01:14:20 CEST 2015
+; Tue May 05 13:52:35 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -60,10 +60,23 @@
 ;+		(allowed-classes Especialidad)
 		(cardinality 1 5)
 		(create-accessor read-write))
+	(multislot notas_exp
+;+		(comment "Conjunto de notas de examenes registradas en el expediente")
+		(type INSTANCE)
+;+		(allowed-classes Nota_examen)
+;+		(inverse-slot expediente_nota)
+		(create-accessor read-write))
 	(multislot precorrequisitos
 ;+		(comment "Conjunto de asignaturas que se debe haber matriculado previamente (por lo menos, un cuatrimestre antes)")
 		(type INSTANCE)
 ;+		(allowed-classes Asignatura)
+		(create-accessor read-write))
+	(single-slot expediente_alumno
+;+		(comment "Expediente del alumno")
+		(type INSTANCE)
+;+		(allowed-classes Expediente)
+;+		(cardinality 1 1)
+;+		(inverse-slot alumno_exp)
 		(create-accessor read-write))
 	(multislot competencias
 ;+		(comment "Conjunto de competencias desarrolladas en la asignatura")
@@ -93,7 +106,6 @@
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot convocatorias
-;+		(comment "Conjunto de convocatorias de examen registradas en el expediente")
 		(type INSTANCE)
 ;+		(allowed-classes Convocatoria)
 		(create-accessor read-write))
@@ -169,6 +181,27 @@
 ;+		(allowed-classes Asignatura)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
+	(single-slot convocatoria_nota
+;+		(comment "Convocatoria de la calificacion")
+		(type INSTANCE)
+;+		(allowed-classes Convocatoria)
+;+		(cardinality 1 1)
+;+		(inverse-slot notas_conv)
+		(create-accessor read-write))
+	(multislot expediente_nota
+;+		(comment "Expediente bajo el que se archiva la nota")
+		(type INSTANCE)
+;+		(allowed-classes Expediente)
+		(cardinality 1 ?VARIABLE)
+;+		(inverse-slot notas_exp)
+		(create-accessor read-write))
+	(single-slot alumno_exp
+;+		(comment "Alumno que registra el expediente")
+		(type INSTANCE)
+;+		(allowed-classes Alumno)
+;+		(cardinality 1 1)
+;+		(inverse-slot expediente_alumno)
+		(create-accessor read-write))
 	(single-slot ontologia_Class20018
 		(type STRING)
 ;+		(cardinality 0 1)
@@ -202,6 +235,18 @@
 ;+		(comment "Si la asignatura es de proyecto")
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot notas_conv
+;+		(comment "Conjunto de notas obtenidas por los alumnos presentados a la convocatoria")
+		(type INSTANCE)
+;+		(allowed-classes Nota_examen)
+;+		(inverse-slot convocatoria_nota)
+		(create-accessor read-write))
+	(single-slot expediente
+;+		(comment "Expediente bajo el que se archiva la nota")
+		(type INSTANCE)
+;+		(allowed-classes Expediente)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot nombre_esp
@@ -253,6 +298,12 @@
 		(type INSTANCE)
 ;+		(allowed-classes Competencia)
 		(cardinality 1 ?VARIABLE)
+		(create-accessor read-write))
+	(single-slot nota
+;+		(comment "Puntuación obtenida en el examen")
+		(type FLOAT)
+		(range 0.0 10.0)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot num_creditos
 ;+		(comment "Número de créditos ECTS")
@@ -421,11 +472,10 @@
 ;+		(allowed-classes Asignatura)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot calificacion
-;+		(comment "Puntuación obtenida en el examen")
-		(type FLOAT)
-		(range 0.0 10.0)
-;+		(cardinality 1 1)
+	(multislot notas_conv
+;+		(comment "Conjunto de notas obtenidas por los alumnos presentados a la convocatoria")
+		(type INSTANCE)
+;+		(allowed-classes Nota_examen)
 		(create-accessor read-write)))
 
 (defclass Horario "Franja horaria"
@@ -495,10 +545,16 @@
 (defclass Expediente "Expediente académico de un alumno"
 	(is-a USER)
 	(role concrete)
-	(multislot convocatorias
-;+		(comment "Conjunto de convocatorias de examen registradas en el expediente")
+	(multislot notas_exp
+;+		(comment "Conjunto de notas de examenes registradas en el expediente")
 		(type INSTANCE)
-;+		(allowed-classes Convocatoria)
+;+		(allowed-classes Nota_examen)
+		(create-accessor read-write))
+	(single-slot alumno_exp
+;+		(comment "Alumno que registra el expediente")
+		(type INSTANCE)
+;+		(allowed-classes Alumno)
+;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
 (defclass Alumno "Representación de un alumno de la Facultat d'Informàtica de Barcelona"
@@ -509,6 +565,12 @@
 		(type INSTANCE)
 ;+		(allowed-classes Especialidad)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot expediente_alumno
+;+		(comment "Expediente del alumno")
+		(type INSTANCE)
+;+		(allowed-classes Expediente)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot interes_compl_esp
 ;+		(comment "Interés por completar la especialidad en la matrícula actual")
@@ -627,5 +689,27 @@
 	(multislot competencia_preferida
 		(type INSTANCE)
 ;+		(allowed-classes Competencia)
+		(cardinality 1 ?VARIABLE)
+		(create-accessor read-write)))
+
+(defclass Nota_examen "Nota entre una convocatoria y un alumno"
+	(is-a USER)
+	(role concrete)
+	(single-slot nota
+;+		(comment "Puntuación obtenida en el examen")
+		(type FLOAT)
+		(range 0.0 10.0)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot convocatoria_nota
+;+		(comment "Convocatoria de la calificacion")
+		(type INSTANCE)
+;+		(allowed-classes Convocatoria)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot expediente_nota
+;+		(comment "Expediente bajo el que se archiva la nota")
+		(type INSTANCE)
+;+		(allowed-classes Expediente)
 		(cardinality 1 ?VARIABLE)
 		(create-accessor read-write)))
