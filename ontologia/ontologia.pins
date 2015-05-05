@@ -1,4 +1,4 @@
-; Tue May 05 13:52:35 CEST 2015
+; Tue May 05 14:52:00 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -26,7 +26,7 @@
 ([ontologia_Class2] of  Alumno
 
 	(expediente_alumno [ontologia_Class3])
-	(id "111"))
+	(id 111))
 
 ([ontologia_Class20000] of  Especializada
 
@@ -1541,7 +1541,7 @@
 ([ontologia_Class4] of  Alumno
 
 	(expediente_alumno [ontologia_Class5])
-	(id "222"))
+	(id 222))
 
 ([ontologia_Class40] of  Obligatoria
 

@@ -1,4 +1,4 @@
-; Tue May 05 13:52:35 CEST 2015
+; Tue May 05 14:52:00 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -26,7 +26,7 @@
 		(create-accessor read-write))
 	(single-slot id
 ;+		(comment "Identificador del alumno (DNI)")
-		(type STRING)
+		(type INTEGER)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot intereses
@@ -597,7 +597,7 @@
 		(create-accessor read-write))
 	(single-slot id
 ;+		(comment "Identificador del alumno (DNI)")
-		(type STRING)
+		(type INTEGER)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot dificultad
