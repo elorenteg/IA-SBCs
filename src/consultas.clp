@@ -2,6 +2,7 @@
 ;; Estructuras para consultar información del usuario
 ;;
 
+
 (deffunction pregunta
     (?pregunta ?puede-omitir)
 
@@ -143,7 +144,7 @@
 
 	=>
 
-	(printout t "facts en memoria " (facts) crlf)
+	;(printout t "facts en memoria " (facts) crlf)
 
 	(if (eq ?es-pref TRUE)
 		then
