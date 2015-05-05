@@ -80,6 +80,24 @@
     (str-cat (upcase (sub-string 0 1 ?str)) (sub-string 2 (length$ ?str) ?str))
 )
 
+(deffunction resprefs-alumno "Devuelve el conjunto de restricciones y preferencias de un alumno"
+    (?dni)
+
+    (bind ?al (find-instance ((?a Alumno)) (= ?a:id ?dni)))
+    (if (!= (length$ ?al) 1) then (return nil) else (send (eval (implode$ ?al)) get-respref_alumno))
+)
+
+(deffunction muestra-resprefs "Muestra por pantalla las restricciones y preferencias de un alumno"
+    (?dni)
+
+    (bind ?resprefs (resprefs-alumno ?dni))
+    (loop-for-count (?i 1 (length$ ?resprefs)) do
+        (printout t "#" ?i ":" crlf)
+        (send (nth$ ?i ?resprefs) print)
+        (printout t crlf)
+    )
+)
+
 ;;; TODO: organizar reglas de "consulta al usuario" bajo un mismo módulo ;;;
 
 (defrule main
@@ -113,19 +131,19 @@
     (ent-respref ?es-pref)
 	(dni ?dni)
 	?alumn <- (object (is-a Alumno) (id ?dni))  ; ?alumn es la instancia del alumno con id ?dni al que le queremos introducir las respref
-	
+
 	=>
-	
+
 	(printout t "facts en memoria " (facts) crlf)
-	
+
 	(if (eq ?es-pref TRUE)
 		then
-		(format t ">> Entrada de Preferencias%n")
+		(progn (format t ">> Entrada de Preferencias%n") (assert (prefs ok)))
 		else
-		(format t ">> Entrada de Restricciones%n")
+		(progn (format t ">> Entrada de Restricciones%n") (assert (restrs ok)))
 	)
-	(send ?alumn put-id 10) ; formato para cambiar un slot de una instancia
-	(printout t "prueba " (send ?alumn get-id) crlf) ; formato para obtener el valor de un slot de una instancia
+	;(send ?alumn put-id 10) ; formato para cambiar un slot de una instancia
+	;(printout t "prueba " (send ?alumn get-id) crlf) ; formato para obtener el valor de un slot de una instancia
 
     (bind ?ma (pregunta-rango ">> Cual es el numero maximo de asignaturas a matricular?" TRUE 1 8))
     (if (not(eq ?ma nil))
@@ -133,14 +151,14 @@
          (bind ?maI (make-instance (sym-cat respref-ma- (gensym)) of Max_Asignaturas (es_preferencia ?es-pref) (max_asigns ?ma)))
 		 (slot-insert$ ?alumn respref_alumno 1 ?maI)
     )
-	
+
     (bind ?mh (pregunta-rango ">> Cual es el numero maximo de horas de dedicacion semanales?" TRUE 0 100))
     (if (not(eq ?mh nil))
          then
          (bind ?mhI (make-instance (sym-cat respref-mh- (gensym)) of Max_Horas_Trabajo (es_preferencia ?es-pref) (max_horas_trabajo ?mh)))
 		 (slot-insert$ ?alumn respref_alumno 1 ?mhI)
     )
-	
+
     (bind ?ml (pregunta-rango ">> Cual es el numero maximo de horas de laboratorio semanales?" TRUE 0 100))
     (if (not(eq ?ml nil))
          then
@@ -161,7 +179,14 @@
 (defrule resfref "Pide las preferencias y las restricciones"
     (e-dni ok) (dni ?dni)
     =>
-	(assert (ent-respref TRUE))
 	(assert (ent-respref FALSE))
+    (assert (ent-respref TRUE))
 )
 
+(defrule check "Prueba para mostrar resprefs"
+    (prefs ok)
+    (restrs ok)
+    (dni ?dni)
+    =>
+    (muestra-resprefs ?dni)
+)
