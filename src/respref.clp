@@ -3,9 +3,9 @@
 ;;
 
 (deftemplate respref
-    (slot es_restriccion (allowed-strings "TRUE" "FALSE"))
+    (slot es_restriccion)
     (multislot competencias_preferidas)
-    (slot completar_especialidad (allowed-strings "TRUE" "FALSE"))
+    (slot completar_especialidad)
     (slot dificultad (allowed-strings "facil" "dificil"))
     (slot max_asigns (type INTEGER) (range 0 6)) ;max 36 ECTS/cuatri --> con una asignatura 6 ECTS, son 6 asigs.
     (slot max_horas_trabajo (type INTEGER) (range 0 900)) ;max 36 ECTS/cuatri y 1ECTS=25h --> 900h
@@ -34,9 +34,9 @@
     
 	(if (eq ?es-rest TRUE)
 		then
-		(progn (format t ">> Preferencias%n") (assert (prefs ok)))
-		else
 		(progn (format t ">> Restricciones%n") (assert (restrs ok)))
+		else
+		(progn (format t ">> Preferencias%n") (assert (prefs ok)))
 	)
 
     (bind ?ma (pregunta-rango ">> Cual es el numero maximo de asignaturas a matricular?" TRUE 1 8))

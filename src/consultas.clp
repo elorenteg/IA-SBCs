@@ -122,14 +122,9 @@
     ?hecho <- (bienvenida ok)
     =>
     (bind ?dni (pregunta-rango "Introduzca su identificador (DNI):" FALSE 0 9999))
-    (if (not (existe-alumno ?dni))
-         then
-         (printout t "Alumno nuevo creado con identificador " ?dni crlf)
-         (make-instance (sym-cat alumno- (gensym)) of Alumno (id ?dni))
-		 ;;; TODO: pedir mas datos del alumno ;;;
-         else
-         (format t "Alumno ya dentro del sistema%n")
-		 ;;; TODO: imprimir datos del alumno ;;;
+    (while (not (existe-alumno ?dni)) do
+        (printout t "No existe ningun alumno con identificador " ?dni crlf)
+        (bind ?dni (pregunta-rango "Introduzca su identificador (DNI):" FALSE 0 9999))
     )
     (assert (dni ?dni))
     (retract ?hecho)
