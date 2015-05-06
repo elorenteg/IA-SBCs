@@ -15,8 +15,8 @@
     (slot interes-compl-espP (allowed-strings "alto" "medio" "ninguno"))
     (slot tiempo-dedicacionR (allowed-strings "alto" "medio" "bajo"))
     (slot tiempo-dedicacionP (allowed-strings "alto" "medio" "bajo"))
-    (slot horario-preferidoR (allowed-strings "manyana" "tarde"))
-    (slot horario-preferidoP (allowed-strings "manyana" "tarde"))
+    (multislot horario-preferidoR (allowed-strings "manyana" "tarde") (default (create$)))
+    (multislot horario-preferidoP (allowed-strings "manyana" "tarde") (default (create$)))
 )
 
 ;;; TODO: dar peso a las características de problema-abstacto, según sean restricciones o preferencias ;;;
@@ -34,8 +34,9 @@
     =>
     ;;; TODO: abstraccion del problema ;;;
     (printout t "Abstraccion del problema" crlf)
-    (assert(ent-abs-horario))
     
+    (assert(ent-abs-horario))
+    (assert (problema-abstracto))
     (retract ?hecho)
 )
 
@@ -43,19 +44,42 @@
     ?hecho <- (ent-abs-horario)
     (dni ?dni)
     ?alumn <- (object (is-a Alumno) (name ?na) (id ?dni))
-    ?res <- (respref (es_restriccion TRUE) (tipo_horario $?tipo-horarioR))
-    ?pref <- (respref (es_restriccion FALSE) (tipo_horario $?tipo-horarioP))
+    ?res <- (respref (es_restriccion TRUE) (tipo_horario $?thRes))
+    ?pref <- (respref (es_restriccion FALSE) (tipo_horario $?thPref))
+    ?abs <- (problema-abstracto (horario-preferidoR $?absRes) (horario-preferidoP $?absPref))
+    
     ;(object (is-a Tipo_Horario) (name ?nrp) (es_preferencia ?es-pref) (tipo_horario ?th))
     ;(test (>= 1 (member-wrapper ?nrp (send ?na get-respref_alumno))))
 
     =>
 
-    (printout t "Abstraccion de Horario" crlf)
-    
+    (printout t ">> Abstraccion de Horario" crlf)
+    (if (= (length$ ?thRes) 1)
+        then
+        (bind ?hora (nth$ 1 ?thRes)) ; instancia Tipo_Horario
+        (bind ?absRes (send ?hora get-horario)) ; valor del horario
+        (bind ?abs (modify ?abs (horario-preferidoR ?absRes))) ; añadir a la abstraccion
+        else
+        (bind ?absRes (insert$ ?absRes 1 "Manyana"))
+        (bind ?absRes (insert$ ?absRes 2 "Tarde"))
+        (bind ?abs (modify ?abs (horario-preferidoR ?absRes)))
+    )
+    (if (= (length$ ?thPref) 1)
+        then
+        (bind ?hora (nth$ 1 ?thPref)) ; instancia Tipo_Horario
+        (bind ?absPref (send ?hora get-horario)) ; valor del horario
+        (bind ?abs (modify ?abs (horario-preferidoP ?absPref))) ; añadir a la abstraccion
+        else
+        (bind ?absPref (insert$ ?absPref 1 "Manyana"))
+        (bind ?absPref (insert$ ?absPref 2 "Tarde"))
+        (bind ?abs (modify ?abs (horario-preferidoP ?absPref)))
+    )
     
     (assert(abs-horario ok))
     (retract ?hecho)
 )
+
+;;; TODO: una regla por cada abstraccion a realizar o una sola regla para todo ;;;
 
 (defrule fin-abstracto "Comprueba que se ejecuten todas las reglas de Abstraccion"
     ?hecho1 <- (abs-horario ok)
