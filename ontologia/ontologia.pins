@@ -1,4 +1,4 @@
-; Tue May 05 18:17:38 CEST 2015
+; Wed May 06 11:39:58 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -209,9 +209,16 @@
 
 ([ontologia_Class20027] of  Especializada
 
+	(aprobados_ant 73.3)
+	(competencias [ontologia_Class20097])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class68])
 	(horarios [ontologia_Class47])
+	(horas_lab 0.0)
+	(horas_prob 30.0)
+	(horas_teoria 30.0)
+	(matriculados_ant 30)
 	(nombre "A")
 	(num_creditos 6.0)
 	(precorrequisitos
@@ -222,9 +229,18 @@
 
 ([ontologia_Class20029] of  Especializada
 
+	(aprobados_ant 66.67)
+	(competencias
+		[ontologia_Class20087]
+		[ontologia_Class20099])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class68])
 	(horarios [ontologia_Class47])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teoria 30.0)
+	(matriculados_ant 48)
 	(nombre "G")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -237,9 +253,18 @@
 
 ([ontologia_Class20031] of  Especializada
 
+	(aprobados_ant 76.47)
+	(competencias
+		[ontologia_Class20085]
+		[ontologia_Class20094])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class68])
 	(horarios [ontologia_Class47])
+	(horas_lab 15.0)
+	(horas_prob 15.0)
+	(horas_teoria 30.0)
+	(matriculados_ant 34)
 	(nombre "IA")
 	(num_creditos 6.0)
 	(precorrequisitos [ontologia_Class43])
@@ -251,9 +276,18 @@
 
 ([ontologia_Class20032] of  Especializada
 
+	(aprobados_ant 60.98)
+	(competencias
+		[ontologia_Class20088]
+		[ontologia_Class20101])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class68])
 	(horarios [ontologia_Class47])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teoria 32.0)
+	(matriculados_ant 41)
 	(nombre "LI")
 	(num_creditos 6.0)
 	(precorrequisitos [ontologia_Class43])
@@ -265,9 +299,18 @@
 
 ([ontologia_Class20033] of  Especializada
 
+	(aprobados_ant 67.21)
+	(competencias
+		[ontologia_Class20091]
+		[ontologia_Class20093])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class68])
 	(horarios [ontologia_Class47])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teoria 30.0)
+	(matriculados_ant 61)
 	(nombre "LP")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class43])
@@ -277,9 +320,18 @@
 
 ([ontologia_Class20034] of  Especializada
 
+	(aprobados_ant 72.5)
+	(competencias
+		[ontologia_Class20097]
+		[ontologia_Class20101])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class68])
 	(horarios [ontologia_Class47])
+	(horas_lab 34.0)
+	(horas_prob 30.0)
+	(horas_teoria 0.0)
+	(matriculados_ant 40)
 	(nombre "TC")
 	(num_creditos 6.0)
 	(precorrequisitos [ontologia_Class43])
@@ -288,9 +340,16 @@
 
 ([ontologia_Class20035] of  Especializada
 
+	(aprobados_ant 93.33)
+	(competencias [ontologia_Class20097])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class68])
 	(horarios [ontologia_Class47])
+	(horas_lab 0.0)
+	(horas_prob 15.0)
+	(horas_teoria 45.0)
+	(matriculados_ant 15)
 	(nombre "AA")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class20027])
@@ -298,9 +357,16 @@
 
 ([ontologia_Class20036] of  Especializada
 
+	(aprobados_ant 95.0)
+	(competencias [ontologia_Class20091])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class68])
 	(horarios [ontologia_Class47])
+	(horas_lab 14.0)
+	(horas_prob 15.0)
+	(horas_teoria 30.0)
+	(matriculados_ant 20)
 	(nombre "APA")
 	(num_creditos 6.0)
 	(precorrequisitos [ontologia_Class43])
@@ -331,9 +397,16 @@
 
 ([ontologia_Class20038] of  Especializada
 
+	(aprobados_ant 96.67)
+	(competencias [ontologia_Class20094])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class68])
 	(horarios [ontologia_Class47])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teoria 30.0)
+	(matriculados_ant 30)
 	(nombre "CL")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class20034])
@@ -343,9 +416,16 @@
 
 ([ontologia_Class20039] of  Especializada
 
+	(aprobados_ant 75.0)
+	(competencias [ontologia_Class20101])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class68])
 	(horarios [ontologia_Class47])
+	(horas_lab 15.0)
+	(horas_prob 15.0)
+	(horas_teoria 30.0)
+	(matriculados_ant 20)
 	(nombre "CN")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -376,9 +456,19 @@
 
 ([ontologia_Class20041] of  Especializada
 
+	(aprobados_ant 90.91)
+	(competencias
+		[ontologia_Class20094]
+		[ontologia_Class20081]
+		[ontologia_Class20083])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class68])
 	(horarios [ontologia_Class47])
+	(horas_lab 15.0)
+	(horas_prob 15.0)
+	(horas_teoria 30.0)
+	(matriculados_ant 11)
 	(nombre "SID")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class20031])
@@ -386,9 +476,16 @@
 
 ([ontologia_Class20043] of  Especializada
 
+	(aprobados_ant 63.16)
+	(competencias [ontologia_Class20101])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class69])
 	(horarios [ontologia_Class46])
+	(horas_lab 15.0)
+	(horas_prob 15.0)
+	(horas_teoria 30.0)
+	(matriculados_ant 19)
 	(nombre "AC2")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class42])
@@ -396,9 +493,16 @@
 
 ([ontologia_Class20044] of  Especializada
 
+	(aprobados_ant 80.0)
+	(competencias [ontologia_Class20088])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class69])
 	(horarios [ontologia_Class46])
+	(horas_lab 24.0)
+	(horas_prob 12.0)
+	(horas_teoria 18.0)
+	(matriculados_ant 15)
 	(nombre "DSBM")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class38])
@@ -406,9 +510,16 @@
 
 ([ontologia_Class20045] of  Especializada
 
+	(aprobados_ant 41.67)
+	(competencias [ontologia_Class20097])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class69])
 	(horarios [ontologia_Class47])
+	(horas_lab 15.0)
+	(horas_prob 15.0)
+	(horas_teoria 27.0)
+	(matriculados_ant 12)
 	(nombre "MP")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -418,10 +529,19 @@
 
 ([ontologia_Class20046] of  Especializada
 
+	(aprobados_ant 92.86)
+	(competencias
+		[ontologia_Class20085]
+		[ontologia_Class20091]
+		[ontologia_Class20094])
 	(curso tercero)
 	(es_proyecto TRUE)
 	(especialidad_asig [ontologia_Class69])
 	(horarios [ontologia_Class46])
+	(horas_lab 66.0)
+	(horas_prob 0.0)
+	(horas_teoria 0.0)
+	(matriculados_ant 14)
 	(nombre "PEC")
 	(num_creditos 6.0)
 	(precorrequisitos
@@ -432,9 +552,18 @@
 
 ([ontologia_Class20047] of  Especializada
 
+	(aprobados_ant 94.44)
+	(competencias
+		[ontologia_Class20093]
+		[ontologia_Class20099])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class69])
 	(horarios [ontologia_Class46])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teoria 30.0)
+	(matriculados_ant 18)
 	(nombre "SO2")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class36])
@@ -447,9 +576,16 @@
 
 ([ontologia_Class20049] of  Especializada
 
+	(aprobados_ant 100.0)
+	(competencias [ontologia_Class20087])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class69])
 	(horarios [ontologia_Class46])
+	(horas_lab 15.0)
+	(horas_prob 15.0)
+	(horas_teoria 30.0)
+	(matriculados_ant 12)
 	(nombre "XC2")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class41])
@@ -459,9 +595,16 @@
 
 ([ontologia_Class20050] of  Especializada
 
+	(aprobados_ant 76.0)
+	(competencias [ontologia_Class20099])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class69])
 	(horarios [ontologia_Class46])
+	(horas_lab 28.0)
+	(horas_prob 14.0)
+	(horas_teoria 14.0)
+	(matriculados_ant 25)
 	(nombre "PAP")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class44])
@@ -471,9 +614,16 @@
 
 ([ontologia_Class20051] of  Especializada
 
+	(aprobados_ant 96.67)
+	(competencias [ontologia_Class20085])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class69])
 	(horarios [ontologia_Class46])
+	(horas_lab 30.0)
+	(horas_prob 15.0)
+	(horas_teoria 15.0)
+	(matriculados_ant 30)
 	(nombre "PCA")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class42])
@@ -483,9 +633,18 @@
 
 ([ontologia_Class20052] of  Especializada
 
+	(aprobados_ant 94.74)
+	(competencias
+		[ontologia_Class20095]
+		[ontologia_Class20093])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class69])
 	(horarios [ontologia_Class46])
+	(horas_lab 26.0)
+	(horas_prob 10.8)
+	(horas_teoria 19.2)
+	(matriculados_ant 19)
 	(nombre "PDS")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class38])
@@ -500,20 +659,35 @@
 
 ([ontologia_Class20054] of  Especializada
 
+	(aprobados_ant 95.0)
+	(competencias [ontologia_Class20101])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class69])
 	(horarios [ontologia_Class46])
+	(horas_lab 37.5)
+	(horas_prob 7.5)
+	(horas_teoria 15.0)
+	(matriculados_ant 20)
 	(nombre "STR")
 	(num_creditos 6.0)
 	(prerrequisitos
 		[ontologia_Class20044]
-		[ontologia_Class36]))
+		[ontologia_Class36])
+	(temas
+		[ontologia_Class20053]
+		[ontologia_Class55]))
 
 ([ontologia_Class20055] of  Especializada
 
+	(competencias [ontologia_Class20087])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class69])
 	(horarios [ontologia_Class46])
+	(horas_lab 15.0)
+	(horas_prob 15.0)
+	(horas_teoria 30.0)
 	(nombre "VLSI")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class20043])
@@ -523,9 +697,16 @@
 
 ([ontologia_Class20057] of  Especializada
 
+	(aprobados_ant 81.82)
+	(competencias [ontologia_Class20101])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class70])
 	(horarios [ontologia_Class47])
+	(horas_lab 28.0)
+	(horas_prob 0.0)
+	(horas_teoria 28.0)
+	(matriculados_ant 33)
 	(nombre "AS")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class40])
@@ -535,9 +716,16 @@
 
 ([ontologia_Class20058] of  Especializada
 
+	(aprobados_ant 100.0)
+	(competencias [ontologia_Class20097])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class70])
 	(horarios [ontologia_Class47])
+	(horas_lab 30.0)
+	(horas_prob 11.0)
+	(horas_teoria 20.0)
+	(matriculados_ant 42)
 	(nombre "ASW")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class20057])
@@ -555,10 +743,19 @@
 
 ([ontologia_Class20060] of  Especializada
 
+	(aprobados_ant 87.5)
+	(competencias
+		[ontologia_Class20077]
+		[ontologia_Class20099])
 	(correquisitos [ontologia_Class40])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class70])
 	(horarios [ontologia_Class47])
+	(horas_lab 28.0)
+	(horas_prob 0.0)
+	(horas_teoria 28.0)
+	(matriculados_ant 40)
 	(nombre "DBD")
 	(num_creditos 6.0)
 	(precorrequisitos [ontologia_Class40])
@@ -592,9 +789,18 @@
 
 ([ontologia_Class20062] of  Especializada
 
+	(aprobados_ant 100.0)
+	(competencias
+		[ontologia_Class20085]
+		[ontologia_Class20086])
 	(curso tercero)
+	(es_proyecto TRUE)
 	(especialidad_asig [ontologia_Class70])
 	(horarios [ontologia_Class47])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teoria 30.0)
+	(matriculados_ant 51)
 	(nombre "GPS")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -606,10 +812,18 @@
 
 ([ontologia_Class20063] of  Especializada
 
+	(aprobados_ant 100.0)
+	(competencias
+		[ontologia_Class20091]
+		[ontologia_Class20094])
 	(curso tercero)
 	(es_proyecto TRUE)
 	(especialidad_asig [ontologia_Class70])
 	(horarios [ontologia_Class47])
+	(horas_lab 60.0)
+	(horas_prob 0.0)
+	(horas_teoria 0.0)
+	(matriculados_ant 44)
 	(nombre "PES")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -623,9 +837,16 @@
 
 ([ontologia_Class20064] of  Especializada
 
+	(aprobados_ant 100.0)
+	(competencias [ontologia_Class20092])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class70])
 	(horarios [ontologia_Class47])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teoria 30.0)
+	(matriculados_ant 25)
 	(nombre "CAP")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -637,9 +858,16 @@
 
 ([ontologia_Class20065] of  Especializada
 
+	(aprobados_ant 100.0)
+	(competencias [ontologia_Class20099])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class70])
 	(horarios [ontologia_Class47])
+	(horas_lab 26.0)
+	(horas_prob 0.0)
+	(horas_teoria 30.0)
+	(matriculados_ant 21)
 	(nombre "CBDE")
 	(num_creditos 6.0)
 	(orrequisitos
@@ -666,9 +894,18 @@
 
 ([ontologia_Class20069] of  Especializada
 
+	(aprobados_ant 100.0)
+	(competencias
+		[ontologia_Class20090]
+		[ontologia_Class20091])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class70])
 	(horarios [ontologia_Class47])
+	(horas_lab 0.0)
+	(horas_prob 30.0)
+	(horas_teoria 13.0)
+	(matriculados_ant 37)
 	(nombre "CSI")
 	(num_creditos 6.0)
 	(prerrequisitos
@@ -678,9 +915,14 @@
 
 ([ontologia_Class20070] of  Especializada
 
+	(competencias [ontologia_Class20101])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class70])
 	(horarios [ontologia_Class47])
+	(horas_lab 15.0)
+	(horas_prob 15.0)
+	(horas_teoria 30.0)
 	(nombre "ECSDI")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class20057])
@@ -688,9 +930,19 @@
 
 ([ontologia_Class20072] of  Especializada
 
+	(aprobados_ant 89.19)
+	(competencias
+		[ontologia_Class20087]
+		[ontologia_Class20077]
+		[ontologia_Class20101])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class70])
 	(horarios [ontologia_Class47])
+	(horas_lab 30.0)
+	(horas_prob 0.0)
+	(horas_teoria 30.0)
+	(matriculados_ant 37)
 	(nombre "SIM")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class35])
@@ -698,9 +950,16 @@
 
 ([ontologia_Class20073] of  Especializada
 
+	(aprobados_ant 100.0)
+	(competencias [ontologia_Class20087])
 	(curso tercero)
+	(es_proyecto FALSE)
 	(especialidad_asig [ontologia_Class70])
 	(horarios [ontologia_Class47])
+	(horas_lab 15.0)
+	(horas_prob 30.0)
+	(horas_teoria 15.0)
+	(matriculados_ant 19)
 	(nombre "SOAD")
 	(num_creditos 6.0)
 	(prerrequisitos [ontologia_Class36])
@@ -1227,6 +1486,7 @@
 	(competencias [ontologia_Class20087])
 	(curso cuarto)
 	(es_proyecto FALSE)
+	(horarios [ontologia_Class46])
 	(horas_lab 4.0)
 	(horas_prob 0.0)
 	(horas_teoria 56.0)
@@ -1328,6 +1588,7 @@
 	(competencias [ontologia_Class20083])
 	(curso cuarto)
 	(es_proyecto FALSE)
+	(horarios [ontologia_Class46])
 	(horas_lab 0.0)
 	(horas_prob 30.0)
 	(horas_teoria 30.0)
@@ -1610,6 +1871,7 @@
 		[ontologia_Class20089])
 	(curso cuarto)
 	(es_proyecto FALSE)
+	(horarios [ontologia_Class47])
 	(horas_lab 7.5)
 	(horas_prob 15.0)
 	(horas_teoria 37.5)
@@ -1630,6 +1892,7 @@
 		[ontologia_Class20101])
 	(curso cuarto)
 	(es_proyecto FALSE)
+	(horarios [ontologia_Class46])
 	(horas_lab 30.0)
 	(horas_prob 0.0)
 	(horas_teoria 30.0)
