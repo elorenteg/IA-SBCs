@@ -5,6 +5,7 @@
 
 (load "consultas.clp")
 (load "abstraccion.clp")
+(load "respref.clp")
 
 ;(run)
 
