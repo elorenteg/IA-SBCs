@@ -1,4 +1,4 @@
-; Wed May 06 11:39:58 CEST 2015
+; Wed May 06 23:16:01 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -14,29 +14,15 @@
 ;+		(cardinality 1 1)
 ;+		(inverse-slot alumno_exp)
 		(create-accessor read-write))
-	(multislot competencia_preferida
-		(type INSTANCE)
-;+		(allowed-classes Competencia)
-		(cardinality 1 ?VARIABLE)
-		(create-accessor read-write))
 	(multislot tipo_horario
 		(type INSTANCE)
 ;+		(allowed-classes Horario)
 		(cardinality 1 2)
 		(create-accessor read-write))
-	(multislot correquisitos
-;+		(comment "Conjunto de asignaturas que se debe haber aprobado o matriculado")
-		(type INSTANCE)
-;+		(allowed-classes Asignatura)
-		(create-accessor read-write))
 	(single-slot volumen_trabajo
 ;+		(comment "Volumen de trabajo que puede asumir")
 		(type SYMBOL)
 		(allowed-values alto medio bajo)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot max_horas_lab
-		(type INTEGER)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot nivel
@@ -50,31 +36,9 @@
 		(type INSTANCE)
 ;+		(allowed-classes Tema)
 		(create-accessor read-write))
-	(single-slot es_preferencia
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot horarios
-;+		(comment "Horarios de impartición de clases")
-		(type INSTANCE)
-;+		(allowed-classes Horario)
-		(cardinality 1 2)
-		(create-accessor read-write))
-	(single-slot tiempo_dedicacion
-;+		(comment "Tiempo de dedicación permitido")
-		(type SYMBOL)
-		(allowed-values alto medio bajo)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot aprobados_ant
 ;+		(comment "Porcentaje de estudiantes aprobados el cuatrimestre anterior")
 		(type FLOAT)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot es_restriccion
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot interes_compl_esp
@@ -89,22 +53,11 @@
 		(range 0.0 10.0)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot precorrequisitos
-;+		(comment "Conjunto de asignaturas que se debe haber matriculado previamente (por lo menos, un cuatrimestre antes)")
-		(type INSTANCE)
-;+		(allowed-classes Asignatura)
-		(create-accessor read-write))
 	(multislot notas_exp
 ;+		(comment "Conjunto de notas de examenes registradas en el expediente")
 		(type INSTANCE)
 ;+		(allowed-classes Nota_examen)
 ;+		(inverse-slot expediente_nota)
-		(create-accessor read-write))
-	(multislot temas_afines
-;+		(comment "Conjunto de temas (especializados) afines")
-		(type INSTANCE)
-;+		(allowed-classes Especializado)
-;+		(inverse-slot temas_afines)
 		(create-accessor read-write))
 	(single-slot nota
 ;+		(comment "Puntuación obtenida en el examen")
@@ -119,23 +72,10 @@
 ;+		(cardinality 1 1)
 ;+		(inverse-slot expediente_alumno)
 		(create-accessor read-write))
-	(single-slot max_horas_trabajo
-		(type INTEGER)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot dificultad
 ;+		(comment "Dificultad en los estudios que puede asumir un alumno")
 		(type SYMBOL)
 		(allowed-values alta media)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot completar_especialidad
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot nombre_esp
-;+		(comment "Nombre de la especialidad")
-		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot competencias
@@ -143,12 +83,6 @@
 		(type INSTANCE)
 ;+		(allowed-classes Competencia)
 		(cardinality 1 ?VARIABLE)
-		(create-accessor read-write))
-	(single-slot cuatrimestre
-;+		(comment "Cuatrimestre de convocatoria")
-		(type SYMBOL)
-		(allowed-values A B)
-;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot prerrequisitos
 ;+		(comment "Conjunto de asignaturas que se debe haber aprovado previamente")
@@ -172,15 +106,6 @@
 		(type INTEGER)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot max_asigns
-		(type INTEGER)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot horas_lab
-;+		(comment "Número de horas por el concepto de carga de laboratorio")
-		(type FLOAT)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot es_proyecto
 ;+		(comment "Si la asignatura es de proyecto")
 		(type SYMBOL)
@@ -192,27 +117,10 @@
 		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot esRestriccion
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(multislot expediente_nota
-;+		(comment "Expediente bajo el que se archiva la nota")
-		(type INSTANCE)
-;+		(allowed-classes Expediente)
-		(cardinality 1 ?VARIABLE)
-;+		(inverse-slot notas_exp)
-		(create-accessor read-write))
 	(single-slot nombre_comp
 ;+		(comment "Nombre de la competencia")
 		(type STRING)
 ;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot temas_incluidos
-;+		(comment "Conjunto de temas especializados que incluye la especialidad")
-		(type INSTANCE)
-;+		(allowed-classes Especializado)
 		(create-accessor read-write))
 	(multislot tema_especializado
 		(type INSTANCE)
@@ -229,11 +137,12 @@
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot asignatura_conv
-;+		(comment "Asignatura que convoca el examen")
+	(single-slot alumno_rec
+;+		(comment "Alumno objetivo al que se destina la recomendacion")
 		(type INSTANCE)
-;+		(allowed-classes Asignatura)
+;+		(allowed-classes Alumno)
 ;+		(cardinality 1 1)
+;+		(inverse-slot recomendaciones)
 		(create-accessor read-write))
 	(single-slot ontologia_Class20012
 		(type SYMBOL)
@@ -256,18 +165,6 @@
 ;+		(allowed-parents)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot horario_conv
-;+		(comment "Horario de la convocatoria de examen")
-		(type INSTANCE)
-;+		(allowed-classes Horario)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot temas
-;+		(comment "Conjunto de temas en los que se ubica la asignatura")
-		(type INSTANCE)
-;+		(allowed-classes Tema)
-		(cardinality 1 ?VARIABLE)
-		(create-accessor read-write))
 	(single-slot ontologia_Class20018
 		(type STRING)
 ;+		(cardinality 0 1)
@@ -288,6 +185,150 @@
 		(type FLOAT)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
+	(multislot recomendaciones
+;+		(comment "Conjunto de recomendaciones de asignaturas")
+		(type INSTANCE)
+;+		(allowed-classes Recomendacion)
+		(cardinality 0 6)
+;+		(inverse-slot alumno_rec)
+		(create-accessor read-write))
+	(multislot convocatorias
+		(type INSTANCE)
+;+		(allowed-classes Convocatoria)
+		(create-accessor read-write))
+	(single-slot asignatura_rec
+;+		(comment "Asignatura recomendada")
+		(type INSTANCE)
+;+		(allowed-classes Asignatura)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot competencia_preferida
+		(type INSTANCE)
+;+		(allowed-classes Competencia)
+		(cardinality 1 ?VARIABLE)
+		(create-accessor read-write))
+	(multislot correquisitos
+;+		(comment "Conjunto de asignaturas que se debe haber aprobado o matriculado")
+		(type INSTANCE)
+;+		(allowed-classes Asignatura)
+		(create-accessor read-write))
+	(single-slot max_horas_lab
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot es_preferencia
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot horarios
+;+		(comment "Horarios de impartición de clases")
+		(type INSTANCE)
+;+		(allowed-classes Horario)
+		(cardinality 1 2)
+		(create-accessor read-write))
+	(single-slot tiempo_dedicacion
+;+		(comment "Tiempo de dedicación permitido")
+		(type SYMBOL)
+		(allowed-values alto medio bajo)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot es_restriccion
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot precorrequisitos
+;+		(comment "Conjunto de asignaturas que se debe haber matriculado previamente (por lo menos, un cuatrimestre antes)")
+		(type INSTANCE)
+;+		(allowed-classes Asignatura)
+		(create-accessor read-write))
+	(multislot temas_afines
+;+		(comment "Conjunto de temas (especializados) afines")
+		(type INSTANCE)
+;+		(allowed-classes Especializado)
+;+		(inverse-slot temas_afines)
+		(create-accessor read-write))
+	(single-slot max_horas_trabajo
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot completar_especialidad
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot grado_dif
+;+		(comment "Grado de dificultad")
+		(type SYMBOL)
+		(allowed-values alta media)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot nombre_esp
+;+		(comment "Nombre de la especialidad")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot cuatrimestre
+;+		(comment "Cuatrimestre de convocatoria")
+		(type SYMBOL)
+		(allowed-values A B)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot max_asigns
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot horas_lab
+;+		(comment "Número de horas por el concepto de carga de laboratorio")
+		(type FLOAT)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot esRestriccion
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot expediente_nota
+;+		(comment "Expediente bajo el que se archiva la nota")
+		(type INSTANCE)
+;+		(allowed-classes Expediente)
+;+		(cardinality 1 1)
+;+		(inverse-slot notas_exp)
+		(create-accessor read-write))
+	(multislot temas_incluidos
+;+		(comment "Conjunto de temas especializados que incluye la especialidad")
+		(type INSTANCE)
+;+		(allowed-classes Especializado)
+		(create-accessor read-write))
+	(single-slot asignatura_conv
+;+		(comment "Asignatura que convoca el examen")
+		(type INSTANCE)
+;+		(allowed-classes Asignatura)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot horario_conv
+;+		(comment "Horario de la convocatoria de examen")
+		(type INSTANCE)
+;+		(allowed-classes Horario)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot motivo
+;+		(comment "Justificacion de la recomendacion")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot temas
+;+		(comment "Conjunto de temas en los que se ubica la asignatura")
+		(type INSTANCE)
+;+		(allowed-classes Tema)
+		(cardinality 1 ?VARIABLE)
+		(create-accessor read-write))
+	(single-slot grado
+;+		(comment "Grado de recomendacion")
+		(type SYMBOL)
+		(allowed-values altamente_recomendable recomendable)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
 	(multislot respref_alumno
 ;+		(comment "Restricciones y preferencias del alumno")
 		(type INSTANCE)
@@ -298,10 +339,6 @@
 		(type INSTANCE)
 ;+		(allowed-classes Expediente)
 ;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot convocatorias
-		(type INSTANCE)
-;+		(allowed-classes Convocatoria)
 		(create-accessor read-write))
 	(single-slot nombre
 ;+		(comment "Siglas del nombre")
@@ -594,6 +631,12 @@
 		(type INTEGER)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
+	(multislot recomendaciones
+;+		(comment "Conjunto de recomendaciones de asignaturas")
+		(type INSTANCE)
+;+		(allowed-classes Recomendacion)
+		(cardinality 0 6)
+		(create-accessor read-write))
 	(multislot intereses
 ;+		(comment "Conjunto de intereses temáticos")
 		(type INSTANCE)
@@ -673,15 +716,13 @@
 
 (defclass Dificultad "Dificultad máxima de las asignaturas indicada por un alumno"
 	(is-a ResPref)
-	(role concrete))
-
-(defclass F%C3%A1cil "Dificultad máxima de las asignaturas ha de ser fácil"
-	(is-a Dificultad)
-	(role concrete))
-
-(defclass Dif%C3%ADcil "Dificultad máxima de las asignaturas ha de ser difícil"
-	(is-a Dificultad)
-	(role concrete))
+	(role concrete)
+	(single-slot grado_dif
+;+		(comment "Grado de dificultad")
+		(type SYMBOL)
+		(allowed-values alta media)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
 
 (defclass Competencias_Preferidas "Competencias preferidas de un alumno"
 	(is-a ResPref)
@@ -695,11 +736,11 @@
 (defclass Nota_examen "Nota entre una convocatoria y un alumno"
 	(is-a USER)
 	(role concrete)
-	(multislot expediente_nota
+	(single-slot expediente_nota
 ;+		(comment "Expediente bajo el que se archiva la nota")
 		(type INSTANCE)
 ;+		(allowed-classes Expediente)
-		(cardinality 1 ?VARIABLE)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot convocatoria_nota
 ;+		(comment "Convocatoria de la calificacion")
@@ -711,5 +752,32 @@
 ;+		(comment "Puntuación obtenida en el examen")
 		(type FLOAT)
 		(range 0.0 10.0)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Recomendacion "Recomendacion de una asignatura para un alumno"
+	(is-a USER)
+	(role concrete)
+	(single-slot motivo
+;+		(comment "Justificacion de la recomendacion")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot grado
+;+		(comment "Grado de recomendacion")
+		(type SYMBOL)
+		(allowed-values altamente_recomendable recomendable)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot asignatura_rec
+;+		(comment "Asignatura recomendada")
+		(type INSTANCE)
+;+		(allowed-classes Asignatura)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot alumno_rec
+;+		(comment "Alumno objetivo al que se destina la recomendacion")
+		(type INSTANCE)
+;+		(allowed-classes Alumno)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))

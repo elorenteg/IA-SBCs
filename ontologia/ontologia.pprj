@@ -1,4 +1,4 @@
-; Wed May 06 11:39:58 CEST 2015
+; Wed May 06 23:16:01 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -21,22 +21,22 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[ontologia_ProjectKB_Class40864]
-		[ontologia_ProjectKB_Class40865]
-		[ontologia_ProjectKB_Class40866]
-		[ontologia_ProjectKB_Class40867]
-		[ontologia_ProjectKB_Class40868]
-		[ontologia_ProjectKB_Class40869]
-		[ontologia_ProjectKB_Class40870]
-		[ontologia_ProjectKB_Class40871]
-		[ontologia_ProjectKB_Class40872]
-		[ontologia_ProjectKB_Class40873]
-		[ontologia_ProjectKB_Class40874]
-		[ontologia_ProjectKB_Class40875]
-		[ontologia_ProjectKB_Class40876]
-		[ontologia_ProjectKB_Class40877]
-		[ontologia_ProjectKB_Class40878]
-		[ontologia_ProjectKB_Class40879]))
+		[ontologia_ProjectKB_Class30048]
+		[ontologia_ProjectKB_Class30049]
+		[ontologia_ProjectKB_Class30050]
+		[ontologia_ProjectKB_Class30051]
+		[ontologia_ProjectKB_Class30052]
+		[ontologia_ProjectKB_Class30053]
+		[ontologia_ProjectKB_Class30054]
+		[ontologia_ProjectKB_Class30055]
+		[ontologia_ProjectKB_Class30056]
+		[ontologia_ProjectKB_Class30057]
+		[ontologia_ProjectKB_Class30058]
+		[ontologia_ProjectKB_Class30059]
+		[ontologia_ProjectKB_Class30060]
+		[ontologia_ProjectKB_Class30061]
+		[ontologia_ProjectKB_Class30062]
+		[ontologia_ProjectKB_Class30063]))
 
 ([CLSES_TAB] of  Widget
 
@@ -81,6 +81,9 @@
 	(is_hidden FALSE)
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
 
+([KB_107355_Class5] of  Map
+)
+
 ([KB_111590_Class0] of  String
 
 	(name "factory_class_name")
@@ -89,11 +92,11 @@
 ([KB_111590_Class1] of  Map
 
 	(entries
-		[ontologia_ProjectKB_Class40881]
-		[ontologia_ProjectKB_Class40882]
-		[ontologia_ProjectKB_Class40883]
-		[ontologia_ProjectKB_Class40884])
-	(referenced_maps [ontologia_ProjectKB_Class40880]))
+		[ontologia_ProjectKB_Class30065]
+		[ontologia_ProjectKB_Class30066]
+		[ontologia_ProjectKB_Class40067]
+		[ontologia_ProjectKB_Class40068])
+	(referenced_maps [ontologia_ProjectKB_Class30064]))
 
 ([KB_111590_Class10] of  Boolean
 
@@ -210,9 +213,6 @@
 		[KB_111590_Class10]
 		[KB_111590_Class11]))
 
-([KB_237707_Class5] of  Map
-)
-
 ([LAYOUT_PROPERTIES] of  Property_List
 
 	(name "layout properties")
@@ -297,6 +297,103 @@
 ([ontologia_ProjectKB_Class20070] of  Property_List
 )
 
+([ontologia_ProjectKB_Class30048] of  String
+
+	(name "General")
+	(string_value "nombre_tema"))
+
+([ontologia_ProjectKB_Class30049] of  String
+
+	(name "No_informatico")
+	(string_value "nombre_tema"))
+
+([ontologia_ProjectKB_Class30050] of  String
+
+	(name "Especializada")
+	(string_value "nombre"))
+
+([ontologia_ProjectKB_Class30051] of  String
+
+	(name "Expediente")
+	(string_value "alumno_exp"))
+
+([ontologia_ProjectKB_Class30052] of  String
+
+	(name "Obligatoria")
+	(string_value "nombre"))
+
+([ontologia_ProjectKB_Class30053] of  String
+
+	(name "Convocatoria")
+	(string_value "asignatura_conv{+%28Q}cuatrimestre{+-+}horario_conv{%29}"))
+
+([ontologia_ProjectKB_Class30054] of  String
+
+	(name "Nota_examen")
+	(string_value "convocatoria_nota{+}expediente_nota{+}nota"))
+
+([ontologia_ProjectKB_Class30055] of  String
+
+	(name "Optativa")
+	(string_value "nombre"))
+
+([ontologia_ProjectKB_Class30056] of  String
+
+	(name "Especializado")
+	(string_value "nombre_tema"))
+
+([ontologia_ProjectKB_Class30057] of  String
+
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([ontologia_ProjectKB_Class30058] of  String
+
+	(name "Horario")
+	(string_value "horario"))
+
+([ontologia_ProjectKB_Class30059] of  String
+
+	(name "Especialidad")
+	(string_value "nombre_esp"))
+
+([ontologia_ProjectKB_Class30060] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
+
+([ontologia_ProjectKB_Class30061] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([ontologia_ProjectKB_Class30062] of  String
+
+	(name "Competencia")
+	(string_value "{G}nombre_comp{.}nivel"))
+
+([ontologia_ProjectKB_Class30063] of  String
+
+	(name "Alumno")
+	(string_value "id"))
+
+([ontologia_ProjectKB_Class30064] of  Map
+)
+
+([ontologia_ProjectKB_Class30065] of  Map_Entry
+
+	(key "InstanceDisplay.yellow_stickies")
+	(key_class "java.lang.String")
+	(value "ontologia_ProjectKB_Class30064")
+	(value_class "java.util.Map"))
+
+([ontologia_ProjectKB_Class30066] of  Map_Entry
+
+	(key "suppress_instance_counting")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
 ([ontologia_ProjectKB_Class30067] of  Widget
 
 	(height 120)
@@ -355,111 +452,14 @@
 
 	(name "layout properties"))
 
-([ontologia_ProjectKB_Class40864] of  String
-
-	(name "General")
-	(string_value "nombre_tema"))
-
-([ontologia_ProjectKB_Class40865] of  String
-
-	(name "No_informatico")
-	(string_value "nombre_tema"))
-
-([ontologia_ProjectKB_Class40866] of  String
-
-	(name "Especializada")
-	(string_value "nombre"))
-
-([ontologia_ProjectKB_Class40867] of  String
-
-	(name "Expediente")
-	(string_value "alumno_exp"))
-
-([ontologia_ProjectKB_Class40868] of  String
-
-	(name "Obligatoria")
-	(string_value "nombre"))
-
-([ontologia_ProjectKB_Class40869] of  String
-
-	(name "Convocatoria")
-	(string_value "asignatura_conv{+%28Q}cuatrimestre{+-+}horario_conv{%29}"))
-
-([ontologia_ProjectKB_Class40870] of  String
-
-	(name "Nota_examen")
-	(string_value "convocatoria_nota{+}expediente_nota{+}nota"))
-
-([ontologia_ProjectKB_Class40871] of  String
-
-	(name "Optativa")
-	(string_value "nombre"))
-
-([ontologia_ProjectKB_Class40872] of  String
-
-	(name "Especializado")
-	(string_value "nombre_tema"))
-
-([ontologia_ProjectKB_Class40873] of  String
-
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
-
-([ontologia_ProjectKB_Class40874] of  String
-
-	(name "Horario")
-	(string_value "horario"))
-
-([ontologia_ProjectKB_Class40875] of  String
-
-	(name "Especialidad")
-	(string_value "nombre_esp"))
-
-([ontologia_ProjectKB_Class40876] of  String
-
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
-
-([ontologia_ProjectKB_Class40877] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
-([ontologia_ProjectKB_Class40878] of  String
-
-	(name "Competencia")
-	(string_value "{G}nombre_comp{.}nivel"))
-
-([ontologia_ProjectKB_Class40879] of  String
-
-	(name "Alumno")
-	(string_value "id"))
-
-([ontologia_ProjectKB_Class40880] of  Map
-)
-
-([ontologia_ProjectKB_Class40881] of  Map_Entry
-
-	(key "InstanceDisplay.yellow_stickies")
-	(key_class "java.lang.String")
-	(value "ontologia_ProjectKB_Class40880")
-	(value_class "java.util.Map"))
-
-([ontologia_ProjectKB_Class40882] of  Map_Entry
-
-	(key "suppress_instance_counting")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([ontologia_ProjectKB_Class40883] of  Map_Entry
+([ontologia_ProjectKB_Class40067] of  Map_Entry
 
 	(key "add_name_on_instance_form")
 	(key_class "java.lang.String")
 	(value "false")
 	(value_class "java.lang.String"))
 
-([ontologia_ProjectKB_Class40884] of  Map_Entry
+([ontologia_ProjectKB_Class40068] of  Map_Entry
 
 	(key "change_tracking_active")
 	(key_class "java.lang.String")
