@@ -32,24 +32,90 @@
 (defrule entrada-abstracto "Abstrae el problema"
     ?hecho <- (inferencia ok)
     =>
-    ;;; TODO: abstraccion del problema ;;;
     (printout t "Abstraccion del problema" crlf)
+    ;;; TODO: abstraccion del problema ;;;
+    ;;; esta funcion solo genera los hechos para ejecutar las reglas de abstraccion ;;;
     
-    (assert(ent-abs-horario))
+    (assert (ent-abs-dedicacion) (ent-abs-horario))
     (assert (problema-abstracto))
+    (retract ?hecho)
+)
+
+(defrule abs-volumenDedicacion "Abstrae restricciones y preferencias sobre el volumen de dedicacion y el tiempo"
+    ?hecho <- (ent-abs-dedicacion)
+    ?res <- (respref (es_restriccion TRUE) (max_asigns ?asigsRes) (max_horas_trabajo ?horasRes) (max_horas_lab ?labRes))
+    ?pref <- (respref (es_restriccion FALSE) (max_asigns ?asigsPref) (max_horas_trabajo ?horasPref) (max_horas_lab ?labPref))
+    ?abs <- (problema-abstracto (volumen-trabajoR ?volRes) (volumen-trabajoP ?volPref) (tiempo-dedicacionR ?tPref) (tiempo-dedicacionP ?tPref))
+
+    =>
+    
+    (printout t ">> Abstraccion del volumen de dedicacion y el tiempo" crlf)
+    (if (not(eq ?asigsRes nil))
+        then
+        (if (<= ?asigsRes 2)
+            then
+            (bind ?abs (modify ?abs (volumen-trabajoR "bajo")))
+            else
+            (if (<= ?asigsRes 4)
+                then
+                (bind ?abs (modify ?abs (volumen-trabajoR "medio")))
+                else
+                (bind ?abs (modify ?abs (volumen-trabajoR "alto")))
+            )
+        )
+    )
+    (if (not(eq ?horasRes nil))
+        then
+        (if (<= ?horasRes 300)
+            then
+            (bind ?abs (modify ?abs (tiempo-dedicacionR "bajo")))
+            else
+            (if (<= ?horasRes 600)
+                then
+                (bind ?abs (modify ?abs (tiempo-dedicacionR "medio")))
+                else
+                (bind ?abs (modify ?abs (tiempo-dedicacionR "alto")))
+            )
+        )
+    )
+    (if (not(eq ?asigsPref nil))
+        then
+        (if (<= ?asigsPref 2)
+            then
+            (bind ?abs (modify ?abs (volumen-trabajoP "bajo")))
+            else
+            (if (<= ?asigsPref 4)
+                then
+                (bind ?abs (modify ?abs (volumen-trabajoP "medio")))
+                else
+                (bind ?abs (modify ?abs (volumen-trabajoP "alto")))
+            )
+        )
+    )
+    (if (not(eq ?horasPref nil))
+        then
+        (if (<= ?horasPref 300)
+            then
+            (bind ?abs (modify ?abs (tiempo-dedicacionP "bajo")))
+            else
+            (if (<= ?horasPref 600)
+                then
+                (bind ?abs (modify ?abs (tiempo-dedicacionP "medio")))
+                else
+                (bind ?abs (modify ?abs (tiempo-dedicacionP "alto")))
+            )
+        )
+    )
+    (assert(abs-dedicacion ok))
     (retract ?hecho)
 )
 
 (defrule abs-horario "Abstrae restricciones y preferencias sobre el horario"
     ?hecho <- (ent-abs-horario)
     (dni ?dni)
-    ?alumn <- (object (is-a Alumno) (name ?na) (id ?dni))
     ?res <- (respref (es_restriccion TRUE) (tipo_horario $?thRes))
     ?pref <- (respref (es_restriccion FALSE) (tipo_horario $?thPref))
     ?abs <- (problema-abstracto (horario-preferidoR $?absRes) (horario-preferidoP $?absPref))
-    
-    ;(object (is-a Tipo_Horario) (name ?nrp) (es_preferencia ?es-pref) (tipo_horario ?th))
-    ;(test (>= 1 (member-wrapper ?nrp (send ?na get-respref_alumno))))
 
     =>
 
@@ -82,9 +148,11 @@
 ;;; TODO: una regla por cada abstraccion a realizar o una sola regla para todo ;;;
 
 (defrule fin-abstracto "Comprueba que se ejecuten todas las reglas de Abstraccion"
-    ?hecho1 <- (abs-horario ok)
+    ?hecho1 <- (abs-dedicacion ok)
+    ?hecho2 <- (abs-horario ok)
     =>
+    ;;; esta funcion elimina los hechos usados en la abstraccion y genera un assert conforme ha acabado ;;;
     (printout t "Fin abstraccion" crlf)
     (assert(abstraccion ok))
-    (retract ?hecho1)
+    (retract ?hecho1 ?hecho2)
 )

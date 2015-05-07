@@ -60,17 +60,14 @@
     (bind ?th (pregunta-cerrada ">> Que horario se ajusta mejor a su disponibilidad?" TRUE manyana tarde cualquiera))
 	(if (not(eq ?th nil))
         then
-        (if (or (=(str-compare ?th "manyana")0) (=(str-compare ?th "tarde")0))
-            then
-            (bind ?th-ins (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus ?th))))
-            (bind ?rec (modify ?rec (tipo_horario ?th-ins)))
-            else
-            (bind ?th-ins-man (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus "manyana"))))
-            (bind ?th-ins-tar (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus "tarde"))))
-            (bind ?tipo-horario (insert$ ?tipo-horario 1 ?th-ins-man))
-            (bind ?tipo-horario (insert$ ?tipo-horario 2 ?th-ins-tar))
-            (bind ?rec (modify ?rec (tipo_horario ?tipo-horario)))
-        )
+        (bind ?th-ins (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus ?th))))
+        (bind ?rec (modify ?rec (tipo_horario ?th-ins)))
+        else
+        (bind ?th-ins-man (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus "manyana"))))
+        (bind ?th-ins-tar (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus "tarde"))))
+        (bind ?tipo-horario (insert$ ?tipo-horario 1 ?th-ins-man))
+        (bind ?tipo-horario (insert$ ?tipo-horario 2 ?th-ins-tar))
+        (bind ?rec (modify ?rec (tipo_horario ?tipo-horario)))
     )
     
 	;;; TODO: añadir mas preguntas de ResPref ;;;
