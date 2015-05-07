@@ -7,9 +7,9 @@
     (multislot competencias_preferidas)
     (slot completar_especialidad)
     (slot dificultad (allowed-strings "facil" "dificil"))
-    (slot max_asigns (type INTEGER) (range 0 6)) ;max 36 ECTS/cuatri --> con una asignatura 6 ECTS, son 6 asigs.
-    (slot max_horas_trabajo (type INTEGER) (range 0 900)) ;max 36 ECTS/cuatri y 1ECTS=25h --> 900h
-    (slot max_horas_lab (type INTEGER) (range 0 900))
+    (slot max_asigns) ;max 36 ECTS/cuatri --> con una asignatura 6 ECTS, son 6 asigs.
+    (slot max_horas_trabajo) ;max 36 ECTS/cuatri y 1ECTS=25h --> 900h
+    (slot max_horas_lab)
     (multislot tema_especializado)
     (multislot tipo_horario (cardinality 1 2) (default (create$)))
 )
@@ -39,19 +39,19 @@
 		(progn (format t ">> Preferencias%n") (assert (prefs ok)))
 	)
 
-    (bind ?ma (pregunta-rango ">> Cual es el numero maximo de asignaturas a matricular?" TRUE 1 8))
+    (bind ?ma (pregunta-rango ">> Cual es el numero maximo de asignaturas a matricular?" TRUE 1 6))
     (if (not(eq ?ma nil))
         then
         (bind ?rec (modify ?rec (max_asigns ?ma)))
     )
 
-    (bind ?mh (pregunta-rango ">> Cual es el numero maximo de horas de dedicacion semanales?" TRUE 0 100))
+    (bind ?mh (pregunta-rango ">> Cual es el numero maximo de horas de dedicacion semanales?" TRUE 0 900))
     (if (not(eq ?mh nil))
         then
         (bind ?rec (modify ?rec (max_horas_trabajo ?mh)))
     )
 
-    (bind ?ml (pregunta-rango ">> Cual es el numero maximo de horas de laboratorio semanales?" TRUE 0 100))
+    (bind ?ml (pregunta-rango ">> Cual es el numero maximo de horas de laboratorio semanales?" TRUE 0 900))
     (if (not(eq ?ml nil))
         then
         (bind ?rec (modify ?rec (max_horas_lab ?ml)))
