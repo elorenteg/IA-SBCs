@@ -7,7 +7,7 @@
     (multislot competencias_preferidas)
     (slot completar_especialidad)
     (slot dificultad (allowed-strings "facil" "dificil"))
-    (slot max_asigns) ;max 36 ECTS/cuatri --> con una asignatura 6 ECTS, son 6 asigs.
+    (slot max_asigns (range 0 1)) ;max 36 ECTS/cuatri --> con una asignatura 6 ECTS, son 6 asigs.
     (slot max_horas_trabajo) ;max 36 ECTS/cuatri y 1ECTS=25h --> 900h
     (slot max_horas_lab)
     (multislot tema_especializado)

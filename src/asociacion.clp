@@ -2,11 +2,41 @@
 ;; Estructuras para la asociacion heuristica de un problema abstracto a una solucion abstracta
 ;;
 
+(deftemplate asignat "Asignatura recomendada con sus motivos"
+    (slot asign (type INSTANCE))
+    (multislot motivos (default (create$)))
+)
+
+(deftemplate solucion-abstracta "Asignaturas a recomendar"
+    (multislot list-asigns (default (create$)))
+)
+
 (defrule entrada-asociacion "Asociacion heuristica del problema"
     ?hecho <- (abstraccion ok)
     =>
-    ;;; TODO: abstraccion del problema ;;;
+    ;;; TODO: asociacion del problema ;;;
     (printout t "Asociacion del problema" crlf)
     
+    (assert(ent-asigs))
     (retract ?hecho)
+)
+
+(defrule escoge-asigns
+    ?hecho <- (ent-asigs)
+    ?abs <- (problema-abstracto)
+    =>
+    
+    ;;; TODO: mirar las asignaturas y escoger segun el problema abstracto ;;;
+    
+    (assert (asigs ok))
+    (retract ?hecho)
+)
+
+(defrule fin-asociacion "Comprueba que se ejecuten todas las reglas de Asociacion"
+    ?hecho1 <- (asigs ok)
+    =>
+    ;;; esta regla elimina los hechos usados en la asociacion y genera un assert conforme ha acabado ;;;
+    (printout t "Fin asociacion" crlf)
+    (assert(asociacion ok))
+    (retract ?hecho1)
 )

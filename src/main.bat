@@ -7,6 +7,7 @@
 (load "respref.clp")
 (load "abstraccion.clp")
 (load "asociacion.clp")
+(load "refinamiento.clp")
 
 ;(run)
 

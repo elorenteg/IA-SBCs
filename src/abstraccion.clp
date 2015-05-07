@@ -151,7 +151,7 @@
     ?hecho1 <- (abs-dedicacion ok)
     ?hecho2 <- (abs-horario ok)
     =>
-    ;;; esta funcion elimina los hechos usados en la abstraccion y genera un assert conforme ha acabado ;;;
+    ;;; esta regla elimina los hechos usados en la abstraccion y genera un assert conforme ha acabado ;;;
     (printout t "Fin abstraccion" crlf)
     (assert(abstraccion ok))
     (retract ?hecho1 ?hecho2)
