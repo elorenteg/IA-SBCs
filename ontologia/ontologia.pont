@@ -1,4 +1,4 @@
-; Wed May 06 23:16:01 CEST 2015
+; Thu May 07 10:35:14 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -254,7 +254,9 @@
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot completar_especialidad
-		(type STRING)
+;+		(comment "Especialidad que se quiere completar")
+		(type INSTANCE)
+;+		(allowed-classes Especialidad)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot grado_dif
@@ -597,12 +599,6 @@
 (defclass Alumno "Representación de un alumno de la Facultat d'Informàtica de Barcelona"
 	(is-a USER)
 	(role concrete)
-	(single-slot volumen_trabajo
-;+		(comment "Volumen de trabajo que puede asumir")
-		(type SYMBOL)
-		(allowed-values alto medio bajo)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(multislot respref_alumno
 ;+		(comment "Restricciones y preferencias del alumno")
 		(type INSTANCE)
@@ -612,18 +608,6 @@
 ;+		(comment "Especialidad principal")
 		(type INSTANCE)
 ;+		(allowed-classes Especialidad)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot dificultad
-;+		(comment "Dificultad en los estudios que puede asumir un alumno")
-		(type SYMBOL)
-		(allowed-values alta media)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot interes_compl_esp
-;+		(comment "Interés por completar la especialidad en la matrícula actual")
-		(type SYMBOL)
-		(allowed-values ninguno medio alto)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot id
@@ -637,21 +621,10 @@
 ;+		(allowed-classes Recomendacion)
 		(cardinality 0 6)
 		(create-accessor read-write))
-	(multislot intereses
-;+		(comment "Conjunto de intereses temáticos")
-		(type INSTANCE)
-;+		(allowed-classes Tema)
-		(create-accessor read-write))
 	(single-slot expediente_alumno
 ;+		(comment "Expediente del alumno")
 		(type INSTANCE)
 ;+		(allowed-classes Expediente)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot tiempo_dedicacion
-;+		(comment "Tiempo de dedicación permitido")
-		(type SYMBOL)
-		(allowed-values alto medio bajo)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
@@ -710,7 +683,9 @@
 	(is-a ResPref)
 	(role concrete)
 	(single-slot completar_especialidad
-		(type STRING)
+;+		(comment "Especialidad que se quiere completar")
+		(type INSTANCE)
+;+		(allowed-classes Especialidad)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
