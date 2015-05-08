@@ -35,7 +35,7 @@
     (printout t "Abstraccion del problema" crlf)
     ;;; TODO: abstraccion del problema ;;;
     ;;; esta funcion solo genera los hechos para ejecutar las reglas de abstraccion ;;;
-    
+
     (assert (ent-abs-dedicacion) (ent-abs-horario))
     (assert (problema-abstracto))
     (retract ?hecho)
@@ -48,7 +48,7 @@
     ?abs <- (problema-abstracto (volumen-trabajoR ?volRes) (volumen-trabajoP ?volPref) (tiempo-dedicacionR ?tPref) (tiempo-dedicacionP ?tPref))
 
     =>
-    
+
     (printout t ">> Abstraccion del volumen de dedicacion y el tiempo" crlf)
     (if (not(eq ?asigsRes nil))
         then
@@ -140,7 +140,7 @@
         (bind ?absPref (insert$ ?absPref 2 "Tarde"))
         (bind ?abs (modify ?abs (horario-preferidoP ?absPref)))
     )
-    
+
     (assert(abs-horario ok))
     (retract ?hecho)
 )
