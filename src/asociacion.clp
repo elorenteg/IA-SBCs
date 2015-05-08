@@ -23,7 +23,7 @@
 )
 
 (defrule escoge-horario-preferidoR
-    ?prob <- (problema-abstracto (horario-preferidoR ?td))
+    ?prob-abs <- (problema-abstracto (horario-preferidoR ?td))
     ?sol-abs <- (solucion-abstracta)
     =>
     (bind ?res (create$))
