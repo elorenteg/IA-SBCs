@@ -89,19 +89,12 @@
 
     (bind ?espN (create$))
     (do-for-all-instances ((?t Especialidad)) TRUE (bind ?espN (insert$ ?espN 1 (send ?t get-nombre_esp))))
-    (bind ?ei (pregunta-cerrada ">> Que especialidad deseas acabar?" TRUE ?espN)) ; NO acaba de pillar bien la entrada de nombres!! ;
-    (printout t "especialidades " $?ei crlf)
+    (bind ?ei (pregunta-lista-string ">> Que especialidad deseas acabar?" TRUE ?espN))
     (if (not(eq ?ei nil))
         then
-        (bind ?i 1)
-        (while (<= ?i (length$ ?ei))
-            do
-                (bind ?t (nth$ ?i ?ei))
-                (bind ?esp-ins (find-instance ((?ei Especialidad)) (eq ?ei:nombre_esp ?t)))
-                (bind ?espI (insert$ ?espI 1 ?esp-ins))
-                (bind ?rec (modify ?rec (tema_especializado ?espI)))
-                (bind ?i (+ ?i 1))
-        )
+        (bind ?esp-ins (find-instance ((?esp Especialidad)) (eq ?esp:nombre_esp (primera-mayus ?ei))))
+        (printout t "instancia " ?esp-ins crlf)
+        (bind ?rec (modify ?rec (completar_especialidad ?esp-ins))) ;;; La instancia es correcta, pero peta al intentar agregarla ;;;
     )
 
     (bind ?di (pregunta-cerrada ">> Que dificultat puedes asumir?" TRUE facil dificil))

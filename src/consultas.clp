@@ -65,6 +65,43 @@
     )
 )
 
+(deffunction member-lista-string
+    (?respuesta $?candidatos)
+    
+    (bind ?i 1)
+    (while (<= ?i (length$ ?candidatos))
+        do
+            (bind ?c (nth$ ?i ?candidatos))
+            (if (str-compare ?c ?respuesta)
+                then
+                (return TRUE)
+            )
+            (bind ?i (+ ?i 1))
+    )
+    
+    (return FALSE)
+)
+
+(deffunction pregunta-lista-string
+    (?pregunta ?puede-omitir $?candidatos)
+
+    (if ?puede-omitir then (bind ?salida-opc "(opcional)")
+    else (bind ?salida-opc ""))
+
+    (progn$ (?var ?candidatos) (lowcase ?var))
+    (format t ">> %s [%s] %s " ?pregunta (implode$ ?candidatos) ?salida-opc)
+    (bind ?respuesta (readline))
+
+    (if (and (eq ?respuesta "-") ?puede-omitir) then (return nil)) ;permite omitir la pregunta
+    (while (not (member-lista-string (lowcase ?respuesta) ?candidatos)) do
+        (printout t "No se ha introducido una respuesta valida" crlf)
+        (format t ">> %s [%s] %s " ?pregunta (implode$ ?candidatos) ?salida-opc)
+        (bind ?respuesta (read))
+        (if (and (eq ?respuesta "-") ?puede-omitir) then (return nil)) ;permite omitir la pregunta
+    )
+    ?respuesta
+)
+
 (deffunction existe-alumno "Consulta si existe un alumno con cierto DNI"
     (?dni)
 
