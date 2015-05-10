@@ -92,6 +92,36 @@
     ;)
 )
 
+(defrule escoge-volumen-trabajo
+    (asigs ok)
+    ?prob-abs <- (problema-abstracto (volumen-trabajoR ?vt))
+
+    =>
+
+    (if (eq ?vt bajo)
+        then
+        (bind ?min 0)
+        (bind ?max 27)
+        else (if (eq ?vt medio)
+            then
+            (bind ?min 28)
+            (bind ?max 37)
+            else
+            (bind ?min 37)
+            (bind ?max 100)
+        )
+    )
+
+    ;Restricciones
+    (bind ?ins-asigs (find-all-instances ((?ins Asignatura))
+        (and
+            (<= ?min (+ (send ?ins get-horas_lab) (send ?ins get-horas_prob)))
+            (<= (+ (send ?ins get-horas_lab) (send ?ins get-horas_prob)) ?max))))
+
+    (loop-for-count (?i 1 (length$ ?ins-asigs)) do
+        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo volumen-trabajo) (es-pref FALSE))) ;poner un motivo más user-friendly
+    )
+)
 
 
 (defrule escoge-asigns

@@ -19,7 +19,6 @@
     (multislot horario-preferidoP (allowed-strings "manyana" "tarde") (default (create$)))
 )
 
-;;; TODO: dar peso a las características de problema-abstacto, según sean restricciones o preferencias ;;;
 
 (deffunction member-wrapper "Si X no es miembro de L, devuelve 0"
     (?X ?L)

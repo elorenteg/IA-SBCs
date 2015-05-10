@@ -7,7 +7,7 @@
     (multislot competencias_preferidas)
     (slot completar_especialidad)
     (slot dificultad (allowed-strings "facil" "dificil"))
-    (slot max_asigns (range 0 1)) ;max 36 ECTS/cuatri --> con una asignatura 6 ECTS, son 6 asigs.
+    (slot max_asigns (range 0 6)) ;max 36 ECTS/cuatri --> con una asignatura 6 ECTS, son 6 asigs.
     (slot max_horas_trabajo) ;max 36 ECTS/cuatri y 1ECTS=25h --> 900h
     (slot max_horas_lab)
     (multislot tema_especializado (default (create$)))
@@ -132,7 +132,7 @@
     ?pref <- (respref (es_restriccion FALSE))
     ?hecho1 <- (prefs ok)
     ?hecho2 <- (restrs ok)
-    ?res <- (respref (es_restriccion ?es-rest) (tipo_horario ?th)) ;faltan por poner más restricciones
+    ?res <- (respref (es_restriccion ?es-rest) (max_asigns ?ma) (tipo_horario $?th)) ;faltan por poner más restricciones
 
     =>
 
@@ -141,6 +141,7 @@
     (if (eq ?es-rest TRUE)
         then
         (if (neq ?th nil) then (bind ?nrest (+ ?nrest 1)))
+        (if (neq ?ma nil) then (bind ?nrest (+ ?nrest 1)))
         ;faltan por poner más restricciones
     )
 
