@@ -25,7 +25,7 @@
     ?nr <- (nueva-rec (asign ?a) (motivo ?m) (es-pref ?ep))
     ?ar <- (asig-rec (asign ?a) (motivos $?ms) (rest-sat ?rs) (pref-sat ?ps))
     =>
-    (if (eq ep TRUE)
+    (if (eq ?ep TRUE)
         then
         (bind ?ps-nuevo (+ 1 ?ps))
         (bind ?rs-nuevo ?rs)
@@ -42,7 +42,7 @@
     ?nr <- (nueva-rec (asign ?a) (motivo ?m) (es-pref ?ep))
     (not (exists (asig-rec (asign ?a))))
     =>
-    (if (eq ep TRUE)
+    (if (eq ?ep TRUE)
         then
         (bind ?ps 1)
         (bind ?rs 0)
@@ -67,10 +67,11 @@
     (retract ?hecho)
 )
 
-(defrule escoge-horario-preferidoR
+(defrule escoge-horario-preferido
     (asigs ok)
-    ?prob-abs <- (problema-abstracto (horario-preferidoR ?td))
+    ?prob-abs <- (problema-abstracto (horario-preferidoR ?td)) ;si añado "(horario-preferidoP ?tdP)", no entrará a menos el usuario haya introducido ambos criterios
     =>
+    ;Restricciones
     (bind ?res (create$))
     (bind ?ins-asigs (find-all-instances ((?ins Asignatura))
         (member ?td (create$ (progn$ (?cand (send ?ins get-horarios)) (insert$ ?res (+ 1 (length$ ?res)) (send ?cand get-horario)))))
@@ -79,6 +80,16 @@
     (loop-for-count (?i 1 (length$ ?ins-asigs)) do
         (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo horario-preferido) (es-pref FALSE))) ;poner un motivo más user-friendly
     )
+
+    ;Preferencias
+    ;(bind ?resP (create$))
+    ;(bind ?ins-asigsP (find-all-instances ((?ins Asignatura))
+    ;    (member ?tdP (create$ (progn$ (?cand (send ?ins get-horarios)) (insert$ ?resP (+ 1 (length$ ?resP)) (send ?cand get-horario)))))
+    ;))
+
+    ;(loop-for-count (?i 1 (length$ ?ins-asigsP)) do
+    ;    (assert (nueva-rec (asign (nth$ ?i ?ins-asigsP)) (motivo horario-preferido) (es-pref TRUE))) ;poner un motivo más user-friendly
+    ;)
 )
 
 
