@@ -11,16 +11,19 @@
     =>
     ;;; TODO: refinamiento del problema ;;;
     (printout t "Refinamiento del problema" crlf)
-    
+
     (assert (refina-rec))
     (retract ?hecho)
 )
 
 (defrule refina
     ?hecho <- (refina-rec)
-    
+    ?nrest <- (nrestricciones ?nrest)
+
     =>
-    
+
+    ;;;; TODO: eliminar "asig-rec"s que no tengan el slot rest-sat == ?nrest ;;;
+
     (assert (refinamiento ok))
     (retract ?hecho)
 )
@@ -30,8 +33,8 @@
     =>
     ;;; esta regla elimina los hechos usados en el refinamiento y genera un assert conforme ha acabado ;;;
     (printout t "Fin refinamiento" crlf)
-    
+
     ;;; TODO: Mostrar la recomendacion ;;;
-    
+
     (retract ?hecho1)
 )

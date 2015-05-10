@@ -29,9 +29,9 @@
 	(dni ?dni)
 	?alumn <- (object (is-a Alumno) (id ?dni))  ; ?alumn es la instancia del alumno con id ?dni al que le queremos introducir las respref
     ?rec <- (respref (es_restriccion ?es-rest) (tipo_horario $?tipo-horario) (tema_especializado $?temasI))
-    
+
 	=>
-    
+
 	(if (eq ?es-rest TRUE)
 		then
 		(progn (format t ">> Restricciones%n") (assert (restrs ok)))
@@ -69,7 +69,7 @@
         (bind ?tipo-horario (insert$ ?tipo-horario 2 ?th-ins-tar))
         (bind ?rec (modify ?rec (tipo_horario ?tipo-horario)))
     )
-    
+
     (bind ?temasN (create$))
     (do-for-all-instances ((?t Especializado)) TRUE (bind ?e (insert$ ?temasN 1 (send ?t get-nombre_tema))))
     (bind ?ti (pregunta-cerrada ">> Que temas especializados te interesan?" TRUE ?temasN)) ; NO acaba de pillar bien la entrada de nombres!! ;
@@ -86,7 +86,7 @@
                 (bind ?i (+ ?i 1))
         )
     )
-    
+
     (bind ?espN (create$))
     (do-for-all-instances ((?t Especialidad)) TRUE (bind ?espN (insert$ ?espN 1 (send ?t get-nombre_esp))))
     (bind ?ei (pregunta-cerrada ">> Que especialidad deseas acabar?" TRUE ?espN)) ; NO acaba de pillar bien la entrada de nombres!! ;
@@ -103,13 +103,13 @@
                 (bind ?i (+ ?i 1))
         )
     )
-    
+
     (bind ?di (pregunta-cerrada ">> Que dificultat puedes asumir?" TRUE facil dificil))
 	(if (not(eq ?th nil))
         then
         (bind ?rec (modify ?rec (dificultad ?di)))
     )
-    
+
     (bind ?comP (create$))
     (do-for-all-instances ((?t Competencia)) TRUE (bind ?comP (insert$ ?comP 1 (send ?t get-nombre_comp))))
     (bind ?cp (pregunta-cerrada ">> Cuales son tus competencias favoritas?" TRUE ?comP)) ; NO acaba de pillar bien la entrada de nombres!! ;
@@ -126,9 +126,9 @@
                 (bind ?i (+ ?i 1))
         )
     )
-    
+
 	;;; TODO: añadir mas preguntas de ResPref ;;;
-    
+
     (retract ?hecho)
 )
 
@@ -139,11 +139,24 @@
     ?pref <- (respref (es_restriccion FALSE))
     ?hecho1 <- (prefs ok)
     ?hecho2 <- (restrs ok)
+    ?res <- (respref (es_restriccion ?es-rest) (tipo_horario ?th)) ;faltan por poner más restricciones
+
     =>
-    
+
+    ;es necesario conocer cuántas restricciones ha introducido el usuario
+    (bind ?nrest 0)
+    (if (eq ?es-rest TRUE)
+        then
+        (if (neq ?th nil) then (bind ?nrest (+ ?nrest 1)))
+        ;faltan por poner más restricciones
+    )
+
+    (assert (nrestricciones ?nrest))
+    (printout t "num. restricciones: " ?nrest crlf)
+
     ;;; TODO: inferencia de respref ;;;
     (printout t "Inferencia de restricciones/preferencias" crlf)
-    
+
     (assert(inferencia ok))
     (retract ?hecho1)
     (retract ?hecho2)
