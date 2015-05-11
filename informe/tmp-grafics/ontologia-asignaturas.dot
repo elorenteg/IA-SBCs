@@ -1,0 +1,39 @@
+digraph "ontologia" {
+graph[fontname="Palatino"];
+node[fontname="Palatino"];
+edge[fontname="Palatino"];
+
+"General" [shape=box, label="General", color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Tema"->"General" [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Convocatoria" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Convocatoria|{horario_conv|Instance|{Horario}}|{cuatrimestre|Symbol|{A|B}}|{asignatura_conv|Instance|{Asignatura}}|{notas_conv|Instance*|{Nota_examen}}}"]
+"Convocatoria"->"Horario" [style=filled, label="horario_conv", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Convocatoria"->"Asignatura" [style=filled, label="asignatura_conv", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Recomendacion" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Recomendacion|{motivo|String}|{grado|Symbol|{altamente_recomendable|recomendable}}|{asignatura_rec|Instance|{Asignatura}}|{alumno_rec|Instance|{Alumno}}}"]
+"Recomendacion"->"Asignatura" [style=filled, label="asignatura_rec", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Optativa" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Optativa|{curso|Symbol|{primero|segundo|tercero|...}}}"]
+"Asignatura"->"Optativa" [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Especialidad" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Especialidad|{temas_incluidos|Instance*|{Especializado}}|{nombre_esp|String}}"]
+"Especialidad"->"Especializado" [style=filled, label="temas_incluidos*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Competencia" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Competencia|{nivel|Symbol|{N1|N2|N3}}|{nombre_comp|String}}"]
+"Asignatura" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Asignatura|{aprobados_ant|Float}|{precorrequisitos|Instance*|{Asignatura}}|{horas_lab|Float}|{temas|Instance*|{Tema}}|{es_proyecto|Boolean}|{...}}"]
+"Asignatura"->"Asignatura" [style=filled, label="precorrequisitos*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Asignatura"->"Tema" [style=filled, label="temas*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Asignatura"->"Asignatura" [style=filled, label="correquisitos*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Asignatura"->"Competencia" [style=filled, label="competencias*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Asignatura"->"Horario" [style=filled, label="horarios*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Asignatura"->"Asignatura" [style=filled, label="prerrequisitos*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Asignatura"->"Asignatura" [style=filled, label="orrequisitos*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Especializada" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Especializada|{curso|Symbol|{primero|segundo|tercero|...}}|{especialidad_asig|Instance*|{Especialidad}}}"]
+"Asignatura"->"Especializada" [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Especializada"->"Especialidad" [style=filled, label="especialidad_asig*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"No_informatico" [shape=box, label="No_informatico", color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Tema"->"No_informatico" [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Obligatoria" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Obligatoria|{curso|Symbol|{primero|segundo|tercero|...}}}"]
+"Asignatura"->"Obligatoria" [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Tema" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Tema|{nombre_tema|String}}"]
+"Especializado" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Especializado|{temas_afines|Instance*|{Especializado}}}"]
+"Tema"->"Especializado" [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Especializado"->"Especializado" [style=filled, label="temas_afines*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Horario" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Horario|{horario|String}}"]
+
+}

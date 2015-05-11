@@ -1,0 +1,34 @@
+digraph "ontologia" {
+graph[fontname="Palatino"];
+node[fontname="Palatino"];
+edge[fontname="Palatino"];
+
+"Max_Asignaturas" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Max_Asignaturas|{max_asigns|Integer}}"]
+"ResPref"->"Max_Asignaturas" [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Tipo_Horario" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Tipo_Horario|{tipo_horario|Instance*|{Horario}}}"]
+"ResPref"->"Tipo_Horario" [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Tipo_Horario"->"Horario" [style=filled, label="tipo_horario*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Especialidad" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Especialidad|{temas_incluidos|Instance*|{Especializado}}|{nombre_esp|String}}"]
+"Competencia" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Competencia|{nivel|Symbol|{N1|N2|N3}}|{nombre_comp|String}}"]
+"Competencias_Preferidas" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Competencias_Preferidas|{competencia_preferida|Instance*|{Competencia}}}"]
+"ResPref"->"Competencias_Preferidas" [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Competencias_Preferidas"->"Competencia" [style=filled, label="competencia_preferida*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Alumno" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Alumno|{respref_alumno|Instance*|{ResPref}}|{especialidad|Instance|{Especialidad}}|{id|Integer}|{recomendaciones|Instance*|{Recomendacion}}|{expediente_alumno|Instance|{Expediente}}}"]
+"Alumno"->"ResPref" [style=filled, label="respref_alumno*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Completar_Especialidad" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Completar_Especialidad|{completar_especialidad|Instance|{Especialidad}}}"]
+"ResPref"->"Completar_Especialidad" [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Completar_Especialidad"->"Especialidad" [style=filled, label="completar_especialidad", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Max_Horas_Trabajo" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Max_Horas_Trabajo|{max_horas_trabajo|Integer}}"]
+"ResPref"->"Max_Horas_Trabajo" [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Dificultad" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Dificultad|{grado_dif|Symbol|{alta|media}}}"]
+"ResPref"->"Dificultad" [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Max_Horas_Lab" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Max_Horas_Lab|{max_horas_lab|Integer}}"]
+"ResPref"->"Max_Horas_Lab" [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Especializado" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Especializado|{temas_afines|Instance*|{Especializado}}}"]
+"Horario" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Horario|{horario|String}}"]
+"Tema_Especializado" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Tema_Especializado|{tema_especializado|Instance*|{Especializado}}}"]
+"ResPref"->"Tema_Especializado" [dir=back, label=isa, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0"]
+"Tema_Especializado"->"Especializado" [style=filled, label="tema_especializado*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"ResPref" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{ResPref|{es_preferencia|Boolean}}"]
+
+}

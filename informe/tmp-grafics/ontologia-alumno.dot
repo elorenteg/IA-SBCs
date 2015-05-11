@@ -1,0 +1,25 @@
+digraph "ontologia" {
+graph[fontname="Palatino"];
+node[fontname="Palatino"];
+edge[fontname="Palatino"];
+
+
+"Expediente" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Expediente|{notas_exp|Instance*|{Nota_examen}}|{alumno_exp|Instance|{Alumno}}}"]
+"Expediente"->"Nota_examen" [style=filled, label="notas_exp*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Expediente"->"Alumno" [style=filled, label="alumno_exp", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Recomendacion" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Recomendacion|{motivo|String}|{grado|Symbol|{altamente_recomendable|recomendable}}|{asignatura_rec|Instance|{Asignatura}}|{alumno_rec|Instance|{Alumno}}}"]
+"Recomendacion"->"Alumno" [style=filled, label="alumno_rec", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Alumno" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Alumno|{respref_alumno|Instance*|{ResPref}}|{especialidad|Instance|{Especialidad}}|{id|Integer}|{recomendaciones|Instance*|{Recomendacion}}|{expediente_alumno|Instance|{Expediente}}}"]
+"Alumno"->"ResPref" [style=filled, label="respref_alumno*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Alumno"->"Especialidad" [style=filled, label="especialidad", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Alumno"->"Recomendacion" [style=filled, label="recomendaciones*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Alumno"->"Expediente" [style=filled, label="expediente_alumno", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"ResPref" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{ResPref|{es_preferencia|Boolean}}"]
+"Convocatoria" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Convocatoria|{horario_conv|Instance|{Horario}}|{cuatrimestre|Symbol|{A|B}}|{asignatura_conv|Instance|{Asignatura}}|{notas_conv|Instance*|{Nota_examen}}}"]
+"Convocatoria"->"Nota_examen" [style=filled, label="notas_conv*", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Nota_examen" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Nota_examen|{expediente_nota|Instance|{Expediente}}|{convocatoria_nota|Instance|{Convocatoria}}|{nota|Float}}"]
+"Nota_examen"->"Expediente" [style=filled, label="expediente_nota", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Nota_examen"->"Convocatoria" [style=filled, label="convocatoria_nota", color="0.6666667,1.0,1.0", fontcolor="0.6666667,1.0,1.0"]
+"Especialidad" [shape=record, color="0.0,0.0,0.0", fontcolor="0.0,0.0,0.0", label="{Especialidad|{temas_incluidos|Instance*|{Especializado}}|{nombre_esp|String}}"]
+
+}
