@@ -65,40 +65,30 @@
     )
 )
 
-(deffunction member-lista-string
-    (?respuesta $?candidatos)
-    
-    (bind ?i 1)
-    (while (<= ?i (length$ ?candidatos))
-        do
-            (bind ?c (nth$ ?i ?candidatos))
-            (if (str-compare ?c ?respuesta)
-                then
-                (return TRUE)
-            )
-            (bind ?i (+ ?i 1))
-    )
-    
-    (return FALSE)
-)
-
-(deffunction pregunta-lista-string
+(deffunction pregunta-numero
     (?pregunta ?puede-omitir $?candidatos)
 
     (if ?puede-omitir then (bind ?salida-opc "(opcional)")
     else (bind ?salida-opc ""))
 
-    (progn$ (?var ?candidatos) (lowcase ?var))
-    (format t ">> %s [%s] %s " ?pregunta (implode$ ?candidatos) ?salida-opc)
-    (bind ?respuesta (readline))
-
-    (if (and (eq ?respuesta "-") ?puede-omitir) then (return nil)) ;permite omitir la pregunta
-    (while (not (member-lista-string (lowcase ?respuesta) ?candidatos)) do
-        (printout t "No se ha introducido una respuesta valida" crlf)
-        (format t ">> %s [%s] %s " ?pregunta (implode$ ?candidatos) ?salida-opc)
-        (bind ?respuesta (read))
-        (if (and (eq ?respuesta "-") ?puede-omitir) then (return nil)) ;permite omitir la pregunta
+    (format t ">> %s %s %n" ?pregunta ?salida-opc)
+    (loop-for-count (?i 1 (length$ ?candidatos)) do
+        (bind ?cand (nth$ ?i ?candidatos))
+        (format t "  (%d) %s%n" ?i ?cand)
     )
+    
+    (bind ?min 1)
+    (bind ?max (length$ ?candidatos))
+    
+    (bind ?respuesta (read))
+    (if (and (eq ?respuesta -) ?puede-omitir) then (return nil)) ;permite omitir la pregunta
+    (while (or (< ?respuesta ?min) (> ?respuesta ?max))
+        (printout t "No se ha introducido una respuesta valida" crlf)
+        (format t ">> %s [%d, %d] %s " ?pregunta ?min ?max ?salida-opc)
+        (bind ?respuesta (read))
+        (if (and (eq ?respuesta -) ?puede-omitir) then (return nil)) ;permite omitir la pregunta
+    )
+    
     ?respuesta
 )
 
