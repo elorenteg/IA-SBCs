@@ -52,7 +52,7 @@
     ?hecho <- (ent-respref ?es-rest)
 	(dni ?dni)
 	?alumn <- (object (is-a Alumno) (id ?dni))  ; ?alumn es la instancia del alumno con id ?dni al que le queremos introducir las respref
-    ?rec <- (respref (es_restriccion ?es-rest) (tipo_horario $?tipo-horario) (tema_especializado $?temasI))
+    ?rec <- (respref (es_restriccion ?es-rest))
 
 	=>
 
@@ -90,26 +90,33 @@
         else
         (bind ?th-ins-man (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus "manyana"))))
         (bind ?th-ins-tar (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus "tarde"))))
+        (bind $?tipo-horario (create$))
         (bind ?tipo-horario (insert$ ?tipo-horario 1 ?th-ins-man))
         (bind ?tipo-horario (insert$ ?tipo-horario 2 ?th-ins-tar))
         (bind ?rec (modify ?rec (tipo_horario ?tipo-horario)))
     )
 
-    ;;; TODO: Que acepte mas de un tema por respuesta ;;;
     (bind ?temasN (create$))
     (do-for-all-instances ((?t Especializado)) TRUE (bind ?temasN (insert$ ?temasN 1 (send ?t get-nombre_tema))))
-    (bind ?numTem (pregunta-numero ">> Que temas especializados te interesan?" TRUE ?temasN))
+    (bind ?numTem (pregunta-lista-numeros ">> Que temas especializados te interesan?" TRUE ?temasN))
     (if (not(eq ?numTem nil))
         then
-        (bind ?nomTem (nth$ ?numTem ?temasN))
-        (bind ?tema-ins (find-instance ((?tem Especializado)) (eq ?tem:nombre_tema ?nomTem)))
-        
-        (printout t "numero " ?numTem crlf)
-        (printout t "nombre " ?nomTem crlf)
-        (printout t "instancia " ?tema-ins crlf)
-        
-        (bind ?rec (modify ?rec (tema_especializado ?tema-ins)))
+        (bind $?temasI (create$))
+        (loop-for-count (?i 1 (length$ ?numTem)) do
+            (bind ?num (nth$ ?i ?numTem))
+            (bind ?nomTem (nth$ ?num ?temasN))
+            (bind ?tema-ins (find-instance ((?tem Especializado)) (eq ?tem:nombre_tema ?nomTem)))
+            
+            ;(printout t "numero " ?num crlf)
+            ;(printout t "nombre " ?nomTem crlf)
+            ;(printout t "instancia " ?tema-ins crlf)
+            
+            (bind ?temasI (insert$ ?temasI 1 ?tema-ins))
+        )
+        (bind ?rec (modify ?rec (tema_especializado ?temasI)))
     )
+    
+    
 
     (bind ?espN (create$))
     (do-for-all-instances ((?t Especialidad)) TRUE (bind ?espN (insert$ ?espN 1 (send ?t get-nombre_esp))))
@@ -119,9 +126,9 @@
         (bind ?nomEsp (nth$ ?numEsp ?espN))
         (bind ?esp-ins (find-instance ((?esp Especialidad)) (eq ?esp:nombre_esp (primera-mayus ?nomEsp))))
         
-        (printout t "numero " ?numEsp crlf)
-        (printout t "nombre " ?nomEsp crlf)
-        (printout t "instancia " ?esp-ins crlf)
+        ;(printout t "numero " ?numEsp crlf)
+        ;(printout t "nombre " ?nomEsp crlf)
+        ;(printout t "instancia " ?esp-ins crlf)
         
         (bind ?rec (modify ?rec (completar_especialidad ?esp-ins)))
     )
@@ -132,25 +139,30 @@
         (bind ?rec (modify ?rec (dificultad ?di)))
     )    
     
-    ;;; TODO: Que acepte mas de un tema por respuesta ;;;
     (bind ?comP (create$))
     (do-for-all-instances ((?t Competencia)) TRUE (bind ?comP (insert$ ?comP 1 (str-cat (sub-string 3 (str-length(send ?t get-nombre_comp)) (send ?t get-nombre_comp)) " ("(send ?t get-nivel) ")"))))
     (bind ?ordComP (sort-list ?comP))
-    (bind ?numComp (pregunta-numero ">> Cuales son tus competencias favoritas?" TRUE ?ordComP))
+    (bind ?numComp (pregunta-lista-numeros ">> Cuales son tus competencias favoritas?" TRUE ?ordComP))
     (if (not(eq ?numComp nil))
         then
-        (bind ?nomComp (sub-string 1 (-(str-length(nth$ ?numComp ?ordComP))5) (nth$ ?numComp ?ordComP)))
-        (bind ?nivComp (sub-string (-(str-length(nth$ ?numComp ?ordComP))2) (-(str-length(nth$ ?numComp ?ordComP))1) (nth$ ?numComp ?ordComP)))
-        (bind ?comp-ins (find-instance ((?comp Competencia)) (and (= (str-compare (sub-string 3 (str-length ?comp:nombre_comp) ?comp:nombre_comp) ?nomComp) 0) (= (str-compare ?comp:nivel ?nivComp) 0))))
-        
-        (printout t "numero " ?numComp crlf)
-        (printout t "nombre " ?nomComp crlf)
-        (printout t "nivel " ?nivComp crlf)
-        (printout t "instancia " ?comp-ins crlf)
-        
-        (bind ?rec (modify ?rec (competencias_preferidas ?comp-ins)))
+        (bind $?compeI (create$))
+        (loop-for-count (?i 1 (length$ ?numComp)) do
+            (bind ?num (nth$ ?i ?numComp))
+            
+            (bind ?nomComp (sub-string 1 (-(str-length(nth$ ?num ?ordComP))5) (nth$ ?num ?ordComP)))
+            (bind ?nivComp (sub-string (-(str-length(nth$ ?num ?ordComP))2) (-(str-length(nth$ ?num ?ordComP))1) (nth$ ?num ?ordComP)))
+            (bind ?comp-ins (find-instance ((?comp Competencia)) (and (= (str-compare (sub-string 3 (str-length ?comp:nombre_comp) ?comp:nombre_comp) ?nomComp) 0) (= (str-compare ?comp:nivel ?nivComp) 0))))
+            
+            ;(printout t "numero " ?num crlf)
+            ;(printout t "nombre " ?nomComp crlf)
+            ;(printout t "nivel " ?nivComp crlf)
+            ;(printout t "instancia " ?comp-ins crlf)
+            
+            (bind ?compeI (insert$ ?compeI 1 ?comp-ins))
+        )
+        (bind ?rec (modify ?rec (competencias_preferidas ?compeI)))
     )
-
+    
     (retract ?hecho)
 )
 

@@ -92,6 +92,49 @@
     ?respuesta
 )
 
+(deffunction fuera-rango
+    (?min ?max $?lista-res)
+
+    (loop-for-count (?i 1 (length$ ?lista-res)) do
+        (bind ?res (nth$ ?i ?lista-res))
+        (if (or (< ?res ?min) (> ?res ?max))
+            then
+            (return TRUE)
+        )
+    )
+    
+    (return FALSE)
+)
+
+(deffunction pregunta-lista-numeros
+    (?pregunta ?puede-omitir $?candidatos)
+
+    (if ?puede-omitir then (bind ?salida-opc "(opcional)")
+    else (bind ?salida-opc ""))
+
+    (format t ">> %s %s %n" ?pregunta ?salida-opc)
+    (loop-for-count (?i 1 (length$ ?candidatos)) do
+        (bind ?cand (nth$ ?i ?candidatos))
+        (format t "  (%d) %s%n" ?i ?cand)
+    )
+    
+    (bind ?min 1)
+    (bind ?max (length$ ?candidatos))
+    
+    (bind ?respuesta (readline))
+    (if (and (eq ?respuesta "-") ?puede-omitir) then (return nil)) ;permite omitir la pregunta
+    (bind $?lista-res (str-explode ?respuesta))
+    (while (fuera-rango ?min ?max ?lista-res)
+        (printout t "No se ha introducido una respuesta valida" crlf)
+        (format t ">> %s [%d, %d] %s " ?pregunta ?min ?max ?salida-opc)
+        (bind ?respuesta (readline))
+        (if (and (eq ?respuesta "-") ?puede-omitir) then (return nil)) ;permite omitir la pregunta
+        (bind $?lista-res (str-explode ?respuesta))
+    )
+    
+    $?lista-res
+)
+
 (deffunction existe-alumno "Consulta si existe un alumno con cierto DNI"
     (?dni)
 
