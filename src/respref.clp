@@ -4,38 +4,46 @@
 
 (deftemplate respref
     (slot es_restriccion)
-    (multislot competencias_preferidas (default (create$)))
-    (multislot completar_especialidad (default (create$)))
-    ;(slot completar_especialidad (type INSTANCE))
-    (slot dificultad (allowed-strings "facil" "dificil"))
-    (slot max_asigns (range 0 6)) ;max 36 ECTS/cuatri --> con una asignatura 6 ECTS, son 6 asigs.
-    (slot max_horas_trabajo) ;max 36 ECTS/cuatri y 1ECTS=25h --> 900h
+    (multislot competencias_preferidas)
+    (multislot completar_especialidad)
+    (slot dificultad)
+    (slot max_asigns)
+    (slot max_horas_trabajo)
     (slot max_horas_lab)
-    (multislot tema_especializado (default (create$)))
-    (multislot tipo_horario (cardinality 1 2) (default (create$)))
+    (multislot tema_especializado)
+    (multislot tipo_horario)
 )
 
 (deffunction sort-list
     ($?list)
     
+    (bind $?sin-repes (create$))
     (loop-for-count (?i 1 (length$ ?list)) do
+        (bind ?elem (nth$ ?i ?list))
+        (if (not(member$ ?elem ?sin-repes))
+            then
+            (bind ?sin-repes (insert$ ?sin-repes 1 ?elem))
+        )
+    )
+    
+    (loop-for-count (?i 1 (length$ ?sin-repes)) do
         (bind ?min ?i)
-        (loop-for-count (?j (+ ?i 1) (length$ ?list)) do
-            (if (< (str-compare (nth$ ?j ?list) (nth$ ?min ?list)) 0)
+        (loop-for-count (?j (+ ?i 1) (length$ ?sin-repes)) do
+            (if (< (str-compare (nth$ ?j ?sin-repes) (nth$ ?min ?sin-repes)) 0)
                 then
                 (bind ?min ?j)
             )
         )
         (if (!= ?min ?i)
             then
-            (bind ?auxI (nth$ ?i ?list))
-            (bind ?auxM (nth$ ?min ?list))
-            (bind ?list (replace$ ?list ?i ?i ?auxM))
-            (bind ?list (replace$ ?list ?min ?min ?auxI))
+            (bind ?auxI (nth$ ?i ?sin-repes))
+            (bind ?auxM (nth$ ?min ?sin-repes))
+            (bind ?sin-repes (replace$ ?sin-repes ?i ?i ?auxM))
+            (bind ?sin-repes (replace$ ?sin-repes ?min ?min ?auxI))
         )
     )
     
-    ?list
+    ?sin-repes
 )
 
 (defrule entrada-respref "Pide las preferencias y las restricciones"
@@ -115,8 +123,6 @@
         )
         (bind ?rec (modify ?rec (tema_especializado ?temasI)))
     )
-    
-    
 
     (bind ?espN (create$))
     (do-for-all-instances ((?t Especialidad)) TRUE (bind ?espN (insert$ ?espN 1 (send ?t get-nombre_esp))))
@@ -140,7 +146,7 @@
     )    
     
     (bind ?comP (create$))
-    (do-for-all-instances ((?t Competencia)) TRUE (bind ?comP (insert$ ?comP 1 (str-cat (sub-string 3 (str-length(send ?t get-nombre_comp)) (send ?t get-nombre_comp)) " ("(send ?t get-nivel) ")"))))
+    (do-for-all-instances ((?t Competencia)) TRUE (bind ?comP (insert$ ?comP 1 (str-cat (sub-string 3 (str-length(send ?t get-nombre_comp)) (send ?t get-nombre_comp))))))
     (bind ?ordComP (sort-list ?comP))
     (bind ?numComp (pregunta-lista-numeros ">> Cuales son tus competencias favoritas?" TRUE ?ordComP))
     (if (not(eq ?numComp nil))
@@ -149,14 +155,14 @@
         (loop-for-count (?i 1 (length$ ?numComp)) do
             (bind ?num (nth$ ?i ?numComp))
             
-            (bind ?nomComp (sub-string 1 (-(str-length(nth$ ?num ?ordComP))5) (nth$ ?num ?ordComP)))
-            (bind ?nivComp (sub-string (-(str-length(nth$ ?num ?ordComP))2) (-(str-length(nth$ ?num ?ordComP))1) (nth$ ?num ?ordComP)))
-            (bind ?comp-ins (find-instance ((?comp Competencia)) (and (= (str-compare (sub-string 3 (str-length ?comp:nombre_comp) ?comp:nombre_comp) ?nomComp) 0) (= (str-compare ?comp:nivel ?nivComp) 0))))
+            (bind ?nomComp (nth$ ?num ?ordComP))
+            ;(bind ?nivComp (sub-string (-(str-length(nth$ ?num ?ordComP))2) (-(str-length(nth$ ?num ?ordComP))1) (nth$ ?num ?ordComP)))
+            (bind $?comp-ins (find-all-instances ((?comp Competencia)) (= (str-compare (sub-string 3 (str-length ?comp:nombre_comp) ?comp:nombre_comp) ?nomComp) 0)))
             
-            ;(printout t "numero " ?num crlf)
-            ;(printout t "nombre " ?nomComp crlf)
+            (printout t "numero " ?num crlf)
+            (printout t "nombre " ?nomComp crlf)
             ;(printout t "nivel " ?nivComp crlf)
-            ;(printout t "instancia " ?comp-ins crlf)
+            (printout t "instancia " ?comp-ins crlf)
             
             (bind ?compeI (insert$ ?compeI 1 ?comp-ins))
         )
@@ -166,33 +172,45 @@
     (retract ?hecho)
 )
 
-(defrule entrada-inferencia "Infiere restricciones/preferencias segun el expediente"
-    (dni ?dni)
-    ?alumn <- (object (is-a Alumno) (id ?dni))
-    ?rest <- (respref (es_restriccion TRUE))
-    ?pref <- (respref (es_restriccion FALSE))
+(defrule contador-restricciones
     ?hecho1 <- (prefs ok)
     ?hecho2 <- (restrs ok)
-    ?res <- (respref (es_restriccion ?es-rest) (max_asigns ?ma) (tipo_horario $?th)) ;faltan por poner más restricciones
-
+    ?rest <- (respref (es_restriccion TRUE) (competencias_preferidas $?cp) (completar_especialidad $?ce) (dificultad ?d) 
+                    (max_asigns ?ma) (max_horas_trabajo ?mht) (max_horas_lab ?mhl) (tema_especializado $?te) (tipo_horario $?th))
+                    
     =>
-
-    ;es necesario conocer cuántas restricciones ha introducido el usuario
+    
+    (printout t "Contador de restricciones" crlf)
     (bind ?nrest 0)
-    (if (eq ?es-rest TRUE)
-        then
-        (if (neq ?th nil) then (bind ?nrest (+ ?nrest 1)))
-        (if (neq ?ma nil) then (bind ?nrest (+ ?nrest 1)))
-        ;faltan por poner más restricciones
-    )
-
-    (assert (nrestricciones ?nrest))
+    (if (> (length$ ?cp) 0) then (bind ?nrest (+ ?nrest 1)))
+    (if (> (length$ ?ce) 0) then (bind ?nrest (+ ?nrest 1)))
+    (if (neq ?d nil) then (bind ?nrest (+ ?nrest 1)))
+    (if (neq ?ma nil) then (bind ?nrest (+ ?nrest 1)))
+    (if (neq ?mht nil) then (bind ?nrest (+ ?nrest 1)))
+    (if (neq ?mhl nil) then (bind ?nrest (+ ?nrest 1)))
+    (if (> (length$ ?te) 0) then (bind ?nrest (+ ?nrest 1)))
+    (if (> (length$ ?th) 0) then (bind ?nrest (+ ?nrest 1)))
+    
     (printout t "num. restricciones: " ?nrest crlf)
-
-    ;;; TODO: inferencia de respref ;;;
-    (printout t "Inferencia de restricciones/preferencias" crlf)
-
-    (assert(inferencia ok))
+    
+    (assert (contador ok))
+    (assert (nrestricciones ?nrest))
     (retract ?hecho1)
     (retract ?hecho2)
+)
+
+(defrule inferencia-preferencias "Infiere restricciones/preferencias segun el expediente"
+    ?hecho <- (contador ok)
+    (dni ?dni)
+    ?alumn <- (object (is-a Alumno) (id ?dni))
+    ?rec <- (respref (es_restriccion FALSE))
+    
+    =>
+
+    ;;; TODO: inferencia de respref ;;;
+    (printout t "Inferencia de preferencias" crlf)
+    
+
+    (assert(inferencia ok))
+    (retract ?hecho)
 )
