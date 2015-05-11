@@ -5,25 +5,26 @@ El conocimiento adquirido para este problema se representa mediante una
 ontología. En esta aparecen todos los conceptos detallados en la
 \autoref{sec:conceptualizacion} y las relaciones entre ellos, puesto que debe
 permitir al sistema basado en el conocimiento razonar sobre ellos de forma
-adecuada. Para formalizarlos deberemos pensar en una forma para representarlos
-y que nuestro Sistema Basado en el Conocimiento lo entienda.
+adecuada. Para formalizarlos, deberemos pensar en una forma para representarlos
+y que nuestro sistema basado en el conocimiento lo entienda. A continuación, 
+pasamos a detallar las partes principales de la ontología desarrollada.
 
 La ontología empieza con el Alumno que se podrá distinguir según su DNI.
 Desde él podremos acceder a todo su expediente de las asignaturas a las
-que se ha presentado y a sus preferencias sobre como le gustaría ser su
-próxima elección de matrícula. Ésto nos sirve para que desde la clase Alumno
+que se ha presentado y a sus preferencias sobre cómo le gustaría que fuese su
+próxima elección de matrícula. Esto nos sirve para que desde la clase Alumno
 podamos gestionar sus preferencias y restricciones o inferirlas si es
 necesario y así poder escoger las mejores asignaturas para una buena recomendación.
 
 El expediente único del alumno tendrá todas las convocatorias de exámenes
 del alumno. Para distinguir una convocatoria usaremos la asignatura y el
-cuatrimestre en el que se ha presentado. Ésto nos permitirá que un alumno
+cuatrimestre en el que se ha presentado. Esto nos permitirá que un alumno
 se pueda presentar a la misma asignatura en más de una ocasión si éste la
-suspendiera. Como atributo tendremos la calificación y su horario.
+suspendiera. Como atributos tendremos la calificación y su horario.
 
 Las asignaturas son los conceptos que permanecerán estáticos durante toda
 la ejecución del sistema. Su conocimiento no podrá ser modificado por el
-alumno porque es independiente a él y es algo nos proporciona la Facultad.
+alumno porque es independiente de él y es algo nos proporciona la Facultad.
 Cada asignatura consistirá en un nombre (tomaremos sus siglas para abreviar),
 el curso en el que aparece en el plan de estudios, su número de créditos
 ECTS (así como la distribución en horas de esta carga por los conceptos de
@@ -52,7 +53,22 @@ preferencia/restricción que se quiera introducir en el sistema. Para poder
 diferenciarlos, usaremos el atributo booleano y su subconcepto. De este modo
 podremos tener una restricción y una preferencia de un mismo subconcepto.
 
-A continuación mostramos el esquema de la jerarquía de la ontología
-anteriormente descrita.
+En la \autoref{fig:ontologia-completa} se muestra el esquema de la jerarquía 
+de la ontología anteriormente descrita.
+
+\afterpage{% Página horizontal (a parte).
+\begin{landscape}
+
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[width=23cm,height=14cm,keepaspectratio]{ontologia-completa}
+        \caption{Representación gráfica de la ontología completa.}
+        \label{fig:ontologia-completa}
+    \end{figure}
+
+\end{landscape}
+}
+
+
 
 \textbf{(grafo de jerarquía)}
