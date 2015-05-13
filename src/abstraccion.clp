@@ -35,7 +35,7 @@
     ;;; TODO: abstraccion del problema ;;;
     ;;; esta funcion solo genera los hechos para ejecutar las reglas de abstraccion ;;;
 
-    (assert (ent-abs-dedicacion) (ent-abs-horario))
+    (assert (ent-abs-dedicacion) (ent-abs-horario) (ent-abs-especialidad) (ent-abs-dificultad) (ent-abs-tema))
     (assert (problema-abstracto))
     (retract ?hecho)
 )
@@ -144,14 +144,60 @@
     (retract ?hecho)
 )
 
-;;; TODO: una regla por cada abstraccion a realizar o una sola regla para todo ;;;
+(defrule abs-dificultad
+    ?hecho <- (ent-abs-dificultad)
+    (dni ?dni)
+    ?res <- (respref (es_restriccion TRUE) (dificultad ?difRes))
+    ?pref <- (respref (es_restriccion FALSE) (dificultad ?difPref))
+    ?abs <- (problema-abstracto (dificultadR ?absRes) (dificultadP ?absPref))
+
+    =>
+
+    (printout t ">> Abstraccion de Dificultad" crlf)
+
+    (assert(abs-dificultad ok))
+    (retract ?hecho)
+)
+
+(defrule abs-tema
+    ?hecho <- (ent-abs-tema)
+    (dni ?dni)
+    ?res <- (respref (es_restriccion TRUE) (tema_especializado $?temRes))
+    ?pref <- (respref (es_restriccion FALSE) (tema_especializado $?temPref))
+    ?abs <- (problema-abstracto (intereses-tematicosR $?absRes) (intereses-tematicosP $?absPref))
+
+    =>
+
+    (printout t ">> Abstraccion de Interes Tematico" crlf)
+
+    (assert(abs-tema ok))
+    (retract ?hecho)
+)
+
+(defrule abs-especialidad
+    ?hecho <- (ent-abs-especialidad)
+    (dni ?dni)
+    ?res <- (respref (es_restriccion TRUE) (completar_especialidad $?espRes))
+    ?pref <- (respref (es_restriccion FALSE) (completar_especialidad $?espPref))
+    ?abs <- (problema-abstracto (interes-compl-espR ?absRes) (interes-compl-espP ?absPref))
+
+    =>
+
+    (printout t ">> Abstraccion de Especialidad" crlf)
+
+    (assert(abs-especialidad ok))
+    (retract ?hecho)
+)
 
 (defrule fin-abstracto "Comprueba que se ejecuten todas las reglas de Abstraccion"
     ?hecho1 <- (abs-dedicacion ok)
     ?hecho2 <- (abs-horario ok)
+    ?hecho3 <- (abs-tema ok)
+    ?hecho4 <- (abs-dificultad ok)
+    ?hecho5 <- (abs-especialidad ok)
     =>
     ;;; esta regla elimina los hechos usados en la abstraccion y genera un assert conforme ha acabado ;;;
     (printout t "Fin abstraccion" crlf)
     (assert(abstraccion ok))
-    (retract ?hecho1 ?hecho2)
+    (retract ?hecho1 ?hecho2 ?hecho3 ?hecho4 ?hecho5)
 )
