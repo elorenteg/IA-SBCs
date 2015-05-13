@@ -17,7 +17,7 @@
 )
 
 (defrule descarta-segun-rest "Descarta las candidatas que no cumplen todas las restricciones"
-    (declare (salience 10)) ;alguna forma más elegante para que "refina" sólo se ejecute cuando no se pueda aplicar más esta regla?
+    (declare (salience 10))
     (nrestricciones ?nrest)
     (filtro-restr)
     ?ar <- (asig-rec (asign ?a) (rest-sat ?rs))
@@ -26,12 +26,27 @@
     (assert (refina-rec))
 )
 
+(defrule descarta-ya-cursadas "Descarta las candidatas que ya se hayan cursado"
+    (declare (salience 8))
+    (refina-rec)
+    ?ar <- (asig-rec (asign ?a))
+    ?al <- (object (is-a Alumno) (id ?dni))
+    =>
+    (bind ?nombre-cand (send ?a get-nombre))
+    (bind ?notas (send (send ?al get-expediente_alumno) get-notas_exp))
+    (progn$ (?ins ?notas)
+        (if (eq ?nombre-cand (send (send (send ?ins get-convocatoria_nota) get-asignatura_conv) get-nombre))
+            then
+            (retract ?ar)
+            (break)
+        )
+    )
+)
+
 (defrule refina
     ?hecho <- (refina-rec)
 
     =>
-
-    ;;;; TODO: eliminar "asig-rec"s que no tengan el slot rest-sat == ?nrest ;;;
 
     (assert (refinamiento ok))
     (retract ?hecho)
