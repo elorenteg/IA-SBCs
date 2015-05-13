@@ -34,11 +34,22 @@ más restringidos. Esto facilitará la calificación de la adecuación de las
 asignaturas al alumno (puesto que el tamaño de los datos a analizar será 
 menor).
 
-Finalmente, hay que asociar a cada asignatura disponible para la matrícula del 
-alumno un cierto grado de adecuación para la recomendación, basándose en las 
-características del alumno y las de la asignatura. Una vez calculados estos 
-niveles de recomendación, se puede elaborar la solución final seleccionando 
-aquellas asignaturas más idóneas (hasta un máximo de seis).
+Tras esta abstracción, hay que asociar a cada asignatura disponible para la 
+matrícula del alumno un cierto grado de adecuación para la recomendación, 
+basándose en las características del alumno y las de la asignatura. Es decir, 
+el cuarto subproblema consiste en determinar una estimación de cuán 
+recomendables son las asignaturas usando el conocimiento abstraído 
+anteriormente (que no será el conocimiento completo sobre el alumno, sino una 
+simplificación de este). De hecho, en el proceso hay que recordar las razones 
+en las que se basa esta estimación.
+
+Finalmente, una vez calculados estos niveles de recomendación, se puede 
+elaborar la solución final seleccionando aquellas asignaturas más idóneas 
+(hasta un máximo de seis). En este subproblema, puede ser necesario comprobar 
+que las asignaturas elegidas cumplen en efecto todas las restricciones 
+impuestas (puesto que la recomendación hecha en el subproblema anterior puede 
+haber ignorado algunos detalles y, además, algunas restricciones y 
+preferencias pueden afectar al conjunto total de asignaturas recomendadas).
 
 
 

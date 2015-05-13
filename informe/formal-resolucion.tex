@@ -26,21 +26,54 @@ es la clasificación heurística. Para nuestro problema de recomendación la
 resolución consistirá en tres fases:
 
 \begin{enumerate}
-\item La \textbf{abstracción de datos} cosiste en pasar de un problema concreto, 
-la situación de nuestro alumno, y pasarlo a un problema abstracto, una 
-generalización para tratar a todos los alumnos. Si el alumno nos ha introducido 
-preferencias y restricciones, la abstracción será sencilla porque ya tendremos 
-toda la información que necesitaremos para el sistema. En caso contrario, 
-deberemos deducir sus preferencias según su expediente.
-\item La \textbf{asociación herurística} consiste en pasar de un problema 
-abstracto a una solución abstracta. En esta fase se quiere obtener una posible 
-solución que normalmente ha funcionado para un mismo patrón de estudiantes y 
-del que se genera una serie de recomentaciones de asingaturas según si son 
-altamente recomendables o solo recomendables.
-\item El \textbf{Refinamiento} y la \textbf{adaptación} consiste en pasar de 
-una solución abstracta a una solución concreta. De este modo, podremos pasar 
-de una solución con distintas recomendaciones, que nos encajaría con el mismo 
-tipo de estudiantes, a nuestro alumno. En esta fase, escogeremos hasta un 
-máximo de seis asignaturas entre todas las recomendadas por el sistema según 
-los datos concretos del alumno para poder depurar mejor la recomendación.
+
+\item La abstracción de datos consiste en pasar de un problema concreto, 
+la situación de nuestro alumno, a un problema abstracto, una generalización 
+para tratar a todos los alumnos. En esta fase, pues, incluimos los 
+subproblemas de obtención de conocimiento mediante preguntas al usuario y la 
+inferencia del conocimiento restante a partir de su expediente. 
+Si el alumno nos ha introducido preferencias y restricciones, la abstracción 
+será sencilla porque ya tendremos toda la información que necesitaremos para 
+el sistema. En caso contrario, deberemos deducir sus preferencias según su 
+expediente mediante un sistema de reglas heurísticas (aproximaciones basadas  
+en nuestro conocimiento del dominio). Así, en esta fase de abstracción, 
+simplificamos todo este conocimiento concreto en un conjunto mucho más 
+reducido (también más genérico e impreciso) que permitirá un tratamiento 
+más eficiente para la generación de soluciones. Esta última parte se 
+corresponde con el subproblema de abstracción de características clave.
+
+\item La asociación heurística consiste en pasar de un problema abstracto a 
+una solución abstracta. En esta fase se quiere obtener una posible solución 
+que normalmente ha funcionado para un mismo patrón de estudiantes y del que 
+se genera una serie de recomendaciones de asignaturas según si son 
+altamente recomendables o solo recomendables. Más específicamente, en esta 
+fase se usan una serie de reglas de razonamiento deductivo. Estas reglas, a 
+partir del conocimiento simplificado de la situación del alumno obtenido en 
+la fase previa, califican la adecuación de cada asignatura al alumno de un 
+modo que puede no ser totalmente preciso (puesto que se han omitido detalles 
+para conseguir un método de resolución más eficiente). Por otro lado, se 
+mantiene un registro con las reglas que se han podido aplicar para cada 
+asignatura: este registro constituye un resumen de los motivos que llevan a 
+la calificación final. En esta fase, pues, se incluye el subproblema de 
+evaluación del grado de recomendación.
+
+\item El refinamiento y la adaptación consisten en pasar de una solución 
+abstracta a una solución concreta. De este modo, podremos pasar de una 
+solución con distintas recomendaciones, que nos encajaría con el mismo 
+tipo de estudiante, a nuestro alumno. En nuestro caso particular, escogeremos 
+hasta un máximo de seis asignaturas entre todas las recomendadas por el 
+sistema según los datos concretos del alumno para poder depurar mejor la 
+recomendación. Concretamente, en esta fase se seleccionan las asignaturas que 
+se mostrarán al usuario junto a los motivos por los cuales se recomiendan. 
+Además, se garantiza (esta vez teniendo en cuenta todo el conocimiento 
+concreto que se tiene del alumno) que la recomendación final cumple todas las 
+restricciones requeridas. Esta fase, pues, corresponde al último de los 
+subproblemas establecidos.
+
 \end{enumerate}
+
+%%% TODO : Explicación del "proceso de razonamiento de los subproblemas".
+%%%        Entiendo que se trata de describir un poco a alto nivel las reglas
+%%%        con las que resolvemos el problema.
+
+
