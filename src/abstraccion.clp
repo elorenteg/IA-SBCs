@@ -11,8 +11,8 @@
     (multislot intereses-tematicosP (type INSTANCE))
     (slot especialidadR (type INSTANCE))
     (slot especialidadP (type INSTANCE))
-    (slot interes-compl-espR (allowed-strings "alto" "medio" "ninguno"))
-    (slot interes-compl-espP (allowed-strings "alto" "medio" "ninguno"))
+    (multislot competenciasR (type INSTANCE))
+    (multislot competenciasP (type INSTANCE))
     (slot tiempo-dedicacionR (allowed-strings "alto" "medio" "bajo"))
     (slot tiempo-dedicacionP (allowed-strings "alto" "medio" "bajo"))
     (multislot horario-preferidoR (allowed-strings "manyana" "tarde") (default (create$)))
@@ -35,7 +35,7 @@
     ;;; TODO: abstraccion del problema ;;;
     ;;; esta funcion solo genera los hechos para ejecutar las reglas de abstraccion ;;;
 
-    (assert (ent-abs-dedicacion) (ent-abs-horario) (ent-abs-especialidad) (ent-abs-dificultad) (ent-abs-tema))
+    (assert (ent-abs-dedicacion) (ent-abs-horario) (ent-abs-especialidad) (ent-abs-dificultad) (ent-abs-tema) (ent-abs-competencias))
     (assert (problema-abstracto))
     (retract ?hecho)
 )
@@ -180,15 +180,30 @@
 (defrule abs-especialidad
     ?hecho <- (ent-abs-especialidad)
     (dni ?dni)
-    ?res <- (respref (es_restriccion TRUE) (completar_especialidad $?espRes))
-    ?pref <- (respref (es_restriccion FALSE) (completar_especialidad $?espPref))
-    ?abs <- (problema-abstracto (interes-compl-espR ?absRes) (interes-compl-espP ?absPref))
+    ?res <- (respref (es_restriccion TRUE) (completar_especialidad ?espRes))
+    ?pref <- (respref (es_restriccion FALSE) (completar_especialidad ?espPref))
+    ?abs <- (problema-abstracto (especialidadR ?espR) (especialidadP ?espP))
 
     =>
 
     (printout t ">> Abstraccion de Especialidad" crlf)
 
     (assert(abs-especialidad ok))
+    (retract ?hecho)
+)
+
+(defrule abs-competencias
+    ?hecho <- (ent-abs-competencias)
+    (dni ?dni)
+    ?res <- (respref (es_restriccion TRUE) (competencias_preferidas ?comRes))
+    ?pref <- (respref (es_restriccion FALSE) (competencias_preferidas ?comPref))
+    ?abs <- (problema-abstracto (competenciasR ?absRes) (competenciasP ?absPref))
+
+    =>
+
+    (printout t ">> Abstraccion de Competencias" crlf)
+
+    (assert(abs-competencias ok))
     (retract ?hecho)
 )
 

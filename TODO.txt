@@ -1,10 +1,4 @@
 
-especialidad --> 1 slot
-quitar pregrunta dificultad (se inferirá)
-Preguntar:
-* si tiene especialidad --> deseas terminarla?
-* sino --> que especialidad deseas cursar?
-
 ABSTRACCION
 * horas (mejorar) D
 * dificultad E

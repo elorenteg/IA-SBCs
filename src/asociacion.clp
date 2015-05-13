@@ -88,19 +88,19 @@
 
 (defrule escoge-interes-compl-esp
     (ent-asigs)
-    ?prob-abs <- (problema-abstracto (interes-compl-espR ?ice))
+    ?prob-abs <- (problema-abstracto (especialidadR ?espR) (especialidadP ?espP))
     ?al <- (object (is-a Alumno) (id ?dni) (especialidad ?e))
     =>
     (bind ?ins-asigs (find-all-instances ((?ins Especializada)) (member ?e ?ins:especialidad_asig)))
 
-    (if (eq ?ice alto)
-        then
+    ;(if (eq ?ice alto)
+        ;then
         (loop-for-count (?i 1 (length$ ?ins-asigs)) do
             (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo interes-compl-esp) (es-pref FALSE))) ;poner un motivo más user-friendly
         )
         ;qué pasa si tiene interés "medio"?
         ;y si tiene interés "ninguno", impedimos la recomendación de asigs. de especialidad?
-    )
+    ;)
 
 )
 

@@ -5,7 +5,7 @@
 (deftemplate respref
     (slot es_restriccion)
     (multislot competencias_preferidas)
-    (multislot completar_especialidad)
+    (slot completar_especialidad)
     (slot dificultad)
     (slot max_asigns)
     (slot max_horas_trabajo)
@@ -74,7 +74,7 @@
 (defrule preguntas-respref "Modifica los hechos de ResPref segun lo que pida el alumno"
     ?hecho <- (ent-respref ?es-rest)
 	(dni ?dni)
-	?alumn <- (object (is-a Alumno) (id ?dni))  ; ?alumn es la instancia del alumno con id ?dni al que le queremos introducir las respref
+	?alumn <- (object (is-a Alumno) (id ?dni) (especialidad ?esp))  ; ?alumn es la instancia del alumno con id ?dni al que le queremos introducir las respref
     ?rec <- (respref (es_restriccion ?es-rest))
 
 	=>
@@ -92,13 +92,13 @@
         (bind ?rec (modify ?rec (max_asigns ?ma)))
     )
 
-    (bind ?mh (pregunta-rango ">> Cual es el numero maximo de horas de dedicacion semanales?" TRUE 0 900))
+    (bind ?mh (pregunta-rango ">> Cual es el numero maximo de horas de dedicacion semanales?" TRUE 0 50))
     (if (not(eq ?mh nil))
         then
         (bind ?rec (modify ?rec (max_horas_trabajo ?mh)))
     )
 
-    (bind ?ml (pregunta-rango ">> Cual es el numero maximo de horas de laboratorio semanales?" TRUE 0 900))
+    (bind ?ml (pregunta-rango ">> Cual es el numero maximo de horas de laboratorio semanales?" TRUE 0 50))
     (if (not(eq ?ml nil))
         then
         (bind ?rec (modify ?rec (max_horas_lab ?ml)))
@@ -138,25 +138,30 @@
         (bind ?rec (modify ?rec (tema_especializado ?temasI)))
     )
 
-    (bind ?espN (create$))
-    (do-for-all-instances ((?t Especialidad)) TRUE (bind ?espN (insert$ ?espN 1 (send ?t get-nombre_esp))))
-    (bind ?numEsp (pregunta-numero ">> Que especialidad deseas acabar?" TRUE ?espN))
-    (if (not(eq ?numEsp nil))
+    (if (not(eq ?esp [nil]))
         then
-        (bind ?nomEsp (nth$ ?numEsp ?espN))
-        (bind ?esp-ins (find-instance ((?esp Especialidad)) (eq ?esp:nombre_esp (primera-mayus ?nomEsp))))
-
-        ;(printout t "numero " ?numEsp crlf)
-        ;(printout t "nombre " ?nomEsp crlf)
-        ;(printout t "instancia " ?esp-ins crlf)
-
-        (bind ?rec (modify ?rec (completar_especialidad ?esp-ins)))
-    )
-
-    (bind ?di (pregunta-cerrada ">> Que dificultad puedes asumir?" TRUE facil dificil))
-	(if (not(eq ?th nil))
-        then
-        (bind ?rec (modify ?rec (dificultad ?di)))
+        ; el alumno tiene una especialidad
+        (bind ?bool (pregunta-cerrada ">> Deseas completar tu especialidad?" TRUE si no))
+        (if (eq ?bool si)
+            then
+            (bind ?rec (modify ?rec (completar_especialidad ?esp)))
+        )
+        else
+        ; el alumno no tiene una especialidad --> preguntar cual quiere cursar
+        (bind ?espN (create$))
+        (do-for-all-instances ((?t Especialidad)) TRUE (bind ?espN (insert$ ?espN 1 (send ?t get-nombre_esp))))
+        (bind ?numEsp (pregunta-numero ">> Que especialidad deseas matricular?" TRUE ?espN))
+        (if (not(eq ?numEsp nil))
+            then
+            (bind ?nomEsp (nth$ ?numEsp ?espN))
+            (bind ?esp-ins (find-instance ((?esp Especialidad)) (eq ?esp:nombre_esp (primera-mayus ?nomEsp))))
+            
+            ;(printout t "numero " ?numEsp crlf)
+            ;(printout t "nombre " ?nomEsp crlf)
+            ;(printout t "instancia " ?esp-ins crlf)
+            
+            (bind ?rec (modify ?rec (completar_especialidad ?esp-ins)))
+        )
     )
 
     (bind ?comP (create$))
@@ -189,7 +194,7 @@
 (defrule contador-restricciones
     ?hecho1 <- (prefs ok)
     ?hecho2 <- (restrs ok)
-    ?rest <- (respref (es_restriccion TRUE) (competencias_preferidas $?cp) (completar_especialidad $?ce) (dificultad ?d)
+    ?rest <- (respref (es_restriccion TRUE) (competencias_preferidas $?cp) (completar_especialidad ?ce) (dificultad ?d) 
                     (max_asigns ?ma) (max_horas_trabajo ?mht) (max_horas_lab ?mhl) (tema_especializado $?te) (tipo_horario $?th))
 
     =>
@@ -197,7 +202,7 @@
     (printout t "Contador de restricciones" crlf)
     (bind ?nrest 0)
     (if (> (length$ ?cp) 0) then (bind ?nrest (+ ?nrest 1)))
-    (if (> (length$ ?ce) 0) then (bind ?nrest (+ ?nrest 1)))
+    (if (neq ?ce [nil]) then (bind ?nrest (+ ?nrest 1)))
     (if (neq ?d nil) then (bind ?nrest (+ ?nrest 1)))
     (if (neq ?ma nil) then (bind ?nrest (+ ?nrest 1)))
     (if (neq ?mht nil) then (bind ?nrest (+ ?nrest 1)))
@@ -253,7 +258,7 @@
         (bind ?cred (send ?asig get-num_creditos))
         (bind ?horT (send ?asig get-horas_teoria))
         (bind ?horL (send ?asig get-horas_lab))
-        (bind ?horP (send ?asig get-horas_lab))
+        (bind ?horP (send ?asig get-horas_prob))
         (bind $?com (send ?asig get-competencias))
         (bind ?espA nil)
         (if (eq (str-cat (class ?asig)) "Especializada")
@@ -348,6 +353,9 @@
             (if (< ?nota ?peor-nota-dificil) then (bind ?peor-nota-dificil ?nota))
         )
     )
+    (bind ?nhoras-teo (/ ?nhoras-teo 18))
+    (bind ?nhoras-lab (/ ?nhoras-lab 18))
+    (bind ?nhoras-pro (/ ?nhoras-pro 18))
 
     (assert (inf-comp $?compe p))
     (assert (inf-esp $?nasigEs p $?espeCur))
@@ -382,43 +390,40 @@
     ?hecho <- (inf-esp $?nasigEs p $?espeCur)
     (dni ?dni)
     ?alumn <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped) (especialidad ?esp))
-    ?pref <- (respref (es_restriccion FALSE) (completar_especialidad $?ce))
-
+    ?pref <- (respref (es_restriccion FALSE) (completar_especialidad ?ce))
+    
     =>
-
+    
     (printout t ">> Inferencia de preferencia de especialidad" crlf)
-
-    (if (= (length$ ?ce) 0)
+    
+    (if (not(eq ?ce [nil]))
         then
         ; especialidad de alumno (si la tiene) y especialidad casi acabada (si se da el caso)
-        (bind ?espes (create$))
-
+        
         (if (not(eq ?esp [nil]))
             then
             (printout t "tiene especialidad" ?esp crlf)
-            (bind ?espes (insert$ ?espes 1 ?esp))
-        )
-
-        (if (> (length$ ?nasigEs) 0)
-            then
-            (printout t "length nasigEs " (length$ ?nasigEs) crlf)
-            (printout t "nasigEs " ?nasigEs crlf)
-            (bind ?max 1)
-            (loop-for-count (?i 2 (length$ ?nasigEs)) do
-                (if (> (nth$ ?i ?nasigEs) (nth$ ?max ?nasigEs))
-                    then
-                    (bind ?max ?i)
-                )
-            )
-            (bind ?espMax (nth$ ?max ?espeCur))
-            (if (not(member ?espMax ?espes))
+            (printout t "ce " ?esp crlf)
+            (bind ?pref (modify ?pref (completar_especialidad ?esp)))
+            else
+            (if (> (length$ ?nasigEs) 0)
                 then
-                (bind ?espes (insert$ ?espes 1 ?espMax))
+                (printout t "length nasigEs " (length$ ?nasigEs) crlf)
+                (printout t "nasigEs " ?nasigEs crlf)
+                (bind ?max 1)
+                (loop-for-count (?i 2 (length$ ?nasigEs)) do
+                    (if (> (nth$ ?i ?nasigEs) (nth$ ?max ?nasigEs))
+                        then
+                        (bind ?max ?i)
+                    )
+                )
+                (bind ?espMax (nth$ ?max ?espeCur))
+                (printout t "ce " ?espMax crlf)
+                (bind ?pref (modify ?pref (completar_especialidad ?espMax)))
+                else
+                (printout t "Aun no puede escoger especialidad" crlf)
             )
         )
-
-        (printout t "ce " ?espes crlf)
-        (bind ?pref (modify ?pref (completar_especialidad ?espes)))
     )
 
     (assert(inf-esp ok))
