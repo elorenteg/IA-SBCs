@@ -154,13 +154,13 @@
         (if (not(eq ?numEsp nil))
             then
             (bind ?nomEsp (nth$ ?numEsp ?espN))
-            (bind ?esp-ins (find-instance ((?esp Especialidad)) (eq ?esp:nombre_esp (primera-mayus ?nomEsp))))
+            (bind ?esp-ins (find-instance ((?e Especialidad)) (eq ?e:nombre_esp (primera-mayus ?nomEsp))))
             
-            ;(printout t "numero " ?numEsp crlf)
-            ;(printout t "nombre " ?nomEsp crlf)
-            ;(printout t "instancia " ?esp-ins crlf)
+            (printout t "numero " ?numEsp crlf)
+            (printout t "nombre " ?nomEsp crlf)
+            (printout t "instancia " ?esp-ins crlf)
             
-            (bind ?rec (modify ?rec (completar_especialidad ?esp-ins)))
+            ;(bind ?rec (modify ?rec (completar_especialidad ?esp-ins))) ;;; Esto PETA y se me cuelga el programa y no se porque ;;;
         )
     )
 
@@ -509,9 +509,9 @@
         ; media de horas de lab y prob/cuatri
         (bind ?mediaHL (div (+ ?nhoras-lab ?nhoras-pro) (length$ ?cuatris)))
         (printout t "mhl " ?mediaHL crlf)
-        (bind ?pref (modify ?pref (max_horas_trabajo ?mediaHL)))
+        (bind ?pref (modify ?pref (max_horas_lab ?mediaHL)))
     )
-
+    
     (assert(inf-horas ok))
     (retract ?hecho)
 )
