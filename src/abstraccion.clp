@@ -154,6 +154,14 @@
     =>
 
     (printout t ">> Abstraccion de Dificultad" crlf)
+    
+    (bind ?abs (modify ?abs (dificultadR nil)))
+    (if (eq (str-compare ?difPref "Facil") 0)
+        then
+        (bind ?abs (modify ?abs (dificultadP "media")))
+        else
+        (bind ?abs (modify ?abs (dificultadP "alta")))
+    )
 
     (assert(abs-dificultad ok))
     (retract ?hecho)
@@ -187,6 +195,8 @@
     =>
 
     (printout t ">> Abstraccion de Especialidad" crlf)
+    (bind ?abs (modify ?abs (especialidadR ?espRes)))
+    (bind ?abs (modify ?abs (especialidadP ?espPref)))
 
     (assert(abs-especialidad ok))
     (retract ?hecho)
@@ -195,9 +205,9 @@
 (defrule abs-competencias
     ?hecho <- (ent-abs-competencias)
     (dni ?dni)
-    ?res <- (respref (es_restriccion TRUE) (competencias_preferidas ?comRes))
-    ?pref <- (respref (es_restriccion FALSE) (competencias_preferidas ?comPref))
-    ?abs <- (problema-abstracto (competenciasR ?absRes) (competenciasP ?absPref))
+    ?res <- (respref (es_restriccion TRUE) (competencias_preferidas $?comRes))
+    ?pref <- (respref (es_restriccion FALSE) (competencias_preferidas $?comPref))
+    ?abs <- (problema-abstracto (competenciasR $?absRes) (competenciasP $?absPref))
 
     =>
 
@@ -213,9 +223,10 @@
     ?hecho3 <- (abs-tema ok)
     ?hecho4 <- (abs-dificultad ok)
     ?hecho5 <- (abs-especialidad ok)
+    ?hecho6 <- (abs-competencias ok)
     =>
     ;;; esta regla elimina los hechos usados en la abstraccion y genera un assert conforme ha acabado ;;;
     (printout t "Fin abstraccion" crlf)
     (assert(abstraccion ok))
-    (retract ?hecho1 ?hecho2 ?hecho3 ?hecho4 ?hecho5)
+    (retract ?hecho1 ?hecho2 ?hecho3 ?hecho4 ?hecho5 ?hecho6)
 )
