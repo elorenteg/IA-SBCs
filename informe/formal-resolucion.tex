@@ -72,6 +72,74 @@ subproblemas establecidos.
 
 \end{enumerate}
 
+A continuación, detallamos el proceso de razonamiento seguido por el sistema 
+basado en el conocimiento para resolver cada uno de los subproblemas 
+explicados en la \autoref{sec:subproblemas}. Es decir, ofrecemos una 
+descripción a alto nivel de las reglas de deducción que permiten al sistema 
+encontrar una solución.
+
+En el primer subproblema, la obtención de datos del usuario, no hay ningún
+tipo de razonamiento propiamente. Esta parte del sistema se limita a mostrar 
+al usuario un conjunto de preguntas sobre sus preferencias y restricciones, 
+ofreciendo la información necesaria sobre el formato de las respuestas 
+esperado, y a almacenar apropiadamente el conocimiento obtenido a partir de 
+las respuestas del usuario.
+
+El segundo subproblema trata de inferir, a partir del expediente, 
+todo aquel conocimiento acerca de las preferencias del alumno que no ha sido 
+proporcionado explícitamente por este. Notamos que solo se infieren 
+preferencias, puesto que no es posible conocer con certeza si las tendencias 
+observadas en el expediente son debidas a alguna restricción estricta o no, 
+si bien se puede asumir que es mejor que estas tendencias sigan cumpliéndose 
+dentro de lo posible y, por ello, se expresan en forma de preferencias del 
+alumno, con lo cual no se eliminan posibles soluciones. Es decir, este 
+conocimiento inferido simplemente guiará la recomendación hacia soluciones 
+parecidas a las matrículas del alumno en los cuatrimestres anteriores.
+
+En particular, se infiere que es preferible restringir el número máximo de 
+asignaturas a matricular, la cantidad máxima de horas de dedicación y la 
+cantidad máxima de horas destinadas a prácticas de laboratorio a las medias 
+por cuatrimestre de asignaturas matriculadas, cargas de trabajo (en horas) 
+asumidas y prácticas de laboratorio, respectivamente. Si el último 
+cuatrimestre el alumno cursó todas las asignaturas en un mismo horario, se 
+asume que ese es su horario preferido. Asimismo, si el alumno ya está cursando
+una especialidad del grado y, de hecho, ya le quedan muy pocas asignaturas 
+para completarla, se infiere que es prioritario terminarla.
+% TODO : ¿Cuántas son 'muy pocas'? Habría que sustituir esta última frase por la regla exacta.
+En cuanto a las competencias transversales, se asume que el alumno da 
+prioridad a aquellas que se desarrollan en las asignaturas que ha cursado 
+hasta el momento. Del mismo modo, se infiere que el 
+alumno está interesado en aquellos temas especializados tratados en las 
+asignaturas que ha cursado previamente. 
+Finalmente, un análisis más detallado del expediente del alumno permite 
+estimar la capacidad de este para asumir asignaturas más o menos difíciles. 
+Concretamente, se comprueba si el alumno ha aprobado a la primera todas las 
+asignaturas consideradas fáciles (donde se determina que una asignatura es 
+fácil si la gran mayoría de la gente que se matricula la aprueba) y, en ese 
+caso, si ha obtenido una calificación de al menos cuatro puntos en las 
+asignaturas difíciles cursadas. 
+
+El tercer subproblema consiste en simplificar los datos de los que disponemos 
+mediante descripciones cualitativas que permitirán realizar la recomendación 
+de forma más eficiente y sencilla, puesto que se reduce el número de factores 
+a tener en cuenta. Es decir, para cada restricción o preferencia disponible, 
+se evalúan los parámetros que la caracterizan y, según unos rangos, se 
+sustituyen por valores más genéricos (con un dominio mucho más reducido). 
+
+En particular, el volumen de trabajo asumible se califica como \textit{alto}, 
+\textit{medio} o \textit{bajo} según si el número máximo de asignaturas a 
+matricular es superior a cinco, entre tres y cuatro o como mucho dos, 
+respectivamente. Similarmente, el número de horas de dedicación semanales se 
+divide en \textit{alto}, \textit{medio} y \textit{bajo} según si es superior 
+a XXX, está entre XXX y XXX o es menor o igual que XXX. 
+% TODO : Hay que sustituir los XXX por el número que sea.
+El resto de conocimiento del problema, como por ejemplo la dificultad 
+asumible, la especialidad que se cursa y si es importante completarla, la 
+disponibilidad horaria o los temas de interés, no se abstrae: se trata de 
+parámetros que no se pueden agrupar de forma más general y que son necesarios 
+de esta forma para el proceso de asociación posterior.
+
+
 %%% TODO : Explicación del "proceso de razonamiento de los subproblemas".
 %%%        Entiendo que se trata de describir un poco a alto nivel las reglas
 %%%        con las que resolvemos el problema.
