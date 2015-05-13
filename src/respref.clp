@@ -155,12 +155,12 @@
             then
             (bind ?nomEsp (nth$ ?numEsp ?espN))
             (bind ?esp-ins (find-instance ((?e Especialidad)) (eq ?e:nombre_esp (primera-mayus ?nomEsp))))
-            
+
             (printout t "numero " ?numEsp crlf)
             (printout t "nombre " ?nomEsp crlf)
             (printout t "instancia " ?esp-ins crlf)
-            
-            ;(bind ?rec (modify ?rec (completar_especialidad ?esp-ins))) ;;; Esto PETA y se me cuelga el programa y no se porque ;;;
+
+            (bind ?rec (modify ?rec (completar_especialidad (implode$ ?esp-ins))))
         )
     )
 
@@ -194,7 +194,7 @@
 (defrule contador-restricciones
     ?hecho1 <- (prefs ok)
     ?hecho2 <- (restrs ok)
-    ?rest <- (respref (es_restriccion TRUE) (competencias_preferidas $?cp) (completar_especialidad ?ce) (dificultad ?d) 
+    ?rest <- (respref (es_restriccion TRUE) (competencias_preferidas $?cp) (completar_especialidad ?ce) (dificultad ?d)
                     (max_asigns ?ma) (max_horas_trabajo ?mht) (max_horas_lab ?mhl) (tema_especializado $?te) (tipo_horario $?th))
 
     =>
@@ -391,15 +391,15 @@
     (dni ?dni)
     ?alumn <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped) (especialidad ?esp))
     ?pref <- (respref (es_restriccion FALSE) (completar_especialidad ?ce))
-    
+
     =>
-    
+
     (printout t ">> Inferencia de preferencia de especialidad" crlf)
-    
+
     (if (not(eq ?ce [nil]))
         then
         ; especialidad de alumno (si la tiene) y especialidad casi acabada (si se da el caso)
-        
+
         (if (not(eq ?esp [nil]))
             then
             (printout t "tiene especialidad" ?esp crlf)
@@ -511,7 +511,7 @@
         (printout t "mhl " ?mediaHL crlf)
         (bind ?pref (modify ?pref (max_horas_lab ?mediaHL)))
     )
-    
+
     (assert(inf-horas ok))
     (retract ?hecho)
 )
