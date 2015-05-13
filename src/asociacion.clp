@@ -25,7 +25,6 @@
     ;;; TODO: asociacion del problema ;;;
     (printout t "Asociacion del problema" crlf)
 
-    (assert (solucion-abstracta (list-asigns (create$))))
     (assert(ent-asigs))
     (retract ?hecho)
 )
@@ -59,9 +58,8 @@
 (defrule escoge-volumen-trabajo
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (volumen-trabajoR ?vt))
-
+    (test (neq ?vt nil))
     =>
-
     (if (eq ?vt bajo)
         then
         (bind ?min 0)
@@ -106,7 +104,25 @@
 
 )
 
+(deffunction interseccion-vacia "Indica si la intersección de dos listas (como conjuntos) está vacía"
+    (?L1 ?L2)
 
+    (loop-for-count  (?i 1 (length$ ?L1)) do
+        (if (member (nth$ ?i ?L1) ?L2) then (return FALSE))
+    )
+    (return TRUE)
+)
+
+(defrule escoge-intereses-tematicos
+    (ent-asigs)
+    ?prob-abs <- (problema-abstracto (intereses-tematicosR $?it))
+    =>
+    (bind ?ins-asigs (find-all-instances ((?ins Especializada)) (not (interseccion-vacia ?it ?ins:temas))))
+
+    (loop-for-count (?i 1 (length$ ?ins-asigs)) do
+        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo intereses-tematicos) (es-pref FALSE))) ;poner un motivo más user-friendly
+    )
+)
 
 
 (defrule modifica-asig-rec "Modifica una asignatura recomendada (añade motivo y/o pref-sat)"

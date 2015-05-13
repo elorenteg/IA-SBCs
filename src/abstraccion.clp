@@ -170,6 +170,9 @@
 
     (printout t ">> Abstraccion de Interes Tematico" crlf)
 
+    (bind ?abs (modify ?abs (intereses-tematicosR ?temRes)))
+    (bind ?abs (modify ?abs (intereses-tematicosP ?temPref)))
+
     (assert(abs-tema ok))
     (retract ?hecho)
 )
