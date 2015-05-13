@@ -194,7 +194,7 @@
 
     =>
 
-    (printout t "Contador de restricciones " ?cp " " ?ce " " ?d " " ?ma " " ?mht " " ?mhl " " ?th crlf)
+    (printout t "Contador de restricciones" crlf)
     (bind ?nrest 0)
     (if (> (length$ ?cp) 0) then (bind ?nrest (+ ?nrest 1)))
     (if (> (length$ ?ce) 0) then (bind ?nrest (+ ?nrest 1)))

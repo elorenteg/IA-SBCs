@@ -117,7 +117,7 @@
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (intereses-tematicosR $?it))
     =>
-    (bind ?ins-asigs (find-all-instances ((?ins Especializada)) (not (interseccion-vacia ?it ?ins:temas))))
+    (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?it ?ins:temas))))
 
     (loop-for-count (?i 1 (length$ ?ins-asigs)) do
         (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo intereses-tematicos) (es-pref FALSE))) ;poner un motivo más user-friendly
