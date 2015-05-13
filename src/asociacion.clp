@@ -10,15 +10,104 @@
     ;añadir también el grado de recomendación? [altamente recomendable, recomendable]
 )
 
-(deftemplate solucion-abstracta "Asignaturas recomendadas" ; ya no es necesario (?)
-    (multislot list-asigns (default (create$)))
-)
-
 (deftemplate nueva-rec "Nueva asignatura recomendada por una regla"
     (slot asign)
     (slot motivo)
     (slot es-pref)
 )
+
+
+
+
+(defrule entrada-asociacion "Asociacion heuristica del problema"
+    ?hecho <- (abstraccion ok)
+    =>
+    ;;; TODO: asociacion del problema ;;;
+    (printout t "Asociacion del problema" crlf)
+
+    (assert (solucion-abstracta (list-asigns (create$))))
+    (assert(ent-asigs))
+    (retract ?hecho)
+)
+
+
+(defrule escoge-horario-preferido
+    (ent-asigs)
+    ?prob-abs <- (problema-abstracto (horario-preferidoR ?td)) ;si añado "(horario-preferidoP ?tdP)", no entrará a menos el usuario haya introducido ambos criterios
+    =>
+    ;Restricciones
+    (bind ?res (create$))
+    (bind ?ins-asigs (find-all-instances ((?ins Asignatura))
+        (member ?td (create$ (progn$ (?cand (send ?ins get-horarios)) (insert$ ?res (+ 1 (length$ ?res)) (send ?cand get-horario)))))
+    ))
+
+    (loop-for-count (?i 1 (length$ ?ins-asigs)) do
+        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo horario-preferido) (es-pref FALSE))) ;poner un motivo más user-friendly
+    )
+
+    ;Preferencias
+    ;(bind ?resP (create$))
+    ;(bind ?ins-asigsP (find-all-instances ((?ins Asignatura))
+    ;    (member ?tdP (create$ (progn$ (?cand (send ?ins get-horarios)) (insert$ ?resP (+ 1 (length$ ?resP)) (send ?cand get-horario)))))
+    ;))
+
+    ;(loop-for-count (?i 1 (length$ ?ins-asigsP)) do
+    ;    (assert (nueva-rec (asign (nth$ ?i ?ins-asigsP)) (motivo horario-preferido) (es-pref TRUE))) ;poner un motivo más user-friendly
+    ;)
+)
+
+(defrule escoge-volumen-trabajo
+    (ent-asigs)
+    ?prob-abs <- (problema-abstracto (volumen-trabajoR ?vt))
+
+    =>
+
+    (if (eq ?vt bajo)
+        then
+        (bind ?min 0)
+        (bind ?max 27)
+        else (if (eq ?vt medio)
+            then
+            (bind ?min 28)
+            (bind ?max 37)
+            else
+            (bind ?min 37)
+            (bind ?max 100)
+        )
+    )
+
+    ;Restricciones
+    (bind ?ins-asigs (find-all-instances ((?ins Asignatura))
+        (and
+            (<= ?min (+ (send ?ins get-horas_lab) (send ?ins get-horas_prob)))
+            (<= (+ (send ?ins get-horas_lab) (send ?ins get-horas_prob)) ?max))))
+
+    (loop-for-count (?i 1 (length$ ?ins-asigs)) do
+        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo volumen-trabajo) (es-pref FALSE))) ;poner un motivo más user-friendly
+    )
+)
+
+
+(defrule escoge-interes-compl-esp
+    (ent-asigs)
+    ?prob-abs <- (problema-abstracto (interes-compl-espR ?ice))
+    ?al <- (object (is-a Alumno) (id ?dni) (especialidad ?e))
+    =>
+    (bind ?ins-asigs (find-all-instances ((?ins Especializada)) (member ?e ?ins:especialidad_asig)))
+
+    (if (eq ?ice alto)
+        then
+        (loop-for-count (?i 1 (length$ ?ins-asigs)) do
+            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo interes-compl-esp) (es-pref FALSE))) ;poner un motivo más user-friendly
+        )
+        ;qué pasa si tiene interés "medio"?
+        ;y si tiene interés "ninguno", impedimos la recomendación de asigs. de especialidad?
+    )
+
+)
+
+
+
 
 (defrule modifica-asig-rec "Modifica una asignatura recomendada (añade motivo y/o pref-sat)"
     (declare (salience 10)) ;tiene prioridad para comprobar si ya existe la asig-rec
@@ -56,105 +145,11 @@
 )
 
 
-(defrule entrada-asociacion "Asociacion heuristica del problema"
-    ?hecho <- (abstraccion ok)
-    =>
-    ;;; TODO: asociacion del problema ;;;
-    (printout t "Asociacion del problema" crlf)
-
-    (assert (solucion-abstracta (list-asigns (create$))))
-    (assert(ent-asigs))
-    (retract ?hecho)
-)
-
-(defrule escoge-horario-preferido
-    (asigs ok)
-    ?prob-abs <- (problema-abstracto (horario-preferidoR ?td)) ;si añado "(horario-preferidoP ?tdP)", no entrará a menos el usuario haya introducido ambos criterios
-    =>
-    ;Restricciones
-    (bind ?res (create$))
-    (bind ?ins-asigs (find-all-instances ((?ins Asignatura))
-        (member ?td (create$ (progn$ (?cand (send ?ins get-horarios)) (insert$ ?res (+ 1 (length$ ?res)) (send ?cand get-horario)))))
-    ))
-
-    (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo horario-preferido) (es-pref FALSE))) ;poner un motivo más user-friendly
-    )
-
-    ;Preferencias
-    ;(bind ?resP (create$))
-    ;(bind ?ins-asigsP (find-all-instances ((?ins Asignatura))
-    ;    (member ?tdP (create$ (progn$ (?cand (send ?ins get-horarios)) (insert$ ?resP (+ 1 (length$ ?resP)) (send ?cand get-horario)))))
-    ;))
-
-    ;(loop-for-count (?i 1 (length$ ?ins-asigsP)) do
-    ;    (assert (nueva-rec (asign (nth$ ?i ?ins-asigsP)) (motivo horario-preferido) (es-pref TRUE))) ;poner un motivo más user-friendly
-    ;)
-)
-
-(defrule escoge-volumen-trabajo
-    (asigs ok)
-    ?prob-abs <- (problema-abstracto (volumen-trabajoR ?vt))
-
-    =>
-
-    (if (eq ?vt bajo)
-        then
-        (bind ?min 0)
-        (bind ?max 27)
-        else (if (eq ?vt medio)
-            then
-            (bind ?min 28)
-            (bind ?max 37)
-            else
-            (bind ?min 37)
-            (bind ?max 100)
-        )
-    )
-
-    ;Restricciones
-    (bind ?ins-asigs (find-all-instances ((?ins Asignatura))
-        (and
-            (<= ?min (+ (send ?ins get-horas_lab) (send ?ins get-horas_prob)))
-            (<= (+ (send ?ins get-horas_lab) (send ?ins get-horas_prob)) ?max))))
-
-    (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo volumen-trabajo) (es-pref FALSE))) ;poner un motivo más user-friendly
-    )
-)
 
 
-(defrule escoge-interes-compl-esp
-    (asigs ok)
-    ?prob-abs <- (problema-abstracto (interes-compl-espR ?ice))
-    ?al <- (object (is-a Alumno) (id ?dni) (especialidad ?e))
-    =>
-    (bind ?ins-asigs (find-all-instances ((?ins Especializada)) (member ?e ?ins:especialidad_asig)))
-
-    (if (eq ?ice alto)
-        then
-        (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo interes-compl-esp) (es-pref FALSE))) ;poner un motivo más user-friendly
-        )
-        ;qué pasa si tiene interés "medio"?
-        ;y si tiene interés "ninguno", impedimos la recomendación de asigs. de especialidad?
-    )
-
-)
-
-(defrule escoge-asigns
-    ?hecho <- (ent-asigs)
-    ?abs <- (problema-abstracto)
-    =>
-
-    ;;; TODO: mirar las asignaturas y escoger segun el problema abstracto ;;;
-
-    (assert (asigs ok))
-    (retract ?hecho)
-)
 
 (defrule fin-asociacion "Comprueba que se ejecuten todas las reglas de Asociacion"
-    ?hecho1 <- (asigs ok)
+    ?hecho1 <- (ent-asigs)
     =>
     ;;; esta regla elimina los hechos usados en la asociacion y genera un assert conforme ha acabado ;;;
     (printout t "Fin asociacion" crlf)
