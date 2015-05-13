@@ -1,4 +1,4 @@
-; Thu May 07 10:35:14 CEST 2015
+; Thu May 14 00:48:39 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -272,8 +272,7 @@
 		(create-accessor read-write))
 	(single-slot cuatrimestre
 ;+		(comment "Cuatrimestre de convocatoria")
-		(type SYMBOL)
-		(allowed-values A B)
+		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot max_asigns
@@ -501,8 +500,7 @@
 		(create-accessor read-write))
 	(single-slot cuatrimestre
 ;+		(comment "Cuatrimestre de convocatoria")
-		(type SYMBOL)
-		(allowed-values A B)
+		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot asignatura_conv

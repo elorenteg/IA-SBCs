@@ -1,4 +1,4 @@
-; Thu May 07 10:35:14 CEST 2015
+; Thu May 14 00:48:39 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -6,18 +6,22 @@
 ([ontologia_Class0] of  Convocatoria
 
 	(asignatura_conv [ontologia_Class27])
-	(cuatrimestre A)
+	(cuatrimestre "2011-A")
 	(horario_conv [ontologia_Class46])
 	(notas_conv
 		[ontologia_Class6]
-		[ontologia_Class8]))
+		[ontologia_Class8]
+		[ontologia_Class50032]))
 
 ([ontologia_Class1] of  Convocatoria
 
 	(asignatura_conv [ontologia_Class33])
-	(cuatrimestre A)
-	(horario_conv [ontologia_Class47])
-	(notas_conv [ontologia_Class7]))
+	(cuatrimestre "2011-A")
+	(horario_conv [ontologia_Class46])
+	(notas_conv
+		[ontologia_Class7]
+		[ontologia_Class50005]
+		[ontologia_Class50035]))
 
 ([ontologia_Class10000] of  No_informatico
 
@@ -1176,7 +1180,9 @@
 	(alumno_exp [ontologia_Class2])
 	(notas_exp
 		[ontologia_Class6]
-		[ontologia_Class7]))
+		[ontologia_Class7]
+		[ontologia_Class50001]
+		[ontologia_Class50003]))
 
 ([ontologia_Class30] of  Obligatoria
 
@@ -2178,11 +2184,392 @@
 ([ontologia_Class5] of  Expediente
 
 	(alumno_exp [ontologia_Class4])
-	(notas_exp [ontologia_Class8]))
+	(notas_exp
+		[ontologia_Class8]
+		[ontologia_Class50005]
+		[ontologia_Class50006]
+		[ontologia_Class50007]
+		[ontologia_Class50013]
+		[ontologia_Class50014]
+		[ontologia_Class50015]
+		[ontologia_Class50016]))
 
 ([ontologia_Class50] of  General
 
 	(nombre_tema "Ingenieria de software"))
+
+([ontologia_Class50000] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class26])
+	(cuatrimestre "2011-A")
+	(horario_conv [ontologia_Class46])
+	(notas_conv
+		[ontologia_Class50001]
+		[ontologia_Class50007]
+		[ontologia_Class50033]))
+
+([ontologia_Class50001] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50000])
+	(expediente_nota [ontologia_Class3])
+	(nota 6.0))
+
+([ontologia_Class50002] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class28])
+	(cuatrimestre "2011-A")
+	(horario_conv [ontologia_Class46])
+	(notas_conv
+		[ontologia_Class50003]
+		[ontologia_Class50006]
+		[ontologia_Class50034]))
+
+([ontologia_Class50003] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50002])
+	(expediente_nota [ontologia_Class3])
+	(nota 4.0))
+
+([ontologia_Class50005] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class1])
+	(expediente_nota [ontologia_Class5])
+	(nota 7.0))
+
+([ontologia_Class50006] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50002])
+	(expediente_nota [ontologia_Class5])
+	(nota 5.5))
+
+([ontologia_Class50007] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50000])
+	(expediente_nota [ontologia_Class5])
+	(nota 5.0))
+
+([ontologia_Class50008] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class31])
+	(cuatrimestre "2011-B")
+	(horario_conv [ontologia_Class47])
+	(notas_conv
+		[ontologia_Class50013]
+		[ontologia_Class50043]))
+
+([ontologia_Class50009] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class32])
+	(cuatrimestre "2011-B")
+	(horario_conv [ontologia_Class47])
+	(notas_conv
+		[ontologia_Class50014]
+		[ontologia_Class50042]))
+
+([ontologia_Class50010] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class30])
+	(cuatrimestre "2011-B")
+	(horario_conv [ontologia_Class47])
+	(notas_conv
+		[ontologia_Class50015]
+		[ontologia_Class50050]))
+
+([ontologia_Class50011] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class29])
+	(cuatrimestre "2011-B")
+	(horario_conv [ontologia_Class47])
+	(notas_conv
+		[ontologia_Class50016]
+		[ontologia_Class50036]))
+
+([ontologia_Class50012] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class36])
+	(cuatrimestre "2012-A")
+	(horario_conv [ontologia_Class46])
+	(notas_conv [ontologia_Class50038]))
+
+([ontologia_Class50013] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50008])
+	(expediente_nota [ontologia_Class5])
+	(nota 8.0))
+
+([ontologia_Class50014] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50009])
+	(expediente_nota [ontologia_Class5])
+	(nota 6.3))
+
+([ontologia_Class50015] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50010])
+	(expediente_nota [ontologia_Class5])
+	(nota 5.0))
+
+([ontologia_Class50016] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50011])
+	(expediente_nota [ontologia_Class5])
+	(nota 6.5))
+
+([ontologia_Class50017] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class34])
+	(cuatrimestre "2012-A")
+	(horario_conv [ontologia_Class46])
+	(notas_conv [ontologia_Class50052]))
+
+([ontologia_Class50018] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class37])
+	(cuatrimestre "2012-A")
+	(horario_conv [ontologia_Class46])
+	(notas_conv [ontologia_Class50049]))
+
+([ontologia_Class50019] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class35])
+	(cuatrimestre "2012-A")
+	(horario_conv [ontologia_Class46])
+	(notas_conv [ontologia_Class50041]))
+
+([ontologia_Class50020] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class38])
+	(cuatrimestre "2012-A")
+	(horario_conv [ontologia_Class46])
+	(notas_conv [ontologia_Class50051]))
+
+([ontologia_Class50021] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class42])
+	(cuatrimestre "2012-B")
+	(horario_conv [ontologia_Class47])
+	(notas_conv [ontologia_Class50053]))
+
+([ontologia_Class50022] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class39])
+	(cuatrimestre "2012-B")
+	(horario_conv [ontologia_Class47])
+	(notas_conv [ontologia_Class50048]))
+
+([ontologia_Class50023] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class40])
+	(cuatrimestre "2012-B")
+	(horario_conv [ontologia_Class47])
+	(notas_conv [ontologia_Class50046]))
+
+([ontologia_Class50024] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class43])
+	(cuatrimestre "2012-B")
+	(horario_conv [ontologia_Class47])
+	(notas_conv [ontologia_Class50037]))
+
+([ontologia_Class50025] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class41])
+	(cuatrimestre "2012-B")
+	(horario_conv [ontologia_Class47])
+	(notas_conv [ontologia_Class50039]))
+
+([ontologia_Class50026] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class20034])
+	(cuatrimestre "2013-A")
+	(horario_conv [ontologia_Class47])
+	(notas_conv [ontologia_Class50040]))
+
+([ontologia_Class50027] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class20032])
+	(cuatrimestre "2013-A")
+	(horario_conv [ontologia_Class47])
+	(notas_conv [ontologia_Class50045]))
+
+([ontologia_Class50028] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class20033])
+	(cuatrimestre "2013-A")
+	(horario_conv [ontologia_Class47])
+	(notas_conv [ontologia_Class50044]))
+
+([ontologia_Class50029] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class45])
+	(cuatrimestre "2013-A")
+	(horario_conv [ontologia_Class47])
+	(notas_conv [ontologia_Class50047]))
+
+([ontologia_Class50030] of  Alumno
+
+	(especialidad [ontologia_Class68])
+	(expediente_alumno [ontologia_Class50031])
+	(id 333))
+
+([ontologia_Class50031] of  Expediente
+
+	(alumno_exp [ontologia_Class50030])
+	(notas_exp
+		[ontologia_Class50032]
+		[ontologia_Class50033]
+		[ontologia_Class50034]
+		[ontologia_Class50035]
+		[ontologia_Class50036]
+		[ontologia_Class50037]
+		[ontologia_Class50038]
+		[ontologia_Class50039]
+		[ontologia_Class50040]
+		[ontologia_Class50041]
+		[ontologia_Class50042]
+		[ontologia_Class50043]
+		[ontologia_Class50044]
+		[ontologia_Class50045]
+		[ontologia_Class50046]
+		[ontologia_Class50047]
+		[ontologia_Class50048]
+		[ontologia_Class50049]
+		[ontologia_Class50050]
+		[ontologia_Class50051]
+		[ontologia_Class50052]
+		[ontologia_Class50053]))
+
+([ontologia_Class50032] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class0])
+	(expediente_nota [ontologia_Class50031])
+	(nota 6.5))
+
+([ontologia_Class50033] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50000])
+	(expediente_nota [ontologia_Class50031])
+	(nota 8.0))
+
+([ontologia_Class50034] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50002])
+	(expediente_nota [ontologia_Class50031])
+	(nota 7.0))
+
+([ontologia_Class50035] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class1])
+	(expediente_nota [ontologia_Class50031])
+	(nota 8.0))
+
+([ontologia_Class50036] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50011])
+	(expediente_nota [ontologia_Class50031])
+	(nota 5.5))
+
+([ontologia_Class50037] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50024])
+	(expediente_nota [ontologia_Class50031])
+	(nota 8.0))
+
+([ontologia_Class50038] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50012])
+	(expediente_nota [ontologia_Class50031])
+	(nota 7.5))
+
+([ontologia_Class50039] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50025])
+	(expediente_nota [ontologia_Class50031])
+	(nota 5.0))
+
+([ontologia_Class50040] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50026])
+	(expediente_nota [ontologia_Class50031])
+	(nota 5.5))
+
+([ontologia_Class50041] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50019])
+	(expediente_nota [ontologia_Class50031])
+	(nota 8.0))
+
+([ontologia_Class50042] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50009])
+	(expediente_nota [ontologia_Class50031])
+	(nota 6.0))
+
+([ontologia_Class50043] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50008])
+	(expediente_nota [ontologia_Class50031])
+	(nota 5.5))
+
+([ontologia_Class50044] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50028])
+	(expediente_nota [ontologia_Class50031])
+	(nota 8.5))
+
+([ontologia_Class50045] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50027])
+	(expediente_nota [ontologia_Class50031])
+	(nota 6.5))
+
+([ontologia_Class50046] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50023])
+	(expediente_nota [ontologia_Class50031])
+	(nota 7.5))
+
+([ontologia_Class50047] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50029])
+	(expediente_nota [ontologia_Class50031])
+	(nota 6.0))
+
+([ontologia_Class50048] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50022])
+	(expediente_nota [ontologia_Class50031])
+	(nota 6.0))
+
+([ontologia_Class50049] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50018])
+	(expediente_nota [ontologia_Class50031])
+	(nota 5.0))
+
+([ontologia_Class50050] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50010])
+	(expediente_nota [ontologia_Class50031])
+	(nota 5.5))
+
+([ontologia_Class50051] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50020])
+	(expediente_nota [ontologia_Class50031])
+	(nota 5.0))
+
+([ontologia_Class50052] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50017])
+	(expediente_nota [ontologia_Class50031])
+	(nota 9.0))
+
+([ontologia_Class50053] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50021])
+	(expediente_nota [ontologia_Class50031])
+	(nota 7.0))
 
 ([ontologia_Class51] of  General
 
