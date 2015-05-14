@@ -101,7 +101,7 @@
     (printout t "Contador de restricciones" crlf)
     (bind ?nrest 0)
     (if (> (length$ ?cp) 0) then (bind ?nrest (+ ?nrest 1)))
-    (if (neq ?ce [nil]) then (bind ?nrest (+ ?nrest 1)))
+    (if (neq ?ce nil) then (bind ?nrest (+ ?nrest 1)))
     (if (neq ?d nil) then (bind ?nrest (+ ?nrest 1)))
     (if (neq ?ma nil) then (bind ?nrest (+ ?nrest 1)))
     (if (neq ?mht nil) then (bind ?nrest (+ ?nrest 1)))
