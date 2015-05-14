@@ -6,6 +6,36 @@
     (multislot list-asigns (default (create$)))
 )
 
+
+(deffunction ha-aprobado
+    (?al ?a)
+
+    (bind ?nombre-cand (send ?a get-nombre))
+    (bind ?notas (send (send ?al get-expediente_alumno) get-notas_exp))
+    (progn$ (?ins ?notas)
+        (if (and (eq ?nombre-cand (send (send (send ?ins get-convocatoria_nota) get-asignatura_conv) get-nombre)) (>= (send ?ins get-nota) 5))
+            then
+            (return TRUE)
+        )
+    )
+    (return FALSE)
+)
+
+(deffunction ha-cursado
+    (?al ?a)
+
+    (bind ?nombre-cand (send ?a get-nombre))
+    (bind ?notas (send (send ?al get-expediente_alumno) get-notas_exp))
+    (progn$ (?ins ?notas)
+        (if (eq ?nombre-cand (send (send (send ?ins get-convocatoria_nota) get-asignatura_conv) get-nombre))
+            then
+            (return TRUE)
+        )
+    )
+    (return FALSE)
+)
+
+
 (defrule entrada-refinamiento "Asociacion heuristica del problema"
     ?hecho <- (asociacion ok)
     =>
@@ -26,20 +56,17 @@
     (assert (refina-rec))
 )
 
-(defrule descarta-ya-cursadas "Descarta las candidatas que ya se hayan cursado"
-    (declare (salience 8))
+(defrule descarta-ya-aprobadas "Descarta las candidatas que ya se hayan cursado y aprobado"
+    (declare (salience 9))
     (refina-rec)
-    ?ar <- (asig-rec (asign ?a))
+    (dni ?dni)
     ?al <- (object (is-a Alumno) (id ?dni))
+    ?ar <- (asig-rec (asign ?a))
     =>
-    (bind ?nombre-cand (send ?a get-nombre))
-    (bind ?notas (send (send ?al get-expediente_alumno) get-notas_exp))
-    (progn$ (?ins ?notas)
-        (if (eq ?nombre-cand (send (send (send ?ins get-convocatoria_nota) get-asignatura_conv) get-nombre))
-            then
-            (retract ?ar)
-            (break)
-        )
+    (if (ha-aprobado ?al ?a)
+        then
+        (printout t (send ?a get-nombre) " ya esta aprobada" crlf)
+        (retract ?ar)
     )
 )
 

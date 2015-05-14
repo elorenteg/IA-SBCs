@@ -42,6 +42,7 @@
 (defrule escoge-horario-preferido
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (horario-preferidoR ?td)) ;si añado "(horario-preferidoP ?tdP)", no entrará a menos el usuario haya introducido ambos criterios
+    (test (neq ?td nil))
     =>
     ;Restricciones
     (bind ?res (create$))
@@ -98,6 +99,7 @@
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (especialidadR ?espR) (especialidadP ?espP))
     ?al <- (object (is-a Alumno) (id ?dni) (especialidad ?e))
+    (test (neq ?espR nil))
     =>
     (bind ?ins-asigs (find-all-instances ((?ins Especializada)) (member ?e ?ins:especialidad_asig)))
 
@@ -115,6 +117,7 @@
 (defrule escoge-intereses-tematicos
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (intereses-tematicosR $?it))
+    (test (!= 0 (length$ ?it)))
     =>
     (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?it ?ins:temas))))
 
@@ -127,11 +130,13 @@
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (competenciasR $?comRes) (competenciasP $?comPref))
     ?al <- (object (is-a Alumno) (id ?dni) (especialidad ?e))
+    (test (!= 0 (length$ ?comRes)))
+
     =>
-    
+
     (bind ?ins-asigs-pref (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?comPref ?ins:competencias))))
     (bind ?ins-asigs-rest (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?comRes ?ins:competencias))))
-    
+
     (loop-for-count (?i 1 (length$ ?ins-asigs-pref)) do
         (assert (nueva-rec (asign (nth$ ?i ?ins-asigs-pref)) (motivo intereses-competencias) (es-pref TRUE))) ;poner un motivo más user-friendly
     )
