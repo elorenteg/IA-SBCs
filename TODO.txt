@@ -6,6 +6,10 @@ ABSTRACCION
 ASOCIACON
 * dificultad E
 
+* especialidad  <--- no estaba acabado
+* volumen trabajo  <--- no estaba acabado
+* horario  <--- no estaba acabado
+
 REFINAMIENTO
 * cumplimiento Restriccion
 * * Volumen D
