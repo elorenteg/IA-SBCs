@@ -145,6 +145,25 @@
     )
 )
 
+(defrule escoge-curso
+    (ent-asigs)
+    ?prob-abs <- (problema-abstracto (curso-estudios ?ce))
+    =>
+    (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (= (curso-a-int ?ins:curso) ?ce)))
+
+    (loop-for-count (?i 1 (length$ ?ins-asigs)) do
+        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo sigue-plan-estudios) (es-pref TRUE))) ;poner un motivo más user-friendly
+    )
+
+    (if (< ?ce 4)
+        then
+        (bind ?ins-asigs2 (find-all-instances ((?ins Asignatura)) (= (curso-a-int ?ins:curso) (+ 1 ?ce))))
+        (loop-for-count (?i 1 (length$ ?ins-asigs2)) do
+            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs2)) (motivo sigue-plan-estudios) (es-pref TRUE)))
+        )
+    )
+
+)
 
 
 
@@ -167,6 +186,7 @@
 )
 
 (defrule anade-asig-rec "Añade una nueva asignatura recomendada (antes no existía)"
+    (declare (salience 5))
     ?nr <- (nueva-rec (asign ?a) (motivo ?m) (es-pref ?ep))
     (not (exists (asig-rec (asign ?a))))
     =>

@@ -118,7 +118,7 @@
             (break)
         )
     )
-    (if (eq ?orreq-alguna FALSE) then (retract ?ar))
+    (if (and (> 0 (length$ ?orrequisitos)) (eq ?orreq-alguna FALSE)) then (retract ?ar))
 )
 
 (defrule refina

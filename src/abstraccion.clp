@@ -17,6 +17,7 @@
     (slot tiempo-dedicacionP (allowed-strings "alto" "medio" "bajo"))
     (multislot horario-preferidoR (allowed-strings "manyana" "tarde") (default (create$)))
     (multislot horario-preferidoP (allowed-strings "manyana" "tarde") (default (create$)))
+    (slot curso-estudios) ;curso del plan de estudios
 )
 
 
@@ -35,7 +36,7 @@
     ;;; TODO: abstraccion del problema ;;;
     ;;; esta funcion solo genera los hechos para ejecutar las reglas de abstraccion ;;;
 
-    (assert (ent-abs-dedicacion) (ent-abs-horario) (ent-abs-especialidad) (ent-abs-dificultad) (ent-abs-tema) (ent-abs-competencias))
+    (assert (ent-abs-dedicacion) (ent-abs-horario) (ent-abs-especialidad) (ent-abs-dificultad) (ent-abs-tema) (ent-abs-competencias) (ent-abs-curso))
     (assert (problema-abstracto))
     (retract ?hecho)
 )
@@ -154,7 +155,7 @@
     =>
 
     (printout t ">> Abstraccion de Dificultad" crlf)
-    
+
     (bind ?abs (modify ?abs (dificultadR nil)))
     (if (eq (str-compare ?difPref "Facil") 0)
         then
@@ -204,7 +205,7 @@
 
 (deffunction compet-a-superar
     (?exped $?compet)
-    
+
     (bind $?notas (send ?exped get-notas_exp))
     (loop-for-count (?i 1 (length$ ?notas)) do
         (bind ?not (nth$ ?i ?notas))
@@ -212,14 +213,14 @@
         (bind ?asig (send ?conv get-asignatura_conv))
         (bind $?com (send ?asig get-competencias))
         (bind ?nota (send ?not get-nota))
-        
+
         ; borramos las competencias de nivel inferior y del mismo nivel (si la tiene superada)
         (bind $?indices (create$))
         (loop-for-count (?j 1 (length$ ?compet)) do
             (bind ?compI (nth$ ?j ?compet))
             (bind ?nomC (send ?compI get-nombre_comp))
             (bind ?nivC (send ?compI get-nivel))
-            
+
             (loop-for-count (?k 1 (length$ ?com)) do
                 (bind ?inst (nth$ ?k ?com))
                 (bind ?nom (send ?inst get-nombre_comp))
@@ -238,14 +239,14 @@
                 )
             )
         )
-        
+
         (loop-for-count (?j 1 (length$ ?indices)) do
             (bind ?ind (nth$ ?j ?indices))
             (bind $?compet (delete$ ?compet ?ind ?ind))
         )
     )
 
-    
+
     (return ?compet)
 )
 
@@ -261,15 +262,27 @@
 
     (printout t ">> Abstraccion de Competencias" crlf)
     (bind $?compet $?comPref)
-    
+
     ;;; reduccion de las competencias al nivel que le falta por cursar
     (bind $?competP (compet-a-superar ?exped ?comPref))
     (bind $?competR (compet-a-superar ?exped ?comRes))
-    
+
     (bind ?abs (modify ?abs (competenciasR ?competR)))
     (bind ?abs (modify ?abs (competenciasP ?competP)))
 
     (assert(abs-competencias ok))
+    (retract ?hecho)
+)
+
+(defrule abs-curso
+    ?hecho <- (ent-abs-curso)
+    ?hecho2 <- (curso ?max-curso)
+    ?abs <- (problema-abstracto (curso-estudios ?ce))
+    =>
+    (printout t ">> Abstraccion de Curso" crlf)
+    (bind ?abs (modify ?abs (curso-estudios ?max-curso)))
+
+    (assert (abs-curso ok))
     (retract ?hecho)
 )
 
@@ -280,9 +293,10 @@
     ?hecho4 <- (abs-dificultad ok)
     ?hecho5 <- (abs-especialidad ok)
     ?hecho6 <- (abs-competencias ok)
+    ?hecho7 <- (abs-curso ok)
     =>
     ;;; esta regla elimina los hechos usados en la abstraccion y genera un assert conforme ha acabado ;;;
     (printout t "Fin abstraccion" crlf)
     (assert(abstraccion ok))
-    (retract ?hecho1 ?hecho2 ?hecho3 ?hecho4 ?hecho5 ?hecho6)
+    (retract ?hecho1 ?hecho2 ?hecho3 ?hecho4 ?hecho5 ?hecho6 ?hecho7)
 )
