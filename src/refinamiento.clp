@@ -70,6 +70,57 @@
     )
 )
 
+(defrule descarta-segun-requisitos "Descarta las candidatas que incumplan los requisitos entre asignaturas"
+    (declare (salience 8))
+    (refina-rec)
+    (dni ?dni)
+    ?al <- (object (is-a Alumno) (id ?dni))
+    ?ar <- (asig-rec (asign ?a))
+    =>
+    (bind ?prerrequisitos (send ?a get-prerrequisitos))
+    (bind ?correquisitos (send ?a get-correquisitos))
+    (bind ?precorrequisitos (send ?a get-precorrequisitos))
+    (bind ?orrequisitos (send ?a get-orrequisitos))
+
+    (loop-for-count (?i 1 (length$ ?prerrequisitos)) do
+        (if (not (ha-aprobado ?al (nth$ ?i ?prerrequisitos)))
+            then
+            (printout t (send ?a get-nombre) " no cumple prerrequisitos" crlf)
+            (retract ?ar)
+            (break)
+        )
+    )
+
+    (loop-for-count (?i 1 (length$ ?correquisitos)) do
+        (if (not (or (ha-aprobado ?al (nth$ ?i ?correquisitos)) TRUE)) ;cómo compruebo si "está matriculado" de una asignatura? Si está entre las candidatas?
+            then
+            (printout t (send ?a get-nombre) " no cumple correquisitos" crlf)
+            (retract ?ar)
+            (break)
+        )
+    )
+
+    (loop-for-count (?i 1 (length$ ?precorrequisitos)) do
+        (if (not (ha-cursado ?al (nth$ ?i ?precorrequisitos)))
+            then
+            (printout t (send ?a get-nombre) " no cumple precorrequisitos" crlf)
+            (retract ?ar)
+            (break)
+        )
+    )
+
+    (bind ?orreq-alguna FALSE)
+    (loop-for-count (?i 1 (length$ ?orrequisitos)) do
+        (if (ha-aprobado ?al (nth$ ?i ?orrequisitos))
+            then
+            (printout t (send ?a get-nombre) " no cumple orrequisitos" crlf)
+            (bind ?orreq-alguna TRUE)
+            (break)
+        )
+    )
+    (if (eq ?orreq-alguna FALSE) then (retract ?ar))
+)
+
 (defrule refina
     ?hecho <- (refina-rec)
 
