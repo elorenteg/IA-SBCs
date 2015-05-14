@@ -202,9 +202,57 @@
     (retract ?hecho)
 )
 
+(deffunction compet-a-superar
+    (?exped $?compet)
+    
+    (bind $?notas (send ?exped get-notas_exp))
+    (loop-for-count (?i 1 (length$ ?notas)) do
+        (bind ?not (nth$ ?i ?notas))
+        (bind ?conv (send ?not get-convocatoria_nota))
+        (bind ?asig (send ?conv get-asignatura_conv))
+        (bind $?com (send ?asig get-competencias))
+        (bind ?nota (send ?not get-nota))
+        
+        ; borramos las competencias de nivel inferior y del mismo nivel (si la tiene superada)
+        (bind $?indices (create$))
+        (loop-for-count (?j 1 (length$ ?compet)) do
+            (bind ?compI (nth$ ?j ?compet))
+            (bind ?nomC (send ?compI get-nombre_comp))
+            (bind ?nivC (send ?compI get-nivel))
+            
+            (loop-for-count (?k 1 (length$ ?com)) do
+                (bind ?inst (nth$ ?k ?com))
+                (bind ?nom (send ?inst get-nombre_comp))
+                (bind ?niv (send ?inst get-nivel))
+                (if (eq (str-compare ?nom ?nomC) 0)
+                    then
+                    (if (eq (str-compare ?niv ?nivC) 1) ; la comp de la asig es de nivel superior a la posible recomendada
+                        then
+                        (if (not(member ?j ?indices)) then (bind $?indices (insert$ ?indices 1 ?j)))
+                        else
+                        (if (and (eq (str-compare ?niv ?nivC) 0) (not(< ?nota 5.0))) ; la comp de la asig es del mismo nivel y ya la ha superado
+                            then
+                           (if (not(member ?j ?indices)) then (bind $?indices (insert$ ?indices 1 ?j)))
+                        )
+                    )
+                )
+            )
+        )
+        
+        (loop-for-count (?j 1 (length$ ?indices)) do
+            (bind ?ind (nth$ ?j ?indices))
+            (bind $?compet (delete$ ?compet ?ind ?ind))
+        )
+    )
+
+    
+    (return ?compet)
+)
+
 (defrule abs-competencias
     ?hecho <- (ent-abs-competencias)
     (dni ?dni)
+    ?alumn <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped))
     ?res <- (respref (es_restriccion TRUE) (competencias_preferidas $?comRes))
     ?pref <- (respref (es_restriccion FALSE) (competencias_preferidas $?comPref))
     ?abs <- (problema-abstracto (competenciasR $?absRes) (competenciasP $?absPref))
@@ -212,6 +260,14 @@
     =>
 
     (printout t ">> Abstraccion de Competencias" crlf)
+    (bind $?compet $?comPref)
+    
+    ;;; reduccion de las competencias al nivel que le falta por cursar
+    (bind $?competP (compet-a-superar ?exped ?comPref))
+    (bind $?competR (compet-a-superar ?exped ?comRes))
+    
+    (bind ?abs (modify ?abs (competenciasR ?competR)))
+    (bind ?abs (modify ?abs (competenciasP ?competP)))
 
     (assert(abs-competencias ok))
     (retract ?hecho)

@@ -1,16 +1,10 @@
 
 ABSTRACCION
 * horas (mejorar) D
-* dificultad E
-
 * tema D (hecho -faltará algo...?)
-* especialidad E
-* competencias D
 
 ASOCIACON
 * dificultad E
-* tema D (hecho)
-* competencias E
 
 REFINAMIENTO
 * cumplimiento Restriccion
@@ -20,3 +14,5 @@ REFINAMIENTO
 * * volumen D
 * * nasigs E
 * * dificultad E
+
+* * Cumplimiento de requisitos !!!!

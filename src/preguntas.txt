@@ -1,18 +1,17 @@
 
-    
     (bind ?ma (pregunta-rango ">> Cual es el numero maximo de asignaturas a matricular?" TRUE 1 6))
     (if (not(eq ?ma nil))
         then
         (bind ?rec (modify ?rec (max_asigns ?ma)))
     )
 
-    (bind ?mh (pregunta-rango ">> Cual es el numero maximo de horas de dedicacion semanales?" TRUE 0 900))
+    (bind ?mh (pregunta-rango ">> Cual es el numero maximo de horas de dedicacion semanales?" TRUE 0 50))
     (if (not(eq ?mh nil))
         then
         (bind ?rec (modify ?rec (max_horas_trabajo ?mh)))
     )
 
-    (bind ?ml (pregunta-rango ">> Cual es el numero maximo de horas de laboratorio semanales?" TRUE 0 900))
+    (bind ?ml (pregunta-rango ">> Cual es el numero maximo de horas de laboratorio semanales?" TRUE 0 50))
     (if (not(eq ?ml nil))
         then
         (bind ?rec (modify ?rec (max_horas_lab ?ml)))
@@ -42,37 +41,42 @@
             (bind ?num (nth$ ?i ?numTem))
             (bind ?nomTem (nth$ ?num ?temasN))
             (bind ?tema-ins (find-instance ((?tem Especializado)) (eq ?tem:nombre_tema ?nomTem)))
-            
+
             ;(printout t "numero " ?num crlf)
             ;(printout t "nombre " ?nomTem crlf)
             ;(printout t "instancia " ?tema-ins crlf)
-            
+
             (bind ?temasI (insert$ ?temasI 1 ?tema-ins))
         )
         (bind ?rec (modify ?rec (tema_especializado ?temasI)))
     )
 
-    (bind ?espN (create$))
-    (do-for-all-instances ((?t Especialidad)) TRUE (bind ?espN (insert$ ?espN 1 (send ?t get-nombre_esp))))
-    (bind ?numEsp (pregunta-numero ">> Que especialidad deseas acabar?" TRUE ?espN))
-    (if (not(eq ?numEsp nil))
+    (if (not(eq ?esp [nil]))
         then
-        (bind ?nomEsp (nth$ ?numEsp ?espN))
-        (bind ?esp-ins (find-instance ((?esp Especialidad)) (eq ?esp:nombre_esp (primera-mayus ?nomEsp))))
-        
-        ;(printout t "numero " ?numEsp crlf)
-        ;(printout t "nombre " ?nomEsp crlf)
-        ;(printout t "instancia " ?esp-ins crlf)
-        
-        (bind ?rec (modify ?rec (completar_especialidad ?esp-ins)))
+        ; el alumno tiene una especialidad
+        (bind ?bool (pregunta-cerrada ">> Deseas completar tu especialidad?" TRUE si no))
+        (if (eq ?bool si)
+            then
+            (bind ?rec (modify ?rec (completar_especialidad ?esp)))
+        )
+        else
+        ; el alumno no tiene una especialidad --> preguntar cual quiere cursar
+        (bind ?espN (create$))
+        (do-for-all-instances ((?t Especialidad)) TRUE (bind ?espN (insert$ ?espN 1 (send ?t get-nombre_esp))))
+        (bind ?numEsp (pregunta-numero ">> Que especialidad deseas matricular?" TRUE ?espN))
+        (if (not(eq ?numEsp nil))
+            then
+            (bind ?nomEsp (nth$ ?numEsp ?espN))
+            (bind ?esp-ins (find-instance ((?e Especialidad)) (eq ?e:nombre_esp (primera-mayus ?nomEsp))))
+
+            (printout t "numero " ?numEsp crlf)
+            (printout t "nombre " ?nomEsp crlf)
+            (printout t "instancia " ?esp-ins crlf)
+
+            (bind ?rec (modify ?rec (completar_especialidad (implode$ ?esp-ins))))
+        )
     )
 
-    (bind ?di (pregunta-cerrada ">> Que dificultad puedes asumir?" TRUE facil dificil))
-	(if (not(eq ?th nil))
-        then
-        (bind ?rec (modify ?rec (dificultad ?di)))
-    )    
-    
     (bind ?comP (create$))
     (do-for-all-instances ((?t Competencia)) TRUE (bind ?comP (insert$ ?comP 1 (str-cat (sub-string 3 (str-length(send ?t get-nombre_comp)) (send ?t get-nombre_comp))))))
     (bind ?ordComP (sort-list ?comP))
@@ -82,16 +86,16 @@
         (bind $?compeI (create$))
         (loop-for-count (?i 1 (length$ ?numComp)) do
             (bind ?num (nth$ ?i ?numComp))
-            
+
             (bind ?nomComp (nth$ ?num ?ordComP))
             ;(bind ?nivComp (sub-string (-(str-length(nth$ ?num ?ordComP))2) (-(str-length(nth$ ?num ?ordComP))1) (nth$ ?num ?ordComP)))
             (bind $?comp-ins (find-all-instances ((?comp Competencia)) (= (str-compare (sub-string 3 (str-length ?comp:nombre_comp) ?comp:nombre_comp) ?nomComp) 0)))
-            
+
             (printout t "numero " ?num crlf)
             (printout t "nombre " ?nomComp crlf)
             ;(printout t "nivel " ?nivComp crlf)
             (printout t "instancia " ?comp-ins crlf)
-            
+
             (bind ?compeI (insert$ ?compeI 1 ?comp-ins))
         )
         (bind ?rec (modify ?rec (competencias_preferidas ?compeI)))

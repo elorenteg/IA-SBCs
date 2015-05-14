@@ -16,6 +16,15 @@
     (slot es-pref)
 )
 
+(deffunction interseccion-vacia "Indica si la intersección de dos listas (como conjuntos) está vacía"
+    (?L1 ?L2)
+
+    (loop-for-count  (?i 1 (length$ ?L1)) do
+        (if (member (nth$ ?i ?L1) ?L2) then (return FALSE))
+    )
+    (return TRUE)
+)
+
 
 
 
@@ -85,7 +94,6 @@
     )
 )
 
-
 (defrule escoge-interes-compl-esp
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (especialidadR ?espR) (especialidadP ?espP))
@@ -104,15 +112,6 @@
 
 )
 
-(deffunction interseccion-vacia "Indica si la intersección de dos listas (como conjuntos) está vacía"
-    (?L1 ?L2)
-
-    (loop-for-count  (?i 1 (length$ ?L1)) do
-        (if (member (nth$ ?i ?L1) ?L2) then (return FALSE))
-    )
-    (return TRUE)
-)
-
 (defrule escoge-intereses-tematicos
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (intereses-tematicosR $?it))
@@ -123,6 +122,25 @@
         (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo intereses-tematicos) (es-pref FALSE))) ;poner un motivo más user-friendly
     )
 )
+
+(defrule escoge-intereses-competencias
+    (ent-asigs)
+    ?prob-abs <- (problema-abstracto (competenciasR $?comRes) (competenciasP $?comPref))
+    ?al <- (object (is-a Alumno) (id ?dni) (especialidad ?e))
+    =>
+    
+    (bind ?ins-asigs-pref (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?comPref ?ins:competencias))))
+    (bind ?ins-asigs-rest (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?comRes ?ins:competencias))))
+    
+    (loop-for-count (?i 1 (length$ ?ins-asigs-pref)) do
+        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs-pref)) (motivo intereses-competencias) (es-pref TRUE))) ;poner un motivo más user-friendly
+    )
+    (loop-for-count (?i 1 (length$ ?ins-asigs-rest)) do
+        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs-rest)) (motivo intereses-competencias) (es-pref FALSE))) ;poner un motivo más user-friendly
+    )
+)
+
+
 
 
 (defrule modifica-asig-rec "Modifica una asignatura recomendada (añade motivo y/o pref-sat)"
