@@ -113,12 +113,15 @@
     (loop-for-count (?i 1 (length$ ?orrequisitos)) do
         (if (ha-aprobado ?al (nth$ ?i ?orrequisitos))
             then
-            (printout t (send ?a get-nombre) " no cumple orrequisitos" crlf)
             (bind ?orreq-alguna TRUE)
             (break)
         )
     )
-    (if (and (> 0 (length$ ?orrequisitos)) (eq ?orreq-alguna FALSE)) then (retract ?ar))
+    (if (and (> (length$ ?orrequisitos) 0) (eq ?orreq-alguna FALSE))
+        then
+        (printout t (send ?a get-nombre) " no cumple orrequisitos" crlf)
+        (retract ?ar)
+    )
 )
 
 (defrule refina
