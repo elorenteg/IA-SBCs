@@ -568,6 +568,7 @@
     (retract ?hecho)
 )
 
+
 (deffunction curso-a-int
     (?cur)
 
@@ -579,7 +580,6 @@
     )
 )
 
-
 (defrule inferencia-curso
     ?hecho <- (inf-curso)
     (dni ?dni)
@@ -589,7 +589,7 @@
 
     (bind ?notas (send ?exped get-notas_exp))
     (bind ?max-curso 0)
-    (progn$ (?ins ?notas)
+    (progn$ (?ins ?notas) ;encuentro el curso más superior que ha alcanzado el alumno
         (if (> (curso-a-int (send (send (send ?ins get-convocatoria_nota) get-asignatura_conv) get-curso)) ?max-curso)
             then
             (bind ?max-curso (curso-a-int (send (send (send ?ins get-convocatoria_nota) get-asignatura_conv) get-curso)))

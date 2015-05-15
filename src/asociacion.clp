@@ -155,6 +155,7 @@
         (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo sigue-plan-estudios) (es-pref TRUE))) ;poner un motivo más user-friendly
     )
 
+    ;intentamos recomendar asignaturas del siguiente curso (por si el alumno está a punto de empezar uno nuevo)
     (if (< ?ce 4)
         then
         (bind ?ins-asigs2 (find-all-instances ((?ins Asignatura)) (= (curso-a-int ?ins:curso) (+ 1 ?ce))))
