@@ -41,28 +41,31 @@
 
 (defrule escoge-horario-preferido
     (ent-asigs)
-    ?prob-abs <- (problema-abstracto (horario-preferidoR ?td)) ;si añado "(horario-preferidoP ?tdP)", no entrará a menos el usuario haya introducido ambos criterios
+    ?prob-abs <- (problema-abstracto (horario-preferidoR $?td) (horario-preferidoP $?tdP))
+    ?alumn <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped))
     (test (neq ?td nil))
     =>
     ;Restricciones
-    (bind ?res (create$))
-    (bind ?ins-asigs (find-all-instances ((?ins Asignatura))
-        (member ?td (create$ (progn$ (?cand (send ?ins get-horarios)) (insert$ ?res (+ 1 (length$ ?res)) (send ?cand get-horario)))))
-    ))
+    (if (= 1 (length$ ?td)) then
+        (bind ?insh (find-instance ((?ins Horario)) (eq ?ins:horario (nth$ 1 ?td))))
+        (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?insh ?ins:horarios))))
 
-    (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo horario-preferido) (es-pref FALSE))) ;poner un motivo más user-friendly
+        (loop-for-count (?i 1 (length$ ?ins-asigs)) do
+            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo horario-preferido) (es-pref FALSE))) ;poner un motivo más user-friendly
+        )
     )
 
     ;Preferencias
-    ;(bind ?resP (create$))
-    ;(bind ?ins-asigsP (find-all-instances ((?ins Asignatura))
-    ;    (member ?tdP (create$ (progn$ (?cand (send ?ins get-horarios)) (insert$ ?resP (+ 1 (length$ ?resP)) (send ?cand get-horario)))))
-    ;))
+    (if (= 1 (length$ ?tdP)) then
+        (bind ?resP (create$))
+        (bind ?ins-asigsP (find-all-instances ((?ins Asignatura))
+            (member ?tdP (create$ (progn$ (?cand (send ?ins get-horarios)) (insert$ ?resP (+ 1 (length$ ?resP)) (send ?cand get-horario)))))
+        ))
 
-    ;(loop-for-count (?i 1 (length$ ?ins-asigsP)) do
-    ;    (assert (nueva-rec (asign (nth$ ?i ?ins-asigsP)) (motivo horario-preferido) (es-pref TRUE))) ;poner un motivo más user-friendly
-    ;)
+        (loop-for-count (?i 1 (length$ ?ins-asigsP)) do
+            (assert (nueva-rec (asign (nth$ ?i ?ins-asigsP)) (motivo horario-preferido) (es-pref TRUE))) ;poner un motivo más user-friendly
+        )
+    )
 )
 
 (defrule escoge-volumen-trabajo

@@ -52,7 +52,10 @@
     (filtro-restr)
     ?ar <- (asig-rec (asign ?a) (rest-sat ?rs))
     =>
-    (if (!= ?nrest ?rs) then (retract ?ar))
+    (if (!= ?nrest ?rs) then
+        (printout t (send ?a get-nombre) " no cumple todas las restricciones" crlf)
+        (retract ?ar)
+    )
     (assert (refina-rec))
 )
 
