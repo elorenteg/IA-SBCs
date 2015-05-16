@@ -139,9 +139,56 @@ disponibilidad horaria o los temas de interés, no se abstrae: se trata de
 parámetros que no se pueden agrupar de forma más general y que son necesarios 
 de esta forma para el proceso de asociación posterior.
 
+En el subproblema de asociación, esencialmente se comprueban algunas 
+restricciones por asignatura y se calcula qué preferencias satisface cada 
+asignatura. Esto permite, de entre las asignaturas que cumplen todas las 
+restricciones satisfechas, establecer un orden de prioridad en la 
+recomendación según la cantidad de preferencias cumplidas. Además, estas 
+preferencias conforman los motivos que se ofrecerán al alumno para la 
+recomendación. Sin embargo, algunas de las restricciones conciernen a todo 
+el conjunto de asignaturas recomendadas (por ejemplo, el número máximo de 
+asignaturas a matricular) y, por ello, no se tratan en esta fase, sino que 
+se aseguran en el refinamiento final.
 
-%%% TODO : Explicación del "proceso de razonamiento de los subproblemas".
-%%%        Entiendo que se trata de describir un poco a alto nivel las reglas
-%%%        con las que resolvemos el problema.
+Concretamente, para cada asignatura se registra si está disponible en el 
+horario preferido, si tiene la dificultad adecuada, si es de la especialidad 
+que el alumno desea completar (en caso de que este desee completar la 
+especialidad cursada), si trata algunos de los temas de interés del alumno 
+o si desarrolla alguna de las competencias transversales preferidas. Se 
+calcula también cuántas restricciones satisface cada asignatura para la criba 
+de aquellas que no las cumplen todas. Asimismo, entre las restricciones 
+comprobadas en esta fase, se analiza qué asignaturas están disponibles para 
+el alumno; es decir, cuáles son las asignaturas que aún no ha cursado y 
+que está en disposición de cursar porque ya ha completado el número de 
+créditos necesarios (por ejemplo, un alumno no puede empezar la especialidad 
+ni matricularse de asignaturas optativas hasta que no ha completado una 
+cantidad mínima de créditos) y cumple todos sus requisitos, precorrequisitos 
+y orrequisitos (se trata, de hecho, de un tipo de restricciones implícitas 
+dadas por el plan de estudios).
+
+El último subproblema consiste en generar la recomendación final y mostrarla 
+al usuario. En este paso, además, hay que refinar las soluciones que se 
+obtendrían directamente del subproblema anterior, puesto que algunas 
+restricciones y preferencias no han podido ser comprobadas correctamente 
+con el conocimiento simplificado de la abstracción o bien conciernen a todo 
+el conjunto de asignaturas a recomendar. 
+
+En esta parte, pues, se tratan las restricciones y preferencias relacionadas 
+con la carga de trabajo permitida (puesto que es necesario conocer los valores 
+exactos introducidos por el alumno): la cantidad máxima de asignaturas a 
+matricular, el número de horas de dedicación semanales y el número de horas 
+en prácticas de laboratorio. En esta parte también se comprueba la compleción 
+de la especialidad (si procede) y el cumplimiento de los correquisitos de las 
+asignaturas recomendadas. Teniendo en cuenta toda esta información concreta, 
+se genera la recomendación final, constituída por un máximo de seis 
+asignaturas que se adecúan en la medida de lo posible a las preferencias del 
+alumno. Se asegura la satisfacción de todas las restricciones en esta 
+recomendación. En caso de que sea imposible ofrecer una recomendación con 
+todas las restricciones impuestas, se advierte al alumno de ello.
+% TODO : Probablemente habría que explicar mejor cómo se mira qué asignaturas 
+%        son las mejores (por ejemplo: suma ponderada de preferencias 
+%        cumplidas).
+
+
 
 
