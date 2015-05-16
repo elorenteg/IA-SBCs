@@ -7,7 +7,7 @@
 )
 
 
-(deffunction ha-aprobado
+(deffunction ha-aprobado "Retorna si el alumno ?al ha aprobado la asignatura ?a"
     (?al ?a)
 
     (bind ?nombre-cand (send ?a get-nombre))
@@ -21,7 +21,7 @@
     (return FALSE)
 )
 
-(deffunction ha-cursado
+(deffunction ha-cursado "Retorna si el alumno ?al ha cursado la asignatura ?a"
     (?al ?a)
 
     (bind ?nombre-cand (send ?a get-nombre))
@@ -35,6 +35,19 @@
     (return FALSE)
 )
 
+(deffunction creditos-aprobados "Obtiene los créditos aprobados del alumno ?al"
+    (?al)
+
+    (bind ?cred-apr 0)
+    (bind ?notas (send (send ?al get-expediente_alumno) get-notas_exp))
+    (progn$ (?ins ?notas)
+        (if (>= (send ?ins get-nota) 5) then
+            (bind ?cred-apr (+ ?cred-apr (send (send (send ?ins get-convocatoria_nota) get-asignatura_conv) get-num_creditos)))
+        )
+    )
+    ?cred-apr
+)
+
 
 (defrule entrada-refinamiento "Asociacion heuristica del problema"
     ?hecho <- (asociacion ok)
@@ -43,6 +56,7 @@
     (printout t "Refinamiento del problema" crlf)
 
     (assert (filtro-restr))
+    (assert (refina-rec))
     (retract ?hecho)
 )
 
@@ -51,12 +65,10 @@
     (nrestricciones ?nrest)
     (filtro-restr)
     ?ar <- (asig-rec (asign ?a) (rest-sat ?rs))
+    (test (!= ?nrest ?rs))
     =>
-    (if (!= ?nrest ?rs) then
-        (printout t (send ?a get-nombre) " no cumple todas las restricciones" crlf)
-        (retract ?ar)
-    )
-    (assert (refina-rec))
+    (printout t (send ?a get-nombre) " no cumple todas las restricciones" crlf)
+    (retract ?ar)
 )
 
 (defrule descarta-ya-aprobadas "Descarta las candidatas que ya se hayan cursado y aprobado"
@@ -65,12 +77,10 @@
     (dni ?dni)
     ?al <- (object (is-a Alumno) (id ?dni))
     ?ar <- (asig-rec (asign ?a))
+    (test (ha-aprobado ?al ?a))
     =>
-    (if (ha-aprobado ?al ?a)
-        then
-        (printout t (send ?a get-nombre) " ya esta aprobada" crlf)
-        (retract ?ar)
-    )
+    (printout t (send ?a get-nombre) " ya esta aprobada" crlf)
+    (retract ?ar)
 )
 
 (defrule descarta-segun-requisitos "Descarta las candidatas que incumplan los requisitos entre asignaturas"
@@ -125,6 +135,19 @@
         (printout t (send ?a get-nombre) " no cumple orrequisitos" crlf)
         (retract ?ar)
     )
+)
+
+(defrule descarta-optativas "Descarta las asignaturas optativas si no se ha superado la fase inicial (60 créditos ECTS)"
+    (declare (salience 7))
+    (refina-rec)
+    (dni ?dni)
+    ?al <- (object (is-a Alumno) (id ?dni))
+    ?ar <- (asig-rec (asign ?a))
+    (test (< (creditos-aprobados ?al) 60))
+    (test (eq Optativa (class ?a)))
+    =>
+    (printout t (send ?a get-nombre) " es optativa y no se puede cursar" crlf)
+    (retract ?ar)
 )
 
 (defrule refina

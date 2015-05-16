@@ -41,6 +41,7 @@
 
 (defrule escoge-horario-preferido
     (ent-asigs)
+    (dni ?dni)
     ?prob-abs <- (problema-abstracto (horario-preferidoR $?td) (horario-preferidoP $?tdP))
     ?alumn <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped))
     (test (neq ?td nil))
@@ -100,6 +101,7 @@
 
 (defrule escoge-interes-compl-esp
     (ent-asigs)
+    (dni ?dni)
     ?prob-abs <- (problema-abstracto (especialidadR ?espR) (especialidadP ?espP))
     ?al <- (object (is-a Alumno) (id ?dni) (especialidad ?e))
     (test (neq ?espR nil))
@@ -131,6 +133,7 @@
 
 (defrule escoge-intereses-competencias
     (ent-asigs)
+    (dni ?dni)
     ?prob-abs <- (problema-abstracto (competenciasR $?comRes) (competenciasP $?comPref))
     ?al <- (object (is-a Alumno) (id ?dni) (especialidad ?e))
     (test (!= 0 (length$ ?comRes)))
