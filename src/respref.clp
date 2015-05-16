@@ -86,6 +86,107 @@
 		(progn (format t ">> Preferencias%n") (assert (prefs ok)))
 	)
 
+    (bind ?ma (pregunta-rango ">> Cual es el numero maximo de asignaturas a matricular?" TRUE 1 6))
+    (if (not(eq ?ma nil))
+        then
+        (bind ?rec (modify ?rec (max_asigns ?ma)))
+    )
+
+    (bind ?mh (pregunta-rango ">> Cual es el numero maximo de horas de dedicacion semanales?" TRUE 0 50))
+    (if (not(eq ?mh nil))
+        then
+        (bind ?rec (modify ?rec (max_horas_trabajo ?mh)))
+    )
+
+    (bind ?ml (pregunta-rango ">> Cual es el numero maximo de horas de laboratorio semanales?" TRUE 0 50))
+    (if (not(eq ?ml nil))
+        then
+        (bind ?rec (modify ?rec (max_horas_lab ?ml)))
+    )
+
+    (bind ?th (pregunta-cerrada ">> Que horario se ajusta mejor a su disponibilidad?" TRUE manyana tarde))
+	(if (not(eq ?th nil))
+        then
+        (bind ?th-ins (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus ?th))))
+        (bind ?rec (modify ?rec (tipo_horario ?th-ins)))
+        else
+        (bind ?th-ins-man (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus "manyana"))))
+        (bind ?th-ins-tar (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus "tarde"))))
+        (bind $?tipo-horario (create$))
+        (bind ?tipo-horario (insert$ ?tipo-horario 1 ?th-ins-man))
+        (bind ?tipo-horario (insert$ ?tipo-horario 2 ?th-ins-tar))
+        (bind ?rec (modify ?rec (tipo_horario ?tipo-horario)))
+    )
+
+    (bind ?temasN (create$))
+    (do-for-all-instances ((?t Especializado)) TRUE (bind ?temasN (insert$ ?temasN 1 (send ?t get-nombre_tema))))
+    (bind ?numTem (pregunta-lista-numeros ">> Que temas especializados te interesan?" TRUE ?temasN))
+    (if (not(eq ?numTem nil))
+        then
+        (bind $?temasI (create$))
+        (loop-for-count (?i 1 (length$ ?numTem)) do
+            (bind ?num (nth$ ?i ?numTem))
+            (bind ?nomTem (nth$ ?num ?temasN))
+            (bind ?tema-ins (find-instance ((?tem Especializado)) (eq ?tem:nombre_tema ?nomTem)))
+
+            ;(printout t "numero " ?num crlf)
+            ;(printout t "nombre " ?nomTem crlf)
+            ;(printout t "instancia " ?tema-ins crlf)
+
+            (bind ?temasI (insert$ ?temasI 1 ?tema-ins))
+        )
+        (bind ?rec (modify ?rec (tema_especializado ?temasI)))
+    )
+
+    (if (not(eq ?esp [nil]))
+        then
+        ; el alumno tiene una especialidad
+        (bind ?bool (pregunta-cerrada ">> Deseas completar tu especialidad?" TRUE si no))
+        (if (eq ?bool si)
+            then
+            (bind ?rec (modify ?rec (completar_especialidad ?esp)))
+        )
+        else
+        ; el alumno no tiene una especialidad --> preguntar cual quiere cursar
+        (bind ?espN (create$))
+        (do-for-all-instances ((?t Especialidad)) TRUE (bind ?espN (insert$ ?espN 1 (send ?t get-nombre_esp))))
+        (bind ?numEsp (pregunta-numero ">> Que especialidad deseas matricular?" TRUE ?espN))
+        (if (not(eq ?numEsp nil))
+            then
+            (bind ?nomEsp (nth$ ?numEsp ?espN))
+            (bind ?esp-ins (find-instance ((?e Especialidad)) (eq ?e:nombre_esp (primera-mayus ?nomEsp))))
+
+            (printout t "numero " ?numEsp crlf)
+            (printout t "nombre " ?nomEsp crlf)
+            (printout t "instancia " ?esp-ins crlf)
+
+            (bind ?rec (modify ?rec (completar_especialidad (implode$ ?esp-ins))))
+        )
+    )
+
+    (bind ?comP (create$))
+    (do-for-all-instances ((?t Competencia)) TRUE (bind ?comP (insert$ ?comP 1 (str-cat (sub-string 3 (str-length(send ?t get-nombre_comp)) (send ?t get-nombre_comp))))))
+    (bind ?ordComP (sort-list ?comP))
+    (bind ?numComp (pregunta-lista-numeros ">> Cuales son tus competencias favoritas?" TRUE ?ordComP))
+    (if (not(eq ?numComp nil))
+        then
+        (bind $?compeI (create$))
+        (loop-for-count (?i 1 (length$ ?numComp)) do
+            (bind ?num (nth$ ?i ?numComp))
+
+            (bind ?nomComp (nth$ ?num ?ordComP))
+            ;(bind ?nivComp (sub-string (-(str-length(nth$ ?num ?ordComP))2) (-(str-length(nth$ ?num ?ordComP))1) (nth$ ?num ?ordComP)))
+            (bind $?comp-ins (find-all-instances ((?comp Competencia)) (= (str-compare (sub-string 3 (str-length ?comp:nombre_comp) ?comp:nombre_comp) ?nomComp) 0)))
+
+            (printout t "numero " ?num crlf)
+            (printout t "nombre " ?nomComp crlf)
+            ;(printout t "nivel " ?nivComp crlf)
+            (printout t "instancia " ?comp-ins crlf)
+
+            (bind ?compeI (insert$ ?compeI 1 ?comp-ins))
+        )
+        (bind ?rec (modify ?rec (competencias_preferidas ?compeI)))
+    )
 
     (retract ?hecho)
 )
@@ -101,7 +202,7 @@
     (printout t "Contador de restricciones" crlf)
     (bind ?nrest 0)
     (if (> (length$ ?cp) 0) then (bind ?nrest (+ ?nrest 1)))
-    (if (neq ?ce [nil]) then (bind ?nrest (+ ?nrest 1)))
+    (if (neq ?ce nil) then (bind ?nrest (+ ?nrest 1)))
     (if (neq ?d nil) then (bind ?nrest (+ ?nrest 1)))
     (if (neq ?ma nil) then (bind ?nrest (+ ?nrest 1)))
     (if (neq ?mht nil) then (bind ?nrest (+ ?nrest 1)))
@@ -263,6 +364,7 @@
     (assert (inf-horas ?nhoras-teo ?nhoras-lab ?nhoras-pro $?cuatris))
     (assert (inf-tema $?temas p $?afins))
     (assert (inf-horario $?horarioC p $?cuatris))
+    (assert (inf-curso))
     (retract ?hecho)
 )
 
@@ -466,6 +568,39 @@
     (retract ?hecho)
 )
 
+
+(deffunction curso-a-int
+    (?cur)
+
+    (switch ?cur
+        (case primero then (return 1))
+        (case segundo then (return 2))
+        (case tercero then (return 3))
+        (case cuarto then (return 4))
+    )
+)
+
+(defrule inferencia-curso
+    ?hecho <- (inf-curso)
+    (dni ?dni)
+    ?alumn <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped))
+    =>
+    (printout t "Inferencia de curso" crlf)
+
+    (bind ?notas (send ?exped get-notas_exp))
+    (bind ?max-curso 0)
+    (progn$ (?ins ?notas) ;encuentro el curso más superior que ha alcanzado el alumno
+        (if (> (curso-a-int (send (send (send ?ins get-convocatoria_nota) get-asignatura_conv) get-curso)) ?max-curso)
+            then
+            (bind ?max-curso (curso-a-int (send (send (send ?ins get-convocatoria_nota) get-asignatura_conv) get-curso)))
+        )
+    )
+
+    (retract ?hecho)
+    (assert (curso ?max-curso))
+    (assert (inf-curso ok))
+)
+
 (defrule fin-inferencia
     ?hecho1 <- (inf-comp ok)
     ?hecho2 <- (inf-esp ok)
@@ -474,11 +609,12 @@
     ?hecho5 <- (inf-horas ok)
     ?hecho6 <- (inf-tema ok)
     ?hecho7 <- (inf-horario ok)
+    ?hecho8 <- (inf-curso ok)
 
     =>
 
     (printout t "Fin inferencia" crlf)
 
     (assert(inferencia ok))
-    (retract ?hecho1 ?hecho2 ?hecho3 ?hecho4 ?hecho5 ?hecho6 ?hecho7)
+    (retract ?hecho1 ?hecho2 ?hecho3 ?hecho4 ?hecho5 ?hecho6 ?hecho7 ?hecho8)
 )

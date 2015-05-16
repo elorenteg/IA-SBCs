@@ -19,4 +19,6 @@ REFINAMIENTO
 * * nasigs E
 * * dificultad E
 
-* * Cumplimiento de requisitos !!!!
+* * Cumplimiento de requisitos (casi completado -faltan por acabar correquisitos)
+* * Filtrado de optativas si no están aprobados X% de los créditos
+* * Recomendar asignaturas de otras especialidades como optativas

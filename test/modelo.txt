@@ -1,0 +1,25 @@
+(run)
+
+;id alumno
+
+
+;PREFERENCIAS
+;Cual es el numero maximo de asignaturas a matricular? [1, 6] (opcional)
+;Cual es el numero maximo de horas de dedicacion semanales? [0, 50] (opcional)
+;Cual es el numero maximo de horas de laboratorio semanales? [0, 50] (opcional)
+;Que horario se ajusta mejor a su disponibilidad? [manyana tarde] (opcional)
+;Que temas especializados te interesan? (opcional)
+;Que especialidad deseas matricular? (opcional)
+;Cuales son tus competencias favoritas? (opcional)
+
+
+;RESTRICCIONES
+;Cual es el numero maximo de asignaturas a matricular? [1, 6] (opcional)
+;Cual es el numero maximo de horas de dedicacion semanales? [0, 50] (opcional)
+;Cual es el numero maximo de horas de laboratorio semanales? [0, 50] (opcional)
+;Que horario se ajusta mejor a su disponibilidad? [manyana tarde] (opcional)
+;Que temas especializados te interesan? (opcional)
+;Que especialidad deseas matricular? (opcional)
+;Cuales son tus competencias favoritas? (opcional)
+
+(exit)

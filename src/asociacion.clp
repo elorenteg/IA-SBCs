@@ -41,27 +41,32 @@
 
 (defrule escoge-horario-preferido
     (ent-asigs)
-    ?prob-abs <- (problema-abstracto (horario-preferidoR ?td)) ;si añado "(horario-preferidoP ?tdP)", no entrará a menos el usuario haya introducido ambos criterios
+    (dni ?dni)
+    ?prob-abs <- (problema-abstracto (horario-preferidoR $?td) (horario-preferidoP $?tdP))
+    ?alumn <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped))
+    (test (neq ?td nil))
     =>
     ;Restricciones
-    (bind ?res (create$))
-    (bind ?ins-asigs (find-all-instances ((?ins Asignatura))
-        (member ?td (create$ (progn$ (?cand (send ?ins get-horarios)) (insert$ ?res (+ 1 (length$ ?res)) (send ?cand get-horario)))))
-    ))
+    (if (= 1 (length$ ?td)) then
+        (bind ?insh (find-instance ((?ins Horario)) (eq ?ins:horario (nth$ 1 ?td))))
+        (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?insh ?ins:horarios))))
 
-    (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo horario-preferido) (es-pref FALSE))) ;poner un motivo más user-friendly
+        (loop-for-count (?i 1 (length$ ?ins-asigs)) do
+            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo horario-preferido) (es-pref FALSE))) ;poner un motivo más user-friendly
+        )
     )
 
     ;Preferencias
-    ;(bind ?resP (create$))
-    ;(bind ?ins-asigsP (find-all-instances ((?ins Asignatura))
-    ;    (member ?tdP (create$ (progn$ (?cand (send ?ins get-horarios)) (insert$ ?resP (+ 1 (length$ ?resP)) (send ?cand get-horario)))))
-    ;))
+    (if (= 1 (length$ ?tdP)) then
+        (bind ?resP (create$))
+        (bind ?ins-asigsP (find-all-instances ((?ins Asignatura))
+            (member ?tdP (create$ (progn$ (?cand (send ?ins get-horarios)) (insert$ ?resP (+ 1 (length$ ?resP)) (send ?cand get-horario)))))
+        ))
 
-    ;(loop-for-count (?i 1 (length$ ?ins-asigsP)) do
-    ;    (assert (nueva-rec (asign (nth$ ?i ?ins-asigsP)) (motivo horario-preferido) (es-pref TRUE))) ;poner un motivo más user-friendly
-    ;)
+        (loop-for-count (?i 1 (length$ ?ins-asigsP)) do
+            (assert (nueva-rec (asign (nth$ ?i ?ins-asigsP)) (motivo horario-preferido) (es-pref TRUE))) ;poner un motivo más user-friendly
+        )
+    )
 )
 
 (defrule escoge-volumen-trabajo
@@ -96,8 +101,10 @@
 
 (defrule escoge-interes-compl-esp
     (ent-asigs)
+    (dni ?dni)
     ?prob-abs <- (problema-abstracto (especialidadR ?espR) (especialidadP ?espP))
     ?al <- (object (is-a Alumno) (id ?dni) (especialidad ?e))
+    (test (neq ?espR nil))
     =>
     (bind ?ins-asigs (find-all-instances ((?ins Especializada)) (member ?e ?ins:especialidad_asig)))
 
@@ -115,6 +122,7 @@
 (defrule escoge-intereses-tematicos
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (intereses-tematicosR $?it))
+    (test (!= 0 (length$ ?it)))
     =>
     (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?it ?ins:temas))))
 
@@ -125,13 +133,16 @@
 
 (defrule escoge-intereses-competencias
     (ent-asigs)
+    (dni ?dni)
     ?prob-abs <- (problema-abstracto (competenciasR $?comRes) (competenciasP $?comPref))
     ?al <- (object (is-a Alumno) (id ?dni) (especialidad ?e))
+    (test (!= 0 (length$ ?comRes)))
+
     =>
-    
+
     (bind ?ins-asigs-pref (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?comPref ?ins:competencias))))
     (bind ?ins-asigs-rest (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?comRes ?ins:competencias))))
-    
+
     (loop-for-count (?i 1 (length$ ?ins-asigs-pref)) do
         (assert (nueva-rec (asign (nth$ ?i ?ins-asigs-pref)) (motivo intereses-competencias) (es-pref TRUE))) ;poner un motivo más user-friendly
     )
@@ -140,6 +151,26 @@
     )
 )
 
+(defrule escoge-curso
+    (ent-asigs)
+    ?prob-abs <- (problema-abstracto (curso-estudios ?ce))
+    =>
+    (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (= (curso-a-int ?ins:curso) ?ce)))
+
+    (loop-for-count (?i 1 (length$ ?ins-asigs)) do
+        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo sigue-plan-estudios) (es-pref TRUE))) ;poner un motivo más user-friendly
+    )
+
+    ;intentamos recomendar asignaturas del siguiente curso (por si el alumno está a punto de empezar uno nuevo)
+    (if (< ?ce 4)
+        then
+        (bind ?ins-asigs2 (find-all-instances ((?ins Asignatura)) (= (curso-a-int ?ins:curso) (+ 1 ?ce))))
+        (loop-for-count (?i 1 (length$ ?ins-asigs2)) do
+            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs2)) (motivo sigue-plan-estudios) (es-pref TRUE)))
+        )
+    )
+
+)
 
 
 
@@ -162,6 +193,7 @@
 )
 
 (defrule anade-asig-rec "Añade una nueva asignatura recomendada (antes no existía)"
+    (declare (salience 5))
     ?nr <- (nueva-rec (asign ?a) (motivo ?m) (es-pref ?ep))
     (not (exists (asig-rec (asign ?a))))
     =>
