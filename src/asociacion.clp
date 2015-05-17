@@ -40,10 +40,7 @@
 
 (defrule escoge-horario-preferido
     (ent-asigs)
-    (dni ?dni)
     ?prob-abs <- (problema-abstracto (horario-preferidoR $?td) (horario-preferidoP $?tdP))
-    ?alumn <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped))
-    ;(test (neq ?td nil))
     =>
     (printout t ">> Asociacion de Horario" crlf)
 
@@ -70,60 +67,58 @@
     )
 )
 
+(deffunction volumen-trabajo
+    (?vt ?es_pref)
+    
+    (if (not(eq ?vt nil))
+        then
+        (if (eq ?vt bajo)
+            then
+            (bind ?min 0)
+            (bind ?max 20)
+            else (if (eq ?vt medio)
+                then
+                (bind ?min 20)
+                (bind ?max 40)
+                else
+                (bind ?min 40)
+                (bind ?max 50)
+            )
+        )
+        (bind ?ins-asigs (find-all-instances ((?ins Asignatura))
+            (and
+                (<= ?min (+ (send ?ins get-horas_lab) (send ?ins get-horas_prob)))
+                (<= (+ (send ?ins get-horas_lab) (send ?ins get-horas_prob)) ?max))))
+
+        (loop-for-count (?i 1 (length$ ?ins-asigs)) do
+            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo volumen-trabajo) (es-pref ?es_pref))) ;poner un motivo más user-friendly
+        )
+    )
+)
+
 (defrule escoge-volumen-trabajo
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (volumen-trabajoR ?vtR) (volumen-trabajoP ?vtP))
-    ;(test (neq ?vt nil))
     =>
     (printout t ">> Asociacion de volumen de trabajo" crlf)
 
-    (if (not(eq ?vtR nil))
-        then
-        (if (eq ?vtR bajo)
-            then
-            (bind ?minR 0)
-            (bind ?maxR 20)
-            else (if (eq ?vtR medio)
-                then
-                (bind ?minR 20)
-                (bind ?maxR 40)
-                else
-                (bind ?minR 40)
-                (bind ?maxR 50)
-            )
-        )
-        (bind ?ins-asigs (find-all-instances ((?ins Asignatura))
-            (and
-                (<= ?minR (+ (send ?ins get-horas_lab) (send ?ins get-horas_prob)))
-                (<= (+ (send ?ins get-horas_lab) (send ?ins get-horas_prob)) ?maxR))))
+    (volumen-trabajo ?vtR FALSE)
+    (volumen-trabajo ?vtP TRUE)
+)
 
+(deffunction tiempo-dedicacion
+    (?td ?es_pref)
+    
+    (if (neq ?td nil) then
+        (if (eq ?td "alto")
+            then (bind ?max 100)
+            else (if (eq ?td "medio") then (bind ?max 60)
+            else (bind ?max 33)
+        ))
+
+        (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (<= (+ (send ?ins get-horas_teoria) (send ?ins get-horas_lab) (send ?ins get-horas_prob)) ?max)))
         (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo volumen-trabajo) (es-pref FALSE))) ;poner un motivo más user-friendly
-        )
-    )
-
-    (if (not(eq ?vtP nil))
-        then
-        (if (eq ?vtP bajo)
-            then
-            (bind ?minP 0)
-            (bind ?maxP 20)
-            else (if (eq ?vtP medio)
-                then
-                (bind ?minP 20)
-                (bind ?maxP 40)
-                else
-                (bind ?minP 40)
-                (bind ?maxP 50)
-            )
-        )
-        (bind ?ins-asigs (find-all-instances ((?ins Asignatura))
-            (and
-                (<= ?minP (+ (send ?ins get-horas_lab) (send ?ins get-horas_prob)))
-                (<= (+ (send ?ins get-horas_lab) (send ?ins get-horas_prob)) ?maxP))))
-
-        (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo volumen-trabajo) (es-pref TRUE))) ;poner un motivo más user-friendly
+            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo tiempo-dedicacion) (es-pref ?es_pref))) ;poner un motivo más user-friendly
         )
     )
 )
@@ -132,44 +127,43 @@
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (tiempo-dedicacionR ?tdR) (tiempo-dedicacionP ?tdP))
     =>
-    (if (neq ?tdR nil) then
-        (if (eq ?tdR "alto")
-            then (bind ?max 100)
-            else (if (eq ?tdR "medio") then (bind ?max 60)
-            else (bind ?max 33)
-        ))
+    
+    (tiempo-dedicacion ?tdR FALSE)
+    (tiempo-dedicacion ?tdP TRUE)
+)
 
-        (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (<= (+ (send ?ins get-horas_teoria) (send ?ins get-horas_lab) (send ?ins get-horas_prob)) ?max)))
-        (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo tiempo-dedicacion) (es-pref FALSE))) ;poner un motivo más user-friendly
+(deffunction completar-esp
+    (?esp ?es_pref)
+    
+    (if (not(eq ?esp nil))
+        then
+        (bind ?asigs (find-all-instances ((?ins Especializada)) (member ?esp ?ins:especialidad_asig)))
+
+        (loop-for-count (?i 1 (length$ ?asigs)) do
+            (assert (nueva-rec (asign (nth$ ?i ?asigs)) (motivo interes-compl-esp) (es-pref ?es_pref))) ;poner un motivo más user-friendly
         )
     )
 )
 
 (defrule escoge-interes-compl-esp
     (ent-asigs)
-    (dni ?dni)
     ?prob-abs <- (problema-abstracto (especialidadR ?espR) (especialidadP ?espP))
-    ?al <- (object (is-a Alumno) (id ?dni) (especialidad ?e))
-    ;(test (neq ?espR nil))
     =>
     (printout t ">> Asociacion de Especialidad" crlf)
 
-    (if (not(eq ?espR nil))
+    (completar-esp ?espR FALSE)
+    (completar-esp ?espP TRUE)
+)
+
+(deffunction intereses-tematicos
+    (?es_pref $?it)
+    
+    (if (!= 0 (length$ ?it))
         then
-        (bind ?asigsR (find-all-instances ((?ins Especializada)) (member ?espR ?ins:especialidad_asig)))
+        (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?it ?ins:temas))))
 
-        (loop-for-count (?i 1 (length$ ?asigsR)) do
-            (assert (nueva-rec (asign (nth$ ?i ?asigsR)) (motivo interes-compl-esp) (es-pref FALSE))) ;poner un motivo más user-friendly
-        )
-    )
-
-    (if (not(eq ?espP nil))
-        then
-        (bind ?asigsP (find-all-instances ((?ins Especializada)) (member ?espP ?ins:especialidad_asig)))
-
-        (loop-for-count (?i 1 (length$ ?asigsP)) do
-            (assert (nueva-rec (asign (nth$ ?i ?asigsP)) (motivo interes-compl-esp) (es-pref TRUE))) ;poner un motivo más user-friendly
+        (loop-for-count (?i 1 (length$ ?ins-asigs)) do
+            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo intereses-tematicos) (es-pref ?es_pref))) ;poner un motivo más user-friendly
         )
     )
 )
@@ -177,49 +171,69 @@
 (defrule escoge-intereses-tematicos
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (intereses-tematicosR $?itR) (intereses-tematicosP $?itP))
-    ;(test (!= 0 (length$ ?it)))
     =>
     (printout t ">> Asociacion de Tema" crlf)
 
-    (if (!= 0 (length$ ?itR))
+    (intereses-tematicos FALSE ?itR)
+    (intereses-tematicos TRUE ?itP)
+)
+
+(deffunction intereses-competencias
+    (?es_pref $?com)
+    
+    (if (!= 0 (length$ ?com))
         then
-        (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?itR ?ins:temas))))
+        (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?com ?ins:competencias))))
 
         (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo intereses-tematicos) (es-pref FALSE))) ;poner un motivo más user-friendly
-        )
-    )
-
-    (if (!= 0 (length$ ?itP))
-        then
-        (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?itP ?ins:temas))))
-
-        (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo intereses-tematicos) (es-pref TRUE))) ;poner un motivo más user-friendly
+            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo intereses-competencias) (es-pref ?es_pref))) ;poner un motivo más user-friendly
         )
     )
 )
 
 (defrule escoge-intereses-competencias
     (ent-asigs)
-    (dni ?dni)
     ?prob-abs <- (problema-abstracto (competenciasR $?comRes) (competenciasP $?comPref))
-    ?al <- (object (is-a Alumno) (id ?dni) (especialidad ?e))
-    ;(test (!= 0 (length$ ?comRes)))
 
     =>
     (printout t ">> Asociacion de Competencias" crlf)
 
-    (bind ?ins-asigs-pref (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?comPref ?ins:competencias))))
-    (bind ?ins-asigs-rest (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?comRes ?ins:competencias))))
+    (intereses-competencias FALSE ?comRes)
+    (intereses-competencias TRUE ?comPref)
+)
 
-    (loop-for-count (?i 1 (length$ ?ins-asigs-pref)) do
-        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs-pref)) (motivo intereses-competencias) (es-pref TRUE))) ;poner un motivo más user-friendly
-    )
-    (loop-for-count (?i 1 (length$ ?ins-asigs-rest)) do
-        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs-rest)) (motivo intereses-competencias) (es-pref FALSE))) ;poner un motivo más user-friendly
+(deffunction dificultad
+    (?dif ?es_pref)
+    
+    (if (not(eq ?dif nil))
+        then
+        (bind $?asigs-dificiles (find-all-instances ((?ins Asignatura)) (< ?ins:aprobados_ant 70)))
+        (bind $?asigs-faciles (find-all-instances ((?ins Asignatura)) (not(member ?ins ?asigs-dificiles))))
+
+        (loop-for-count (?i 1 (length$ ?asigs-faciles)) do
+            (assert (nueva-rec (asign (nth$ ?i ?asigs-faciles)) (motivo dificultad-facil) (es-pref ?es_pref))) ;poner un motivo más user-friendly
+        )
+        (if (eq ?dif dificil)
+            then
+            (loop-for-count (?i 1 (length$ ?asigs-dificiles)) do
+                (assert (nueva-rec (asign (nth$ ?i ?asigs-dificiles)) (motivo dificultad-dificil) (es-pref ?es_pref))) ;poner un motivo más user-friendly
+            )
+        )
     )
 )
+
+(defrule escoge-dificultad
+    (ent-asigs)
+    ?prob-abs <- (problema-abstracto (dificultadR ?difRes) (dificultadP ?difPref))
+    
+    =>
+    (printout t ">> Asociacion de Dificultad" crlf)
+    
+    (dificultad ?difRes FALSE)
+    (dificultad ?difPref TRUE)
+)
+
+
 
 (defrule escoge-curso
     (ent-asigs)
