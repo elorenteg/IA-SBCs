@@ -1,7 +1,34 @@
 
 \subsection{Algunos ejemplos del conocimiento experto} \label{sec:ejemplos}
 
-%%% TODO %%%
+En las secciones previas, se ha hablado de la adecuación de las asignaturas a 
+los alumnos de forma abstracta. Sin embargo, no se han establecido de ningún 
+modo los criterios de valoración de las asignaturas que el sistema utilizará 
+para generar una recomendación. A continuación, procedemos a ofrecer algunos 
+ejemplos concretos del conocimiento experto del sistema que permite efectuar 
+esta valoración, a parte del conocimiento objetivo sobre el plan de estudios 
+y el expediente del alumno ya descrito.
 
+En el problema de inferencia de conocimiento a partir del expediente, se usa 
+implícitamente una gran cantidad de conocimiento sobre el dominio para obtener 
+conclusiones. Por ejemplo, el sistema asume que, si un alumno ha realizado 
+todas las asignaturas del cuatrimestre previo en un mismo horario, es porque 
+tiene preferencia por este horario. Del mismo modo, el sistema deduce que la 
+carga de trabajo o la dificultad de las asignaturas soportada por el alumno 
+es similar a la de los cuatrimestres previos (por lo tanto, si el alumno ha 
+matriculado pocas asignaturas en los cuatrimestres anteriores, es razonable 
+ofrecer una recomendación de pocas asignaturas a matricular). También se 
+deduce que los temas de interés del alumno son aquellos que se han tratado en 
+las asignaturas matriculadas anteriormente (es decir, es razonable pensar que 
+un alumno se matricula de aquellas asignaturas que le interesan).
+
+En el problema de valoración de las asignaturas también se utiliza 
+conocimiento experto sobre el dominio. Entre otros usos, el sistema determina 
+la dificultad aproximada de las asignaturas en función del porcentaje de 
+aprobados y de la nota media del último cuatrimestre (parece razonable admitir 
+que una asignatura es fácil si la gran mayoría de los matriculados la aprueban 
+y si la nota media es alta y que es difícil en caso contrario). 
+
+% TODO : Igual faltan cosas, pero no se me ocurre nada más.
 
 
