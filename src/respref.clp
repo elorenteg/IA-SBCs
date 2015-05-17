@@ -260,11 +260,11 @@
         (bind ?horL (send ?asig get-horas_lab))
         (bind ?horP (send ?asig get-horas_prob))
         (bind $?com (send ?asig get-competencias))
-        (bind ?espA nil)
+        (bind $?espA nil)
         (if (eq (str-cat (class ?asig)) "Especializada")
             then
-            (printout t "Asignatura de Especialidad!" crlf)
-            (bind ?espA (send ?asig get-especialidad_asig))
+            ;(printout t "Asignatura de Especialidad!" crlf)
+            (bind $?espA (send ?asig get-especialidad_asig))
         )
         (bind ?horaI (send ?conv get-horario_conv))
         (bind ?horaS (send ?horaI get-horario))
@@ -307,13 +307,13 @@
             )
             (if (eq (str-cat (class ?tem-j)) "Especializado")
                 then
-                (printout t "Tema Especializado! (tiene afines)" crlf)
+                ;(printout t "Tema Especializado! (tiene afines)" crlf)
                 (bind $?temAf (send ?tem-j get-temas_afines))
                 (loop-for-count (?k 1 (length$ ?temAf)) do
                     (bind ?tem-k (nth$ ?k ?temAf))
-                    (if (not (member ?tem-k ?afines))
+                    (if (not (member ?tem-k ?afins))
                         then
-                        (bind ?afines (insert$ ?afines 1 ?tem-k))
+                        (bind ?afins (insert$ ?afins 1 ?tem-k))
                     )
                 )
             )
@@ -329,17 +329,22 @@
             )
         )
 
-        (if (not(eq ?espA nil))
+        (if (not (eq ?espA nil))
             then
-            (if (not (member ?espA ?espeCur))
-                then
-                (bind ?espeCur (insert$ ?espeCur 1 ?espA))
-                (bind ?nasigEs (insert$ ?nasigEs 1 1))
-                else
-                (bind ?ind (find-index ?espA ?espeCur))
-                (bind ?nasigEs (replace$ ?nasigEs ?ind ?ind (+(nth$ ?ind ?nasigEs)1)))
+            (loop-for-count (?j 1 (length$ ?espA)) do
+                (bind ?esp-j (nth$ ?j ?espA))
+                    then
+                (if (not (member ?esp-j ?espeCur))
+                    then
+                    (bind ?espeCur (insert$ ?espeCur 1 ?esp-j))
+                    (bind ?nasigEs (insert$ ?nasigEs 1 1))
+                    else
+                    (bind ?ind (find-index ?esp-j ?espeCur))
+                    (bind ?nasigEs (replace$ ?nasigEs ?ind ?ind (+(nth$ ?ind ?nasigEs)1)))
+                )
             )
         )
+        
 
         (if (> ?aprob 70)
             then
