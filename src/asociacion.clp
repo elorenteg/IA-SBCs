@@ -4,7 +4,8 @@
 
 (deftemplate asig-rec "Asignatura recomendada con sus motivos (a partir de todas las reglas)"
     (slot asign)
-    (multislot motivos (default (create$)))
+    (multislot motivosR (default (create$)))
+    (multislot motivosP (default (create$)))
     (slot rest-sat) ;número de restricciones que satisface
     (slot pref-sat) ;número de preferencias que satisface
     ;añadir también el grado de recomendación? [altamente recomendable, recomendable]
@@ -273,20 +274,24 @@
     )
 )
 
+
+
 (defrule modifica-asig-rec "Modifica una asignatura recomendada (añade motivo y/o pref-sat)"
     (declare (salience 10)) ;tiene prioridad para comprobar si ya existe la asig-rec
     ?nr <- (nueva-rec (asign ?a) (motivo ?m) (es-pref ?ep))
-    ?ar <- (asig-rec (asign ?a) (motivos $?ms) (rest-sat ?rs) (pref-sat ?ps))
+    ?ar <- (asig-rec (asign ?a) (motivosR $?msR) (motivosP $?msP) (rest-sat ?rs) (pref-sat ?ps))
     =>
     (if (eq ?ep TRUE)
         then
         (bind ?ps-nuevo (+ 1 ?ps))
         (bind ?rs-nuevo ?rs)
+        (bind ?ar (modify ?ar (motivosP (insert$ ?msP 1 ?m)) (rest-sat ?rs-nuevo) (pref-sat ?ps-nuevo)))
         else
         (bind ?ps-nuevo ?ps)
         (bind ?rs-nuevo (+ 1 ?rs))
+        (bind ?ar (modify ?ar (motivosR (insert$ ?msR 1 ?m)) (rest-sat ?rs-nuevo) (pref-sat ?ps-nuevo)))
     )
-    (bind ?ar (modify ?ar (motivos (insert$ ?ms 1 ?m)) (rest-sat ?rs-nuevo) (pref-sat ?ps-nuevo)))
+    
 
     (retract ?nr)
 )
@@ -300,11 +305,13 @@
         then
         (bind ?ps 1)
         (bind ?rs 0)
+        (assert (asig-rec (asign ?a) (motivosP (create$ ?m)) (rest-sat ?rs) (pref-sat ?ps)))
         else
         (bind ?ps 0)
         (bind ?rs 1)
+        (assert (asig-rec (asign ?a) (motivosR (create$ ?m)) (rest-sat ?rs) (pref-sat ?ps)))
     )
-    (assert (asig-rec (asign ?a) (motivos (create$ ?m)) (rest-sat ?rs) (pref-sat ?ps)))
+    
 
     (retract ?nr)
 )
