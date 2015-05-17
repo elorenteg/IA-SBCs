@@ -25,17 +25,59 @@ primeras semanas.
 Inicialmente, se desarrolló un primer prototipo que sirvió para evaluar el 
 funcionamiento y las posibilidades del lenguaje \texttt{CLIPS}. Esta primera 
 versión constaba de dos módulos simples de funcionalidad reducida. El primero
-de ellos hacía preguntas al usuario sobre algunas de sus preferencias y 
-restricciones y añadía las respuestas obtenidas al sistema en forma de hechos 
-estructurados con \texttt{deftemplates}. El segundo módulo generaba una 
-recomendación prácticamente aleatoria, sin tener en cuenta de ninguna manera 
-las preferencias o restricciones del alumno, simplemente elegía hasta seis 
-asignaturas que no se hubiesen cursado anteriormente. Esto sirvió para 
-aprender a navegar en las reglas de \texttt{CLIPS} entre los diferentes 
-conceptos representados en la ontología.
+de ellos constaba de funciones para hacer preguntas al usuario sobre algunas 
+de sus preferencias y restricciones y añadir las respuestas obtenidas al 
+sistema en forma de hechos estructurados con \texttt{deftemplates}. El segundo 
+módulo generaba una recomendación prácticamente aleatoria, sin tener en cuenta 
+de ninguna manera las preferencias o restricciones del alumno, simplemente 
+elegía hasta seis asignaturas que no se hubiesen cursado anteriormente. Esto 
+sirvió para aprender a navegar en las reglas de \texttt{CLIPS} entre los 
+diferentes conceptos representados en la ontología.
 
-% TODO : Más prototipos. Por ejemplo: añadir módulos de abstracción y 
-%        asociación incompletos, añadir más reglas, añadir fase de refinamiento.
+Un segundo prototipo añadió el tratamiento de algunas preferencias y 
+restricciones en la generación de la recomendación. En particular, se añadió 
+un módulo para la fase de abstracción y otro módulo para la fase de asociación
+(fases explicadas en la \autoref{sec:razonamiento}). En esta versión, sin 
+embargo, solo se trataban las restricciones y preferencias de horario y de la 
+especialidad cursada (en caso de que se introdujesen explícitamente como 
+respuestas a las preguntas del sistema, ya que no había inferencia a partir 
+del expediente todavía), puesto que eran las más sencillas de evaluar. Por lo 
+tanto, el último módulo del primer prototipo se modificó para que eligiese 
+asignaturas que cumplieran estas restricciones y preferencias (dentro de lo 
+posible) y lo mostrase explícitamente (es decir, que diese una breve 
+descripción de los motivos de la elección). 
+
+En el tercer prototipo, se expandió el conjunto de restricciones y 
+preferencias que el sistema era capaz de tener en cuenta en la recomendación. 
+Así, el módulo de preguntas se mejoró con la inclusión de algunas preguntas 
+addicionales para poder obtener más información del alumno. Asimismo, se 
+añadieron las reglas pertinentes a los módulos de abstracción y de asociación 
+para poder determinar qué restricciones y preferencias cumplían las distintas 
+asignaturas a recomendar. En esta fase, ya se trataban todas las restricciones 
+y preferencias descritas en la \autoref{sec:razonamiento} exceptuando las del 
+refinamiento final. Por ello, el último módulo también se adaptó para 
+recomendar aquellas asignaturas que cumplían todas estas restricciones y el 
+mayor número posible de preferencias, detallando los motivos de la elección. 
+
+El cuarto prototipo supuso un gran avance hacia la versión final. En este 
+prototipo, se añadieron un módulo de inferencia de preferencias a partir del 
+expediente del alumno, así como un módulo de refinamiento de soluciones. El 
+módulo de inferencia contiene las reglas que crean hechos para expresar 
+preferencias del alumno que no ha introducido explícitamente y que se deducen 
+de su expediente. Por otro lado, el módulo de refinamiento incluye el 
+tratamiento de las restricciones y preferencias que conciernen a la 
+recomendación final o que requieren de conocimiento concreto, como se explica 
+en la \autoref{sec:razonamiento}. 
+
+Finalmente, a partir de este último prototipo, se construyó la versión final 
+del sistema. Esta versión final incluyó ligeras mejoras en las reglas y en su 
+estructura. Asimismo, se mejoró el módulo de selección de las asignaturas a 
+recomendar para tener en cuenta todas las restricciones y preferencias. 
+También se modificó el sistema de preguntas al usuario para hacerlo más 
+``amigable'' y se expresó la salida (es decir, la recomendación final de 
+asignaturas) de forma más ordenada y detallada. La estructura en módulos del 
+programa final se asemeja a la división en subproblemas explicada en 
+\autoref{sec:subproblemas}.
 
 
 \clearpage
