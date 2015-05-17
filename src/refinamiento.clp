@@ -174,9 +174,16 @@
 )
 
 (deffunction grado-recomendacion
-    (?asig $?motivos)
+    (?ps)
     
-    (return recomendable)
+    (if (< ?ps 4)
+        then (return poco-recomendable)
+        else
+        (if (< ?ps 6)
+            then (return recomendable)
+            else (return altamente-recomendable)
+        )
+    )
 )
 
 (deffunction muestra-mot
@@ -184,7 +191,7 @@
     
     (loop-for-count (?i 1 (length$ ?motivos)) do
         (bind ?mot (nth$ ?i ?motivos))
-        (printout t " * " ?mot crlf)
+        ;(printout t " * " ?mot crlf)
     )
 )
 
@@ -193,7 +200,7 @@
     ?ar <- (asig-rec (asign ?a) (motivosR $?msR) (motivosP $?msP) (rest-sat ?rs) (pref-sat ?ps))
     =>
     (bind ?nomA (send ?a get-nombre))
-    (bind ?gradoRec (grado-recomendacion ?a $?msP))
+    (bind ?gradoRec (grado-recomendacion ?ps))
     (format t "%s (%s): %n" ?nomA ?gradoRec)
     (muestra-mot ?rs ?msR)
     (muestra-mot ?ps ?msP)
