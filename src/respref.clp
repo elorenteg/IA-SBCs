@@ -208,7 +208,7 @@
     (if (neq ?mht nil) then (bind ?nrest (+ ?nrest 1)))
     (if (neq ?mhl nil) then (bind ?nrest (+ ?nrest 1)))
     (if (> (length$ ?te) 0) then (bind ?nrest (+ ?nrest 1)))
-    (if (neq (length$ ?th) 2) then (bind ?nrest (+ ?nrest 1))) ;por defecto ?th tiene asignado los dos horarios posibles
+    (if (> (length$ ?th) 0) then (bind ?nrest (+ ?nrest 1))) ;por defecto ?th tiene asignado los dos horarios posibles
 
     (printout t ">> num. restricciones: " ?nrest crlf)
 

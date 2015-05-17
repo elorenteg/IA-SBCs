@@ -37,34 +37,34 @@
     (retract ?hecho)
 )
 
+(deffunction horario-preferido
+    (?es_pref $?td)
+    
+    (if (!= 0 (length$ ?td))
+        then
+        (bind ?horasI (create$))
+        (loop-for-count (?i 1 (length$ td)) do
+            (bind ?horaN (nth$ ?i ?td))
+            (bind ?horaI (nth$ 1 (find-instance ((?ins Horario)) (eq ?ins:horario ?horaN))))
+            (bind ?horasI (insert$ ?horasI 1 ?horaI))
+        )
+        
+        (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?horasI ?ins:horarios))))
+        
+        (loop-for-count (?i 1 (length$ ?ins-asigs)) do
+            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo horario-preferido) (es-pref ?es_pref))) ;poner un motivo más user-friendly
+        )
+    )
+)
 
 (defrule escoge-horario-preferido
     (ent-asigs)
-    ?prob-abs <- (problema-abstracto (horario-preferidoR $?td) (horario-preferidoP $?tdP))
+    ?prob-abs <- (problema-abstracto (horario-preferidoR $?tdR) (horario-preferidoP $?tdP))
     =>
     (printout t ">> Asociacion de Horario" crlf)
 
-    ;Restricciones
-    (if (= 1 (length$ ?td)) then
-        (bind ?insh (find-instance ((?ins Horario)) (eq ?ins:horario (nth$ 1 ?td))))
-        (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?insh ?ins:horarios))))
-
-        (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo horario-preferido) (es-pref FALSE))) ;poner un motivo más user-friendly
-        )
-    )
-
-    ;Preferencias
-    (if (= 1 (length$ ?tdP)) then
-        (bind ?resP (create$))
-        (bind ?ins-asigsP (find-all-instances ((?ins Asignatura))
-            (member ?tdP (create$ (progn$ (?cand (send ?ins get-horarios)) (insert$ ?resP (+ 1 (length$ ?resP)) (send ?cand get-horario)))))
-        ))
-
-        (loop-for-count (?i 1 (length$ ?ins-asigsP)) do
-            (assert (nueva-rec (asign (nth$ ?i ?ins-asigsP)) (motivo horario-preferido) (es-pref TRUE))) ;poner un motivo más user-friendly
-        )
-    )
+    (horario-preferido FALSE ?tdR)
+    (horario-preferido TRUE ?tdP)
 )
 
 (deffunction volumen-trabajo
