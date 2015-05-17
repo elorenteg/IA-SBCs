@@ -172,7 +172,18 @@
 
 )
 
+(defrule escoge-especialidad-principal "Escoge asignaturas de la especialidad principal"
+    (ent-asigs)
+    (dni ?dni)
+    ?al <- (object (is-a Alumno) (id ?dni) (especialidad ?e))
+    (test (neq ?e [nil]))
+    =>
+    (bind ?ins-asigs (find-all-instances ((?ins Especializada)) (member ?e ?ins:especialidad_asig)))
 
+    (loop-for-count (?i 1 (length$ ?ins-asigs)) do
+        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo sigue-esp-principal) (es-pref TRUE))) ;poner un motivo más user-friendly
+    )
+)
 
 (defrule modifica-asig-rec "Modifica una asignatura recomendada (añade motivo y/o pref-sat)"
     (declare (salience 10)) ;tiene prioridad para comprobar si ya existe la asig-rec

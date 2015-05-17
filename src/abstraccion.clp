@@ -33,8 +33,6 @@
     ?hecho <- (inferencia ok)
     =>
     (printout t "Abstraccion del problema" crlf)
-    ;;; TODO: abstraccion del problema ;;;
-    ;;; esta funcion solo genera los hechos para ejecutar las reglas de abstraccion ;;;
 
     (assert (ent-abs-dedicacion) (ent-abs-horario) (ent-abs-especialidad) (ent-abs-dificultad) (ent-abs-tema) (ent-abs-competencias) (ent-abs-curso))
     (assert (problema-abstracto))
@@ -66,11 +64,11 @@
     )
     (if (not(eq ?horasRes nil))
         then
-        (if (<= ?horasRes 300)
+        (if (<= ?horasRes 20)
             then
             (bind ?abs (modify ?abs (tiempo-dedicacionR "bajo")))
             else
-            (if (<= ?horasRes 600)
+            (if (<= ?horasRes 40)
                 then
                 (bind ?abs (modify ?abs (tiempo-dedicacionR "medio")))
                 else
@@ -94,11 +92,11 @@
     )
     (if (not(eq ?horasPref nil))
         then
-        (if (<= ?horasPref 300)
+        (if (<= ?horasPref 20)
             then
             (bind ?abs (modify ?abs (tiempo-dedicacionP "bajo")))
             else
-            (if (<= ?horasPref 600)
+            (if (<= ?horasPref 40)
                 then
                 (bind ?abs (modify ?abs (tiempo-dedicacionP "medio")))
                 else
@@ -295,7 +293,6 @@
     ?hecho6 <- (abs-competencias ok)
     ?hecho7 <- (abs-curso ok)
     =>
-    ;;; esta regla elimina los hechos usados en la abstraccion y genera un assert conforme ha acabado ;;;
     (printout t "Fin abstraccion" crlf)
     (assert(abstraccion ok))
     (retract ?hecho1 ?hecho2 ?hecho3 ?hecho4 ?hecho5 ?hecho6 ?hecho7)
