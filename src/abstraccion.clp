@@ -137,25 +137,21 @@
     =>
 
     (printout t ">> Abstraccion de Horario" crlf)
-    (if (= (length$ ?thRes) 1)
+    (if (> (length$ ?thRes) 0)
         then
-        (bind ?hora (nth$ 1 ?thRes)) ; instancia Tipo_Horario
-        (bind ?absRes (send ?hora get-horario)) ; valor del horario
-        (bind ?abs (modify ?abs (horario-preferidoR ?absRes))) ; añadir a la abstraccion
-        else
-        (bind ?absRes (insert$ ?absRes 1 "Manyana"))
-        (bind ?absRes (insert$ ?absRes 2 "Tarde"))
-        (bind ?abs (modify ?abs (horario-preferidoR ?absRes)))
+        (loop-for-count (?i 1 (length$ ?thRes)) do
+            (bind ?hora (nth$ ?i ?thRes))
+            (bind ?absRes (insert$ ?absRes 1 (send ?hora get-horario)))
+            (bind ?abs (modify ?abs (horario-preferidoR ?absRes)))
+        )
     )
     (if (= (length$ ?thPref) 1)
         then
-        (bind ?hora (nth$ 1 ?thPref)) ; instancia Tipo_Horario
-        (bind ?absPref (send ?hora get-horario)) ; valor del horario
-        (bind ?abs (modify ?abs (horario-preferidoP ?absPref))) ; añadir a la abstraccion
-        else
-        (bind ?absPref (insert$ ?absPref 1 "Manyana"))
-        (bind ?absPref (insert$ ?absPref 2 "Tarde"))
-        (bind ?abs (modify ?abs (horario-preferidoP ?absPref)))
+        (loop-for-count (?i 1 (length$ ?thPref)) do
+            (bind ?hora (nth$ ?i ?thPref))
+            (bind ?absPref (insert$ ?absPref 1 (send ?hora get-horario)))
+            (bind ?abs (modify ?abs (horario-preferidoP ?absPref)))
+        )
     )
 
     (assert(abs-horario ok))

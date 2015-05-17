@@ -191,7 +191,7 @@
     
     (loop-for-count (?i 1 (length$ ?motivos)) do
         (bind ?mot (nth$ ?i ?motivos))
-        ;(printout t " * " ?mot crlf)
+        (printout t "  * " ?mot crlf)
     )
 )
 
@@ -202,6 +202,8 @@
     (bind ?nomA (send ?a get-nombre))
     (bind ?gradoRec (grado-recomendacion ?ps))
     (format t "%s (%s): %n" ?nomA ?gradoRec)
+    (printout t " * Restricciones" crlf)
     (muestra-mot ?rs ?msR)
+    (printout t " * Preferencias" crlf)
     (muestra-mot ?ps ?msP)
 )

@@ -68,45 +68,6 @@
     (horario-preferido TRUE ?tdP)
 )
 
-(deffunction volumen-trabajo
-    (?vt ?es_pref)
-    
-    (if (not(eq ?vt nil))
-        then
-        (if (eq ?vt bajo)
-            then
-            (bind ?min 0)
-            (bind ?max 20)
-            else (if (eq ?vt medio)
-                then
-                (bind ?min 20)
-                (bind ?max 40)
-                else
-                (bind ?min 40)
-                (bind ?max 50)
-            )
-        )
-        (bind ?ins-asigs (find-all-instances ((?ins Asignatura))
-            (and
-                (<= ?min (+ (send ?ins get-horas_lab) (send ?ins get-horas_prob)))
-                (<= (+ (send ?ins get-horas_lab) (send ?ins get-horas_prob)) ?max))))
-
-        (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo volumen-trabajo) (es-pref ?es_pref))) ;poner un motivo más user-friendly
-        )
-    )
-)
-
-(defrule escoge-volumen-trabajo
-    (ent-asigs)
-    ?prob-abs <- (problema-abstracto (volumen-trabajoR ?vtR) (volumen-trabajoP ?vtP))
-    =>
-    (printout t ">> Asociacion de volumen de trabajo" crlf)
-
-    (volumen-trabajo ?vtR FALSE)
-    (volumen-trabajo ?vtP TRUE)
-)
-
 (deffunction tiempo-dedicacion
     (?td ?es_pref)
     

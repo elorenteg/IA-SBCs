@@ -104,18 +104,21 @@
         (bind ?rec (modify ?rec (max_horas_lab ?ml)))
     )
 
-    (bind ?th (pregunta-cerrada ">> Que horario se ajusta mejor a su disponibilidad?" TRUE manyana tarde))
+    (bind ?th (pregunta-cerrada ">> Que horario se ajusta mejor a su disponibilidad?" TRUE manyana tarde cualquiera))
 	(if (not(eq ?th nil))
         then
-        (bind ?th-ins (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus ?th))))
-        (bind ?rec (modify ?rec (tipo_horario ?th-ins)))
-        else
-        (bind ?th-ins-man (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus "manyana"))))
-        (bind ?th-ins-tar (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus "tarde"))))
-        (bind $?tipo-horario (create$))
-        (bind ?tipo-horario (insert$ ?tipo-horario 1 ?th-ins-man))
-        (bind ?tipo-horario (insert$ ?tipo-horario 2 ?th-ins-tar))
-        (bind ?rec (modify ?rec (tipo_horario ?tipo-horario)))
+        (if (eq 0 (str-compare ?th cualquiera))
+            then
+            (bind ?th-ins-man (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus "manyana"))))
+            (bind ?th-ins-tar (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus "tarde"))))
+            (bind $?tipo-horar (create$))
+            (bind ?tipo-horar (insert$ ?tipo-horar 1 ?th-ins-man))
+            (bind ?tipo-horar (insert$ ?tipo-horar 2 ?th-ins-tar))
+            (bind ?rec (modify ?rec (tipo_horario ?tipo-horar)))
+            else
+            (bind ?th-ins (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus ?th))))
+            (bind ?rec (modify ?rec (tipo_horario ?th-ins)))
+        )
     )
 
     (bind ?temasN (create$))
@@ -204,9 +207,10 @@
     (if (> (length$ ?cp) 0) then (bind ?nrest (+ ?nrest 1)))
     (if (neq ?ce nil) then (bind ?nrest (+ ?nrest 1)))
     (if (neq ?d nil) then (bind ?nrest (+ ?nrest 1)))
-    (if (neq ?ma nil) then (bind ?nrest (+ ?nrest 1)))
-    (if (neq ?mht nil) then (bind ?nrest (+ ?nrest 1)))
-    (if (neq ?mhl nil) then (bind ?nrest (+ ?nrest 1)))
+    ;(if (neq ?ma nil) then (bind ?nrest (+ ?nrest 1)))
+    (if (neq ?mht nil)
+        then (bind ?nrest (+ ?nrest 1))
+        else (if (neq ?mhl nil) then (bind ?nrest (+ ?nrest 1))))
     (if (> (length$ ?te) 0) then (bind ?nrest (+ ?nrest 1)))
     (if (> (length$ ?th) 0) then (bind ?nrest (+ ?nrest 1))) ;por defecto ?th tiene asignado los dos horarios posibles
 
