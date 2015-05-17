@@ -384,7 +384,7 @@
     (if (= (length$ ?cp) 0)
         then
         ; competencias cursadas de N1-3 (aunque no haya hecho todos los niveles)
-        (printout t "cp " ?compe crlf)
+        ;(printout t "cp " ?compe crlf)
         (bind ?pref (modify ?pref (competencias_preferidas ?compe)))
     )
 
@@ -408,14 +408,13 @@
 
         (if (not(eq ?esp [nil]))
             then
-            (printout t "tiene especialidad" ?esp crlf)
-            (printout t "ce " ?esp crlf)
+            (printout t ">> >> Tiene especialidad" ?esp crlf)
+            ;(printout t "ce " ?esp crlf)
             (bind ?pref (modify ?pref (completar_especialidad ?esp)))
             else
             (if (> (length$ ?nasigEs) 0)
                 then
-                (printout t "length nasigEs " (length$ ?nasigEs) crlf)
-                (printout t "nasigEs " ?nasigEs crlf)
+                (printout t ">> >> Inferencia de la especialidad mas cursada" ?esp crlf)
                 (bind ?max 1)
                 (loop-for-count (?i 2 (length$ ?nasigEs)) do
                     (if (> (nth$ ?i ?nasigEs) (nth$ ?max ?nasigEs))
@@ -424,10 +423,10 @@
                     )
                 )
                 (bind ?espMax (nth$ ?max ?espeCur))
-                (printout t "ce " ?espMax crlf)
+                ;(printout t "ce " ?espMax crlf)
                 (bind ?pref (modify ?pref (completar_especialidad ?espMax)))
                 else
-                (printout t "Aun no puede escoger especialidad" crlf)
+                (printout t ">> >> Especialidad no inferible" crlf)
             )
         )
     )
@@ -465,7 +464,7 @@
                 )
             )
         )
-        (printout t "d " ?d crlf)
+        ;(printout t "d " ?d crlf)
         (bind ?pref (modify ?pref (dificultad ?d)))
     )
 
@@ -485,7 +484,7 @@
         then
         ; media de asignaturas/cuatri
         (bind ?mediaAs (div ?nasig (length$ ?cuatris)))
-        (printout t "ma " ?mediaAs crlf)
+        ;(printout t "ma " ?mediaAs crlf)
         (bind ?pref (modify ?pref (max_asigns ?mediaAs)))
     )
 
@@ -507,14 +506,14 @@
         then
         ; media de horas de teoria/cuatri
         (bind ?mediaHT (div ?nhoras-teo (length$ ?cuatris)))
-        (printout t "mht " ?mediaHT crlf)
+        ;(printout t "mht " ?mediaHT crlf)
         (bind ?pref (modify ?pref (max_horas_trabajo ?mediaHT)))
     )
     (if (eq ?mhl nil)
         then
         ; media de horas de lab y prob/cuatri
         (bind ?mediaHL (div (+ ?nhoras-lab ?nhoras-pro) (length$ ?cuatris)))
-        (printout t "mhl " ?mediaHL crlf)
+        ;(printout t "mhl " ?mediaHL crlf)
         (bind ?pref (modify ?pref (max_horas_lab ?mediaHL)))
     )
 
@@ -534,7 +533,7 @@
         then
         ; temas cursados y temas afines a los cursados
         (bind ?tems (insert$ ?afins 1 ?temas))
-        (printout t "te " ?tems crlf)
+        ;(printout t "te " ?tems crlf)
         (bind ?pref (modify ?pref (tema_especializado ?tems)))
     )
 
@@ -565,7 +564,7 @@
             then
             (bind ?th (insert$ ?th 1 (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus "manyana")))))
         )
-        (printout t "th " ?th crlf)
+        ;(printout t "th " ?th crlf)
         (bind ?pref (modify ?pref (tipo_horario ?th)))
     )
 
@@ -590,7 +589,7 @@
     (dni ?dni)
     ?alumn <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped))
     =>
-    (printout t "Inferencia de curso" crlf)
+    (printout t ">> Inferencia de curso" crlf)
 
     (bind ?notas (send ?exped get-notas_exp))
     (bind ?max-curso 0)
