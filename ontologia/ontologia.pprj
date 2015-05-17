@@ -1,4 +1,4 @@
-; Thu May 14 00:48:40 CEST 2015
+; Sun May 17 17:46:11 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -210,7 +210,7 @@
 		[KB_111590_Class10]
 		[KB_111590_Class11]))
 
-([KB_492471_Class5] of  Map
+([KB_362301_Class5] of  Map
 )
 
 ([LAYOUT_PROPERTIES] of  Property_List
@@ -296,6 +296,78 @@
 
 ([ontologia_ProjectKB_Class20070] of  Property_List
 )
+
+([ontologia_ProjectKB_Class30006] of  Widget
+
+	(is_hidden FALSE)
+	(name "Expediente")
+	(property_list [ontologia_ProjectKB_Class30007])
+	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+
+([ontologia_ProjectKB_Class30007] of  Property_List
+
+	(properties
+		[ontologia_ProjectKB_Class30008]
+		[ontologia_ProjectKB_Class30009]
+		[ontologia_ProjectKB_Class30013]))
+
+([ontologia_ProjectKB_Class30008] of  Property_List
+
+	(name "layout properties"))
+
+([ontologia_ProjectKB_Class30009] of  Widget
+
+	(height 450)
+	(is_hidden FALSE)
+	(name "notas_exp")
+	(property_list [ontologia_ProjectKB_Class30010])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 200)
+	(x 0)
+	(y 60))
+
+([ontologia_ProjectKB_Class30010] of  Property_List
+
+	(properties
+		[ontologia_ProjectKB_Class30011]
+		[ontologia_ProjectKB_Class30012]))
+
+([ontologia_ProjectKB_Class30011] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([ontologia_ProjectKB_Class30012] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([ontologia_ProjectKB_Class30013] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "alumno_exp")
+	(property_list [ontologia_ProjectKB_Class30014])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([ontologia_ProjectKB_Class30014] of  Property_List
+
+	(properties
+		[ontologia_ProjectKB_Class30015]
+		[ontologia_ProjectKB_Class30016]))
+
+([ontologia_ProjectKB_Class30015] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([ontologia_ProjectKB_Class30016] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
 
 ([ontologia_ProjectKB_Class30067] of  Widget
 
@@ -783,6 +855,7 @@
 		[INSTANCE_ANNOTATION_FORM_WIDGET]
 		[STANDARD_CLASS_FORM_WIDGET]
 		[STANDARD_SLOT_FORM_WIDGET]
+		[ontologia_ProjectKB_Class30006]
 		[ontologia_ProjectKB_Class53]
 		[STANDARD_FACET_FORM_WIDGET]
 		[PAL_FORM_WIDGET])
