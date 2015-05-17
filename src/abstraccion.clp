@@ -48,6 +48,8 @@
     =>
 
     (printout t ">> Abstraccion del volumen de dedicacion y el tiempo" crlf)
+
+    ;Volumen de trabajo (a partir de nº de asignaturas a matricular)
     (if (not(eq ?asigsRes nil))
         then
         (if (<= ?asigsRes 2)
@@ -62,20 +64,7 @@
             )
         )
     )
-    (if (not(eq ?horasRes nil))
-        then
-        (if (<= ?horasRes 20)
-            then
-            (bind ?abs (modify ?abs (tiempo-dedicacionR "bajo")))
-            else
-            (if (<= ?horasRes 40)
-                then
-                (bind ?abs (modify ?abs (tiempo-dedicacionR "medio")))
-                else
-                (bind ?abs (modify ?abs (tiempo-dedicacionR "alto")))
-            )
-        )
-    )
+
     (if (not(eq ?asigsPref nil))
         then
         (if (<= ?asigsPref 2)
@@ -90,20 +79,50 @@
             )
         )
     )
-    (if (not(eq ?horasPref nil))
-        then
-        (if (<= ?horasPref 20)
+
+
+    ;Tiempo de dedicación semanal en horas
+    (bind ?horasR-total 0)
+    (bind ?horasP-total 0)
+    (bind ?numR 0)
+
+    (if (neq ?horasRes nil) then (bind ?horasR-total (+ ?horasR-total ?horasRes)) (bind ?numR (+ 1 ?numR)))
+    (if (neq ?horasPref nil) then (bind ?horasP-total (+ ?horasP-total ?horasPref)))
+
+    (if (neq ?labRes nil) then (bind ?horasR-total (+ ?horasR-total ?labRes)) (bind ?numR (+ 1 ?numR)))
+    (if (neq ?labPref nil) then (bind ?horasP-total (+ ?horasP-total ?labPref)))
+
+    (if (= ?numR 2)
+        then (bind ?bajoR 40) (bind ?medioR 80) ;max: 100
+        else (bind ?bajoR 20) (bind ?medioR 40) ;max: 50
+    )
+
+    (if (> ?numR 0) then
+        (if (<= ?horasR-total ?bajoR)
             then
-            (bind ?abs (modify ?abs (tiempo-dedicacionP "bajo")))
+            (bind ?abs (modify ?abs (tiempo-dedicacionR "bajo")))
             else
-            (if (<= ?horasPref 40)
+            (if (<= ?horasR-total ?medioR)
                 then
-                (bind ?abs (modify ?abs (tiempo-dedicacionP "medio")))
+                (bind ?abs (modify ?abs (tiempo-dedicacionR "medio")))
                 else
-                (bind ?abs (modify ?abs (tiempo-dedicacionP "alto")))
+                (bind ?abs (modify ?abs (tiempo-dedicacionR "alto")))
             )
         )
     )
+
+    (if (<= ?horasP-total 20)
+        then
+        (bind ?abs (modify ?abs (tiempo-dedicacionP "bajo")))
+        else
+        (if (<= ?horasP-total 40)
+            then
+            (bind ?abs (modify ?abs (tiempo-dedicacionP "medio")))
+            else
+            (bind ?abs (modify ?abs (tiempo-dedicacionP "alto")))
+        )
+    )
+
     (assert(abs-dedicacion ok))
     (retract ?hecho)
 )

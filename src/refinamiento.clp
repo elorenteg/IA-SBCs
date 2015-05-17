@@ -67,7 +67,7 @@
     ?ar <- (asig-rec (asign ?a) (rest-sat ?rs))
     (test (!= ?nrest ?rs))
     =>
-    (printout t (send ?a get-nombre) " no cumple todas las restricciones" crlf)
+    (printout t (send ?a get-nombre) " no cumple todas las restricciones (" ?rs "<" ?nrest ")"  crlf)
     (retract ?ar)
 )
 
@@ -164,6 +164,9 @@
     =>
     ;;; esta regla elimina los hechos usados en el refinamiento y genera un assert conforme ha acabado ;;;
     (printout t "Fin refinamiento" crlf)
+    (printout t crlf)
+    (printout t "-------------" crlf)
+    (printout t crlf)
 
     ;;; TODO: Mostrar la recomendacion ;;;
     (assert (muestra-sol))

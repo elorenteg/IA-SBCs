@@ -46,7 +46,7 @@
     ;(test (neq ?td nil))
     =>
     (printout t ">> Asociacion de Horario" crlf)
-    
+
     ;Restricciones
     (if (= 1 (length$ ?td)) then
         (bind ?insh (find-instance ((?ins Horario)) (eq ?ins:horario (nth$ 1 ?td))))
@@ -76,7 +76,7 @@
     ;(test (neq ?vt nil))
     =>
     (printout t ">> Asociacion de volumen de trabajo" crlf)
-    
+
     (if (not(eq ?vtR nil))
         then
         (if (eq ?vtR bajo)
@@ -101,7 +101,7 @@
             (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo volumen-trabajo) (es-pref FALSE))) ;poner un motivo más user-friendly
         )
     )
-    
+
     (if (not(eq ?vtP nil))
         then
         (if (eq ?vtP bajo)
@@ -128,6 +128,24 @@
     )
 )
 
+(defrule escoge-tiempo-dedicacion
+    (ent-asigs)
+    ?prob-abs <- (problema-abstracto (tiempo-dedicacionR ?tdR) (tiempo-dedicacionP ?tdP))
+    =>
+    (if (neq ?tdR nil) then
+        (if (eq ?tdR "alto")
+            then (bind ?max 100)
+            else (if (eq ?tdR "medio") then (bind ?max 60)
+            else (bind ?max 33)
+        ))
+
+        (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (<= (+ (send ?ins get-horas_teoria) (send ?ins get-horas_lab) (send ?ins get-horas_prob)) ?max)))
+        (loop-for-count (?i 1 (length$ ?ins-asigs)) do
+            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo tiempo-dedicacion) (es-pref FALSE))) ;poner un motivo más user-friendly
+        )
+    )
+)
+
 (defrule escoge-interes-compl-esp
     (ent-asigs)
     (dni ?dni)
@@ -136,7 +154,7 @@
     ;(test (neq ?espR nil))
     =>
     (printout t ">> Asociacion de Especialidad" crlf)
-    
+
     (if (not(eq ?espR nil))
         then
         (bind ?asigsR (find-all-instances ((?ins Especializada)) (member ?espR ?ins:especialidad_asig)))
@@ -145,7 +163,7 @@
             (assert (nueva-rec (asign (nth$ ?i ?asigsR)) (motivo interes-compl-esp) (es-pref FALSE))) ;poner un motivo más user-friendly
         )
     )
-    
+
     (if (not(eq ?espP nil))
         then
         (bind ?asigsP (find-all-instances ((?ins Especializada)) (member ?espP ?ins:especialidad_asig)))
@@ -162,7 +180,7 @@
     ;(test (!= 0 (length$ ?it)))
     =>
     (printout t ">> Asociacion de Tema" crlf)
-    
+
     (if (!= 0 (length$ ?itR))
         then
         (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?itR ?ins:temas))))
@@ -171,13 +189,13 @@
             (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo intereses-tematicos) (es-pref FALSE))) ;poner un motivo más user-friendly
         )
     )
-    
+
     (if (!= 0 (length$ ?itP))
         then
         (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?itP ?ins:temas))))
 
         (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo intereses-tematicos) (es-pref FALSE))) ;poner un motivo más user-friendly
+            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo intereses-tematicos) (es-pref TRUE))) ;poner un motivo más user-friendly
         )
     )
 )
@@ -208,7 +226,7 @@
     ?prob-abs <- (problema-abstracto (curso-estudios ?ce))
     =>
     (printout t ">> Asociacion de Curso" crlf)
-    
+
     (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (= (curso-a-int ?ins:curso) ?ce)))
 
     (loop-for-count (?i 1 (length$ ?ins-asigs)) do
@@ -233,7 +251,7 @@
     (test (neq ?e [nil]))
     =>
     (printout t ">> Asociacion de Especialidad Principal" crlf)
-    
+
     (bind ?ins-asigs (find-all-instances ((?ins Especializada)) (member ?e ?ins:especialidad_asig)))
 
     (loop-for-count (?i 1 (length$ ?ins-asigs)) do
