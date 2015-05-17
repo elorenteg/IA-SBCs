@@ -1,7 +1,42 @@
 
 \section{Implementación} \label{sec:implementacion}
 
-%%% TODO %%%
+En la \autoref{sec:formalizacion}, se ha descrito de forma detallada la 
+versión final del sistema basado en el conocimiento que resuelve este problema 
+y que se encuentra implementado en el código adjunto a este documento. En esta 
+sección, pues, se describen las distintas fases del proceso de implementación.
+
+Para implementar el sistema, se ha optado por una metodología de prototipado 
+rápido incremental. Esta metodología consiste en la realización de prototipos 
+funcionales en los que se van añadiendo funcionalidades del sistema final. Es 
+decir, partiendo de un sistema básico de funcionalidad muy limitada, se han 
+ido añadiendo elementos a tener en cuenta en el proceso de resolución hasta 
+llegar al sistema final ya descrito. Con este método, pues, hemos podido tener 
+un sistema funcional desde una fase temprana del desarrollo y que se ha podido 
+probar a medida que se expandía con nuevas características. Además, esto ha 
+facilitado las mejoras basadas en los resultados obtenidos con distintos 
+juegos de prueba. En alguna de estas fases de expansión, ha sido necesario 
+hacer alguna modificación menor de la ontología, como ya se ha explicado en la 
+\autoref{sec:ontologia}. Aun así, el esmero en obtener una especificación 
+correcta de los elementos del dominio ha permitido desarrollar sin problemas 
+el sistema basado en la ontología desarrollada esencialmente durante las 
+primeras semanas.
+
+Inicialmente, se desarrolló un primer prototipo que sirvió para evaluar el 
+funcionamiento y las posibilidades del lenguaje \texttt{CLIPS}. Esta primera 
+versión constaba de dos módulos simples de funcionalidad reducida. El primero
+de ellos hacía preguntas al usuario sobre algunas de sus preferencias y 
+restricciones y añadía las respuestas obtenidas al sistema en forma de hechos 
+estructurados con \texttt{deftemplates}. El segundo módulo generaba una 
+recomendación prácticamente aleatoria, sin tener en cuenta de ninguna manera 
+las preferencias o restricciones del alumno, simplemente elegía hasta seis 
+asignaturas que no se hubiesen cursado anteriormente. Esto sirvió para 
+aprender a navegar en las reglas de \texttt{CLIPS} entre los diferentes 
+conceptos representados en la ontología.
+
+% TODO : Más prototipos. Por ejemplo: añadir módulos de abstracción y 
+%        asociación incompletos, añadir más reglas, añadir fase de refinamiento.
+
 
 \clearpage
 
