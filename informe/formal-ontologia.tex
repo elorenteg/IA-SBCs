@@ -164,3 +164,39 @@ completo de la jerarquía de la ontología anteriormente descrita.
 %%%        los atributos y relaciones que veíamos importantes en un proceso 
 %%%        iterativo, etc. Y cualquier otra chorrada que se nos ocurra.
 
+La ontología mostrada es el resultado final de un proceso de diseño iterativo: 
+partiendo de un modelo inicial que incluía los elementos más importantes, se 
+han ido añadiendo los elementos y características que se han considerado 
+necesarias a lo largo del desarrollo de la práctica. 
+
+Antes de empezar con el diseño de la ontología en sí, se hizo un detallado 
+análisis del problema (que se puede apreciar en parte de la 
+\autoref{sec:conceptualizacion}) para identificar los principales conceptos 
+del dominio que resultarían importantes para la resolución del problema. 
+Partiendo de estos, empezamos a diseñar las clases de la ontología. En esta 
+fase, combinamos una aproximación \textit{de arriba a abajo} (es decir, 
+empezamos colocando los conceptos más importantes, representados por clases 
+como \texttt{Alumno} o \texttt{Asignatura}, siguiendo con las 
+especializaciones de estos) con una aproximación \textit{de abajo a arriba} 
+(para las restricciones y preferencias, empezamos con los tipos que queríamos 
+representar y decidimos posteriormente aglutinarlas en una clase 
+\texttt{ResPref}). Una vez establecidas las clases principales y su jerarquía, 
+fuimos añadiendo los atributos que definen las características importantes 
+de cada clase y las relaciones entre instancias de las clases, siguiendo el 
+análisis de los requerimientos del problema para incluir precisamente aquello 
+que consideramos necesario (puesto que, en este caso particular, no se espera 
+reaprovechar la ontología para resolver otros problemas en el mismo dominio). 
+Finalmente, tras completar el diseño de la ontología propiamente, añadimos las 
+instancias de todos aquellos conceptos estrechamente relacionados con el plan 
+de estudios del grado (asignaturas, competencias transversales, ...) y, a 
+medida que avanzamos en el desarrollo, añadimos instancias con expedientes de 
+alumnos ficticios para los juegos de prueba.
+
+La primera versión de la ontología se completó en una fase muy temprana del 
+desarrollo de la práctica. A lo largo de este desarrollo, sin embargo, la 
+ontología ha sufrido ligeras modificaciones para adaptarse a cambios debidos 
+a una mayor comprensión de la especificación del problema. 
+
+
+
+
