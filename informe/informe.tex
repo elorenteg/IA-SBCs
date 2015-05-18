@@ -28,6 +28,38 @@
 \usepackage{afterpage}
 \usepackage{pdflscape}
 
+% Codi.
+\usepackage{listings}
+\lstset{
+    inputencoding=utf8,
+    extendedchars=true,
+    captionpos=b,
+    frame=single,
+    basicstyle=\small\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=5pt,
+    columns=full_flexible,
+    showspaces=false,
+    showtabs=false,
+    breaklines=true,
+    literate=%
+        {á}{{\'a}}1%
+        {é}{{\'e}}1%
+        {í}{{\'i}}1%
+        {ó}{{\'o}}1%
+        {ú}{{\'u}}1%
+        {Á}{{\'A}}1%
+        {É}{{\'E}}1%
+        {Í}{{\'I}}1%
+        {Ó}{{\'O}}1%
+        {Ú}{{\'U}}1%
+        {¿}{{?`}}1%
+        {¡}{{!`}}1%
+}
+\usepackage{listingsutf8}
+
 
 \begin{document}
 

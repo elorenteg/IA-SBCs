@@ -1,0 +1,2 @@
+En este archivo debería haber la salida exacta del programa con el primer juego de pruebas. ¿Funcionó? ¡Sí!
+Así, esta se incluye en el documento PDF generado con LaTeX.
