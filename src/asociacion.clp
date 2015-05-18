@@ -8,14 +8,12 @@
     (multislot motivosP (default (create$)))
     (slot rest-sat) ;número de restricciones que satisface
     (slot pref-sat) ;número de preferencias que satisface
-    ;añadir también el grado de recomendación? [altamente recomendable, recomendable]
 )
 
 (deftemplate nueva-rec "Nueva asignatura recomendada por una regla"
     (slot asign)
     (slot motivo)
     (slot es-pref)
-    (slot suspensa)
 )
 
 (deffunction interseccion-vacia "Indica si la intersección de dos listas (como conjuntos) está vacía"

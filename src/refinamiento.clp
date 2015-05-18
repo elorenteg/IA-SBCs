@@ -2,10 +2,6 @@
 ;; Estructuras para el refinamiento de una solucion abstracta a la solucion de nuestro problema
 ;;
 
-(deftemplate solucion-concreta "Asignaturas que se recomiendan"
-    (multislot list-asigns (default (create$)))
-)
-
 (deffunction ha-cursado "Retorna si el alumno ?al ha cursado la asignatura ?a"
     (?al ?a)
 
@@ -144,12 +140,14 @@
 )
 
 (defrule refina
-    ?hecho <- (refina-rec)
-
+    ?hecho1 <- (refina-rec)
+    ?hecho2 <- (filtro-restr)
+    ?hecho3 <- (nrestricciones ?nrestr)
+    
     =>
 
     (assert (refinamiento ok))
-    (retract ?hecho)
+    (retract ?hecho1 ?hecho2 ?hecho3)
 )
 
 (defrule fin-refinamiento "Comprueba que se ejecuten todas las reglas de Refinamiento"
@@ -167,15 +165,14 @@
 )
 
 (deffunction grado-recomendacion
-    (?ps)
+    (?ps $?mP)
     
-    (if (< ?ps 3)
-        then (return poco-recomendable)
+    (if (member asignatura-suspensa ?mP) then(return altamente-recomendable))
+    
+    (if (< ?ps 5)
+        then (return recomendable)
         else
-        (if (< ?ps 5)
-            then (return recomendable)
-            else (return altamente-recomendable)
-        )
+        else (return altamente-recomendable)
     )
 )
 
@@ -189,14 +186,38 @@
 )
 
 (defrule muestra-solucion
+    (declare (salience 5))
     (muestra-sol)
     ?ar <- (asig-rec (asign ?a) (motivosR $?msR) (motivosP $?msP) (rest-sat ?rs) (pref-sat ?ps))
     =>
+    
+    (bind ?asign (asig-rec (asign ?a) (motivosR $?msR) (motivosP $?msP) (rest-sat ?rs) (pref-sat ?ps)))
+    
     (bind ?nomA (send ?a get-nombre))
-    (bind ?gradoRec (grado-recomendacion ?ps))
+    (bind ?gradoRec (grado-recomendacion ?ps ?msP))
     (format t "%s (%s): %n" ?nomA ?gradoRec)
     (printout t " * Restricciones" crlf)
     (muestra-mot ?rs ?msR)
     (printout t " * Preferencias" crlf)
     (muestra-mot ?ps ?msP)
+    
+    ;; TODO: guardar la asignatura y sus motivos en la clase
+    ;; añadirlas en la lista de forma ordenada segun el grado de recomendacion
+    
+    (retract ?ar)
 )
+
+(defrule descarta-num
+    ?hecho <- (muestra-sol)
+    =>
+    
+    ;;; TODO: en esta regla deberiamos tener ya una lista de las posibles asignaturas a recomendar
+    ;;; como la lista esta ordenada segun el grado de recomendacion, seria en un bucle mirar:
+    ;;; 1. escoger un grupo de maxAsigs
+    ;;; 2. mirar que cumpla tiempo-dedicacion
+    ;;; 3. mirar que cumple corequisitos (dentro de las asigs escogidas en 1)
+    ;;; si se cumple, tenemos solucion. Sino, quitar la ultima del grupo (la de menos grado), escoger la siguiente y otra vez al bucle.
+    
+    (retract ?hecho)
+)
+
