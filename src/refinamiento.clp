@@ -190,9 +190,6 @@
     (muestra-sol)
     ?ar <- (asig-rec (asign ?a) (motivosR $?msR) (motivosP $?msP) (rest-sat ?rs) (pref-sat ?ps))
     =>
-    
-    (bind ?asign (asig-rec (asign ?a) (motivosR $?msR) (motivosP $?msP) (rest-sat ?rs) (pref-sat ?ps)))
-    
     (bind ?nomA (send ?a get-nombre))
     (bind ?gradoRec (grado-recomendacion ?ps ?msP))
     (format t "%s (%s): %n" ?nomA ?gradoRec)
