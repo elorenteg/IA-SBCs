@@ -2,6 +2,14 @@
 ;; Estructuras para el refinamiento de una solucion abstracta a la solucion de nuestro problema
 ;;
 
+(defclass asig-candidata
+    (is-a USER)
+    (slot asig)
+    (multislot motivosR)
+    (multislot motivosP)
+    (slot grado)
+)
+
 (deffunction ha-cursado "Retorna si el alumno ?al ha cursado la asignatura ?a"
     (?al ?a)
 
@@ -143,7 +151,7 @@
     ?hecho1 <- (refina-rec)
     ?hecho2 <- (filtro-restr)
     ?hecho3 <- (nrestricciones ?nrestr)
-    
+
     =>
 
     (assert (refinamiento ok))
@@ -166,9 +174,9 @@
 
 (deffunction grado-recomendacion
     (?ps $?mP)
-    
+
     (if (member asignatura-suspensa ?mP) then(return altamente-recomendable))
-    
+
     (if (< ?ps 5)
         then (return recomendable)
         else
@@ -178,11 +186,19 @@
 
 (deffunction muestra-mot
     (?rs $?motivos)
-    
+
     (loop-for-count (?i 1 (length$ ?motivos)) do
         (bind ?mot (nth$ ?i ?motivos))
         (printout t "  * " ?mot crlf)
     )
+)
+
+(defrule obtiene-candidatas
+    (declare (salience 6))
+    (muestra-sol)
+    ?ar <- (asig-rec (asign ?a) (motivosR $?msR) (motivosP $?msP) (rest-sat ?rs) (pref-sat ?ps))
+    =>
+    (bind ?ins (make-instance of asig-candidata (asig ?a) (motivosR ?msR) (motivosP ?msP) (grado (grado-recomendacion ?ps ?msP))))
 )
 
 (defrule muestra-solucion
@@ -197,24 +213,24 @@
     (muestra-mot ?rs ?msR)
     (printout t " * Preferencias" crlf)
     (muestra-mot ?ps ?msP)
-    
-    ;; TODO: guardar la asignatura y sus motivos en la clase
-    ;; añadirlas en la lista de forma ordenada segun el grado de recomendacion
-    
+
     (retract ?ar)
 )
 
-(defrule descarta-num
+(defrule descarta-num ;se debería de lanzar antes que muestra-solucion
     ?hecho <- (muestra-sol)
     =>
-    
+    (bind ?list (find-all-instances ((?a asig-candidata)) (eq altamente-recomendable ?a:grado)))
+    (bind ?list (insert$ ?list (+ 1 (length$ ?list)) (find-all-instances ((?a asig-candidata)) (eq recomendable ?a:grado))))
+    ;?list contiene todas las asignaturas candidatas, primero las altamente-recomendable, luego las recomendable
+
     ;;; TODO: en esta regla deberiamos tener ya una lista de las posibles asignaturas a recomendar
     ;;; como la lista esta ordenada segun el grado de recomendacion, seria en un bucle mirar:
     ;;; 1. escoger un grupo de maxAsigs
     ;;; 2. mirar que cumpla tiempo-dedicacion
     ;;; 3. mirar que cumple corequisitos (dentro de las asigs escogidas en 1)
     ;;; si se cumple, tenemos solucion. Sino, quitar la ultima del grupo (la de menos grado), escoger la siguiente y otra vez al bucle.
-    
+
     (retract ?hecho)
 )
 
