@@ -15,6 +15,7 @@
     (slot asign)
     (slot motivo)
     (slot es-pref)
+    (slot suspensa)
 )
 
 (deffunction interseccion-vacia "Indica si la intersección de dos listas (como conjuntos) está vacía"
@@ -90,8 +91,8 @@
     ?prob-abs <- (problema-abstracto (tiempo-dedicacionR ?tdR) (tiempo-dedicacionP ?tdP))
     =>
     
-    (tiempo-dedicacion ?tdR FALSE)
-    (tiempo-dedicacion ?tdP TRUE)
+    ;(tiempo-dedicacion ?tdR FALSE)
+    ;(tiempo-dedicacion ?tdP TRUE)
 )
 
 (deffunction completar-esp
@@ -236,6 +237,45 @@
 )
 
 
+(deffunction ha-aprobado "Retorna si el alumno ?al ha aprobado la asignatura ?a"
+    (?al ?a)
+
+    (bind ?nombre-cand (send ?a get-nombre))
+    (bind ?notas (send (send ?al get-expediente_alumno) get-notas_exp))
+    (progn$ (?ins ?notas)
+        (if (and (eq ?nombre-cand (send (send (send ?ins get-convocatoria_nota) get-asignatura_conv) get-nombre)) (>= (send ?ins get-nota) 5))
+            then
+            (return TRUE)
+        )
+    )
+    (return FALSE)
+)
+
+
+(defrule escoge-suspendidas "Escoge asignaturas suspendidas"
+    (ent-asigs)
+    (dni ?dni)
+    ?al <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped))
+    =>
+    (printout t ">> Asociacion de Suspensos" crlf)
+
+    (bind $?notas (send ?exped get-notas_exp))
+    (loop-for-count (?i 1 (length$ ?notas)) do
+        (bind ?not (nth$ ?i ?notas))
+        (bind ?nota (send ?not get-nota))
+        (if (< ?nota 5)
+            then
+            (bind ?conv (send ?not get-convocatoria_nota))
+            (bind ?asig (send ?conv get-asignatura_conv))
+            (if (not (ha-aprobado ?al ?asig))
+                then
+                (assert (nueva-rec (asign ?asig) (motivo asignatura-suspensa) (es-pref TRUE))) ;poner un motivo más user-friendly
+            )
+        )
+    )
+)
+
+
 
 (defrule modifica-asig-rec "Modifica una asignatura recomendada (añade motivo y/o pref-sat)"
     (declare (salience 10)) ;tiene prioridad para comprobar si ya existe la asig-rec
@@ -272,7 +312,6 @@
         (bind ?rs 1)
         (assert (asig-rec (asign ?a) (motivosR (create$ ?m)) (rest-sat ?rs) (pref-sat ?ps)))
     )
-    
 
     (retract ?nr)
 )

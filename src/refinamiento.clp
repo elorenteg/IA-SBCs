@@ -6,21 +6,6 @@
     (multislot list-asigns (default (create$)))
 )
 
-
-(deffunction ha-aprobado "Retorna si el alumno ?al ha aprobado la asignatura ?a"
-    (?al ?a)
-
-    (bind ?nombre-cand (send ?a get-nombre))
-    (bind ?notas (send (send ?al get-expediente_alumno) get-notas_exp))
-    (progn$ (?ins ?notas)
-        (if (and (eq ?nombre-cand (send (send (send ?ins get-convocatoria_nota) get-asignatura_conv) get-nombre)) (>= (send ?ins get-nota) 5))
-            then
-            (return TRUE)
-        )
-    )
-    (return FALSE)
-)
-
 (deffunction ha-cursado "Retorna si el alumno ?al ha cursado la asignatura ?a"
     (?al ?a)
 
@@ -64,11 +49,19 @@
     (declare (salience 10))
     (nrestricciones ?nrest)
     (filtro-restr)
-    ?ar <- (asig-rec (asign ?a) (rest-sat ?rs))
-    (test (!= ?nrest ?rs))
+    ?ar <- (asig-rec (asign ?a) (rest-sat ?rs) (motivosP $?mP))
+    ;(test (!= ?nrest ?rs))
     =>
-    (printout t (send ?a get-nombre) " no cumple todas las restricciones (" ?rs "<" ?nrest ")"  crlf)
-    (retract ?ar)
+    (if (!= ?nrest ?rs)
+        then
+        (if (member asignatura-suspensa ?mP)
+            then
+            (printout t (send ?a get-nombre) " no cumple todas las restricciones, pero esta suspensa" crlf)
+            else
+            (printout t (send ?a get-nombre) " no cumple todas las restricciones (" ?rs "<" ?nrest ")"  crlf)
+        (retract ?ar)
+        )
+    )
 )
 
 (defrule descarta-ya-aprobadas "Descarta las candidatas que ya se hayan cursado y aprobado"
@@ -176,10 +169,10 @@
 (deffunction grado-recomendacion
     (?ps)
     
-    (if (< ?ps 4)
+    (if (< ?ps 3)
         then (return poco-recomendable)
         else
-        (if (< ?ps 6)
+        (if (< ?ps 5)
             then (return recomendable)
             else (return altamente-recomendable)
         )
