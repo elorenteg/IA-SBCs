@@ -10,6 +10,10 @@
     (slot grado)
 )
 
+(deftemplate recomendacion
+    (multislot asigs-recom)
+)
+
 (deffunction ha-cursado "Retorna si el alumno ?al ha cursado la asignatura ?a"
     (?al ?a)
 
@@ -46,6 +50,7 @@
 
     (assert (filtro-restr))
     (assert (refina-rec))
+    (assert (candidatas (create$)))
     (retract ?hecho)
 )
 
@@ -161,16 +166,16 @@
 (defrule fin-refinamiento "Comprueba que se ejecuten todas las reglas de Refinamiento"
     ?hecho1 <- (refinamiento ok)
     =>
-    ;;; esta regla elimina los hechos usados en el refinamiento y genera un assert conforme ha acabado ;;;
     (printout t "Fin refinamiento" crlf)
     (printout t crlf)
     (printout t "-------------" crlf)
     (printout t crlf)
 
-    ;;; TODO: Mostrar la recomendacion ;;;
-    (assert (muestra-sol))
+    (assert (agrupa))
     (retract ?hecho1)
 )
+
+
 
 (deffunction grado-recomendacion
     (?ps $?mP)
@@ -184,8 +189,107 @@
     )
 )
 
-(deffunction muestra-mot
-    (?rs $?motivos)
+(deffunction inserta-ordenado
+    (?ins $?list)
+    (bind $?motivosP (send ?ins get-motivosP))
+    
+    (bind ?preferente FALSE)
+    (if (member asignatura-suspensa ?motivosP) then (bind ?preferente TRUE))
+ 
+    (bind ?insertat FALSE)
+    (loop-for-count (?i 1 (length$ ?list)) do
+        (bind ?asig (nth$ ?i ?list))
+        (bind $?motP (send ?asig get-motivosP))
+        (if (eq ?preferente TRUE)
+            then
+            (bind $?list (insert$ ?list ?i ?ins))
+            (bind ?insertat TRUE)
+            (break)
+        )
+        (if (> (length$ ?motivosP) (length$ ?motP))
+            then ; ?ins es mas recomendable que ?asig
+            (bind $?list (insert$ ?list ?i ?ins))
+            (bind ?insertat TRUE)
+            (break)
+        )
+    )
+    
+    (if (not ?insertat) then (bind $?list (insert$ ?list (+(length$ ?list)1) ?ins)))
+    (return $?list)
+)
+
+(defrule obtiene-candidatas "Agrupa las asignaturas que se pueden recomendar"
+    (declare (salience 6))
+    ?hecho <- (agrupa)
+    ?ar <- (asig-rec (asign ?a) (motivosR $?msR) (motivosP $?msP) (rest-sat ?rs) (pref-sat ?ps))
+    ?cand <- (candidatas $?list)
+    =>
+    (bind ?ins (make-instance of asig-candidata (asig ?a) (motivosR ?msR) (motivosP ?msP) (grado (grado-recomendacion ?ps ?msP))))
+    (bind $?list (inserta-ordenado ?ins $?list))
+    
+    (retract ?cand)
+    (assert (candidatas ?list))
+    
+    (assert (filtra-nasig))
+    (retract ?ar)
+)
+
+
+
+(defrule backtracking
+    ?hecho1 <- (no-solution)
+    ?hecho2 <- (backtrack ?i $?grupo)
+    ?cand <- (candidatas $?list)
+    
+    =>
+    
+    (if (eq ?i (+(length$ ?list)1))
+        then
+        (printout t "SOLUCION " ?grupo crlf)
+        ; mirar si cumple:
+        ; 1. numAsigs
+        ; 2. numHoras
+        ; 3. corequisitos (matriculacion)
+        ; si cumple -> (muestra-sol ?grupo) y 
+        (if (eq (length$ ?grupo) 6) ;;; Esto solo es una prueba
+            then
+            (retract ?hecho1)
+            (assert (solucion ?grupo))
+        )
+        
+        else
+        (bind ?asig (nth$ ?i ?list))
+        (bind $?grupoCon (insert$ ?grupo (+(length$ ?grupo)1) ?asig))
+        (assert (backtrack (+ ?i 1) ?grupoCon))
+        (assert (backtrack (+ ?i 1) ?grupo))
+    )
+    
+    (retract ?hecho2)
+)
+
+(defrule filtra-final
+    ?hecho <- (filtra-nasig)
+    ?hecho2 <- (agrupa)
+    ?rest <- (respref (es_restriccion TRUE) (max_asigns ?maR))
+    ?pref <- (respref (es_restriccion FALSE) (max_asigns ?maP))
+    ?cand <- (candidatas $?list) ;;; $?list esta ordenado segun el numero de preferencias
+    =>
+    ;(bind ?list (find-all-instances ((?a asig-candidata)) (eq altamente-recomendable ?a:grado)))
+    ;(bind ?list (insert$ ?list (+ 1 (length$ ?list)) (find-all-instances ((?a asig-candidata)) (eq recomendable ?a:grado))))
+    ;?list contiene todas las asignaturas candidatas, primero las altamente-recomendable, luego las recomendable
+    
+    (printout t "COMPLETO " ?list crlf)
+    (assert (solucion ?list))
+
+    (assert (no-solution))
+    (assert (backtrack 1 (create$)))
+    (retract ?hecho)
+)
+
+
+
+(deffunction muestra-motivos
+    ($?motivos)
 
     (loop-for-count (?i 1 (length$ ?motivos)) do
         (bind ?mot (nth$ ?i ?motivos))
@@ -193,44 +297,21 @@
     )
 )
 
-(defrule obtiene-candidatas
-    (declare (salience 6))
-    (muestra-sol)
-    ?ar <- (asig-rec (asign ?a) (motivosR $?msR) (motivosP $?msP) (rest-sat ?rs) (pref-sat ?ps))
-    =>
-    (bind ?ins (make-instance of asig-candidata (asig ?a) (motivosR ?msR) (motivosP ?msP) (grado (grado-recomendacion ?ps ?msP))))
-)
-
 (defrule muestra-solucion
     (declare (salience 5))
-    (muestra-sol)
-    ?ar <- (asig-rec (asign ?a) (motivosR $?msR) (motivosP $?msP) (rest-sat ?rs) (pref-sat ?ps))
+    ?sol <- (solucion $?list)
     =>
-    (bind ?nomA (send ?a get-nombre))
-    (bind ?gradoRec (grado-recomendacion ?ps ?msP))
-    (format t "%s (%s): %n" ?nomA ?gradoRec)
-    (printout t " * Restricciones" crlf)
-    (muestra-mot ?rs ?msR)
-    (printout t " * Preferencias" crlf)
-    (muestra-mot ?ps ?msP)
-
-    (retract ?ar)
+    (loop-for-count (?i 1 (length$ ?list)) do
+        (bind ?asig (nth$ ?i ?list))
+        (bind ?asigI (send ?asig get-asig))
+        (bind ?nomA (send ?asigI get-nombre))
+        (bind $?motR (send ?asig get-motivosR))
+        (bind $?motP (send ?asig get-motivosP))
+        (bind ?gradoRec (send ?asig get-grado))
+        (format t "%s (%s): %n" ?nomA ?gradoRec)
+        (printout t " * Restricciones" crlf)
+        (muestra-motivos ?motR)
+        (printout t " * Preferencias" crlf)
+        (muestra-motivos ?motP)
+    )
 )
-
-(defrule descarta-num ;se debería de lanzar antes que muestra-solucion
-    ?hecho <- (muestra-sol)
-    =>
-    (bind ?list (find-all-instances ((?a asig-candidata)) (eq altamente-recomendable ?a:grado)))
-    (bind ?list (insert$ ?list (+ 1 (length$ ?list)) (find-all-instances ((?a asig-candidata)) (eq recomendable ?a:grado))))
-    ;?list contiene todas las asignaturas candidatas, primero las altamente-recomendable, luego las recomendable
-
-    ;;; TODO: en esta regla deberiamos tener ya una lista de las posibles asignaturas a recomendar
-    ;;; como la lista esta ordenada segun el grado de recomendacion, seria en un bucle mirar:
-    ;;; 1. escoger un grupo de maxAsigs
-    ;;; 2. mirar que cumpla tiempo-dedicacion
-    ;;; 3. mirar que cumple corequisitos (dentro de las asigs escogidas en 1)
-    ;;; si se cumple, tenemos solucion. Sino, quitar la ultima del grupo (la de menos grado), escoger la siguiente y otra vez al bucle.
-
-    (retract ?hecho)
-)
-
