@@ -258,10 +258,10 @@
         )
         
         else
+        (assert (backtrack (+ ?i 1) ?grupo))
         (bind ?asig (nth$ ?i ?list))
         (bind $?grupoCon (insert$ ?grupo (+(length$ ?grupo)1) ?asig))
         (assert (backtrack (+ ?i 1) ?grupoCon))
-        (assert (backtrack (+ ?i 1) ?grupo))
     )
     
     (retract ?hecho2)
