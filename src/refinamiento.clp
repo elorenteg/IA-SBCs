@@ -192,10 +192,10 @@
 (deffunction inserta-ordenado
     (?ins $?list)
     (bind $?motivosP (send ?ins get-motivosP))
-    
+
     (bind ?preferente FALSE)
     (if (member asignatura-suspensa ?motivosP) then (bind ?preferente TRUE))
- 
+
     (bind ?insertat FALSE)
     (loop-for-count (?i 1 (length$ ?list)) do
         (bind ?asig (nth$ ?i ?list))
@@ -213,7 +213,7 @@
             (break)
         )
     )
-    
+
     (if (not ?insertat) then (bind $?list (insert$ ?list (+(length$ ?list)1) ?ins)))
     (return $?list)
 )
@@ -226,10 +226,10 @@
     =>
     (bind ?ins (make-instance of asig-candidata (asig ?a) (motivosR ?msR) (motivosP ?msP) (grado (grado-recomendacion ?ps ?msP))))
     (bind $?list (inserta-ordenado ?ins $?list))
-    
+
     (retract ?cand)
     (assert (candidatas ?list))
-    
+
     (assert (filtra-nasig))
     (retract ?ar)
 )
@@ -240,30 +240,63 @@
     ?hecho1 <- (no-solution)
     ?hecho2 <- (backtrack ?i $?grupo)
     ?cand <- (candidatas $?list)
-    
+    (dni ?dni)
+    ?al <- (object (is-a Alumno) (id ?dni))
+    ?rest <- (respref (es_restriccion TRUE) (max_asigns ?ma) (max_horas_trabajo ?mht) (max_horas_lab ?mhl))
+
     =>
-    
+
     (if (eq ?i (+(length$ ?list)1))
         then
-        (printout t "SOLUCION " ?grupo crlf)
+        (bind ?correq-ok TRUE)
+        (loop-for-count (?j 1 (length$ ?grupo)) do
+            (bind ?correquisitos (send (send (nth$ ?j ?grupo) get-asig) get-correquisitos))
+            (loop-for-count (?k 1 (length$ ?correquisitos)) do
+                (if (not (or (ha-aprobado ?al (nth$ ?k ?correquisitos)) (member (nth$ ?k ?correquisitos) ?grupo))) then
+                    (bind ?correq-ok FALSE)
+                    (break)
+                )
+            )
+        )
+
+        (bind ?sum-horas 0)
+        (loop-for-count (?j 1 (length$ ?grupo)) do
+            ;divido las horas totales entre 18 semanas lectivas, porque la res/pref está en horas semanales
+            (bind ?sum-horas (+ ?sum-horas (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_teoria) 18) (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_prob) 18)))
+        )
+
+        (bind ?sum-horas-lab 0)
+        (loop-for-count (?j 1 (length$ ?grupo)) do
+            (bind ?sum-horas-lab (+ ?sum-horas-lab (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_lab) 18)))
+        )
+
+
+        (if (and (eq ?correq-ok TRUE)
+                 (or (eq ?mht nil) (<= ?sum-horas ?mht))
+                 (or (eq ?mhl nil) (<= ?sum-horas-lab ?mhl))
+                 (or (and (eq ?ma nil) (= (length$ ?grupo) 6))
+                     (and (neq ?ma nil) (= (length$ ?grupo) ?ma))))
+            then
+            ;;; TODO: añadir a los motivos de las asignaturas de ?grupo que cumplen horas
+            ;;; quizá también revisar si se cumplen las preferencias de horas y número de asignaturas?
+            (printout t "SOLUCION " ?grupo crlf)
+            (retract ?hecho1)
+            (assert (solucion ?grupo))
+        )
+
         ; mirar si cumple:
         ; 1. numAsigs
         ; 2. numHoras
         ; 3. corequisitos (matriculacion)
-        ; si cumple -> (muestra-sol ?grupo) y 
-        (if (eq (length$ ?grupo) 6) ;;; Esto solo es una prueba
-            then
-            (retract ?hecho1)
-            (assert (solucion ?grupo))
-        )
-        
+        ; si cumple -> (muestra-sol ?grupo)
+
         else
         (assert (backtrack (+ ?i 1) ?grupo))
         (bind ?asig (nth$ ?i ?list))
         (bind $?grupoCon (insert$ ?grupo (+(length$ ?grupo)1) ?asig))
         (assert (backtrack (+ ?i 1) ?grupoCon))
     )
-    
+
     (retract ?hecho2)
 )
 
@@ -277,7 +310,7 @@
     ;(bind ?list (find-all-instances ((?a asig-candidata)) (eq altamente-recomendable ?a:grado)))
     ;(bind ?list (insert$ ?list (+ 1 (length$ ?list)) (find-all-instances ((?a asig-candidata)) (eq recomendable ?a:grado))))
     ;?list contiene todas las asignaturas candidatas, primero las altamente-recomendable, luego las recomendable
-    
+
     (printout t "COMPLETO " ?list crlf)
     (assert (solucion ?list))
 
