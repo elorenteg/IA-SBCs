@@ -1,4 +1,4 @@
-; Sun May 17 17:46:11 CEST 2015
+; Wed May 20 00:34:50 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -12,7 +12,9 @@
 		[ontologia_Class6]
 		[ontologia_Class8]
 		[ontologia_Class50032]
-		[ontologia_Class60009]))
+		[ontologia_Class60009]
+		[ontologia_Class70007]
+		[ontologia_Class70028]))
 
 ([ontologia_Class1] of  Convocatoria
 
@@ -23,7 +25,9 @@
 		[ontologia_Class7]
 		[ontologia_Class50005]
 		[ontologia_Class50035]
-		[ontologia_Class60016]))
+		[ontologia_Class60016]
+		[ontologia_Class70006]
+		[ontologia_Class70030]))
 
 ([ontologia_Class10000] of  No_informatico
 
@@ -2209,7 +2213,9 @@
 		[ontologia_Class50001]
 		[ontologia_Class50007]
 		[ontologia_Class50033]
-		[ontologia_Class60008]))
+		[ontologia_Class60008]
+		[ontologia_Class70008]
+		[ontologia_Class70029]))
 
 ([ontologia_Class50001] of  Nota_examen
 
@@ -2226,7 +2232,9 @@
 		[ontologia_Class50003]
 		[ontologia_Class50006]
 		[ontologia_Class50034]
-		[ontologia_Class60010]))
+		[ontologia_Class60010]
+		[ontologia_Class70009]
+		[ontologia_Class70031]))
 
 ([ontologia_Class50003] of  Nota_examen
 
@@ -2260,7 +2268,9 @@
 	(notas_conv
 		[ontologia_Class50013]
 		[ontologia_Class50043]
-		[ontologia_Class60013]))
+		[ontologia_Class60013]
+		[ontologia_Class70013]
+		[ontologia_Class70034]))
 
 ([ontologia_Class50009] of  Convocatoria
 
@@ -2270,7 +2280,9 @@
 	(notas_conv
 		[ontologia_Class50014]
 		[ontologia_Class50042]
-		[ontologia_Class60014]))
+		[ontologia_Class60014]
+		[ontologia_Class70012]
+		[ontologia_Class70035]))
 
 ([ontologia_Class50010] of  Convocatoria
 
@@ -2280,7 +2292,9 @@
 	(notas_conv
 		[ontologia_Class50015]
 		[ontologia_Class50050]
-		[ontologia_Class60005]))
+		[ontologia_Class60005]
+		[ontologia_Class70010]
+		[ontologia_Class70033]))
 
 ([ontologia_Class50011] of  Convocatoria
 
@@ -2290,7 +2304,9 @@
 	(notas_conv
 		[ontologia_Class50016]
 		[ontologia_Class50036]
-		[ontologia_Class60017]))
+		[ontologia_Class60017]
+		[ontologia_Class70011]
+		[ontologia_Class70032]))
 
 ([ontologia_Class50012] of  Convocatoria
 
@@ -2299,7 +2315,9 @@
 	(horario_conv [ontologia_Class46])
 	(notas_conv
 		[ontologia_Class50038]
-		[ontologia_Class60019]))
+		[ontologia_Class60019]
+		[ontologia_Class70016]
+		[ontologia_Class70040]))
 
 ([ontologia_Class50013] of  Nota_examen
 
@@ -2332,7 +2350,9 @@
 	(horario_conv [ontologia_Class46])
 	(notas_conv
 		[ontologia_Class50052]
-		[ontologia_Class60003]))
+		[ontologia_Class60003]
+		[ontologia_Class70017]
+		[ontologia_Class70037]))
 
 ([ontologia_Class50018] of  Convocatoria
 
@@ -2341,7 +2361,9 @@
 	(horario_conv [ontologia_Class46])
 	(notas_conv
 		[ontologia_Class50049]
-		[ontologia_Class60006]))
+		[ontologia_Class60006]
+		[ontologia_Class70014]
+		[ontologia_Class70038]))
 
 ([ontologia_Class50019] of  Convocatoria
 
@@ -2350,7 +2372,9 @@
 	(horario_conv [ontologia_Class46])
 	(notas_conv
 		[ontologia_Class50041]
-		[ontologia_Class60015]))
+		[ontologia_Class60015]
+		[ontologia_Class70015]
+		[ontologia_Class70039]))
 
 ([ontologia_Class50020] of  Convocatoria
 
@@ -2359,7 +2383,8 @@
 	(horario_conv [ontologia_Class46])
 	(notas_conv
 		[ontologia_Class50051]
-		[ontologia_Class60004]))
+		[ontologia_Class60004]
+		[ontologia_Class70036]))
 
 ([ontologia_Class50021] of  Convocatoria
 
@@ -2368,7 +2393,9 @@
 	(horario_conv [ontologia_Class47])
 	(notas_conv
 		[ontologia_Class50053]
-		[ontologia_Class60002]))
+		[ontologia_Class60002]
+		[ontologia_Class70019]
+		[ontologia_Class70042]))
 
 ([ontologia_Class50022] of  Convocatoria
 
@@ -2377,7 +2404,8 @@
 	(horario_conv [ontologia_Class47])
 	(notas_conv
 		[ontologia_Class50048]
-		[ontologia_Class60007]))
+		[ontologia_Class60007]
+		[ontologia_Class70041]))
 
 ([ontologia_Class50023] of  Convocatoria
 
@@ -2386,7 +2414,9 @@
 	(horario_conv [ontologia_Class47])
 	(notas_conv
 		[ontologia_Class50046]
-		[ontologia_Class60012]))
+		[ontologia_Class60012]
+		[ontologia_Class70021]
+		[ontologia_Class70045]))
 
 ([ontologia_Class50024] of  Convocatoria
 
@@ -2395,7 +2425,9 @@
 	(horario_conv [ontologia_Class47])
 	(notas_conv
 		[ontologia_Class50037]
-		[ontologia_Class60018]))
+		[ontologia_Class60018]
+		[ontologia_Class70020]
+		[ontologia_Class70043]))
 
 ([ontologia_Class50025] of  Convocatoria
 
@@ -2404,28 +2436,35 @@
 	(horario_conv [ontologia_Class47])
 	(notas_conv
 		[ontologia_Class50039]
-		[ontologia_Class60020]))
+		[ontologia_Class60020]
+		[ontologia_Class70044]))
 
 ([ontologia_Class50026] of  Convocatoria
 
 	(asignatura_conv [ontologia_Class20034])
 	(cuatrimestre "2013-A")
 	(horario_conv [ontologia_Class47])
-	(notas_conv [ontologia_Class50040]))
+	(notas_conv
+		[ontologia_Class50040]
+		[ontologia_Class70051]))
 
 ([ontologia_Class50027] of  Convocatoria
 
 	(asignatura_conv [ontologia_Class20032])
 	(cuatrimestre "2013-A")
 	(horario_conv [ontologia_Class47])
-	(notas_conv [ontologia_Class50045]))
+	(notas_conv
+		[ontologia_Class50045]
+		[ontologia_Class70053]))
 
 ([ontologia_Class50028] of  Convocatoria
 
 	(asignatura_conv [ontologia_Class20033])
 	(cuatrimestre "2013-A")
 	(horario_conv [ontologia_Class47])
-	(notas_conv [ontologia_Class50044]))
+	(notas_conv
+		[ontologia_Class50044]
+		[ontologia_Class70052]))
 
 ([ontologia_Class50029] of  Convocatoria
 
@@ -2434,7 +2473,9 @@
 	(horario_conv [ontologia_Class47])
 	(notas_conv
 		[ontologia_Class50047]
-		[ontologia_Class60011]))
+		[ontologia_Class60011]
+		[ontologia_Class70023]
+		[ontologia_Class70054]))
 
 ([ontologia_Class50030] of  Alumno
 
@@ -2923,6 +2964,427 @@
 ([ontologia_Class70] of  Especialidad
 
 	(nombre_esp "Ingenieria del software"))
+
+([ontologia_Class70000] of  Alumno
+
+	(expediente_alumno [ontologia_Class70001])
+	(id 555))
+
+([ontologia_Class70001] of  Expediente
+
+	(alumno_exp [ontologia_Class70000])
+	(notas_exp
+		[ontologia_Class70006]
+		[ontologia_Class70007]
+		[ontologia_Class70008]
+		[ontologia_Class70009]
+		[ontologia_Class70010]
+		[ontologia_Class70011]
+		[ontologia_Class70012]
+		[ontologia_Class70013]
+		[ontologia_Class70014]
+		[ontologia_Class70015]
+		[ontologia_Class70016]
+		[ontologia_Class70017]
+		[ontologia_Class70018]
+		[ontologia_Class70019]
+		[ontologia_Class70020]
+		[ontologia_Class70021]
+		[ontologia_Class70022]
+		[ontologia_Class70023]
+		[ontologia_Class70024]
+		[ontologia_Class70025]))
+
+([ontologia_Class70002] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class38])
+	(cuatrimestre "2012-B")
+	(horario_conv [ontologia_Class46])
+	(notas_conv [ontologia_Class70018]))
+
+([ontologia_Class70003] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class41])
+	(cuatrimestre "2013-A")
+	(horario_conv [ontologia_Class46])
+	(notas_conv [ontologia_Class70022]))
+
+([ontologia_Class70004] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class20034])
+	(cuatrimestre "2013-B")
+	(horario_conv [ontologia_Class47])
+	(notas_conv [ontologia_Class70025]))
+
+([ontologia_Class70005] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class20027])
+	(cuatrimestre "2013-B")
+	(horario_conv [ontologia_Class47])
+	(notas_conv
+		[ontologia_Class70024]
+		[ontologia_Class70060]))
+
+([ontologia_Class70006] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class1])
+	(expediente_nota [ontologia_Class70001])
+	(nota 8.0))
+
+([ontologia_Class70007] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class0])
+	(expediente_nota [ontologia_Class70001])
+	(nota 8.0))
+
+([ontologia_Class70008] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50000])
+	(expediente_nota [ontologia_Class70001])
+	(nota 9.0))
+
+([ontologia_Class70009] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50002])
+	(expediente_nota [ontologia_Class70001])
+	(nota 7.5))
+
+([ontologia_Class70010] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50010])
+	(expediente_nota [ontologia_Class70001])
+	(nota 8.0))
+
+([ontologia_Class70011] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50011])
+	(expediente_nota [ontologia_Class70001])
+	(nota 10.0))
+
+([ontologia_Class70012] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50009])
+	(expediente_nota [ontologia_Class70001])
+	(nota 8.5))
+
+([ontologia_Class70013] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50008])
+	(expediente_nota [ontologia_Class70001])
+	(nota 8.0))
+
+([ontologia_Class70014] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50018])
+	(expediente_nota [ontologia_Class70001])
+	(nota 7.5))
+
+([ontologia_Class70015] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50019])
+	(expediente_nota [ontologia_Class70001])
+	(nota 8.0))
+
+([ontologia_Class70016] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50012])
+	(expediente_nota [ontologia_Class70001])
+	(nota 7.0))
+
+([ontologia_Class70017] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50017])
+	(expediente_nota [ontologia_Class70001])
+	(nota 7.5))
+
+([ontologia_Class70018] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class70002])
+	(expediente_nota [ontologia_Class70001])
+	(nota 6.5))
+
+([ontologia_Class70019] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50021])
+	(expediente_nota [ontologia_Class70001])
+	(nota 7.0))
+
+([ontologia_Class70020] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50024])
+	(expediente_nota [ontologia_Class70001])
+	(nota 7.5))
+
+([ontologia_Class70021] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50023])
+	(expediente_nota [ontologia_Class70001])
+	(nota 6.5))
+
+([ontologia_Class70022] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class70003])
+	(expediente_nota [ontologia_Class70001])
+	(nota 6.5))
+
+([ontologia_Class70023] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50029])
+	(expediente_nota [ontologia_Class70001])
+	(nota 7.0))
+
+([ontologia_Class70024] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class70005])
+	(expediente_nota [ontologia_Class70001])
+	(nota 7.0))
+
+([ontologia_Class70025] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class70004])
+	(expediente_nota [ontologia_Class70001])
+	(nota 5.5))
+
+([ontologia_Class70026] of  Alumno
+
+	(expediente_alumno [ontologia_Class70027])
+	(id 666))
+
+([ontologia_Class70027] of  Expediente
+
+	(alumno_exp [ontologia_Class70026])
+	(notas_exp
+		[ontologia_Class70028]
+		[ontologia_Class70029]
+		[ontologia_Class70030]
+		[ontologia_Class70031]
+		[ontologia_Class70032]
+		[ontologia_Class70033]
+		[ontologia_Class70034]
+		[ontologia_Class70035]
+		[ontologia_Class70036]
+		[ontologia_Class70037]
+		[ontologia_Class70038]
+		[ontologia_Class70039]
+		[ontologia_Class70040]
+		[ontologia_Class70041]
+		[ontologia_Class70042]
+		[ontologia_Class70043]
+		[ontologia_Class70044]
+		[ontologia_Class70045]
+		[ontologia_Class70051]
+		[ontologia_Class70052]
+		[ontologia_Class70053]
+		[ontologia_Class70054]
+		[ontologia_Class70055]
+		[ontologia_Class70056]
+		[ontologia_Class70057]
+		[ontologia_Class70058]
+		[ontologia_Class70059]
+		[ontologia_Class70060]))
+
+([ontologia_Class70028] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class0])
+	(expediente_nota [ontologia_Class70027])
+	(nota 7.5))
+
+([ontologia_Class70029] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50000])
+	(expediente_nota [ontologia_Class70027])
+	(nota 6.0))
+
+([ontologia_Class70030] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class1])
+	(expediente_nota [ontologia_Class70027])
+	(nota 8.0))
+
+([ontologia_Class70031] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50002])
+	(expediente_nota [ontologia_Class70027])
+	(nota 8.5))
+
+([ontologia_Class70032] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50011])
+	(expediente_nota [ontologia_Class70027])
+	(nota 10.0))
+
+([ontologia_Class70033] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50010])
+	(expediente_nota [ontologia_Class70027])
+	(nota 7.5))
+
+([ontologia_Class70034] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50008])
+	(expediente_nota [ontologia_Class70027])
+	(nota 9.0))
+
+([ontologia_Class70035] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50009])
+	(expediente_nota [ontologia_Class70027])
+	(nota 8.0))
+
+([ontologia_Class70036] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50020])
+	(expediente_nota [ontologia_Class70027])
+	(nota 8.0))
+
+([ontologia_Class70037] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50017])
+	(expediente_nota [ontologia_Class70027])
+	(nota 8.0))
+
+([ontologia_Class70038] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50018])
+	(expediente_nota [ontologia_Class70027])
+	(nota 7.5))
+
+([ontologia_Class70039] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50019])
+	(expediente_nota [ontologia_Class70027])
+	(nota 10.0))
+
+([ontologia_Class70040] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50012])
+	(expediente_nota [ontologia_Class70027])
+	(nota 7.5))
+
+([ontologia_Class70041] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50022])
+	(expediente_nota [ontologia_Class70027])
+	(nota 5.5))
+
+([ontologia_Class70042] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50021])
+	(expediente_nota [ontologia_Class70027])
+	(nota 6.0))
+
+([ontologia_Class70043] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50024])
+	(expediente_nota [ontologia_Class70027])
+	(nota 7.0))
+
+([ontologia_Class70044] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50025])
+	(expediente_nota [ontologia_Class70027])
+	(nota 8.5))
+
+([ontologia_Class70045] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50023])
+	(expediente_nota [ontologia_Class70027])
+	(nota 8.0))
+
+([ontologia_Class70046] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class44])
+	(cuatrimestre "2013-A")
+	(horario_conv [ontologia_Class47])
+	(notas_conv [ontologia_Class70055]))
+
+([ontologia_Class70047] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class20029])
+	(cuatrimestre "2013-B")
+	(horario_conv [ontologia_Class47])
+	(notas_conv [ontologia_Class70056]))
+
+([ontologia_Class70048] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class20031])
+	(cuatrimestre "2013-B")
+	(horario_conv [ontologia_Class47])
+	(notas_conv [ontologia_Class70057]))
+
+([ontologia_Class70049] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class20038])
+	(cuatrimestre "2013-B")
+	(horario_conv [ontologia_Class47])
+	(notas_conv [ontologia_Class70058]))
+
+([ontologia_Class70050] of  Convocatoria
+
+	(asignatura_conv [ontologia_Class20039])
+	(cuatrimestre "2013-B")
+	(horario_conv [ontologia_Class47])
+	(notas_conv [ontologia_Class70059]))
+
+([ontologia_Class70051] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50026])
+	(expediente_nota [ontologia_Class70027])
+	(nota 7.0))
+
+([ontologia_Class70052] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50028])
+	(expediente_nota [ontologia_Class70027])
+	(nota 9.0))
+
+([ontologia_Class70053] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50027])
+	(expediente_nota [ontologia_Class70027])
+	(nota 7.0))
+
+([ontologia_Class70054] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class50029])
+	(expediente_nota [ontologia_Class70027])
+	(nota 8.0))
+
+([ontologia_Class70055] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class70046])
+	(expediente_nota [ontologia_Class70027])
+	(nota 6.5))
+
+([ontologia_Class70056] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class70047])
+	(expediente_nota [ontologia_Class70027])
+	(nota 8.0))
+
+([ontologia_Class70057] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class70048])
+	(expediente_nota [ontologia_Class70027])
+	(nota 10.0))
+
+([ontologia_Class70058] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class70049])
+	(expediente_nota [ontologia_Class70027])
+	(nota 9.0))
+
+([ontologia_Class70059] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class70050])
+	(expediente_nota [ontologia_Class70027])
+	(nota 7.5))
+
+([ontologia_Class70060] of  Nota_examen
+
+	(convocatoria_nota [ontologia_Class70005])
+	(expediente_nota [ontologia_Class70027])
+	(nota 6.0))
 
 ([ontologia_Class71] of  Especialidad
 
