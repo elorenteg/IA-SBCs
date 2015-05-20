@@ -34,7 +34,7 @@
     =>
     (printout t "Abstraccion del problema" crlf)
 
-    (assert (ent-abs-dedicacion) (ent-abs-horario) (ent-abs-especialidad) (ent-abs-dificultad) (ent-abs-tema) (ent-abs-competencias) (ent-abs-curso))
+    (assert (ent-abs-horario) (ent-abs-especialidad) (ent-abs-dificultad) (ent-abs-tema) (ent-abs-competencias) (ent-abs-curso))
     (assert (problema-abstracto))
     (retract ?hecho)
 )
@@ -212,15 +212,14 @@
 )
 
 (defrule fin-abstracto "Comprueba que se ejecuten todas las reglas de Abstraccion"
-    ?hecho1 <- (abs-dedicacion ok)
-    ?hecho2 <- (abs-horario ok)
-    ?hecho3 <- (abs-tema ok)
-    ?hecho4 <- (abs-dificultad ok)
-    ?hecho5 <- (abs-especialidad ok)
-    ?hecho6 <- (abs-competencias ok)
-    ?hecho7 <- (abs-curso ok)
+    ?hecho1 <- (abs-horario ok)
+    ?hecho2 <- (abs-tema ok)
+    ?hecho3 <- (abs-dificultad ok)
+    ?hecho4 <- (abs-especialidad ok)
+    ?hecho5 <- (abs-competencias ok)
+    ?hecho6 <- (abs-curso ok)
     =>
     (printout t "Fin abstraccion" crlf)
     (assert(abstraccion ok))
-    (retract ?hecho1 ?hecho2 ?hecho3 ?hecho4 ?hecho5 ?hecho6 ?hecho7)
+    (retract ?hecho1 ?hecho2 ?hecho3 ?hecho4 ?hecho5 ?hecho6)
 )
