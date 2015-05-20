@@ -168,7 +168,11 @@
 (defrule main
     ?hecho <- (initial-fact)
     =>
-    (format t ">> Iniciando Sistema de Recomendacion de Matricula de la FIB%n")
+    
+    (printout t "=====================================================================" crlf)
+    (printout t "=         Sistema de recomendacion de asignaturas de la FIB         =" crlf)
+    (printout t "=====================================================================" crlf)
+    (printout t crlf)
     (assert (bienvenida ok))
     (retract ?hecho)
 )
@@ -181,6 +185,8 @@
         (printout t "No existe ningun alumno con identificador " ?dni crlf)
         (bind ?dni (pregunta-rango "Introduzca su identificador (DNI):" FALSE 0 9999))
     )
+    (printout t crlf)
+    
     (assert (dni ?dni))
     (retract ?hecho)
 

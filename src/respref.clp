@@ -72,7 +72,10 @@
 (defrule entrada-respref "Pide las preferencias y las restricciones"
     (dni ?dni)
     =>
-    (printout t "Entrada de restricciones/preferencias" crlf)
+    (printout t "A continuacion se le formularan una serie de preguntas sobre sus" crlf)
+    (printout t "preferencias/restricciones para poder recomendarle asignaturas" crlf)
+    (printout t crlf)
+    
 	(assert (ent-respref FALSE))
     (assert (ent-respref TRUE))
     (assert (respref (es_restriccion TRUE)))
@@ -89,30 +92,30 @@
 
 	(if (eq ?es-rest TRUE)
 		then
-		(progn (format t ">> Restricciones%n") (assert (restrs ok)))
+		(progn (printout t "Introduccion de RESTRICCIONES" crlf) (assert (restrs ok)))
 		else
-		(progn (format t ">> Preferencias%n") (assert (prefs ok)))
+		(progn (printout t "Introduccion de PREFERENCIAS" crlf) (assert (prefs ok)))
 	)
 
-    (bind ?ma (pregunta-rango ">> Cual es el numero maximo de asignaturas a matricular?" TRUE 1 6))
+    (bind ?ma (pregunta-rango "Cual es el numero maximo de asignaturas a matricular?" TRUE 1 6))
     (if (not(eq ?ma nil))
         then
         (bind ?rec (modify ?rec (max_asigns ?ma)))
     )
 
-    (bind ?mh (pregunta-rango ">> Cual es el numero maximo de horas de dedicacion semanales?" TRUE 0 50))
+    (bind ?mh (pregunta-rango "Cual es el numero maximo de horas de dedicacion semanales?" TRUE 0 50))
     (if (not(eq ?mh nil))
         then
         (bind ?rec (modify ?rec (max_horas_trabajo ?mh)))
     )
 
-    (bind ?ml (pregunta-rango ">> Cual es el numero maximo de horas de laboratorio semanales?" TRUE 0 50))
+    (bind ?ml (pregunta-rango "Cual es el numero maximo de horas de laboratorio/problemas semanales?" TRUE 0 50))
     (if (not(eq ?ml nil))
         then
         (bind ?rec (modify ?rec (max_horas_lab ?ml)))
     )
 
-    (bind ?th (pregunta-cerrada ">> Que horario se ajusta mejor a su disponibilidad?" TRUE manyana tarde cualquiera))
+    (bind ?th (pregunta-cerrada "Que horario se ajusta mejor a su disponibilidad?" TRUE manyana tarde cualquiera))
 	(if (not(eq ?th nil))
         then
         (if (eq 0 (str-compare ?th cualquiera))
@@ -131,7 +134,7 @@
 
     (bind ?temasN (create$))
     (do-for-all-instances ((?t Especializado)) TRUE (bind ?temasN (insert$ ?temasN 1 (send ?t get-nombre_tema))))
-    (bind ?numTem (pregunta-lista-numeros ">> Que temas especializados te interesan?" TRUE ?temasN))
+    (bind ?numTem (pregunta-lista-numeros "Que temas especializados te interesan?" TRUE ?temasN))
     (if (not(eq ?numTem nil))
         then
         (bind $?temasI (create$))
@@ -139,11 +142,6 @@
             (bind ?num (nth$ ?i ?numTem))
             (bind ?nomTem (nth$ ?num ?temasN))
             (bind ?tema-ins (find-instance ((?tem Especializado)) (eq ?tem:nombre_tema ?nomTem)))
-
-            ;(printout t "numero " ?num crlf)
-            ;(printout t "nombre " ?nomTem crlf)
-            ;(printout t "instancia " ?tema-ins crlf)
-
             (bind ?temasI (insert$ ?temasI 1 ?tema-ins))
         )
         (bind ?rec (modify ?rec (tema_especializado ?temasI)))
@@ -152,7 +150,8 @@
     (if (not(eq ?esp [nil]))
         then
         ; el alumno tiene una especialidad
-        (bind ?bool (pregunta-cerrada ">> Deseas completar tu especialidad?" TRUE si no))
+        (bind ?frase (str-cat (str-cat "Tu especialidad es " (send ?esp get-nombre_esp)) ". Deseas completar tu especialidad?"))
+        (bind ?bool (pregunta-cerrada ?frase TRUE si no))
         (if (eq ?bool si)
             then
             (bind ?rec (modify ?rec (completar_especialidad ?esp)))
@@ -161,16 +160,11 @@
         ; el alumno no tiene una especialidad --> preguntar cual quiere cursar
         (bind ?espN (create$))
         (do-for-all-instances ((?t Especialidad)) TRUE (bind ?espN (insert$ ?espN 1 (send ?t get-nombre_esp))))
-        (bind ?numEsp (pregunta-numero ">> Que especialidad deseas matricular?" TRUE ?espN))
+        (bind ?numEsp (pregunta-numero "Que especialidad deseas matricular?" TRUE ?espN))
         (if (not(eq ?numEsp nil))
             then
             (bind ?nomEsp (nth$ ?numEsp ?espN))
             (bind ?esp-ins (find-instance ((?e Especialidad)) (eq ?e:nombre_esp (primera-mayus ?nomEsp))))
-
-            (printout t "numero " ?numEsp crlf)
-            (printout t "nombre " ?nomEsp crlf)
-            (printout t "instancia " ?esp-ins crlf)
-
             (bind ?rec (modify ?rec (completar_especialidad (implode$ ?esp-ins))))
         )
     )
@@ -178,7 +172,7 @@
     (bind ?comP (create$))
     (do-for-all-instances ((?t Competencia)) TRUE (bind ?comP (insert$ ?comP 1 (str-cat (sub-string 3 (str-length(send ?t get-nombre_comp)) (send ?t get-nombre_comp))))))
     (bind ?ordComP (sort-list ?comP))
-    (bind ?numComp (pregunta-lista-numeros ">> Cuales son tus competencias favoritas?" TRUE ?ordComP))
+    (bind ?numComp (pregunta-lista-numeros "Cuales son tus competencias favoritas?" TRUE ?ordComP))
     (if (not(eq ?numComp nil))
         then
         (bind $?compeI (create$))
@@ -186,18 +180,13 @@
             (bind ?num (nth$ ?i ?numComp))
 
             (bind ?nomComp (nth$ ?num ?ordComP))
-            ;(bind ?nivComp (sub-string (-(str-length(nth$ ?num ?ordComP))2) (-(str-length(nth$ ?num ?ordComP))1) (nth$ ?num ?ordComP)))
             (bind $?comp-ins (find-all-instances ((?comp Competencia)) (= (str-compare (sub-string 3 (str-length ?comp:nombre_comp) ?comp:nombre_comp) ?nomComp) 0)))
-
-            (printout t "numero " ?num crlf)
-            (printout t "nombre " ?nomComp crlf)
-            ;(printout t "nivel " ?nivComp crlf)
-            (printout t "instancia " ?comp-ins crlf)
-
             (bind ?compeI (insert$ ?compeI 1 ?comp-ins))
         )
         (bind ?rec (modify ?rec (competencias_preferidas ?compeI)))
     )
+    
+    (printout t crlf)
 
     (retract ?hecho)
 )
@@ -210,7 +199,7 @@
 
     =>
 
-    (printout t "Contador de restricciones" crlf)
+    ;(printout t "Contador de restricciones" crlf)
     (bind ?nrest 0)
     (if (> (length$ ?cp) 0) then (bind ?nrest (+ ?nrest 1)))
     (if (neq ?ce nil) then (bind ?nrest (+ ?nrest 1)))
@@ -218,7 +207,7 @@
     (if (> (length$ ?te) 0) then (bind ?nrest (+ ?nrest 1)))
     (if (> (length$ ?th) 0) then (bind ?nrest (+ ?nrest 1))) ;por defecto ?th tiene asignado los dos horarios posibles
 
-    (printout t ">> num. restricciones: " ?nrest crlf)
+    ;(printout t ">> num. restricciones: " ?nrest crlf)
 
     ;Restricciones que no se pueden comprobar hasta el final
     (bind ?nrest-final 0)
@@ -228,7 +217,8 @@
 
 
     (assert (contador ok))
-    (assert (nrestricciones ?nrest ?nrest-final))
+    (assert (nrestricciones ?nrest))
+    (assert (nrestricciones-final ?nrest-final))
     (retract ?hecho1)
     (retract ?hecho2)
 )
@@ -239,8 +229,6 @@
     ?alumn <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped) (especialidad ?esp))
 
     =>
-
-    (printout t "Inferencia de preferencias" crlf)
 
     (bind $?notas (send ?exped get-notas_exp))
 
@@ -278,7 +266,6 @@
         (bind $?espA nil)
         (if (eq (str-cat (class ?asig)) "Especializada")
             then
-            ;(printout t "Asignatura de Especialidad!" crlf)
             (bind $?espA (send ?asig get-especialidad_asig))
         )
         (bind ?horaI (send ?conv get-horario_conv))
@@ -322,7 +309,6 @@
             )
             (if (eq (str-cat (class ?tem-j)) "Especializado")
                 then
-                ;(printout t "Tema Especializado! (tiene afines)" crlf)
                 (bind $?temAf (send ?tem-j get-temas_afines))
                 (loop-for-count (?k 1 (length$ ?temAf)) do
                     (bind ?tem-k (nth$ ?k ?temAf))
@@ -393,13 +379,10 @@
     ?pref <- (respref (es_restriccion FALSE) (competencias_preferidas $?cp))
 
     =>
-
-    (printout t ">> Inferencia de preferencia de competencias" crlf)
-
+    
     (if (= (length$ ?cp) 0)
         then
         ; competencias cursadas de N1-3 (aunque no haya hecho todos los niveles)
-        ;(printout t "cp " ?compe crlf)
         (bind ?pref (modify ?pref (competencias_preferidas ?compe)))
     )
 
@@ -415,21 +398,17 @@
 
     =>
 
-    (printout t ">> Inferencia de preferencia de especialidad" crlf)
-
     (if (not(eq ?ce [nil]))
         then
         ; especialidad de alumno (si la tiene) y especialidad casi acabada (si se da el caso)
 
         (if (not(eq ?esp [nil]))
             then
-            (printout t ">> >> Tiene especialidad" ?esp crlf)
-            ;(printout t "ce " ?esp crlf)
+            
             (bind ?pref (modify ?pref (completar_especialidad ?esp)))
             else
             (if (> (length$ ?nasigEs) 0)
                 then
-                (printout t ">> >> Inferencia de la especialidad mas cursada" ?esp crlf)
                 (bind ?max 1)
                 (loop-for-count (?i 2 (length$ ?nasigEs)) do
                     (if (> (nth$ ?i ?nasigEs) (nth$ ?max ?nasigEs))
@@ -438,10 +417,7 @@
                     )
                 )
                 (bind ?espMax (nth$ ?max ?espeCur))
-                ;(printout t "ce " ?espMax crlf)
                 (bind ?pref (modify ?pref (completar_especialidad ?espMax)))
-                else
-                (printout t ">> >> Especialidad no inferible" crlf)
             )
         )
     )
@@ -455,9 +431,6 @@
     ?pref <- (respref (es_restriccion FALSE) (dificultad ?d))
 
     =>
-
-    (printout t ">> Inferencia de preferencia de dificultad" crlf)
-
     (if (eq ?d nil)
         then
         (if (and (eq ?sfacil 0) (eq ?sdificil 0))
@@ -479,7 +452,6 @@
                 )
             )
         )
-        ;(printout t "d " ?d crlf)
         (bind ?pref (modify ?pref (dificultad ?d)))
     )
 
@@ -492,14 +464,10 @@
     ?pref <- (respref (es_restriccion FALSE) (max_asigns ?ma))
 
     =>
-
-    (printout t ">> Inferencia de preferencia de maxAsigns" crlf)
-
     (if (eq ?ma nil)
         then
         ; media de asignaturas/cuatri
         (bind ?mediaAs (div ?nasig (length$ ?cuatris)))
-        ;(printout t "ma " ?mediaAs crlf)
         (bind ?pref (modify ?pref (max_asigns ?mediaAs)))
     )
 
@@ -514,21 +482,16 @@
     ?pref <- (respref (es_restriccion FALSE) (max_horas_trabajo ?mht) (max_horas_lab ?mhl))
 
     =>
-
-    (printout t ">> Inferencia de preferencia de maxHoras y maxHorasLab" crlf)
-
     (if (eq ?mht nil)
         then
         ; media de horas de teoria/cuatri
         (bind ?mediaHT (div ?nhoras-teo (length$ ?cuatris)))
-        ;(printout t "mht " ?mediaHT crlf)
         (bind ?pref (modify ?pref (max_horas_trabajo ?mediaHT)))
     )
     (if (eq ?mhl nil)
         then
         ; media de horas de lab y prob/cuatri
         (bind ?mediaHL (div (+ ?nhoras-lab ?nhoras-pro) (length$ ?cuatris)))
-        ;(printout t "mhl " ?mediaHL crlf)
         (bind ?pref (modify ?pref (max_horas_lab ?mediaHL)))
     )
 
@@ -542,13 +505,10 @@
 
     =>
 
-    (printout t ">> Inferencia de preferencia de tema" crlf)
-
     (if (= (length$ ?te) 0)
         then
         ; temas cursados y temas afines a los cursados
         (bind ?tems (insert$ ?afins 1 ?temas))
-        ;(printout t "te " ?tems crlf)
         (bind ?pref (modify ?pref (tema_especializado ?tems)))
     )
 
@@ -561,8 +521,6 @@
     ?pref <- (respref (es_restriccion FALSE) (tipo_horario $?th))
 
     =>
-
-    (printout t ">> Inferencia de preferencia de tipo de horario" crlf)
 
     (if (= (length$ ?th) 0)
         then
@@ -579,7 +537,6 @@
             then
             (bind ?th (insert$ ?th 1 (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus "manyana")))))
         )
-        ;(printout t "th " ?th crlf)
         (bind ?pref (modify ?pref (tipo_horario ?th)))
     )
 
@@ -604,7 +561,6 @@
     (dni ?dni)
     ?alumn <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped))
     =>
-    (printout t ">> Inferencia de curso" crlf)
 
     (bind ?notas (send ?exped get-notas_exp))
     (bind ?max-curso 0)
@@ -631,8 +587,6 @@
     ?hecho8 <- (inf-curso ok)
 
     =>
-
-    (printout t "Fin inferencia" crlf)
     (retract ?hecho1 ?hecho2 ?hecho3 ?hecho4 ?hecho5 ?hecho6 ?hecho7 ?hecho8)
 
     (focus abstraccion)
