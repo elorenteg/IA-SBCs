@@ -2,6 +2,15 @@
 ;; Estructuras para la asociacion heuristica de un problema abstracto a una solucion abstracta
 ;;
 
+(defmodule asociacion "Módulo para la asociacion heuristica de un problema abstracto a una solucion abstracta"
+    (import MAIN ?ALL)
+    (import consultas deftemplate dni)
+    (import respref deffunction curso-a-int)
+    (import abstraccion deftemplate problema-abstracto)
+    (export ?ALL)
+)
+
+
 (deftemplate asig-rec "Asignatura recomendada con sus motivos (a partir de todas las reglas)"
     (slot asign)
     (multislot motivosR (default (create$)))
@@ -29,12 +38,11 @@
 
 
 (defrule entrada-asociacion "Asociacion heuristica del problema"
-    ?hecho <- (abstraccion ok)
+    (declare (salience 10))
     =>
     (printout t "Asociacion del problema" crlf)
 
     (assert(ent-asigs))
-    (retract ?hecho)
 )
 
 (deffunction horario-preferido
@@ -316,12 +324,11 @@
 
 
 
-
-
 (defrule fin-asociacion "Comprueba que se ejecuten todas las reglas de Asociacion"
     ?hecho1 <- (ent-asigs)
     =>
     (printout t "Fin asociacion" crlf)
-    (assert(asociacion ok))
     (retract ?hecho1)
+
+    (focus refinamiento)
 )

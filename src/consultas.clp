@@ -2,6 +2,18 @@
 ;; Estructuras para consultar información del usuario
 ;;
 
+(defrule inicio
+    (initial-fact)
+    =>
+    (focus consultas)
+)
+
+
+(defmodule consultas "Módulo para consultar información del usuario"
+    (import MAIN ?ALL)
+    (export ?ALL)
+)
+
 
 (deffunction pregunta
     (?pregunta ?puede-omitir)
@@ -171,4 +183,6 @@
     )
     (assert (dni ?dni))
     (retract ?hecho)
+
+    (focus respref)
 )

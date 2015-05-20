@@ -1,6 +1,18 @@
 ;;
-;; Estructuras para el refinamiento de una solucion abstracta a la solucion de nuestro problema
+;; Estructuras para el refinamiento de una solucion abstracta a una solucion concreta
 ;;
+
+(defmodule refinamiento "Módulo para el refinamiento de una solucion abstracta a una solucion concreta"
+    (import MAIN ?ALL)
+    (import consultas deftemplate dni)
+    (import respref deftemplate respref)
+    (import respref deftemplate nrestricciones)
+    (import respref deftemplate nrestricciones-final)
+    (import asociacion deftemplate asig-rec)
+    (import asociacion deffunction ha-aprobado)
+    (export ?ALL)
+)
+
 
 (defclass asig-candidata
     (is-a USER)
@@ -43,7 +55,7 @@
 
 
 (defrule entrada-refinamiento "Asociacion heuristica del problema"
-    ?hecho <- (asociacion ok)
+    (declare (salience 10))
     =>
     ;;; TODO: refinamiento del problema ;;;
     (printout t "Refinamiento del problema" crlf)
@@ -51,17 +63,14 @@
     (assert (filtro-restr))
     (assert (refina-rec))
     (assert (candidatas (create$)))
-    (retract ?hecho)
 )
 
 (defrule descarta-segun-rest "Descarta las candidatas que no cumplen todas las restricciones"
-    (declare (salience 10))
     (nrestricciones ?nrest)
     (filtro-restr)
     ?ar <- (asig-rec (asign ?a) (rest-sat ?rs) (motivosP $?mP))
-    ;(test (!= ?nrest ?rs))
     =>
-    (if (!= ?nrest ?rs)
+    (if (!= ?nrest ?rs) 
         then
         (if (member asignatura-suspensa ?mP)
             then
@@ -74,7 +83,6 @@
 )
 
 (defrule descarta-ya-aprobadas "Descarta las candidatas que ya se hayan cursado y aprobado"
-    (declare (salience 9))
     (refina-rec)
     (dni ?dni)
     ?al <- (object (is-a Alumno) (id ?dni))
@@ -86,7 +94,6 @@
 )
 
 (defrule descarta-segun-requisitos "Descarta las candidatas que incumplan los requisitos entre asignaturas"
-    (declare (salience 8))
     (refina-rec)
     (dni ?dni)
     ?al <- (object (is-a Alumno) (id ?dni))
@@ -130,7 +137,6 @@
 )
 
 (defrule descarta-optativas "Descarta las asignaturas optativas si no se ha superado la fase inicial (60 créditos ECTS)"
-    (declare (salience 7))
     (refina-rec)
     (dni ?dni)
     ?al <- (object (is-a Alumno) (id ?dni))
@@ -208,7 +214,7 @@
 )
 
 (defrule obtiene-candidatas "Agrupa las asignaturas que se pueden recomendar"
-    (declare (salience 6))
+    (declare (salience 1))
     ?hecho <- (agrupa)
     ?ar <- (asig-rec (asign ?a) (motivosR $?msR) (motivosP $?msP) (rest-sat ?rs) (pref-sat ?ps))
     ?cand <- (candidatas $?list)
@@ -266,18 +272,12 @@
                  (or (and (eq ?ma nil) (= (length$ ?grupo) 6))
                      (and (neq ?ma nil) (= (length$ ?grupo) ?ma))))
             then
-            ;;; TODO: añadir a los motivos de las asignaturas de ?grupo que cumplen horas
-            ;;; quizá también revisar si se cumplen las preferencias de horas y número de asignaturas?
+            ;;; TODO: revisar si se cumplen las preferencias de horas y número de asignaturas?
             (printout t "SOLUCION " ?grupo crlf)
             (retract ?hecho1)
             (assert (solucion ?grupo))
+            (focus presentacion)
         )
-
-        ; mirar si cumple:
-        ; 1. numAsigs
-        ; 2. numHoras
-        ; 3. corequisitos (matriculacion)
-        ; si cumple -> (muestra-sol ?grupo)
 
         else
         (assert (backtrack (+ ?i 1) ?grupo))
@@ -301,13 +301,26 @@
     ;?list contiene todas las asignaturas candidatas, primero las altamente-recomendable, luego las recomendable
 
     (printout t "COMPLETO " ?list crlf)
-    (assert (solucion ?list))
 
     (assert (no-solution))
     (assert (backtrack 1 (create$)))
     (retract ?hecho)
 )
 
+
+
+
+
+
+
+(defmodule presentacion "Módulo para la presentacion de resultados"
+    (import MAIN ?ALL)
+    (import respref deftemplate respref)
+    (import respref deftemplate nrestricciones)
+    (import respref deftemplate nrestricciones-final)
+    (import refinamiento deftemplate solucion)
+    (export ?ALL)
+)
 
 
 (deffunction muestra-motivos
@@ -320,7 +333,7 @@
 )
 
 (defrule muestra-solucion
-    (declare (salience 5))
+    (declare (salience 10))
     ?sol <- (solucion $?list)
     (nrestricciones ?nrest)
     (nrestricciones-final ?nrest-final)

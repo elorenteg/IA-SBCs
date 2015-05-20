@@ -1,5 +1,8 @@
 (clear)
 (reset)
+
+(defmodule MAIN (export ?ALL))
+
 (load "../ontologia/ontologia.pont")
 (load-instances "../ontologia/ontologia.pins")
 

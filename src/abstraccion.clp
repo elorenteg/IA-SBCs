@@ -2,6 +2,15 @@
 ;; Estructuras para la abstracción de un problema concreto a uno más general
 ;;
 
+(defmodule abstraccion "Módulo para la abstracción de un problema concreto a uno más general"
+    (import MAIN ?ALL)
+    (import consultas deftemplate dni)
+    (import respref deftemplate respref)
+    (import respref deftemplate curso)
+    (export ?ALL)
+)
+
+
 (deftemplate problema-abstracto "Conjunto de características que definen un problema abstracto"
     (slot dificultadR (allowed-strings "alta" "media"))
     (slot dificultadP (allowed-strings "alta" "media"))
@@ -30,13 +39,12 @@
 )
 
 (defrule entrada-abstracto "Abstrae el problema"
-    ?hecho <- (inferencia ok)
+    (declare (salience 10))
     =>
     (printout t "Abstraccion del problema" crlf)
 
     (assert (ent-abs-horario) (ent-abs-especialidad) (ent-abs-dificultad) (ent-abs-tema) (ent-abs-competencias) (ent-abs-curso))
     (assert (problema-abstracto))
-    (retract ?hecho)
 )
 
 (defrule abs-horario "Abstrae restricciones y preferencias sobre el horario"
@@ -220,6 +228,7 @@
     ?hecho6 <- (abs-curso ok)
     =>
     (printout t "Fin abstraccion" crlf)
-    (assert(abstraccion ok))
     (retract ?hecho1 ?hecho2 ?hecho3 ?hecho4 ?hecho5 ?hecho6)
+
+    (focus asociacion)
 )

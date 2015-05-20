@@ -2,6 +2,14 @@
 ;; Estructuras para la recogida de datos de restricciones/preferencias
 ;;
 
+(defmodule respref "Módulo para la recogida de datos de restricciones/preferencias"
+    (import MAIN ?ALL)
+    (import consultas deffunction ?ALL)
+    (import consultas deftemplate dni)
+    (export ?ALL)
+)
+
+
 (deftemplate respref
     (slot es_restriccion)
     (multislot competencias_preferidas)
@@ -626,7 +634,7 @@
     =>
 
     (printout t "Fin inferencia" crlf)
-
-    (assert(inferencia ok))
     (retract ?hecho1 ?hecho2 ?hecho3 ?hecho4 ?hecho5 ?hecho6 ?hecho7 ?hecho8)
+
+    (focus abstraccion)
 )
