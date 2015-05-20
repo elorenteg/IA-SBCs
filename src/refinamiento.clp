@@ -68,7 +68,7 @@
             (printout t (send ?a get-nombre) " no cumple todas las restricciones, pero esta suspensa" crlf)
             else
             (printout t (send ?a get-nombre) " no cumple todas las restricciones (" ?rs "<" ?nrest ")"  crlf)
-        (retract ?ar)
+            (retract ?ar)
         )
     )
 )
@@ -93,7 +93,6 @@
     ?ar <- (asig-rec (asign ?a))
     =>
     (bind ?prerrequisitos (send ?a get-prerrequisitos))
-    (bind ?correquisitos (send ?a get-correquisitos))
     (bind ?precorrequisitos (send ?a get-precorrequisitos))
     (bind ?orrequisitos (send ?a get-orrequisitos))
 
@@ -101,15 +100,6 @@
         (if (not (ha-aprobado ?al (nth$ ?i ?prerrequisitos)))
             then
             (printout t (send ?a get-nombre) " no cumple prerrequisitos" crlf)
-            (retract ?ar)
-            (break)
-        )
-    )
-
-    (loop-for-count (?i 1 (length$ ?correquisitos)) do
-        (if (not (or (ha-aprobado ?al (nth$ ?i ?correquisitos)) TRUE)) ;cómo compruebo si "está matriculado" de una asignatura? Si está entre las candidatas?
-            then
-            (printout t (send ?a get-nombre) " no cumple correquisitos" crlf)
             (retract ?ar)
             (break)
         )
@@ -333,10 +323,11 @@
     (declare (salience 5))
     ?sol <- (solucion $?list)
     (nrestricciones ?nrest)
+    (nrestricciones-final ?nrest-final)
     ?rest <- (respref (es_restriccion TRUE) (competencias_preferidas $?cp) (completar_especialidad ?ce) (max_asigns ?ma) 
                  (max_horas_trabajo ?mht) (max_horas_lab ?mhl) (tema_especializado $?te) (tipo_horario $?th))
     =>
-    (if (> ?nrest 0) 
+    (if (> (+ ?nrest ?nrest-final) 0) 
         then
         (printout t "Restricciones aplicadas a la solucion:" crlf)
         (if (neq ?ma nil) then (printout t " - Num. asignaturas a matricular: " ?ma crlf))

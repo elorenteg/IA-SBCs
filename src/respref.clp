@@ -206,18 +206,22 @@
     (bind ?nrest 0)
     (if (> (length$ ?cp) 0) then (bind ?nrest (+ ?nrest 1)))
     (if (neq ?ce nil) then (bind ?nrest (+ ?nrest 1)))
-    (if (neq ?d nil) then (bind ?nrest (+ ?nrest 1)))
-    ;(if (neq ?ma nil) then (bind ?nrest (+ ?nrest 1)))
-    (if (neq ?mht nil)
-        then (bind ?nrest (+ ?nrest 1))
-        else (if (neq ?mhl nil) then (bind ?nrest (+ ?nrest 1))))
+    ;(if (neq ?d nil) then (bind ?nrest (+ ?nrest 1)))
     (if (> (length$ ?te) 0) then (bind ?nrest (+ ?nrest 1)))
     (if (> (length$ ?th) 0) then (bind ?nrest (+ ?nrest 1))) ;por defecto ?th tiene asignado los dos horarios posibles
 
     (printout t ">> num. restricciones: " ?nrest crlf)
 
+    ;Restricciones que no se pueden comprobar hasta el final
+    (bind ?nrest-final 0)
+    (if (neq ?ma nil) then (bind ?nrest-final (+ ?nrest-final 1)))
+    (if (neq ?mht nil) then (bind ?nrest-final (+ ?nrest-final 1)))
+    (if (neq ?mhl nil) then (bind ?nrest-final (+ ?nrest-final 1)))
+
+
     (assert (contador ok))
     (assert (nrestricciones ?nrest))
+    (assert (nrestricciones-final ?nrest-final))
     (retract ?hecho1)
     (retract ?hecho2)
 )
