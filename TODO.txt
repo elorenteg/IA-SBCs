@@ -1,24 +1,10 @@
 
-ABSTRACCION
-* horas (mejorar) D
-* tema D (hecho -faltará algo...?)
 
-ASOCIACON
-* dificultad E
+* elegir N asigs / intentar poda en Backtracking
+* modulos
+* quitar volumen-trabajo
+* quitar motivosR
 
-* especialidad  <--- no estaba acabado
-* volumen trabajo  <--- no estaba acabado
-* horario  <--- no estaba acabado
+* cambiar motivos
+* filtro-creditos
 
-REFINAMIENTO
-* cumplimiento Restriccion
-* * Volumen D
-* * nº asigs E
-* cumplimiento Preferencias
-* * volumen D
-* * nasigs E
-* * dificultad E
-
-* * Cumplimiento de requisitos (casi completado -faltan por acabar correquisitos)
-* * Filtrado de optativas si no están aprobados X% de los créditos
-* * Recomendar asignaturas de otras especialidades como optativas
