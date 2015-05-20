@@ -155,12 +155,11 @@
 (defrule refina
     ?hecho1 <- (refina-rec)
     ?hecho2 <- (filtro-restr)
-    ?hecho3 <- (nrestricciones ?nrestr)
 
     =>
 
     (assert (refinamiento ok))
-    (retract ?hecho1 ?hecho2 ?hecho3)
+    (retract ?hecho1 ?hecho2)
 )
 
 (defrule fin-refinamiento "Comprueba que se ejecuten todas las reglas de Refinamiento"
@@ -333,17 +332,47 @@
 (defrule muestra-solucion
     (declare (salience 5))
     ?sol <- (solucion $?list)
+    (nrestricciones ?nrest)
+    ?rest <- (respref (es_restriccion TRUE) (competencias_preferidas $?cp) (completar_especialidad ?ce) (max_asigns ?ma) 
+                 (max_horas_trabajo ?mht) (max_horas_lab ?mhl) (tema_especializado $?te) (tipo_horario $?th))
     =>
+    (if (> ?nrest 0) 
+        then
+        (printout t "Restricciones aplicadas a la solucion:" crlf)
+        (if (neq ?ma nil) then (printout t " - Num. asignaturas a matricular: " ?ma crlf))
+        (if (neq ?mht nil) then (printout t " - Max. horas de dedicacion semanales: " ?mht crlf))
+        (if (neq ?mhl nil) then (printout t " - Max. horas de laboratorio semanales: " ?mhl crlf))
+        (if (eq (length$ ?th) 1) then (printout t " - Tipo de horario: " (send (nth$ 1 ?th) get-horario) crlf))
+        (if (> (length$ ?te) 0) 
+            then 
+            (printout t " - Temas de interes: ")
+            (loop-for-count (?i 1 (length$ ?te)) do
+                (printout t (send (nth$ ?i ?te) get-nombre_tema))
+                (if (< ?i (length$ ?te)) then (printout t ", "))
+            )
+            (printout t crlf)
+        )
+        (if (neq ?ce nil) then (printout t " - Especialidad: " (send ?ce get-nombre_esp) crlf))
+        (if (> (length$ ?cp) 0) 
+            then 
+            (printout t " - Competencias transversales: ")
+            (loop-for-count (?i 1 (length$ ?cp)) do
+                (printout t (send (nth$ ?i ?cp) get-nombre_comp))
+                (if (< ?i (length$ ?cp)) then (printout t ", "))
+            )
+            (printout t crlf)
+
+        ) 
+        (printout t crlf crlf)
+    )
+
     (loop-for-count (?i 1 (length$ ?list)) do
         (bind ?asig (nth$ ?i ?list))
         (bind ?asigI (send ?asig get-asig))
         (bind ?nomA (send ?asigI get-nombre))
-        (bind $?motR (send ?asig get-motivosR))
         (bind $?motP (send ?asig get-motivosP))
         (bind ?gradoRec (send ?asig get-grado))
         (format t "%s (%s): %n" ?nomA ?gradoRec)
-        (printout t " * Restricciones" crlf)
-        (muestra-motivos ?motR)
         (printout t " * Preferencias" crlf)
         (muestra-motivos ?motP)
     )
