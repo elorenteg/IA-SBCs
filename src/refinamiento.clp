@@ -225,7 +225,7 @@
     ?cand <- (candidatas $?list)
     =>
     (bind ?ins (make-instance of asig-candidata (asig ?a) (motivosR ?msR) (motivosP ?msP) (grado (grado-recomendacion ?ps ?msP))))
-    (bind $?list (inserta-ordenado ?ins $?list))
+    (bind $?list (subseq$ (inserta-ordenado ?ins $?list) 1 12)) ;nos quedamos con las 12 mejores candidatas
 
     (retract ?cand)
     (assert (candidatas ?list))
