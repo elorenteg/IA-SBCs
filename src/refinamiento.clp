@@ -7,7 +7,6 @@
     (import consultas deftemplate dni)
     (import respref deftemplate respref)
     (import respref deftemplate nrestricciones)
-    (import respref deftemplate nrestricciones-final)
     (import asociacion deftemplate asig-rec)
     (import asociacion deffunction ha-aprobado)
     (export ?ALL)
@@ -66,7 +65,7 @@
 )
 
 (defrule descarta-segun-rest "Descarta las candidatas que no cumplen todas las restricciones"
-    (nrestricciones ?nrest)
+    (nrestricciones ?nrest ?nrestf)
     (filtro-restr)
     ?ar <- (asig-rec (asign ?a) (rest-sat ?rs) (motivosP $?mP))
     =>
@@ -317,7 +316,6 @@
     (import MAIN ?ALL)
     (import respref deftemplate respref)
     (import respref deftemplate nrestricciones)
-    (import respref deftemplate nrestricciones-final)
     (import refinamiento deftemplate solucion)
     (export ?ALL)
 )
@@ -335,8 +333,7 @@
 (defrule muestra-solucion
     (declare (salience 10))
     ?sol <- (solucion $?list)
-    (nrestricciones ?nrest)
-    (nrestricciones-final ?nrest-final)
+    (nrestricciones ?nrest ?nrest-final)
     ?rest <- (respref (es_restriccion TRUE) (competencias_preferidas $?cp) (completar_especialidad ?ce) (max_asigns ?ma) 
                  (max_horas_trabajo ?mht) (max_horas_lab ?mhl) (tema_especializado $?te) (tipo_horario $?th))
     =>
