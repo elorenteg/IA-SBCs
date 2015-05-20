@@ -151,33 +151,6 @@
     (str-cat (upcase (sub-string 0 1 ?str)) (sub-string 2 (length$ ?str) ?str))
 )
 
-(deffunction resprefs-alumno "Devuelve el conjunto de restricciones y preferencias de un alumno"
-    (?dni)
-
-    (bind ?al (find-instance ((?a Alumno)) (= ?a:id ?dni)))
-    (if (!= (length$ ?al) 1) then (return nil) else (send (eval (implode$ ?al)) get-respref_alumno))
-)
-
-(deffunction muestra-resprefs "Muestra por pantalla las restricciones y preferencias de un alumno"
-    (?dni)
-
-    (bind ?resprefs (resprefs-alumno ?dni))
-    (loop-for-count (?i 1 (length$ ?resprefs)) do
-        (printout t "#" ?i ":" crlf)
-        (send (nth$ ?i ?resprefs) print)
-        (printout t crlf)
-    )
-)
-
-(deffunction muestra-convocatorias-alumno "Muestra las convocatorias a las que se ha presentado un alumno"
-    (?dni)
-
-    (bind ?al (find-instance ((?a Alumno)) (= ?a:id ?dni))) ;falta comprobar si existe el alumno
-    (bind ?exp (send (eval (implode$ ?al)) get-expediente_alumno))
-    (bind ?notas (send ?exp get-notas_exp)) ;todas las notas del alumno
-    (progn$ (?ins ?notas) (printout t (send (send ?ins get-convocatoria_nota) print) crlf))
-)
-
 ;;; TODO: organizar reglas de "consulta al usuario" bajo un mismo módulo ;;;
 
 (defrule main

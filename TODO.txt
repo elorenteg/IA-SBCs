@@ -1,9 +1,9 @@
 
 
-* elegir N asigs / intentar poda en Backtracking
+* elegir N asigs / intentar poda en Backtracking (hecho)
 * modulos
-* quitar volumen-trabajo
-* quitar motivosR
+* quitar volumen-trabajo (hecho)
+* quitar motivosR (hecho)
 
 * cambiar motivos
 * filtro-creditos
