@@ -162,14 +162,11 @@
     =>
     (bind ?facts (find-all-facts ((?a asig-rec)) TRUE))
     (if (= (length$ ?facts) 0)
-        then ; no hay asigs a recomendar
-        (printout t "no hay asigs!!" crlf)
+        then ; no hay asigs a recomendar --> pasar a mostrar no-solucion
         (assert (no-solution))
         (retract ?hecho)
         (focus presentacion)
     )
-        
-    (printout t ?facts crlf)
 )
 
 (deffunction grado-recomendacion
@@ -244,6 +241,7 @@
 )
 
 (defrule backtracking
+    (declare (salience 1))
     ?hecho1 <- (no-solution)
     ?hecho2 <- (backtrack ?i $?grupo)
     ?cand <- (candidatas $?list)
@@ -306,6 +304,31 @@
     )
 
     (retract ?hecho2)
+)
+
+(defrule solo-suspensas
+    ?hecho1 <- (no-solution)
+    ?cand <- (candidatas $?list)
+
+    =>
+
+    (bind $?grupo (create$))
+    (loop-for-count (?i 1 (length$ ?list)) do
+        (bind ?asig (nth$ ?i ?list))
+        (if (member asignatura-suspensa (send ?asig get-motivosP))
+            then
+            (bind $?grupo (insert$ ?grupo ?i ?asig))
+            else
+            (break)
+        )
+    )
+    
+    (if (> (length$ ?grupo) 0)
+        then
+        (assert (solucion ?grupo))
+        (retract ?hecho1)
+    )
+    (focus presentacion)
 )
 
 
