@@ -217,8 +217,7 @@
 
 
     (assert (contador ok))
-    (assert (nrestricciones ?nrest))
-    (assert (nrestricciones-final ?nrest-final))
+    (assert (nrestricciones ?nrest ?nrest-final))
     (retract ?hecho1)
     (retract ?hecho2)
 )

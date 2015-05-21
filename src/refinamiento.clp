@@ -62,11 +62,13 @@
 )
 
 (defrule descarta-segun-rest "Descarta las candidatas que no cumplen todas las restricciones"
+    (declare (salience 5))
     (nrestricciones ?nrest ?nrestf)
     (filtro-restr)
-    ?ar <- (asig-rec (asign ?a) (rest-sat ?rs) (motivosP $?mP))
+    ?ar <- (asig-rec (asign ?a) (rest-sat ?rs) (motivosR $?mR) (motivosP $?mP))
     =>
-    (if (!= ?nrest ?rs) 
+
+    (if (< ?rs ?nrest) 
         then
         (if (member asignatura-suspensa ?mP)
             then
@@ -252,7 +254,7 @@
         (if (and (eq ?correq-ok TRUE)
                  (or (eq ?mht nil) (<= ?sum-horas ?mht))
                  (or (eq ?mhl nil) (<= ?sum-horas-lab ?mhl))
-                 (or (and (eq ?ma nil) (= (length$ ?grupo) 6))
+                 (or TRUE ;(and (eq ?ma nil) (= (length$ ?grupo) 6)) ;;; TODO: permitir que muestre solución si no encuentra suficientes asignaturas (?)
                      (and (neq ?ma nil) (= (length$ ?grupo) ?ma))))
             then
             ;(printout t "SOLUCION " ?grupo crlf)
@@ -349,7 +351,7 @@
 (defrule muestra-solucion
     (declare (salience 10))
     ?sol <- (solucion $?list)
-    ;(nrestricciones ?nrest ?nrest-final)
+    (nrestricciones ?nrest ?nrest-final)
     ?rest <- (respref (es_restriccion TRUE) (competencias_preferidas $?cp) (completar_especialidad ?ce) (max_asigns ?ma) 
                  (max_horas_trabajo ?mht) (max_horas_lab ?mhl) (tema_especializado $?te) (tipo_horario $?th))
     =>
@@ -359,28 +361,26 @@
     (printout t "=====================================================================" crlf)
     (printout t crlf)
     
-    (bind ?nrest 0)
-    (bind ?nrest-final 0)
     (if (> (+ ?nrest ?nrest-final) 0) 
         then
         (printout t "Restricciones aplicadas a la solucion:" crlf)
-        (if (neq ?ma nil) then (printout t " - Num. asignaturas a matricular: " ?ma crlf))
-        (if (neq ?mht nil) then (printout t " - Max. horas de dedicacion semanales: " ?mht crlf))
-        (if (neq ?mhl nil) then (printout t " - Max. horas de laboratorio/problemas semanales: " ?mhl crlf))
-        (if (eq (length$ ?th) 1) then (printout t " - Tipo de horario: " (send (nth$ 1 ?th) get-horario) crlf))
+        (if (neq ?ma nil) then (printout t " * Num. asignaturas a matricular: " ?ma crlf))
+        (if (neq ?mht nil) then (printout t " * Max. horas de dedicacion semanales: " ?mht crlf))
+        (if (neq ?mhl nil) then (printout t " * Max. horas de laboratorio/problemas semanales: " ?mhl crlf))
+        (if (eq (length$ ?th) 1) then (printout t " * Tipo de horario: " (send (nth$ 1 ?th) get-horario) crlf))
         (if (> (length$ ?te) 0) 
             then 
-            (printout t " - Temas de interes: ")
+            (printout t " * Temas de interes: ")
             (loop-for-count (?i 1 (length$ ?te)) do
                 (printout t (send (nth$ ?i ?te) get-nombre_tema))
                 (if (< ?i (length$ ?te)) then (printout t ", "))
             )
             (printout t crlf)
         )
-        (if (neq ?ce nil) then (printout t " - Especialidad: " (send ?ce get-nombre_esp) crlf))
+        (if (neq ?ce nil) then (printout t " * Especialidad: " (send ?ce get-nombre_esp) crlf))
         (if (> (length$ ?cp) 0) 
             then 
-            (printout t " - Competencias transversales: ")
+            (printout t " * Competencias transversales: ")
             (loop-for-count (?i 1 (length$ ?cp)) do
                 (printout t (send (nth$ ?i ?cp) get-nombre_comp))
                 (if (< ?i (length$ ?cp)) then (printout t ", "))
