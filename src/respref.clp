@@ -150,7 +150,7 @@
             then
             (bind ?nomEsp (nth$ ?numEsp ?espN))
             (bind ?esp-ins (find-instance ((?e Especialidad)) (eq ?e:nombre_esp (primera-mayus ?nomEsp))))
-            (bind ?rec (modify ?rec (completar_especialidad (implode$ ?esp-ins))))
+            (bind ?rec (modify ?rec (completar_especialidad (nth$ 1 ?esp-ins))))
         )
     )
 

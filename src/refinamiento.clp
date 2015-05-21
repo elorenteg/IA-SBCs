@@ -74,7 +74,7 @@
             then
             (printout t (send ?a get-nombre) " no cumple todas las restricciones, pero esta suspensa" crlf)
             else
-            (printout t (send ?a get-nombre) " no cumple todas las restricciones (" ?rs "<" ?nrest ")"  crlf)
+            ;(printout t (send ?a get-nombre) " no cumple todas las restricciones (" ?rs "<" ?nrest ")"  crlf)
             (retract ?ar)
         )
     )
@@ -156,6 +156,19 @@
     (retract ?hecho1 ?hecho2)
 )
 
+(defrule no-hay-asigs
+    (declare (salience 2))
+    ?hecho <- (agrupa)
+    =>
+    (bind ?facts (find-all-facts ((?a asig-rec)) TRUE))
+    (if (= (length$ ?facts) 0)
+        then ; no hay asigs a recomendar
+        (assert (no-solution))
+        (retract ?hecho)
+    )
+        
+    (printout t ?facts crlf)
+)
 
 (deffunction grado-recomendacion
     (?ps $?mP)
@@ -214,7 +227,19 @@
     (retract ?ar)
 )
 
+(defrule filtra-final
+    ?hecho <- (filtra-nasig)
+    ?hecho2 <- (agrupa)
+    ?rest <- (respref (es_restriccion TRUE) (max_asigns ?maR))
+    ?pref <- (respref (es_restriccion FALSE) (max_asigns ?maP))
+    ?cand <- (candidatas $?list) ;;; $?list esta ordenado segun el numero de preferencias
+    =>
+    (printout t "COMPLETO " ?list crlf)
 
+    (assert (no-solution))
+    (assert (backtrack 1 (create$)))
+    (retract ?hecho)
+)
 
 (defrule backtracking
     ?hecho1 <- (no-solution)
@@ -259,7 +284,8 @@
                  (or (eq ?mhl nil) (<= ?sum-horas-lab ?mhl))) then
 
             (if (or (and (eq ?ma nil) (= (length$ ?grupo) ?maP)) 
-                    (and (neq ?ma nil) (= (length$ ?grupo) ?ma)))
+                    (and (neq ?ma nil) (= (length$ ?grupo) ?ma))
+                    (and (= (length$ ?grupo) (length$ ?list)) (< (length$ ?grupo) 7)))
                 then
                 ;(printout t "SOLUCION " ?grupo crlf)
                 (retract ?hecho1)
@@ -280,22 +306,6 @@
     (retract ?hecho2)
 )
 
-(defrule filtra-final
-    ?hecho <- (filtra-nasig)
-    ?hecho2 <- (agrupa)
-    ?rest <- (respref (es_restriccion TRUE) (max_asigns ?maR))
-    ?pref <- (respref (es_restriccion FALSE) (max_asigns ?maP))
-    ?cand <- (candidatas $?list) ;;; $?list esta ordenado segun el numero de preferencias
-    =>
-    ;(printout t "COMPLETO " ?list crlf)
-
-    (assert (no-solution))
-    (assert (backtrack 1 (create$)))
-    (retract ?hecho)
-)
-
-
-
 
 
 
@@ -305,6 +315,7 @@
     (import respref deftemplate respref)
     (import respref deftemplate nrestricciones)
     (import refinamiento deftemplate solucion)
+    (import refinamiento deftemplate no-solution)
     (export ?ALL)
 )
 
@@ -355,20 +366,18 @@
     ;(printout t "nprefs: " (length$ ?motivos) crlf)
 )
 
-(defrule muestra-solucion
+(defrule refresc-restricciones
     (declare (salience 10))
-    ?sol <- (solucion $?list)
     (nrestricciones ?nrest ?nrest-final)
     ?rest <- (respref (es_restriccion TRUE) (competencias_preferidas $?cp) (completar_especialidad ?ce) (max_asigns ?ma) 
                  (max_horas_trabajo ?mht) (max_horas_lab ?mhl) (tema_especializado $?te) (tipo_horario $?th))
     =>
-    
     (printout t "=====================================================================" crlf)
     (printout t "=                           Recomendacion                           =" crlf)
     (printout t "=====================================================================" crlf)
     (printout t crlf)
     
-    (if (> (+ ?nrest ?nrest-final) 0) 
+    (if (> (+ ?nrest ?nrest-final) 0)
         then
         (printout t "Restricciones aplicadas a la solucion:" crlf)
         (if (neq ?ma nil) then (printout t " * Num. asignaturas a matricular: " ?ma crlf))
@@ -397,6 +406,11 @@
         ) 
         (printout t crlf crlf)
     )
+)
+
+(defrule muestra-solucion
+    ?sol <- (solucion $?list)
+    =>
 
     (printout t "Asignaturas recomendadas:" crlf)
     (printout t crlf)
@@ -411,4 +425,10 @@
         (muestra-motivos ?motP)
         (printout t crlf)
     )
+)
+
+(defrule no-solucion
+    (no-solution)
+    =>
+    (printout t "El sistema no ha encontrado una solucion acorde a sus restricciones/preferencias" crlf)
 )
