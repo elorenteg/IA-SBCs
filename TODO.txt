@@ -10,6 +10,7 @@ MOSTRAR SOLUCION
 * datos inferidos (hecho)
 * restricciones solucion
 * solucion --> falta nº asigs, horas y especialidad principal
+           --> mostrar competencias de la forma NOMBRE (NIVELES) porque una asignatura puede tener varios niveles de la misma competencia (Ej. ASMI)
 
 
 
