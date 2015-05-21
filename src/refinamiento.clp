@@ -255,7 +255,6 @@
                  (or (and (eq ?ma nil) (= (length$ ?grupo) 6))
                      (and (neq ?ma nil) (= (length$ ?grupo) ?ma))))
             then
-            ;;; TODO: revisar si se cumplen las preferencias de horas y número de asignaturas?
             ;(printout t "SOLUCION " ?grupo crlf)
             (retract ?hecho1)
             (assert (solucion ?grupo))

@@ -1,10 +1,24 @@
 
 
-* elegir N asigs / intentar poda en Backtracking (hecho)
-* modulos
-* quitar volumen-trabajo (hecho)
-* quitar motivosR (hecho)
-
-* cambiar motivos
+* cambiar motivos --> falta nº asigs, horas y especialidad principal
 * filtro-creditos
 
+
+MOSTRAR SOLUCION
+* entrada Sistema (hecho)
+* preguntas (hecho)
+* datos inferidos (hecho)
+* restricciones solucion
+* solucion --> falta nº asigs, horas y especialidad principal
+
+
+
+* Se podrian poner unas listas de asignaturas (solo lista, sin motivo ni nada)
+   * asignaturas aprobadas 
+   * asignaturas que no pasan requisitos 
+   * asignaturas que podian recomendarse y no se han recomendado
+   Ejemplo:
+      Ya aprobadas: LP, ...
+      Faltan requisitos: AA, ...
+      (mostrar solucion sistema)
+      Otras posibilidades: LI, ...
