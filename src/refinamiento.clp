@@ -56,9 +56,6 @@
 (defrule entrada-refinamiento "Asociacion heuristica del problema"
     (declare (salience 10))
     =>
-    ;;; TODO: refinamiento del problema ;;;
-    (printout t "Refinamiento del problema" crlf)
-
     (assert (filtro-restr))
     (assert (refina-rec))
     (assert (candidatas (create$)))
@@ -147,28 +144,15 @@
     (retract ?ar)
 )
 
-(defrule refina
+(defrule fin-refina
     ?hecho1 <- (refina-rec)
     ?hecho2 <- (filtro-restr)
 
     =>
 
-    (assert (refinamiento ok))
+    (assert (agrupa))
     (retract ?hecho1 ?hecho2)
 )
-
-(defrule fin-refinamiento "Comprueba que se ejecuten todas las reglas de Refinamiento"
-    ?hecho1 <- (refinamiento ok)
-    =>
-    (printout t "Fin refinamiento" crlf)
-    (printout t crlf)
-    (printout t "-------------" crlf)
-    (printout t crlf)
-
-    (assert (agrupa))
-    (retract ?hecho1)
-)
-
 
 
 (deffunction grado-recomendacion
@@ -272,7 +256,7 @@
                      (and (neq ?ma nil) (= (length$ ?grupo) ?ma))))
             then
             ;;; TODO: revisar si se cumplen las preferencias de horas y número de asignaturas?
-            (printout t "SOLUCION " ?grupo crlf)
+            ;(printout t "SOLUCION " ?grupo crlf)
             (retract ?hecho1)
             (assert (solucion ?grupo))
             (focus presentacion)
@@ -295,7 +279,7 @@
     ?pref <- (respref (es_restriccion FALSE) (max_asigns ?maP))
     ?cand <- (candidatas $?list) ;;; $?list esta ordenado segun el numero de preferencias
     =>
-    (printout t "COMPLETO " ?list crlf)
+    ;(printout t "COMPLETO " ?list crlf)
 
     (assert (no-solution))
     (assert (backtrack 1 (create$)))

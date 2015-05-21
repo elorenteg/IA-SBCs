@@ -229,6 +229,13 @@
     ?alumn <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped) (especialidad ?esp))
 
     =>
+    
+    (printout t "=====================================================================" crlf)
+    (printout t "=                            Inferencia                             =" crlf)
+    (printout t "=====================================================================" crlf)
+    (printout t crlf)
+    
+    (printout t "Los siguientes dados se han inferido a partir de su Expediente:" crlf)
 
     (bind $?notas (send ?exped get-notas_exp))
 
@@ -364,12 +371,12 @@
     (bind ?nhoras-pro (/ ?nhoras-pro 18))
 
     (assert (inf-comp $?compe p))
-    (assert (inf-esp $?nasigEs p $?espeCur))
-    (assert (inf-dif ?nfacil ?ndificil ?sfacil ?sdificil ?peor-nota-dificil))
-    (assert (inf-nasig ?nasig p $?cuatris))
-    (assert (inf-horas ?nhoras-teo ?nhoras-lab ?nhoras-pro $?cuatris))
     (assert (inf-tema $?temas p $?afins))
+    (assert (inf-esp $?nasigEs p $?espeCur))
     (assert (inf-horario $?horarioC p $?cuatris))
+    (assert (inf-horas ?nhoras-teo ?nhoras-lab ?nhoras-pro $?cuatris))
+    (assert (inf-nasig ?nasig p $?cuatris))
+    (assert (inf-dif ?nfacil ?ndificil ?sfacil ?sdificil ?peor-nota-dificil))
     (assert (inf-curso))
     (retract ?hecho)
 )
@@ -384,6 +391,24 @@
         then
         ; competencias cursadas de N1-3 (aunque no haya hecho todos los niveles)
         (bind ?pref (modify ?pref (competencias_preferidas ?compe)))
+        
+        (bind $?compN (create$))
+        (loop-for-count (?i 1 (length$ ?compe)) do
+            (bind ?nom (send (nth$ ?i ?compe) get-nombre_comp))
+            (if (not (member ?nom ?compN))
+                then
+                (bind $?compN (insert$ ?compN 1 ?nom))
+            )
+        )
+        
+        (printout t " * Competencias: ")
+        (bind ?primer TRUE)
+        (loop-for-count (?i 1 (length$ ?compN)) do
+            (if (eq ?primer FALSE) then (printout t ", "))
+            (printout t (sub-string 3 (str-length (nth$ ?i ?compN)) (nth$ ?i ?compN)))
+            (bind ?primer FALSE)
+        )
+        (printout t crlf)
     )
 
     (assert (inf-comp ok))
@@ -404,8 +429,8 @@
 
         (if (not(eq ?esp [nil]))
             then
-            
             (bind ?pref (modify ?pref (completar_especialidad ?esp)))
+            (printout t " * Su especialidad matriculada: " (send ?esp get-nombre_esp) crlf)
             else
             (if (> (length$ ?nasigEs) 0)
                 then
@@ -418,6 +443,9 @@
                 )
                 (bind ?espMax (nth$ ?max ?espeCur))
                 (bind ?pref (modify ?pref (completar_especialidad ?espMax)))
+                (printout t " * Sin especialidad matriculada, pero ha cursado varias asignaturas de: " (send ?espMax get-nombre_esp) crlf)
+                else
+                (printout t " * No se puede inferir una especialidad" crlf)
             )
         )
     )
@@ -453,6 +481,8 @@
             )
         )
         (bind ?pref (modify ?pref (dificultad ?d)))
+        
+        (printout t " * Dificultad: " ?d crlf)
     )
 
     (assert(inf-dif ok))
@@ -469,6 +499,7 @@
         ; media de asignaturas/cuatri
         (bind ?mediaAs (div ?nasig (length$ ?cuatris)))
         (bind ?pref (modify ?pref (max_asigns ?mediaAs)))
+        (printout t " * Num max asignaturas: " ?mediaAs crlf)
     )
 
     (assert(inf-nasig ok))
@@ -487,12 +518,14 @@
         ; media de horas de teoria/cuatri
         (bind ?mediaHT (div ?nhoras-teo (length$ ?cuatris)))
         (bind ?pref (modify ?pref (max_horas_trabajo ?mediaHT)))
+        (printout t " * Max horas dedicacion semanal: " ?mediaHT crlf)
     )
     (if (eq ?mhl nil)
         then
         ; media de horas de lab y prob/cuatri
         (bind ?mediaHL (div (+ ?nhoras-lab ?nhoras-pro) (length$ ?cuatris)))
         (bind ?pref (modify ?pref (max_horas_lab ?mediaHL)))
+        (printout t " * Max horas lab/prob semanal: " ?mediaHL crlf)
     )
 
     (assert(inf-horas ok))
@@ -510,6 +543,24 @@
         ; temas cursados y temas afines a los cursados
         (bind ?tems (insert$ ?afins 1 ?temas))
         (bind ?pref (modify ?pref (tema_especializado ?tems)))
+        
+        (bind $?temaN (create$))
+        (loop-for-count (?i 1 (length$ ?tems)) do
+            (bind ?nom (send (nth$ ?i ?tems) get-nombre_tema))
+            (if (not (member ?nom ?temaN))
+                then
+                (bind $?temaN (insert$ ?temaN 1 ?nom))
+            )
+        )
+        
+        (printout t " * Temas: ")
+        (bind ?primer TRUE)
+        (loop-for-count (?i 1 (length$ ?temaN)) do
+            (if (eq ?primer FALSE) then (printout t ", "))
+            (printout t (nth$ ?i ?temaN))
+            (bind ?primer FALSE)
+        )
+        (printout t crlf)
     )
 
     (assert(inf-tema ok))
@@ -538,6 +589,10 @@
             (bind ?th (insert$ ?th 1 (find-instance ((?ins Horario)) (eq ?ins:horario (primera-mayus "manyana")))))
         )
         (bind ?pref (modify ?pref (tipo_horario ?th)))
+        
+        (printout t " * Tipo de horario: " (send (nth$ 1 ?th) get-horario))
+        (if (> (length$ ?th) 1) then (printout t (send (nth$ 2 ?th) get-horario)))
+        (printout t crlf)
     )
 
     (assert(inf-horario ok))
@@ -571,6 +626,8 @@
         )
     )
 
+    (printout t " * Curso: " ?max-curso crlf)
+    
     (retract ?hecho)
     (assert (curso ?max-curso))
     (assert (inf-curso ok))
@@ -587,6 +644,9 @@
     ?hecho8 <- (inf-curso ok)
 
     =>
+    
+    (printout t crlf)
+    
     (retract ?hecho1 ?hecho2 ?hecho3 ?hecho4 ?hecho5 ?hecho6 ?hecho7 ?hecho8)
 
     (focus abstraccion)
