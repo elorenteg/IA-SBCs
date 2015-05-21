@@ -92,6 +92,8 @@
     (bind ?min 1)
     (bind ?max (length$ ?candidatos))
     
+    (format t "Indique un numero [%d, %d] " ?min ?max)
+    
     (bind ?respuesta (read))
     (if (and (eq ?respuesta -) ?puede-omitir) then (return nil)) ;permite omitir la pregunta
     (while (or (< ?respuesta ?min) (> ?respuesta ?max))
@@ -132,6 +134,8 @@
     
     (bind ?min 1)
     (bind ?max (length$ ?candidatos))
+    
+    (format t "Indique los numeros separados por un espacio [%d, %d] " ?min ?max)
     
     (bind ?respuesta (readline))
     (if (and (eq ?respuesta "-") ?puede-omitir) then (return nil)) ;permite omitir la pregunta

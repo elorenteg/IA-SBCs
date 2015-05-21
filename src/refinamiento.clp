@@ -88,7 +88,7 @@
     ?ar <- (asig-rec (asign ?a))
     (test (ha-aprobado ?al ?a))
     =>
-    (printout t (send ?a get-nombre) " ya esta aprobada" crlf)
+    ;(printout t (send ?a get-nombre) " ya esta aprobada" crlf)
     (retract ?ar)
 )
 
@@ -105,7 +105,7 @@
     (loop-for-count (?i 1 (length$ ?prerrequisitos)) do
         (if (not (ha-aprobado ?al (nth$ ?i ?prerrequisitos)))
             then
-            (printout t (send ?a get-nombre) " no cumple prerrequisitos" crlf)
+            ;(printout t (send ?a get-nombre) " no cumple prerrequisitos" crlf)
             (retract ?ar)
             (break)
         )
@@ -114,7 +114,7 @@
     (loop-for-count (?i 1 (length$ ?precorrequisitos)) do
         (if (not (ha-cursado ?al (nth$ ?i ?precorrequisitos)))
             then
-            (printout t (send ?a get-nombre) " no cumple precorrequisitos" crlf)
+            ;(printout t (send ?a get-nombre) " no cumple precorrequisitos" crlf)
             (retract ?ar)
             (break)
         )
@@ -130,7 +130,7 @@
     )
     (if (and (> (length$ ?orrequisitos) 0) (eq ?orreq-alguna FALSE))
         then
-        (printout t (send ?a get-nombre) " no cumple orrequisitos" crlf)
+        ;(printout t (send ?a get-nombre) " no cumple orrequisitos" crlf)
         (retract ?ar)
     )
 )
@@ -143,7 +143,7 @@
     (test (< (creditos-aprobados ?al) 60))
     (test (eq Optativa (class ?a)))
     =>
-    (printout t (send ?a get-nombre) " es optativa y no se puede cursar" crlf)
+    ;(printout t (send ?a get-nombre) " es optativa y no se puede cursar" crlf)
     (retract ?ar)
 )
 
@@ -295,10 +295,6 @@
     ?pref <- (respref (es_restriccion FALSE) (max_asigns ?maP))
     ?cand <- (candidatas $?list) ;;; $?list esta ordenado segun el numero de preferencias
     =>
-    ;(bind ?list (find-all-instances ((?a asig-candidata)) (eq altamente-recomendable ?a:grado)))
-    ;(bind ?list (insert$ ?list (+ 1 (length$ ?list)) (find-all-instances ((?a asig-candidata)) (eq recomendable ?a:grado))))
-    ;?list contiene todas las asignaturas candidatas, primero las altamente-recomendable, luego las recomendable
-
     (printout t "COMPLETO " ?list crlf)
 
     (assert (no-solution))
@@ -320,29 +316,84 @@
     (export ?ALL)
 )
 
+(deffunction separa
+    (?mot)
+    
+    (bind ?p1 (str-index "-" ?mot))
+    (bind ?mot1 (sub-string (+ ?p1 1) (str-length ?mot) ?mot))
+    (return ?mot1)
+)
+
+(deffunction lista-motivo
+    (?idMot $?motivos)
+    
+    (bind ?first FALSE)
+    (loop-for-count (?i 1 (length$ ?motivos)) do
+        (bind ?mot (nth$ ?i ?motivos))
+        (if (not(eq (str-index ?idMot ?mot) FALSE))
+            then
+            (if (eq ?first TRUE) then (printout t ","))
+            (printout t " " (separa ?mot))
+            (bind ?first TRUE)
+        )
+    )
+    
+    (if (eq ?first FALSE) then (printout t " -"))
+    (printout t crlf)
+)
 
 (deffunction muestra-motivos
     ($?motivos)
-
-    (loop-for-count (?i 1 (length$ ?motivos)) do
-        (bind ?mot (nth$ ?i ?motivos))
-        (printout t "  * " ?mot crlf)
+    
+    (if (member asignatura-suspensa ?motivos) then
+        (printout t " * Asignatura suspendida" crlf)
     )
+    
+    (printout t " * Sigue plan de estudios: curso")
+    (lista-motivo "sigue plan estudios" ?motivos)
+    
+    (printout t " * Dificultad:")
+    (lista-motivo "dificultad" ?motivos)
+
+    (printout t " * Tipo de Horario:")
+    (lista-motivo "horario preferido" ?motivos)
+    
+    (printout t " * Especialidad:")
+    (lista-motivo "completar especialidad" ?motivos)
+    
+    (printout t " * Temas:")
+    (lista-motivo "intereses tematicos" ?motivos)
+    
+    (printout t " * Competencias:")
+    (lista-motivo "intereses competencias" ?motivos)
+    
+    ;(loop-for-count (?i 1 (length$ ?motivos)) do
+    ;    (bind ?mot (nth$ ?i ?motivos))
+    ;    (printout t " - " ?mot crlf)
+    ;)
 )
 
 (defrule muestra-solucion
     (declare (salience 10))
     ?sol <- (solucion $?list)
-    (nrestricciones ?nrest ?nrest-final)
+    ;(nrestricciones ?nrest ?nrest-final)
     ?rest <- (respref (es_restriccion TRUE) (competencias_preferidas $?cp) (completar_especialidad ?ce) (max_asigns ?ma) 
                  (max_horas_trabajo ?mht) (max_horas_lab ?mhl) (tema_especializado $?te) (tipo_horario $?th))
     =>
+    
+    (printout t "=====================================================================" crlf)
+    (printout t "=                           Recomendacion                           =" crlf)
+    (printout t "=====================================================================" crlf)
+    (printout t crlf)
+    
+    (bind ?nrest 0)
+    (bind ?nrest-final 1)
     (if (> (+ ?nrest ?nrest-final) 0) 
         then
         (printout t "Restricciones aplicadas a la solucion:" crlf)
         (if (neq ?ma nil) then (printout t " - Num. asignaturas a matricular: " ?ma crlf))
         (if (neq ?mht nil) then (printout t " - Max. horas de dedicacion semanales: " ?mht crlf))
-        (if (neq ?mhl nil) then (printout t " - Max. horas de laboratorio semanales: " ?mhl crlf))
+        (if (neq ?mhl nil) then (printout t " - Max. horas de laboratorio/problemas semanales: " ?mhl crlf))
         (if (eq (length$ ?th) 1) then (printout t " - Tipo de horario: " (send (nth$ 1 ?th) get-horario) crlf))
         (if (> (length$ ?te) 0) 
             then 
@@ -367,6 +418,9 @@
         (printout t crlf crlf)
     )
 
+    (printout t "Asignaturas recomendadas:" crlf)
+    (printout t crlf)
+    
     (loop-for-count (?i 1 (length$ ?list)) do
         (bind ?asig (nth$ ?i ?list))
         (bind ?asigI (send ?asig get-asig))
@@ -374,7 +428,7 @@
         (bind $?motP (send ?asig get-motivosP))
         (bind ?gradoRec (send ?asig get-grado))
         (format t "%s (%s): %n" ?nomA ?gradoRec)
-        (printout t " * Preferencias" crlf)
         (muestra-motivos ?motP)
+        (printout t crlf)
     )
 )

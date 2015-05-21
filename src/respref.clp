@@ -131,10 +131,32 @@
             (bind ?rec (modify ?rec (tipo_horario ?th-ins)))
         )
     )
+    
+    (if (not(eq ?esp [nil]))
+        then
+        ; el alumno tiene una especialidad
+        (bind ?frase (str-cat (str-cat "Su especialidad es " (send ?esp get-nombre_esp)) ". Desea completar su especialidad?"))
+        (bind ?bool (pregunta-cerrada ?frase TRUE si no))
+        (if (eq ?bool si)
+            then
+            (bind ?rec (modify ?rec (completar_especialidad ?esp)))
+        )
+        else
+        ; el alumno no tiene una especialidad --> preguntar cual quiere cursar
+        (bind ?espN (create$))
+        (do-for-all-instances ((?t Especialidad)) TRUE (bind ?espN (insert$ ?espN 1 (send ?t get-nombre_esp))))
+        (bind ?numEsp (pregunta-numero "Que especialidad desea matricular?" TRUE ?espN))
+        (if (not(eq ?numEsp nil))
+            then
+            (bind ?nomEsp (nth$ ?numEsp ?espN))
+            (bind ?esp-ins (find-instance ((?e Especialidad)) (eq ?e:nombre_esp (primera-mayus ?nomEsp))))
+            (bind ?rec (modify ?rec (completar_especialidad (implode$ ?esp-ins))))
+        )
+    )
 
     (bind ?temasN (create$))
     (do-for-all-instances ((?t Especializado)) TRUE (bind ?temasN (insert$ ?temasN 1 (send ?t get-nombre_tema))))
-    (bind ?numTem (pregunta-lista-numeros "Que temas especializados te interesan?" TRUE ?temasN))
+    (bind ?numTem (pregunta-lista-numeros "Que temas especializados le interesan?" TRUE ?temasN))
     (if (not(eq ?numTem nil))
         then
         (bind $?temasI (create$))
@@ -147,32 +169,10 @@
         (bind ?rec (modify ?rec (tema_especializado ?temasI)))
     )
 
-    (if (not(eq ?esp [nil]))
-        then
-        ; el alumno tiene una especialidad
-        (bind ?frase (str-cat (str-cat "Tu especialidad es " (send ?esp get-nombre_esp)) ". Deseas completar tu especialidad?"))
-        (bind ?bool (pregunta-cerrada ?frase TRUE si no))
-        (if (eq ?bool si)
-            then
-            (bind ?rec (modify ?rec (completar_especialidad ?esp)))
-        )
-        else
-        ; el alumno no tiene una especialidad --> preguntar cual quiere cursar
-        (bind ?espN (create$))
-        (do-for-all-instances ((?t Especialidad)) TRUE (bind ?espN (insert$ ?espN 1 (send ?t get-nombre_esp))))
-        (bind ?numEsp (pregunta-numero "Que especialidad deseas matricular?" TRUE ?espN))
-        (if (not(eq ?numEsp nil))
-            then
-            (bind ?nomEsp (nth$ ?numEsp ?espN))
-            (bind ?esp-ins (find-instance ((?e Especialidad)) (eq ?e:nombre_esp (primera-mayus ?nomEsp))))
-            (bind ?rec (modify ?rec (completar_especialidad (implode$ ?esp-ins))))
-        )
-    )
-
     (bind ?comP (create$))
     (do-for-all-instances ((?t Competencia)) TRUE (bind ?comP (insert$ ?comP 1 (str-cat (sub-string 3 (str-length(send ?t get-nombre_comp)) (send ?t get-nombre_comp))))))
     (bind ?ordComP (sort-list ?comP))
-    (bind ?numComp (pregunta-lista-numeros "Cuales son tus competencias favoritas?" TRUE ?ordComP))
+    (bind ?numComp (pregunta-lista-numeros "Cuales son sus competencias favoritas?" TRUE ?ordComP))
     (if (not(eq ?numComp nil))
         then
         (bind $?compeI (create$))

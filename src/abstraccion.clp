@@ -41,8 +41,6 @@
 (defrule entrada-abstracto "Abstrae el problema"
     (declare (salience 10))
     =>
-    (printout t "Abstraccion del problema" crlf)
-
     (assert (ent-abs-horario) (ent-abs-especialidad) (ent-abs-dificultad) (ent-abs-tema) (ent-abs-competencias) (ent-abs-curso))
     (assert (problema-abstracto))
 )
@@ -55,8 +53,6 @@
     ?abs <- (problema-abstracto (horario-preferidoR $?absRes) (horario-preferidoP $?absPref))
 
     =>
-
-    (printout t ">> Abstraccion de Horario" crlf)
     (if (> (length$ ?thRes) 0)
         then
         (loop-for-count (?i 1 (length$ ?thRes)) do
@@ -86,9 +82,6 @@
     ?abs <- (problema-abstracto (dificultadR ?absRes) (dificultadP ?absPref))
 
     =>
-
-    (printout t ">> Abstraccion de Dificultad" crlf)
-
     (bind ?abs (modify ?abs (dificultadR nil)))
     (if (eq (str-compare ?difPref "Facil") 0)
         then
@@ -109,9 +102,6 @@
     ?abs <- (problema-abstracto (intereses-tematicosR $?absRes) (intereses-tematicosP $?absPref))
 
     =>
-
-    (printout t ">> Abstraccion de Interes Tematico" crlf)
-
     (bind ?abs (modify ?abs (intereses-tematicosR ?temRes)))
     (bind ?abs (modify ?abs (intereses-tematicosP ?temPref)))
 
@@ -127,8 +117,6 @@
     ?abs <- (problema-abstracto (especialidadR ?espR) (especialidadP ?espP))
 
     =>
-
-    (printout t ">> Abstraccion de Especialidad" crlf)
     (bind ?abs (modify ?abs (especialidadR ?espRes)))
     (bind ?abs (modify ?abs (especialidadP ?espPref)))
 
@@ -192,8 +180,6 @@
     ?abs <- (problema-abstracto (competenciasR $?absRes) (competenciasP $?absPref))
 
     =>
-
-    (printout t ">> Abstraccion de Competencias" crlf)
     (bind $?compet $?comPref)
 
     ;;; reduccion de las competencias al nivel que le falta por cursar
@@ -212,7 +198,6 @@
     ?hecho2 <- (curso ?max-curso)
     ?abs <- (problema-abstracto (curso-estudios ?ce))
     =>
-    (printout t ">> Abstraccion de Curso" crlf)
     (bind ?abs (modify ?abs (curso-estudios ?max-curso)))
 
     (assert (abs-curso ok))
@@ -227,7 +212,6 @@
     ?hecho5 <- (abs-competencias ok)
     ?hecho6 <- (abs-curso ok)
     =>
-    (printout t "Fin abstraccion" crlf)
     (retract ?hecho1 ?hecho2 ?hecho3 ?hecho4 ?hecho5 ?hecho6)
 
     (focus asociacion)

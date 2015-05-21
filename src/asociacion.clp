@@ -40,8 +40,6 @@
 (defrule entrada-asociacion "Asociacion heuristica del problema"
     (declare (salience 10))
     =>
-    (printout t "Asociacion del problema" crlf)
-
     (assert(ent-asigs))
 )
 
@@ -60,7 +58,14 @@
         (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?horasI ?ins:horarios))))
         
         (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo horario-preferido) (es-pref ?es_pref))) ;poner un motivo más user-friendly
+            (bind ?asig (nth$ ?i ?ins-asigs))
+            (loop-for-count (?j 1 (length$ ?horasI)) do
+                (bind ?hI (nth$ ?j ?horasI))
+                (if (member ?hI (send ?asig get-horarios)) then
+                    (bind ?motivo (str-cat "horario preferido-" (send ?hI get-horario)))
+                    (assert (nueva-rec (asign ?asig) (motivo ?motivo) (es-pref ?es_pref))) ;poner un motivo más user-friendly
+                )
+            )
         )
     )
 )
@@ -69,8 +74,6 @@
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (horario-preferidoR $?tdR) (horario-preferidoP $?tdP))
     =>
-    (printout t ">> Asociacion de Horario" crlf)
-
     (horario-preferido FALSE ?tdR)
     (horario-preferido TRUE ?tdP)
 )
@@ -109,7 +112,8 @@
         (bind ?asigs (find-all-instances ((?ins Especializada)) (member ?esp ?ins:especialidad_asig)))
 
         (loop-for-count (?i 1 (length$ ?asigs)) do
-            (assert (nueva-rec (asign (nth$ ?i ?asigs)) (motivo interes-compl-esp) (es-pref ?es_pref))) ;poner un motivo más user-friendly
+            (bind ?motivo (str-cat "completar especialidad-" (send ?esp get-nombre_esp)))
+            (assert (nueva-rec (asign (nth$ ?i ?asigs)) (motivo ?motivo) (es-pref ?es_pref))) ;poner un motivo más user-friendly
         )
     )
 )
@@ -118,8 +122,6 @@
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (especialidadR ?espR) (especialidadP ?espP))
     =>
-    (printout t ">> Asociacion de Especialidad" crlf)
-
     (completar-esp ?espR FALSE)
     (completar-esp ?espP TRUE)
 )
@@ -130,9 +132,16 @@
     (if (!= 0 (length$ ?it))
         then
         (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?it ?ins:temas))))
-
+        
         (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo intereses-tematicos) (es-pref ?es_pref))) ;poner un motivo más user-friendly
+            (bind ?asig (nth$ ?i ?ins-asigs))
+            (loop-for-count (?j 1 (length$ ?it)) do
+                (bind ?tI (nth$ ?j ?it))
+                (if (member ?tI (send ?asig get-temas)) then
+                    (bind ?motivo (str-cat "intereses tematicos-" (send ?tI get-nombre_tema)))
+                    (assert (nueva-rec (asign ?asig) (motivo ?motivo) (es-pref ?es_pref))) ;poner un motivo más user-friendly
+                )
+            )
         )
     )
 )
@@ -141,8 +150,6 @@
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (intereses-tematicosR $?itR) (intereses-tematicosP $?itP))
     =>
-    (printout t ">> Asociacion de Tema" crlf)
-
     (intereses-tematicos FALSE ?itR)
     (intereses-tematicos TRUE ?itP)
 )
@@ -155,7 +162,14 @@
         (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (not (interseccion-vacia ?com ?ins:competencias))))
 
         (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo intereses-competencias) (es-pref ?es_pref))) ;poner un motivo más user-friendly
+            (bind ?asig (nth$ ?i ?ins-asigs))
+            (loop-for-count (?j 1 (length$ ?com)) do
+                (bind ?cI (nth$ ?j ?com))
+                (if (member ?cI (send ?asig get-competencias)) then
+                    (bind ?motivo (str-cat "intereses competencias-" (send ?cI get-nombre_comp)))
+                    (assert (nueva-rec (asign ?asig) (motivo ?motivo) (es-pref ?es_pref))) ;poner un motivo más user-friendly
+                )
+            )
         )
     )
 )
@@ -165,8 +179,6 @@
     ?prob-abs <- (problema-abstracto (competenciasR $?comRes) (competenciasP $?comPref))
 
     =>
-    (printout t ">> Asociacion de Competencias" crlf)
-
     (intereses-competencias FALSE ?comRes)
     (intereses-competencias TRUE ?comPref)
 )
@@ -180,12 +192,13 @@
         (bind $?asigs-faciles (find-all-instances ((?ins Asignatura)) (not(member ?ins ?asigs-dificiles))))
 
         (loop-for-count (?i 1 (length$ ?asigs-faciles)) do
-            (assert (nueva-rec (asign (nth$ ?i ?asigs-faciles)) (motivo dificultad-facil) (es-pref ?es_pref))) ;poner un motivo más user-friendly
+            (assert (nueva-rec (asign (nth$ ?i ?asigs-faciles)) (motivo "dificultad-Facil") (es-pref ?es_pref))) ;poner un motivo más user-friendly
         )
+        
         (if (eq ?dif dificil)
             then
             (loop-for-count (?i 1 (length$ ?asigs-dificiles)) do
-                (assert (nueva-rec (asign (nth$ ?i ?asigs-dificiles)) (motivo dificultad-dificil) (es-pref ?es_pref))) ;poner un motivo más user-friendly
+                (assert (nueva-rec (asign (nth$ ?i ?asigs-dificiles)) (motivo "dificultad-Dificil") (es-pref ?es_pref))) ;poner un motivo más user-friendly
             )
         )
     )
@@ -196,8 +209,6 @@
     ?prob-abs <- (problema-abstracto (dificultadR ?difRes) (dificultadP ?difPref))
     
     =>
-    (printout t ">> Asociacion de Dificultad" crlf)
-    
     (dificultad ?difRes FALSE)
     (dificultad ?difPref TRUE)
 )
@@ -208,12 +219,11 @@
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (curso-estudios ?ce))
     =>
-    (printout t ">> Asociacion de Curso" crlf)
-
     (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (= (curso-a-int ?ins:curso) ?ce)))
 
     (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo sigue-plan-estudios) (es-pref TRUE))) ;poner un motivo más user-friendly
+        (bind ?motivo (str-cat "sigue plan estudios-" ?ce))
+        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo ?motivo) (es-pref TRUE))) ;poner un motivo más user-friendly
     )
 
     ;intentamos recomendar asignaturas del siguiente curso (por si el alumno está a punto de empezar uno nuevo)
@@ -221,7 +231,8 @@
         then
         (bind ?ins-asigs2 (find-all-instances ((?ins Asignatura)) (= (curso-a-int ?ins:curso) (+ 1 ?ce))))
         (loop-for-count (?i 1 (length$ ?ins-asigs2)) do
-            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs2)) (motivo sigue-plan-estudios) (es-pref TRUE)))
+            (bind ?motivo (str-cat "sigue plan estudios-" (+ 1 ?ce)))
+            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs2)) (motivo ?motivo) (es-pref TRUE)))
         )
     )
 
@@ -233,8 +244,6 @@
     ?al <- (object (is-a Alumno) (id ?dni) (especialidad ?e))
     (test (neq ?e [nil]))
     =>
-    (printout t ">> Asociacion de Especialidad Principal" crlf)
-
     (bind ?ins-asigs (find-all-instances ((?ins Especializada)) (member ?e ?ins:especialidad_asig)))
 
     (loop-for-count (?i 1 (length$ ?ins-asigs)) do
@@ -263,8 +272,6 @@
     (dni ?dni)
     ?al <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped))
     =>
-    (printout t ">> Asociacion de Suspensos" crlf)
-
     (bind $?notas (send ?exped get-notas_exp))
     (loop-for-count (?i 1 (length$ ?notas)) do
         (bind ?not (nth$ ?i ?notas))
@@ -327,7 +334,6 @@
 (defrule fin-asociacion "Comprueba que se ejecuten todas las reglas de Asociacion"
     ?hecho1 <- (ent-asigs)
     =>
-    (printout t "Fin asociacion" crlf)
     (retract ?hecho1)
 
     (focus refinamiento)
