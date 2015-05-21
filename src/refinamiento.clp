@@ -325,21 +325,26 @@
 )
 
 (deffunction lista-motivo
-    (?idMot $?motivos)
+    (?titulo ?idMot $?motivos)
     
     (bind ?first FALSE)
+    (bind ?string "")
     (loop-for-count (?i 1 (length$ ?motivos)) do
         (bind ?mot (nth$ ?i ?motivos))
         (if (not(eq (str-index ?idMot ?mot) FALSE))
             then
-            (if (eq ?first TRUE) then (printout t ","))
-            (printout t " " (separa ?mot))
+            (if (eq ?first TRUE) then
+                (bind ?string (str-cat ?string ", "))
+            )
+            (bind ?string (str-cat ?string (separa ?mot)))
             (bind ?first TRUE)
         )
     )
     
-    (if (eq ?first FALSE) then (printout t " -"))
-    (printout t crlf)
+    (if (not (eq (str-compare "" ?string) 0))
+        then
+        (printout t " * " ?titulo ": " ?string crlf)
+    )
 )
 
 (deffunction muestra-motivos
@@ -348,29 +353,14 @@
     (if (member asignatura-suspensa ?motivos) then
         (printout t " * Asignatura suspendida" crlf)
     )
+    (lista-motivo "Sigue plan de estudios" "sigue plan estudios" ?motivos)
+    (lista-motivo "Dificultad" "dificultad" ?motivos)
+    (lista-motivo "Tipo de Horario" "horario preferido" ?motivos)
+    (lista-motivo "Especialidad" "completar especialidad" ?motivos)
+    (lista-motivo "Temas" "intereses tematicos" ?motivos)
+    (lista-motivo "Competencias" "intereses competencias" ?motivos)
     
-    (printout t " * Sigue plan de estudios: curso")
-    (lista-motivo "sigue plan estudios" ?motivos)
-    
-    (printout t " * Dificultad:")
-    (lista-motivo "dificultad" ?motivos)
-
-    (printout t " * Tipo de Horario:")
-    (lista-motivo "horario preferido" ?motivos)
-    
-    (printout t " * Especialidad:")
-    (lista-motivo "completar especialidad" ?motivos)
-    
-    (printout t " * Temas:")
-    (lista-motivo "intereses tematicos" ?motivos)
-    
-    (printout t " * Competencias:")
-    (lista-motivo "intereses competencias" ?motivos)
-    
-    ;(loop-for-count (?i 1 (length$ ?motivos)) do
-    ;    (bind ?mot (nth$ ?i ?motivos))
-    ;    (printout t " - " ?mot crlf)
-    ;)
+    ;(printout t "nprefs: " (length$ ?motivos) crlf)
 )
 
 (defrule muestra-solucion
@@ -387,7 +377,7 @@
     (printout t crlf)
     
     (bind ?nrest 0)
-    (bind ?nrest-final 1)
+    (bind ?nrest-final 0)
     (if (> (+ ?nrest ?nrest-final) 0) 
         then
         (printout t "Restricciones aplicadas a la solucion:" crlf)

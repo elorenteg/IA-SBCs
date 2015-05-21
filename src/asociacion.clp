@@ -166,7 +166,9 @@
             (loop-for-count (?j 1 (length$ ?com)) do
                 (bind ?cI (nth$ ?j ?com))
                 (if (member ?cI (send ?asig get-competencias)) then
-                    (bind ?motivo (str-cat "intereses competencias-" (send ?cI get-nombre_comp)))
+                    (bind ?nombre (sub-string 3(str-length (send ?cI get-nombre_comp)) (send ?cI get-nombre_comp)))
+                    (bind ?nivel (sub-string 2(str-length (send ?cI get-nivel)) (send ?cI get-nivel)))
+                    (bind ?motivo (str-cat (str-cat "intereses competencias-" ?nombre) (str-cat " nivel " ?nivel)))
                     (assert (nueva-rec (asign ?asig) (motivo ?motivo) (es-pref ?es_pref))) ;poner un motivo más user-friendly
                 )
             )
