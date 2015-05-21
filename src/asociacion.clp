@@ -225,7 +225,9 @@
 
     (loop-for-count (?i 1 (length$ ?ins-asigs)) do
         (bind ?motivo (str-cat "sigue plan estudios-" ?ce))
-        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo ?motivo) (es-pref TRUE))) ;poner un motivo más user-friendly
+        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo ?motivo) (es-pref TRUE)))
+        (bind ?motivo (str-cat "sigue curso actual-" ?ce)) ;motivo adicional para dar prioridad a que acabe el curso actual (útil para que no aparezca EEE en fase inicial, p.e.)
+        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo ?motivo) (es-pref TRUE)))
     )
 
     ;intentamos recomendar asignaturas del siguiente curso (por si el alumno está a punto de empezar uno nuevo)

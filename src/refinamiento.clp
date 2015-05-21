@@ -223,8 +223,11 @@
     (dni ?dni)
     ?al <- (object (is-a Alumno) (id ?dni))
     ?rest <- (respref (es_restriccion TRUE) (max_asigns ?ma) (max_horas_trabajo ?mht) (max_horas_lab ?mhl))
+    ?pref <- (respref (es_restriccion FALSE) (max_asigns ?maP) (max_horas_trabajo ?mhtP) (max_horas_lab ?mhlP))
 
     =>
+
+    ;;; TODO: comprobar preferencias de mhtP y mhlP ;;;
 
     (if (eq ?i (+(length$ ?list)1))
         then
@@ -253,14 +256,18 @@
 
         (if (and (eq ?correq-ok TRUE)
                  (or (eq ?mht nil) (<= ?sum-horas ?mht))
-                 (or (eq ?mhl nil) (<= ?sum-horas-lab ?mhl))
-                 (or TRUE ;(and (eq ?ma nil) (= (length$ ?grupo) 6)) ;;; TODO: permitir que muestre solución si no encuentra suficientes asignaturas (?)
-                     (and (neq ?ma nil) (= (length$ ?grupo) ?ma))))
-            then
-            ;(printout t "SOLUCION " ?grupo crlf)
-            (retract ?hecho1)
-            (assert (solucion ?grupo))
-            (focus presentacion)
+                 (or (eq ?mhl nil) (<= ?sum-horas-lab ?mhl))) then
+
+            (if (or (and (eq ?ma nil) (= (length$ ?grupo) ?maP)) 
+                    (and (neq ?ma nil) (= (length$ ?grupo) ?ma)))
+                then
+                ;(printout t "SOLUCION " ?grupo crlf)
+                (retract ?hecho1)
+                (assert (solucion ?grupo))
+                (focus presentacion)
+                else
+                ;;; TODO: permitir que muestre solución si no encuentra suficientes asignaturas (?) ;;;
+            )
         )
 
         else
