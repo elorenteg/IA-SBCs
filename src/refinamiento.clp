@@ -163,8 +163,10 @@
     (bind ?facts (find-all-facts ((?a asig-rec)) TRUE))
     (if (= (length$ ?facts) 0)
         then ; no hay asigs a recomendar
+        (printout t "no hay asigs!!" crlf)
         (assert (no-solution))
         (retract ?hecho)
+        (focus presentacion)
     )
         
     (printout t ?facts crlf)
@@ -404,7 +406,7 @@
             (printout t crlf)
 
         ) 
-        (printout t crlf crlf)
+        (printout t crlf)
     )
 )
 
@@ -431,4 +433,5 @@
     (no-solution)
     =>
     (printout t "El sistema no ha encontrado una solucion acorde a sus restricciones/preferencias" crlf)
+    (printout t crlf)
 )
