@@ -364,11 +364,13 @@
 
 (defmodule presentacion "Módulo para la presentacion de resultados"
     (import MAIN ?ALL)
+    (import consultas deftemplate dni)
     (import respref deftemplate respref)
     (import respref deftemplate nrestricciones)
     (import respref deftemplate preferencias)
     (import respref deffunction find-index)
     (import respref deffunction muestra-nombres-competencias)
+    (import asociacion deffunction ha-aprobado)
     (import refinamiento deftemplate solucion)
     (import refinamiento deftemplate no-solution)
     (import refinamiento deftemplate candidatas)
@@ -562,6 +564,9 @@
 (defrule muestra-solucion
     (solucion $?list)
     (candidatas $?cand)
+    (dni ?dni)
+    ?al <- (object (is-a Alumno) (id ?dni))
+
     =>
 
     (printout t "La recomendacion del sistema conllevaria un tiempo de dedicacion:" crlf)
@@ -607,10 +612,23 @@
         (loop-for-count (?i 1 (length$ ?resto)) do
             (bind ?asig (nth$ ?i ?resto))
             (bind ?asigI (send ?asig get-asig))
-            (bind ?nomA (send ?asigI get-nombre))
-            (if (eq ?primer FALSE) then (printout t ", "))
-            (printout t ?nomA)
-            (bind ?primer FALSE)
+
+            ;Comprobación de correquisitos
+            (bind ?correquisitos (send ?asigI get-correquisitos))
+            (bind ?correq-ok TRUE)
+            (loop-for-count (?k 1 (length$ ?correquisitos)) do
+                (if (not (or (ha-aprobado ?al (nth$ ?k ?correquisitos)) (member (nth$ ?k ?correquisitos) ?resto))) then
+                    (bind ?correq-ok FALSE)
+                    (break)
+                )
+            )
+            
+            (if (eq ?correq-ok TRUE) then
+                (bind ?nomA (send ?asigI get-nombre))
+                (if (eq ?primer FALSE) then (printout t ", "))
+                (printout t ?nomA)
+                (bind ?primer FALSE)
+            )
         )
         (printout t crlf crlf)
     )
