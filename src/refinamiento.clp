@@ -574,6 +574,16 @@
     )
 )
 
+(deffunction div-decimal "Devuelve la división de ?num entre ?den con ?ndec decimales"
+    (?num ?den ?ndec)
+
+    (bind ?factor (** 10 ?ndec))
+    (bind ?int (div ?num ?ndec)) ;supongo que ?den != 0
+    (bind ?fract (- (/ ?num ?den) ?int))
+
+    (return (+ ?int (/ (integer (* ?fract ?factor)) ?factor)))
+)
+
 (defrule muestra-solucion
     (solucion $?list)
     (candidatas $?cand)
@@ -595,8 +605,8 @@
         (bind ?horasT (+ ?horasT ?hT))
         (bind ?horasLP (+ ?horasLP ?hL ?hP))
     )
-    (printout t " * Horas de dedicacion: " (div ?horasT 18) " h" crlf)
-    (printout t " * Horas de laboratorio: " (div ?horasLP 18) " h" crlf)
+    (printout t " * Horas de dedicacion: " (div-decimal ?horasT 18 2) " h" crlf)
+    (printout t " * Horas de laboratorio: " (div-decimal ?horasLP 18 2) " h" crlf)
     (printout t crlf)
     
     (loop-for-count (?i 1 (length$ ?list)) do
