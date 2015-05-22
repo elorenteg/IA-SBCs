@@ -342,6 +342,7 @@
     (import respref deffunction find-index)
     (import refinamiento deftemplate solucion)
     (import refinamiento deftemplate no-solution)
+    (import refinamiento deftemplate candidatas)
     (export ?ALL)
 )
 
@@ -505,7 +506,8 @@
 )
 
 (defrule muestra-solucion
-    ?sol <- (solucion $?list)
+    (solucion $?list)
+    (candidatas $?cand)
     =>
 
     (printout t "Asignaturas recomendadas:" crlf)
@@ -520,6 +522,29 @@
         (format t "%s (%s): %n" ?nomA ?gradoRec)
         (muestra-motivos ?motP)
         (printout t crlf)
+    )
+    
+    (bind $?resto (create$))
+    (loop-for-count (?i 1 (length ?cand)) do
+        (if (not(member (nth$ ?i ?cand) ?list))
+            then
+            (bind $?resto (insert$ ?resto (+(length$ ?resto)1) (nth$ ?i ?cand)))
+        )
+    )
+    
+    (if (> (length$ ?resto) 0)
+        then
+        (printout t "El sistema tambien encontro las siguientes asignaturas para recomendar" crlf)
+        (bind ?primer TRUE)
+        (loop-for-count (?i 1 (length$ ?resto)) do
+            (bind ?asig (nth$ ?i ?resto))
+            (bind ?asigI (send ?asig get-asig))
+            (bind ?nomA (send ?asigI get-nombre))
+            (if (eq ?primer FALSE) then (printout t ", "))
+            (printout t ?nomA)
+            (bind ?primer FALSE)
+        )
+        (printout t crlf crlf)
     )
 )
 
