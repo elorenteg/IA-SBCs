@@ -142,7 +142,19 @@
     (test (< (creditos-aprobados ?al) 60))
     (test (eq Optativa (class ?a)))
     =>
-    ;(printout t (send ?a get-nombre) " es optativa y no se puede cursar" crlf)
+    ;(printout t (send ?a get-nombre) " es optativa y todavia no se puede cursar" crlf)
+    (retract ?ar)
+)
+
+(defrule descarta-especializadas "Descarta las asignaturas de especialidad si no se han superado 96 créditos ECTS"
+    (refina-rec)
+    (dni ?dni)
+    ?al <- (object (is-a Alumno) (id ?dni))
+    ?ar <- (asig-rec (asign ?a))
+    (test (< (creditos-aprobados ?al) 96))
+    (test (eq Especializada (class ?a)))
+    =>
+    ;(printout t (send ?a get-nombre) " es especializada y todavia no se puede cursar" crlf)
     (retract ?ar)
 )
 
@@ -622,7 +634,7 @@
                     (break)
                 )
             )
-            
+
             (if (eq ?correq-ok TRUE) then
                 (bind ?nomA (send ?asigI get-nombre))
                 (if (eq ?primer FALSE) then (printout t ", "))
