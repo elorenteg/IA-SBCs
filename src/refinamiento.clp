@@ -233,7 +233,7 @@
     ?pref <- (respref (es_restriccion FALSE) (max_asigns ?maP))
     ?cand <- (candidatas $?list) ;;; $?list esta ordenado segun el numero de preferencias
     =>
-    (printout t "COMPLETO " ?list crlf)
+    ;(printout t "COMPLETO " ?list crlf)
 
     (assert (no-solution))
     (assert (backtrack 1 (create$)))
@@ -339,6 +339,7 @@
     (import MAIN ?ALL)
     (import respref deftemplate respref)
     (import respref deftemplate nrestricciones)
+    (import respref deffunction find-index)
     (import refinamiento deftemplate solucion)
     (import refinamiento deftemplate no-solution)
     (export ?ALL)
@@ -375,6 +376,57 @@
     )
 )
 
+(deffunction muestra-competencias
+    ($?comp)
+    
+    (bind $?nombres (create$))
+    (bind ?primerC TRUE)
+    (loop-for-count (?i 1 (length$ ?comp)) do
+        (bind ?compI (nth$ ?i ?comp))
+        (bind ?nom (send ?compI get-nombre_comp))
+        (bind ?ind (find-index ?nom ?nombres))
+        (if (= ?ind 0)
+            then ; competencia no mostrada
+            (bind $?nombres (insert$ ?nombres 1 ?nom))
+            
+            (if (eq ?primerC FALSE) then (printout t ", "))
+            (printout t (sub-string 3 (str-length ?nom) ?nom) " ")
+            
+            (bind $?niveles (create$))
+            (loop-for-count (?j 1 (length$ ?comp)) do
+                (bind ?comp-j (nth$ ?j ?comp))
+                (bind ?nom-j (send ?comp-j get-nombre_comp))
+                (if (= (str-compare ?nom ?nom-j) 0)
+                    then
+                    (bind ?niv (send ?comp-j get-nivel))
+                    (bind ?insertat FALSE)
+                    (loop-for-count (?k 1 (length$ ?niveles)) do
+                        (if (= (str-compare ?niv (nth$ ?k ?niveles)) -1)
+                            then
+                            (bind $?niveles (insert$ ?niveles ?k ?niv))
+                            (bind ?insertat TRUE)
+                            (break)
+                        )
+                    )
+                    (if (eq ?insertat FALSE) then (bind $?niveles (insert$ ?niveles (+(length$ ?niveles)1) ?niv)))
+                )
+            )
+            
+            (if (= (length$ ?niveles) 1) then (printout t "nivel ") else (printout t "niveles "))
+            (bind ?primerN TRUE)
+            (loop-for-count (?j 1 (length$ ?niveles)) do
+                (if (= (length$ ?niveles) 3) then (if (eq ?j 2) then (printout t ", ")))
+                (if (and (> (length$ ?niveles) 1) (eq ?j (length$ ?niveles))) then (printout t " y "))
+                (bind ?niv (nth$ ?j ?niveles))
+                (printout t (sub-string 2 (str-length ?niv) ?niv))
+                (bind ?primerN FALSE)
+            )
+            
+            (bind ?primerC FALSE)
+        )
+    )
+)
+
 (deffunction muestra-motivos
     ($?motivos)
     
@@ -386,10 +438,32 @@
     (lista-motivo "Tipo de Horario" "horario preferido" ?motivos)
     (lista-motivo "Especialidad" "completar especialidad" ?motivos)
     (lista-motivo "Temas" "intereses tematicos" ?motivos)
-    (lista-motivo "Competencias" "intereses competencias" ?motivos)
+    ;(lista-motivo "Competencias" "intereses competencias" ?motivos)
     
-    ;(printout t "nprefs: " (length$ ?motivos) crlf)
+    (bind $?comps (create$))
+    (loop-for-count (?i 1 (length$ ?motivos)) do
+        (bind ?mot (nth$ ?i ?motivos))
+        ;(printout t ?mot "  ")
+        (if (not(eq (str-index "intereses competencias" ?mot) FALSE))
+            then
+            (bind ?nomNiv (separa ?mot))
+            
+            (bind ?p1 (str-index "-" ?nomNiv))
+            (bind ?nom (sub-string 1 (- ?p1 1) ?nomNiv))
+            (bind ?niv (sub-string (+ ?p1 1) (str-length ?nomNiv) ?nomNiv))
+            
+            (bind ?comp-ins (find-instance ((?c Competencia)) (and (eq (str-compare ?c:nombre_comp ?nom) 0) (eq (str-compare ?c:nivel ?niv) 0))))
+            (bind $?comps (insert$ ?comps 1 ?comp-ins))
+        )
+    )
+    (if (> (length$ ?comps) 0)
+        then
+        (printout t " * Competencias: ")
+        (muestra-competencias ?comps)
+    )
 )
+
+
 
 (defrule refresc-restricciones
     (declare (salience 10))
@@ -422,10 +496,7 @@
         (if (> (length$ ?cp) 0) 
             then 
             (printout t " * Competencias transversales: ")
-            (loop-for-count (?i 1 (length$ ?cp)) do
-                (printout t (send (nth$ ?i ?cp) get-nombre_comp))
-                (if (< ?i (length$ ?cp)) then (printout t ", "))
-            )
+            (muestra-competencias ?cp)
             (printout t crlf)
 
         ) 
