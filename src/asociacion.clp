@@ -17,12 +17,14 @@
     (multislot motivosP (default (create$)))
     (slot rest-sat) ;número de restricciones que satisface
     (slot pref-sat) ;número de preferencias que satisface
+    (slot prioridad)
 )
 
 (deftemplate nueva-rec "Nueva asignatura recomendada por una regla"
     (slot asign)
     (slot motivo)
     (slot es-pref)
+    (slot prioridad)
 )
 
 (deffunction interseccion-vacia "Indica si la intersección de dos listas (como conjuntos) está vacía"
@@ -63,7 +65,7 @@
                 (bind ?hI (nth$ ?j ?horasI))
                 (if (member ?hI (send ?asig get-horarios)) then
                     (bind ?motivo (str-cat "horario preferido-" (send ?hI get-horario)))
-                    (assert (nueva-rec (asign ?asig) (motivo ?motivo) (es-pref ?es_pref))) ;poner un motivo más user-friendly
+                    (assert (nueva-rec (asign ?asig) (motivo ?motivo) (es-pref ?es_pref) (prioridad 1))) ;poner un motivo más user-friendly
                 )
             )
         )
@@ -113,7 +115,7 @@
 
         (loop-for-count (?i 1 (length$ ?asigs)) do
             (bind ?motivo (str-cat "completar especialidad-" (send ?esp get-nombre_esp)))
-            (assert (nueva-rec (asign (nth$ ?i ?asigs)) (motivo ?motivo) (es-pref ?es_pref))) ;poner un motivo más user-friendly
+            (assert (nueva-rec (asign (nth$ ?i ?asigs)) (motivo ?motivo) (es-pref ?es_pref) (prioridad 1))) ;poner un motivo más user-friendly
         )
     )
 )
@@ -139,7 +141,7 @@
                 (bind ?tI (nth$ ?j ?it))
                 (if (member ?tI (send ?asig get-temas)) then
                     (bind ?motivo (str-cat "intereses tematicos-" (send ?tI get-nombre_tema)))
-                    (assert (nueva-rec (asign ?asig) (motivo ?motivo) (es-pref ?es_pref))) ;poner un motivo más user-friendly
+                    (assert (nueva-rec (asign ?asig) (motivo ?motivo) (es-pref ?es_pref) (prioridad 1))) ;poner un motivo más user-friendly
                 )
             )
         )
@@ -169,7 +171,7 @@
                     (bind ?nombre (send ?cI get-nombre_comp))
                     (bind ?nivel (send ?cI get-nivel))
                     (bind ?motivo (str-cat (str-cat "intereses competencias-" ?nombre) (str-cat "-" ?nivel)))
-                    (assert (nueva-rec (asign ?asig) (motivo ?motivo) (es-pref ?es_pref))) ;poner un motivo más user-friendly
+                    (assert (nueva-rec (asign ?asig) (motivo ?motivo) (es-pref ?es_pref) (prioridad 1))) ;poner un motivo más user-friendly
                 )
             )
         )
@@ -194,13 +196,13 @@
         (bind $?asigs-faciles (find-all-instances ((?ins Asignatura)) (not(member ?ins ?asigs-dificiles))))
 
         (loop-for-count (?i 1 (length$ ?asigs-faciles)) do
-            (assert (nueva-rec (asign (nth$ ?i ?asigs-faciles)) (motivo "dificultad-Facil") (es-pref ?es_pref))) ;poner un motivo más user-friendly
+            (assert (nueva-rec (asign (nth$ ?i ?asigs-faciles)) (motivo "dificultad-Facil") (es-pref ?es_pref) (prioridad 1))) ;poner un motivo más user-friendly
         )
         
         (if (eq ?dif dificil)
             then
             (loop-for-count (?i 1 (length$ ?asigs-dificiles)) do
-                (assert (nueva-rec (asign (nth$ ?i ?asigs-dificiles)) (motivo "dificultad-Dificil") (es-pref ?es_pref))) ;poner un motivo más user-friendly
+                (assert (nueva-rec (asign (nth$ ?i ?asigs-dificiles)) (motivo "dificultad-Dificil") (es-pref ?es_pref) (prioridad 1))) ;poner un motivo más user-friendly
             )
         )
     )
@@ -214,47 +216,6 @@
     (dificultad ?difRes FALSE)
     (dificultad ?difPref TRUE)
 )
-
-
-
-(defrule escoge-curso
-    (ent-asigs)
-    ?prob-abs <- (problema-abstracto (curso-estudios ?ce))
-    =>
-    (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (= (curso-a-int ?ins:curso) ?ce)))
-
-    (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-        (bind ?motivo (str-cat "sigue plan estudios-" ?ce))
-        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo ?motivo) (es-pref TRUE)))
-        (bind ?motivo (str-cat "sigue curso actual-" ?ce)) ;motivo adicional para dar prioridad a que acabe el curso actual (útil para que no aparezca EEE en fase inicial, p.e.)
-        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo ?motivo) (es-pref TRUE)))
-    )
-
-    ;intentamos recomendar asignaturas del siguiente curso (por si el alumno está a punto de empezar uno nuevo)
-    (if (< ?ce 4)
-        then
-        (bind ?ins-asigs2 (find-all-instances ((?ins Asignatura)) (= (curso-a-int ?ins:curso) (+ 1 ?ce))))
-        (loop-for-count (?i 1 (length$ ?ins-asigs2)) do
-            (bind ?motivo (str-cat "sigue plan estudios-" (+ 1 ?ce)))
-            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs2)) (motivo ?motivo) (es-pref TRUE)))
-        )
-    )
-
-)
-
-(defrule escoge-especialidad-principal "Escoge asignaturas de la especialidad principal"
-    (ent-asigs)
-    (dni ?dni)
-    ?al <- (object (is-a Alumno) (id ?dni) (especialidad ?e))
-    (test (neq ?e [nil]))
-    =>
-    (bind ?ins-asigs (find-all-instances ((?ins Especializada)) (member ?e ?ins:especialidad_asig)))
-
-    (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo sigue-esp-principal) (es-pref TRUE))) ;poner un motivo más user-friendly
-    )
-)
-
 
 (deffunction ha-aprobado "Retorna si el alumno ?al ha aprobado la asignatura ?a"
     (?al ?a)
@@ -270,6 +231,49 @@
     (return FALSE)
 )
 
+(defrule escoge-curso
+    (ent-asigs)
+    (dni ?dni)
+    ?al <- (object (is-a Alumno) (id ?dni))
+    ?prob-abs <- (problema-abstracto (curso-estudios ?ce))
+    =>
+    (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (= (curso-a-int ?ins:curso) ?ce)))
+
+    (bind ?naprobadas 0)
+    (loop-for-count (?i 1 (length$ ?ins-asigs)) do
+        (if (ha-aprobado ?al (nth$ ?i ?ins-asigs)) then (bind ?naprobadas (+ ?naprobadas 1)))
+        (bind ?motivo (str-cat "sigue plan estudios-" ?ce))
+        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo ?motivo) (es-pref TRUE) (prioridad 20)))
+    )
+
+    (if (and (= (length$ ?ins-asigs) ?naprobadas) (< ?ce 4))
+        then 
+        ;el alumno ha finalizado el curso actual, pasamos al siguiente
+        (bind ?prob-abs (modify ?prob-abs (curso-estudios (+ ?ce 1))))
+        else (if (< ?ce 4) then
+            ;intentamos recomendar asignaturas del siguiente curso (por si el alumno está a punto de empezar uno nuevo)
+            (bind ?ins-asigs2 (find-all-instances ((?ins Asignatura)) (= (curso-a-int ?ins:curso) (+ 1 ?ce))))
+            (loop-for-count (?i 1 (length$ ?ins-asigs2)) do
+                (bind ?motivo (str-cat "sigue plan estudios-" (+ 1 ?ce)))
+                (assert (nueva-rec (asign (nth$ ?i ?ins-asigs2)) (motivo ?motivo) (es-pref TRUE) (prioridad 1)))
+            )
+        )
+    )
+
+)
+
+(defrule escoge-especialidad-principal "Escoge asignaturas de la especialidad principal"
+    (ent-asigs)
+    (dni ?dni)
+    ?al <- (object (is-a Alumno) (id ?dni) (especialidad ?e))
+    (test (neq ?e [nil]))
+    =>
+    (bind ?ins-asigs (find-all-instances ((?ins Especializada)) (member ?e ?ins:especialidad_asig)))
+
+    (loop-for-count (?i 1 (length$ ?ins-asigs)) do
+        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo sigue-esp-principal) (es-pref TRUE) (prioridad 10))) ;poner un motivo más user-friendly
+    )
+)
 
 (defrule escoge-suspendidas "Escoge asignaturas suspendidas"
     (ent-asigs)
@@ -286,7 +290,7 @@
             (bind ?asig (send ?conv get-asignatura_conv))
             (if (not (ha-aprobado ?al ?asig))
                 then
-                (assert (nueva-rec (asign ?asig) (motivo asignatura-suspensa) (es-pref TRUE))) ;poner un motivo más user-friendly
+                (assert (nueva-rec (asign ?asig) (motivo asignatura-suspensa) (es-pref TRUE) (prioridad 1))) ;poner un motivo más user-friendly
             )
         )
     )
@@ -296,14 +300,14 @@
 
 (defrule modifica-asig-rec "Modifica una asignatura recomendada (añade motivo y/o pref-sat)"
     (declare (salience 10)) ;tiene prioridad para comprobar si ya existe la asig-rec
-    ?nr <- (nueva-rec (asign ?a) (motivo ?m) (es-pref ?ep))
-    ?ar <- (asig-rec (asign ?a) (motivosR $?msR) (motivosP $?msP) (rest-sat ?rs) (pref-sat ?ps))
+    ?nr <- (nueva-rec (asign ?a) (motivo ?m) (es-pref ?ep) (prioridad ?p))
+    ?ar <- (asig-rec (asign ?a) (motivosR $?msR) (motivosP $?msP) (rest-sat ?rs) (pref-sat ?ps) (prioridad ?pa))
     =>
     (if (eq ?ep TRUE)
         then
         (bind ?ps-nuevo (+ 1 ?ps))
         (bind ?rs-nuevo ?rs)
-        (bind ?ar (modify ?ar (motivosP (insert$ ?msP 1 ?m)) (rest-sat ?rs-nuevo) (pref-sat ?ps-nuevo)))
+        (bind ?ar (modify ?ar (motivosP (insert$ ?msP 1 ?m)) (rest-sat ?rs-nuevo) (pref-sat ?ps-nuevo) (prioridad (+ ?pa ?p))))
         else
         (bind ?ps-nuevo ?ps)
         (bind ?rs-nuevo (+ 1 ?rs))
@@ -316,18 +320,18 @@
 
 (defrule anade-asig-rec "Añade una nueva asignatura recomendada (antes no existía)"
     (declare (salience 5))
-    ?nr <- (nueva-rec (asign ?a) (motivo ?m) (es-pref ?ep))
+    ?nr <- (nueva-rec (asign ?a) (motivo ?m) (es-pref ?ep) (prioridad ?p))
     (not (exists (asig-rec (asign ?a))))
     =>
     (if (eq ?ep TRUE)
         then
         (bind ?ps 1)
         (bind ?rs 0)
-        (assert (asig-rec (asign ?a) (motivosP (create$ ?m)) (rest-sat ?rs) (pref-sat ?ps)))
+        (assert (asig-rec (asign ?a) (motivosP (create$ ?m)) (rest-sat ?rs) (pref-sat ?ps) (prioridad ?p)))
         else
         (bind ?ps 0)
         (bind ?rs 1)
-        (assert (asig-rec (asign ?a) (motivosR (create$ ?m)) (rest-sat ?rs) (pref-sat ?ps)))
+        (assert (asig-rec (asign ?a) (motivosR (create$ ?m)) (rest-sat ?rs) (pref-sat ?ps) (prioridad ?p)))
     )
 
     (retract ?nr)

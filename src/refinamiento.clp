@@ -18,6 +18,7 @@
     (slot asig)
     (multislot motivosR)
     (multislot motivosP)
+    (slot prioridad)
     (slot grado)
 )
 
@@ -65,9 +66,8 @@
     (declare (salience 5))
     (nrestricciones ?nrest ?nrestf)
     (filtro-restr)
-    ?ar <- (asig-rec (asign ?a) (rest-sat ?rs) (motivosR $?mR) (motivosP $?mP))
+    ?ar <- (asig-rec (asign ?a) (rest-sat ?rs) (motivosR $?mR) (motivosP $?mP) (prioridad ?p))
     =>
-
     (if (< ?rs ?nrest) 
         then
         (if (member asignatura-suspensa ?mP)
@@ -196,6 +196,7 @@
 (deffunction inserta-ordenado
     (?ins $?list)
     (bind $?motivosP (send ?ins get-motivosP))
+    (bind ?prioridad (send ?ins get-prioridad))
 
     (bind ?preferente FALSE)
     (if (member asignatura-suspensa ?motivosP) then (bind ?preferente TRUE))
@@ -203,14 +204,14 @@
     (bind ?insertat FALSE)
     (loop-for-count (?i 1 (length$ ?list)) do
         (bind ?asig (nth$ ?i ?list))
-        (bind $?motP (send ?asig get-motivosP))
+        (bind ?prioridad2 (send ?asig get-prioridad))
         (if (eq ?preferente TRUE)
             then
             (bind $?list (insert$ ?list ?i ?ins))
             (bind ?insertat TRUE)
             (break)
         )
-        (if (> (length$ ?motivosP) (length$ ?motP))
+        (if (> ?prioridad ?prioridad2)
             then ; ?ins es mas recomendable que ?asig
             (bind $?list (insert$ ?list ?i ?ins))
             (bind ?insertat TRUE)
@@ -225,10 +226,10 @@
 (defrule obtiene-candidatas "Agrupa las asignaturas que se pueden recomendar"
     (declare (salience 1))
     ?hecho <- (agrupa)
-    ?ar <- (asig-rec (asign ?a) (motivosR $?msR) (motivosP $?msP) (rest-sat ?rs) (pref-sat ?ps))
+    ?ar <- (asig-rec (asign ?a) (motivosR $?msR) (motivosP $?msP) (rest-sat ?rs) (pref-sat ?ps) (prioridad ?p))
     ?cand <- (candidatas $?list)
     =>
-    (bind ?ins (make-instance of asig-candidata (asig ?a) (motivosR ?msR) (motivosP ?msP) (grado (grado-recomendacion ?ps ?msP))))
+    (bind ?ins (make-instance of asig-candidata (asig ?a) (motivosR ?msR) (motivosP ?msP) (grado (grado-recomendacion ?ps ?msP)) (prioridad ?p)))
     (bind $?list (subseq$ (inserta-ordenado ?ins $?list) 1 12)) ;nos quedamos con las 12 mejores candidatas
 
     (retract ?cand)
