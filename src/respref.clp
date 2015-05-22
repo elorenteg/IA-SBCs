@@ -22,6 +22,10 @@
     (multislot tipo_horario)
 )
 
+(deftemplate preferencias "Conjunto de preferencias introducidas por el usuario"
+    (multislot prefs)
+)
+
 (deffunction sort-list
     ($?list)
 
@@ -191,10 +195,30 @@
     (retract ?hecho)
 )
 
+(defrule contador-preferencias
+    ?hecho <- (prefs ok)
+    ?pref <- (respref (es_restriccion FALSE) (competencias_preferidas $?cp) (completar_especialidad ?ce)
+                    (max_asigns ?ma) (max_horas_trabajo ?mht) (max_horas_lab ?mhl) (tema_especializado $?te) (tipo_horario $?th))
+
+    =>
+
+    (bind ?prefs (create$))
+    (if (> (length$ ?cp) 0) then (bind ?prefs (insert$ ?prefs 1 competencias_preferidas)))
+    (if (neq ?ce nil) then (bind ?prefs (insert$ ?prefs 1 completar_especialidad)))
+    (if (> (length$ ?te) 0) then (bind ?prefs (insert$ ?prefs 1 tema_especializado)))
+    (if (> (length$ ?th) 0) then (bind ?prefs (insert$ ?prefs 1 tipo_horario)))
+    (if (neq ?ma nil) then (bind ?prefs (insert$ ?prefs 1 max_asigns)))
+    (if (neq ?mht nil) then (bind ?prefs (insert$ ?prefs 1 max_horas_trabajo)))
+    (if (neq ?mhl nil) then (bind ?prefs (insert$ ?prefs 1 max_horas_lab)))
+
+    (assert (preferencias (prefs (create$ ?prefs))))
+    (assert (contadorP ok))
+    (retract ?hecho)
+)
+
 (defrule contador-restricciones
-    ?hecho1 <- (prefs ok)
-    ?hecho2 <- (restrs ok)
-    ?rest <- (respref (es_restriccion TRUE) (competencias_preferidas $?cp) (completar_especialidad ?ce) (dificultad ?d)
+    ?hecho <- (restrs ok)
+    ?rest <- (respref (es_restriccion TRUE) (competencias_preferidas $?cp) (completar_especialidad ?ce)
                     (max_asigns ?ma) (max_horas_trabajo ?mht) (max_horas_lab ?mhl) (tema_especializado $?te) (tipo_horario $?th))
 
     =>
@@ -203,7 +227,6 @@
     (bind ?nrest 0)
     (if (> (length$ ?cp) 0) then (bind ?nrest (+ ?nrest 1)))
     (if (neq ?ce nil) then (bind ?nrest (+ ?nrest 1)))
-    ;(if (neq ?d nil) then (bind ?nrest (+ ?nrest 1)))
     (if (> (length$ ?te) 0) then (bind ?nrest (+ ?nrest 1)))
     (if (> (length$ ?th) 0) then (bind ?nrest (+ ?nrest 1))) ;por defecto ?th tiene asignado los dos horarios posibles
 
@@ -216,14 +239,14 @@
     (if (neq ?mhl nil) then (bind ?nrest-final (+ ?nrest-final 1)))
 
 
-    (assert (contador ok))
+    (assert (contadorR ok))
     (assert (nrestricciones ?nrest ?nrest-final))
-    (retract ?hecho1)
-    (retract ?hecho2)
+    (retract ?hecho)
 )
 
 (defrule inferencia-preferencias "Infiere restricciones/preferencias segun el expediente"
-    ?hecho <- (contador ok)
+    ?hecho1 <- (contadorR ok)
+    ?hecho2 <- (contadorP ok)
     (dni ?dni)
     ?alumn <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped) (especialidad ?esp))
 
@@ -377,7 +400,7 @@
     (assert (inf-nasig ?nasig p $?cuatris))
     (assert (inf-dif ?nfacil ?ndificil ?sfacil ?sdificil ?peor-nota-dificil))
     (assert (inf-curso))
-    (retract ?hecho)
+    (retract ?hecho1 ?hecho2)
 )
 
 (deffunction muestra-nombres-competencias

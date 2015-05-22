@@ -339,6 +339,7 @@
     (import MAIN ?ALL)
     (import respref deftemplate respref)
     (import respref deftemplate nrestricciones)
+    (import respref deftemplate preferencias)
     (import respref deffunction find-index)
     (import respref deffunction muestra-nombres-competencias)
     (import refinamiento deftemplate solucion)
@@ -471,8 +472,11 @@
 (defrule refresc-restricciones
     (declare (salience 10))
     (nrestricciones ?nrest ?nrest-final)
+    (preferencias (prefs $?prefs))
     ?rest <- (respref (es_restriccion TRUE) (competencias_preferidas $?cp) (completar_especialidad ?ce) (max_asigns ?ma) 
                  (max_horas_trabajo ?mht) (max_horas_lab ?mhl) (tema_especializado $?te) (tipo_horario $?th))
+    ?pref <- (respref (es_restriccion FALSE) (competencias_preferidas $?cpP) (completar_especialidad ?ceP) (max_asigns ?maP) 
+                 (max_horas_trabajo ?mhtP) (max_horas_lab ?mhlP) (tema_especializado $?teP) (tipo_horario $?thP))
     =>
     (printout t "=====================================================================" crlf)
     (printout t "=                           Recomendacion                           =" crlf)
@@ -501,6 +505,29 @@
             (printout t " * Competencias transversales: ")
             (muestra-nombres-competencias ?cp)
         ) 
+        (printout t crlf)
+    )
+
+    (if (> (length$ ?prefs) 0)
+        then
+        (printout t "Preferencias aplicadas a la solucion:" crlf)
+        (if (member max_asigns ?prefs) then (printout t " * Num. asignaturas a matricular: " ?maP crlf))
+        (if (member max_horas_trabajo ?prefs) then (printout t " * Max. horas de dedicacion semanales: " ?mhtP crlf))
+        (if (member max_horas_lab ?prefs) then (printout t " * Max. horas de laboratorio/problemas semanales: " ?mhlP crlf))
+        (if (member tipo_horario ?prefs) then (printout t " * Tipo de horario: " (send (nth$ 1 ?thP) get-horario) crlf))
+        (if (member tema_especializado ?prefs) then 
+            (printout t " * Temas de interes: ")
+            (loop-for-count (?i 1 (length$ ?teP)) do
+                (printout t (send (nth$ ?i ?teP) get-nombre_tema))
+                (if (< ?i (length$ ?teP)) then (printout t ", "))
+            )
+            (printout t crlf)
+        )
+        (if (member completar_especialidad ?prefs) then (printout t " * Especialidad: " (send ?ceP get-nombre_esp) crlf))
+        (if (member competencias_preferidas ?prefs) then 
+            (printout t " * Competencias transversales: ")
+            (muestra-nombres-competencias ?cpP)
+        )
         (printout t crlf)
     )
 )
