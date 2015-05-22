@@ -252,8 +252,6 @@
 
     =>
 
-    ;;; TODO: comprobar preferencias de mhtP y mhlP ;;;
-
     (if (eq ?i (+(length$ ?list)1))
         then
         (bind ?correq-ok TRUE)
@@ -270,13 +268,12 @@
         (bind ?sum-horas 0)
         (loop-for-count (?j 1 (length$ ?grupo)) do
             ;divido las horas totales entre 18 semanas lectivas, porque la res/pref está en horas semanales
-            (bind ?sum-horas (+ ?sum-horas (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_teoria) 18) (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_prob) 18)))
+            (bind ?sum-horas (+ ?sum-horas (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_teoria) 18)))
         )
 
         (bind ?sum-horas-lab 0)
         (loop-for-count (?j 1 (length$ ?grupo)) do
-            (bind ?sum-horas-lab (+ ?sum-horas-lab (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_lab) 18)))
-            (bind ?sum-horas-lab (+ ?sum-horas-lab (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_prob) 18)))
+            (bind ?sum-horas-lab (+ ?sum-horas-lab (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_lab) 18) (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_prob) 18)))
         )
 
 
@@ -288,7 +285,36 @@
                     (and (neq ?ma nil) (= (length$ ?grupo) ?ma))
                     (and (= (length$ ?grupo) (length$ ?list)) (< (length$ ?grupo) 7)))
                 then
-                ;(printout t "SOLUCION " ?grupo crlf)
+
+                ;;; Comprobación de preferencias
+
+                (if (and (neq nil ?maP) (= ?maP (length$ ?grupo))) then
+                    ;cumple preferencia de max_asigs -> añadir motivo?
+                    
+                    ;(loop-for-count (?j 1 (length$ ?grupo)) do
+                    ;    (bind ?m (send (nth$ ?j ?grupo) get-motivosP))
+                    ;    (send (nth$ ?j ?grupo) put-motivosP (insert$ ?m 1 (str-cat "num. asignaturas: " ?maP)))
+                    ;)
+                )
+
+                (bind ?sum-horasP 0)
+                (loop-for-count (?j 1 (length$ ?grupo)) do
+                    (bind ?sum-horasP (+ ?sum-horasP (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_teoria) 18)))
+                )
+
+                (bind ?sum-horas-labP 0)
+                (loop-for-count (?j 1 (length$ ?grupo)) do
+                    (bind ?sum-horas-labP (+ ?sum-horas-labP (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_lab) 18) (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_prob) 18)))
+                )
+
+                (if (<= ?sum-horasP ?mhtP) then
+                    ;cumple preferencia de max_horas_trabajo
+                )
+
+                (if (<= ?sum-horas-labP ?mhlP) then
+                    ;cumple preferencia de max_horas_lab
+                )
+
                 (retract ?hecho1)
                 (assert (solucion ?grupo))
                 (focus presentacion)
