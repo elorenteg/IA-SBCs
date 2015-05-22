@@ -72,7 +72,7 @@
         then
         (if (member asignatura-suspensa ?mP)
             then
-            (printout t (send ?a get-nombre) " no cumple todas las restricciones, pero esta suspensa" crlf)
+            ;(printout t (send ?a get-nombre) " no cumple todas las restricciones, pero esta suspensa" crlf)
             else
             ;(printout t (send ?a get-nombre) " no cumple todas las restricciones (" ?rs "<" ?nrest ")"  crlf)
             (retract ?ar)
@@ -462,6 +462,7 @@
         then
         (printout t " * Competencias: ")
         (muestra-competencias ?comps)
+        (printout t crlf)
     )
 )
 
@@ -509,7 +510,21 @@
     (candidatas $?cand)
     =>
 
-    (printout t "Asignaturas recomendadas:" crlf)
+    (printout t "La recomendacion del sistema conllevaria un tiempo de dedicacion:" crlf)
+    
+    (bind ?horasT 0)
+    (bind ?horasLP 0)
+    (loop-for-count (?i 1 (length$ ?list)) do
+        (bind ?asig (nth$ ?i ?list))
+        (bind ?asigI (send ?asig get-asig))
+        (bind ?hT (send ?asigI get-horas_teoria))
+        (bind ?hL (send ?asigI get-horas_lab))
+        (bind ?hP (send ?asigI get-horas_prob))
+        (bind ?horasT (+ ?horasT ?hT))
+        (bind ?horasLP (+ ?horasLP ?hL ?hP))
+    )
+    (printout t " * Horas de dedicacion: " (div ?horasT 18) " h" crlf)
+    (printout t " * Horas de laboratorio: " (div ?horasLP 18) " h" crlf)
     (printout t crlf)
     
     (loop-for-count (?i 1 (length$ ?list)) do
