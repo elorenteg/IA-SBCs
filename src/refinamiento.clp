@@ -276,6 +276,7 @@
         (bind ?sum-horas-lab 0)
         (loop-for-count (?j 1 (length$ ?grupo)) do
             (bind ?sum-horas-lab (+ ?sum-horas-lab (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_lab) 18)))
+            (bind ?sum-horas-lab (+ ?sum-horas-lab (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_prob) 18)))
         )
 
 
