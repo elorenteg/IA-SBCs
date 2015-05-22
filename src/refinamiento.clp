@@ -340,6 +340,7 @@
     (import respref deftemplate respref)
     (import respref deftemplate nrestricciones)
     (import respref deffunction find-index)
+    (import respref deffunction muestra-nombres-competencias)
     (import refinamiento deftemplate solucion)
     (import refinamiento deftemplate no-solution)
     (import refinamiento deftemplate candidatas)
@@ -497,9 +498,7 @@
         (if (> (length$ ?cp) 0) 
             then 
             (printout t " * Competencias transversales: ")
-            (muestra-competencias ?cp)
-            (printout t crlf)
-
+            (muestra-nombres-competencias ?cp)
         ) 
         (printout t crlf)
     )

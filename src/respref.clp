@@ -380,6 +380,27 @@
     (retract ?hecho)
 )
 
+(deffunction muestra-nombres-competencias
+    ($?cp)
+
+    (bind $?compN (create$))
+    (loop-for-count (?i 1 (length$ ?cp)) do
+        (bind ?nom (send (nth$ ?i ?cp) get-nombre_comp))
+        (if (not (member ?nom ?compN))
+            then
+            (bind $?compN (insert$ ?compN 1 ?nom))
+        )
+    )
+    
+    (bind ?primer TRUE)
+    (loop-for-count (?i 1 (length$ ?compN)) do
+        (if (eq ?primer FALSE) then (printout t ", "))
+        (printout t (sub-string 3 (str-length (nth$ ?i ?compN)) (nth$ ?i ?compN)))
+        (bind ?primer FALSE)
+    )
+    (printout t crlf)
+)
+
 (defrule inferencia-competencias
     ?hecho <- (inf-comp $?compe p)
     ?pref <- (respref (es_restriccion FALSE) (competencias_preferidas $?cp))
@@ -391,23 +412,8 @@
         ; competencias cursadas de N1-3 (aunque no haya hecho todos los niveles)
         (bind ?pref (modify ?pref (competencias_preferidas ?compe)))
         
-        (bind $?compN (create$))
-        (loop-for-count (?i 1 (length$ ?compe)) do
-            (bind ?nom (send (nth$ ?i ?compe) get-nombre_comp))
-            (if (not (member ?nom ?compN))
-                then
-                (bind $?compN (insert$ ?compN 1 ?nom))
-            )
-        )
-        
         (printout t " * Competencias: ")
-        (bind ?primer TRUE)
-        (loop-for-count (?i 1 (length$ ?compN)) do
-            (if (eq ?primer FALSE) then (printout t ", "))
-            (printout t (sub-string 3 (str-length (nth$ ?i ?compN)) (nth$ ?i ?compN)))
-            (bind ?primer FALSE)
-        )
-        (printout t crlf)
+        (muestra-nombres-competencias ?compe)
     )
 
     (assert (inf-comp ok))
