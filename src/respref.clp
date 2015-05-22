@@ -168,7 +168,7 @@
             (bind ?num (nth$ ?i ?numTem))
             (bind ?nomTem (nth$ ?num ?temasN))
             (bind ?tema-ins (find-instance ((?tem Especializado)) (eq ?tem:nombre_tema ?nomTem)))
-            (bind ?temasI (insert$ ?temasI 1 ?tema-ins))
+            (if (not (member ?tema-ins ?temasI)) then (bind ?temasI (insert$ ?temasI 1 ?tema-ins)))
         )
         (bind ?rec (modify ?rec (tema_especializado ?temasI)))
     )
@@ -185,7 +185,7 @@
 
             (bind ?nomComp (nth$ ?num ?ordComP))
             (bind $?comp-ins (find-all-instances ((?comp Competencia)) (= (str-compare (sub-string 3 (str-length ?comp:nombre_comp) ?comp:nombre_comp) ?nomComp) 0)))
-            (bind ?compeI (insert$ ?compeI 1 ?comp-ins))
+            (if (not (member ?comp-ins ?compeI)) then (bind ?compeI (insert$ ?compeI 1 ?comp-ins)))
         )
         (bind ?rec (modify ?rec (competencias_preferidas ?compeI)))
     )
