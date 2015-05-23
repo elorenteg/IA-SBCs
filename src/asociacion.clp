@@ -249,9 +249,14 @@
     (if (and (= (length$ ?ins-asigs) ?naprobadas) (< ?ce 4))
         then 
         ;el alumno ha finalizado el curso actual, pasamos al siguiente
-        ;(bind ?prob-abs (modify ?prob-abs (curso-estudios (+ ?ce 1))))
+        (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (= (curso-a-int ?ins:curso) (+ 1 ?ce))))
+
+        (loop-for-count (?i 1 (length$ ?ins-asigs)) do
+            (bind ?motivo (str-cat "sigue plan estudios-" (+ 1 ?ce)))
+            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo ?motivo) (es-pref TRUE) (prioridad 20)))
+        )
         else (if (< ?ce 4) then
-            ;intentamos recomendar asignaturas del siguiente curso (por si el alumno está a punto de empezar uno nuevo)
+            ;intentamos recomendar asignaturas del siguiente curso
             (bind ?ins-asigs2 (find-all-instances ((?ins Asignatura)) (= (curso-a-int ?ins:curso) (+ 1 ?ce))))
             (loop-for-count (?i 1 (length$ ?ins-asigs2)) do
                 (bind ?motivo (str-cat "sigue plan estudios-" (+ 1 ?ce)))
