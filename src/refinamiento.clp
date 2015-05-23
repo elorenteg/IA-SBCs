@@ -294,11 +294,16 @@
                  (or (eq ?mht nil) (<= ?sum-horas ?mht))
                  (or (eq ?mhl nil) (<= ?sum-horas-lab ?mhl))) then
 
-            (if (or (and (eq ?ma nil) (= (length$ ?grupo) ?maP)) 
-                    (and (neq ?ma nil) (= (length$ ?grupo) ?ma))
-                    (and (= (length$ ?grupo) (length$ ?list)) (< (length$ ?grupo) 7)))
-                then
+            ;No hay solución con ?maP asigs -> relanzamos backtracking con objetivo (?maP - 1) asigs
+            (if (and (> ?maP 1) (eq ?ma nil) (= 0 (length$ ?grupo))) 
+                then 
+                (bind ?pref (modify ?pref (max_asigns (- ?maP 1))))
+                (assert (backtrack 1 (create$)))
+            )
 
+            (if (or (and (eq ?ma nil) (= (length$ ?grupo) ?maP)) 
+                    (and (neq ?ma nil) (= (length$ ?grupo) ?ma)))
+                then
                 ;;; Comprobación de preferencias
 
                 (if (and (neq nil ?maP) (= ?maP (length$ ?grupo))) then
@@ -578,7 +583,7 @@
     (?num ?den ?ndec)
 
     (bind ?factor (** 10 ?ndec))
-    (bind ?int (div ?num ?ndec)) ;supongo que ?den != 0
+    (bind ?int (div ?num ?den)) ;supongo que ?den != 0
     (bind ?fract (- (/ ?num ?den) ?int))
 
     (return (+ ?int (/ (integer (* ?fract ?factor)) ?factor)))
