@@ -249,7 +249,7 @@
     (if (and (= (length$ ?ins-asigs) ?naprobadas) (< ?ce 4))
         then 
         ;el alumno ha finalizado el curso actual, pasamos al siguiente
-        (bind ?prob-abs (modify ?prob-abs (curso-estudios (+ ?ce 1))))
+        ;(bind ?prob-abs (modify ?prob-abs (curso-estudios (+ ?ce 1))))
         else (if (< ?ce 4) then
             ;intentamos recomendar asignaturas del siguiente curso (por si el alumno está a punto de empezar uno nuevo)
             (bind ?ins-asigs2 (find-all-instances ((?ins Asignatura)) (= (curso-a-int ?ins:curso) (+ 1 ?ce))))
