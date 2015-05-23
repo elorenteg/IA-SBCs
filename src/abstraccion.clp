@@ -74,10 +74,9 @@
     (retract ?hecho)
 )
 
-(defrule abs-dificultad
+(defrule abs-dificultad "Abstrae preferencias inferidas sobre la dificultad"
     ?hecho <- (ent-abs-dificultad)
     (dni ?dni)
-    ?res <- (respref (es_restriccion TRUE) (dificultad ?difRes))
     ?pref <- (respref (es_restriccion FALSE) (dificultad ?difPref))
     ?abs <- (problema-abstracto (dificultadR ?absRes) (dificultadP ?absPref))
 
@@ -94,7 +93,7 @@
     (retract ?hecho)
 )
 
-(defrule abs-tema
+(defrule abs-tema "Abstrae restricciones y preferencias sobre el tema"
     ?hecho <- (ent-abs-tema)
     (dni ?dni)
     ?res <- (respref (es_restriccion TRUE) (tema_especializado $?temRes))
@@ -109,7 +108,7 @@
     (retract ?hecho)
 )
 
-(defrule abs-especialidad
+(defrule abs-especialidad "Abstrae restricciones y preferencias sobre una especialidad a completar"
     ?hecho <- (ent-abs-especialidad)
     (dni ?dni)
     ?res <- (respref (es_restriccion TRUE) (completar_especialidad ?espRes))
@@ -124,7 +123,7 @@
     (retract ?hecho)
 )
 
-(deffunction compet-a-superar
+(deffunction compet-a-superar "Obtiene las competencias (con niveles concretos) que faltan por superar"
     (?exped $?compet)
 
     (bind $?notas (send ?exped get-notas_exp))
@@ -171,7 +170,7 @@
     (return ?compet)
 )
 
-(defrule abs-competencias
+(defrule abs-competencias "Abstrae restricciones y preferencias sobre las competencias"
     ?hecho <- (ent-abs-competencias)
     (dni ?dni)
     ?alumn <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped))
@@ -193,7 +192,7 @@
     (retract ?hecho)
 )
 
-(defrule abs-curso
+(defrule abs-curso "Abstrae preferencias inferidas sobre el curso actual"
     ?hecho <- (ent-abs-curso)
     ?hecho2 <- (curso ?max-curso)
     ?abs <- (problema-abstracto (curso-estudios ?ce))

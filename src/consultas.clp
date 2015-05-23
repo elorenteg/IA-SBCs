@@ -65,7 +65,7 @@
     ?respuesta
 )
 
-(deffunction pregunta-binaria
+(deffunction pregunta-binaria 
     (?pregunta ?puede-omitir)
 
     (bind ?respuesta (pregunta-cerrada ?pregunta ?puede-omitir si no s n))
@@ -120,7 +120,7 @@
     (return FALSE)
 )
 
-(deffunction pregunta-lista-numeros
+(deffunction pregunta-lista-numeros "Pregunta multirespuesta con opciones numeradas"
     (?pregunta ?puede-omitir $?candidatos)
 
     (if ?puede-omitir then (bind ?salida-opc "(opcional)")
@@ -167,7 +167,6 @@
     (str-cat (upcase (sub-string 0 1 ?str)) (sub-string 2 (length$ ?str) ?str))
 )
 
-;;; TODO: organizar reglas de "consulta al usuario" bajo un mismo módulo ;;;
 
 (defrule main
     ?hecho <- (initial-fact)
@@ -181,7 +180,7 @@
     (retract ?hecho)
 )
 
-(defrule entrada-alumno
+(defrule entrada-alumno "Obtiene y valida el identificador del alumno"
     ?hecho <- (bienvenida ok)
     =>
     (bind ?dni (pregunta-rango "Introduzca su identificador (DNI):" FALSE 0 9999))

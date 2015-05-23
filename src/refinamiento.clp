@@ -13,17 +13,13 @@
 )
 
 
-(defclass asig-candidata
+(defclass asig-candidata "Asignatura candidata a aparecer en la solución final (ha pasado todos los filtros)"
     (is-a USER)
     (slot asig)
     (multislot motivosR)
     (multislot motivosP)
     (slot prioridad)
     (slot grado)
-)
-
-(deftemplate recomendacion
-    (multislot asigs-recom)
 )
 
 (deffunction ha-cursado "Retorna si el alumno ?al ha cursado la asignatura ?a"
@@ -168,7 +164,7 @@
     (retract ?hecho1 ?hecho2)
 )
 
-(defrule no-hay-asigs
+(defrule no-hay-asigs "Salta al módulo de presentación para informar de que no se ha encontrado solución"
     (declare (salience 2))
     ?hecho <- (agrupa)
     =>
@@ -239,21 +235,16 @@
     (retract ?ar)
 )
 
-(defrule filtra-final
+(defrule filtra-final "Finalización del filtrado de asignaturas candidatas"
     ?hecho <- (filtra-nasig)
     ?hecho2 <- (agrupa)
-    ?rest <- (respref (es_restriccion TRUE) (max_asigns ?maR))
-    ?pref <- (respref (es_restriccion FALSE) (max_asigns ?maP))
-    ?cand <- (candidatas $?list) ;;; $?list esta ordenado segun el numero de preferencias
     =>
-    ;(printout t "COMPLETO " ?list crlf)
-
     (assert (no-solution))
     (assert (backtrack 1 (create$)))
     (retract ?hecho)
 )
 
-(defrule backtracking
+(defrule backtracking "Encuentra un subconjunto de candidatas finales que cumplan correquisitos, cardinalidad y tiempos de dedicación"
     (declare (salience 1))
     ?hecho1 <- (no-solution)
     ?hecho2 <- (backtrack ?i $?grupo)
@@ -336,8 +327,6 @@
                 (retract ?hecho1)
                 (assert (solucion ?grupo))
                 (focus presentacion)
-                else
-                ;;; TODO: permitir que muestre solución si no encuentra suficientes asignaturas (?) ;;;
             )
         )
 
@@ -351,7 +340,7 @@
     (retract ?hecho2)
 )
 
-(defrule solo-suspensas
+(defrule solo-suspensas "Si no se ha encontrado solución y hay asignaturas suspendidas, recomendarlas"
     ?hecho1 <- (no-solution)
     ?cand <- (candidatas $?list)
 
@@ -516,7 +505,7 @@
 
 
 
-(defrule refresc-restricciones
+(defrule refresc-restricciones "Muestra un sumario de las restricciones y preferencias introducidas"
     (declare (salience 10))
     (nrestricciones ?nrest ?nrest-final)
     (preferencias (prefs $?prefs))
@@ -589,7 +578,7 @@
     (return (+ ?int (/ (integer (* ?fract ?factor)) ?factor)))
 )
 
-(defrule muestra-solucion
+(defrule muestra-solucion "Muestra la recomendación obtenida y más información relevante"
     (solucion $?list)
     (candidatas $?cand)
     (dni ?dni)
@@ -662,7 +651,7 @@
     )
 )
 
-(defrule no-solucion
+(defrule no-solucion "Muestra un mensaje informando que no se ha encontrado solución"
     (no-solution)
     =>
     (printout t "El sistema no ha encontrado una solucion acorde a sus restricciones/preferencias" crlf)

@@ -10,7 +10,7 @@
 )
 
 
-(deftemplate respref
+(deftemplate respref "Conjunto de características introducidas como restricción o preferencia"
     (slot es_restriccion)
     (multislot competencias_preferidas)
     (slot completar_especialidad)
@@ -22,7 +22,7 @@
     (multislot tipo_horario)
 )
 
-(deftemplate preferencias "Conjunto de preferencias introducidas por el usuario"
+(deftemplate preferencias "Conjunto con los nombres de las preferencias introducidas por el usuario"
     (multislot prefs)
 )
 
@@ -195,7 +195,7 @@
     (retract ?hecho)
 )
 
-(defrule contador-preferencias
+(defrule contador-preferencias "Obtiene las preferencias originamente introducidas por el usuario"
     ?hecho <- (prefs ok)
     ?pref <- (respref (es_restriccion FALSE) (competencias_preferidas $?cp) (completar_especialidad ?ce)
                     (max_asigns ?ma) (max_horas_trabajo ?mht) (max_horas_lab ?mhl) (tema_especializado $?te) (tipo_horario $?th))
@@ -216,28 +216,24 @@
     (retract ?hecho)
 )
 
-(defrule contador-restricciones
+(defrule contador-restricciones "Obtiene el número de restricciones introducidas por el usuario"
     ?hecho <- (restrs ok)
     ?rest <- (respref (es_restriccion TRUE) (competencias_preferidas $?cp) (completar_especialidad ?ce)
                     (max_asigns ?ma) (max_horas_trabajo ?mht) (max_horas_lab ?mhl) (tema_especializado $?te) (tipo_horario $?th))
 
     =>
 
-    ;(printout t "Contador de restricciones" crlf)
     (bind ?nrest 0)
     (if (> (length$ ?cp) 0) then (bind ?nrest (+ ?nrest 1)))
     (if (neq ?ce nil) then (bind ?nrest (+ ?nrest 1)))
     (if (> (length$ ?te) 0) then (bind ?nrest (+ ?nrest 1)))
     (if (> (length$ ?th) 0) then (bind ?nrest (+ ?nrest 1))) ;por defecto ?th tiene asignado los dos horarios posibles
 
-    ;(printout t ">> num. restricciones: " ?nrest crlf)
-
     ;Restricciones que no se pueden comprobar hasta el final
     (bind ?nrest-final 0)
     (if (neq ?ma nil) then (bind ?nrest-final (+ ?nrest-final 1)))
     (if (neq ?mht nil) then (bind ?nrest-final (+ ?nrest-final 1)))
     (if (neq ?mhl nil) then (bind ?nrest-final (+ ?nrest-final 1)))
-
 
     (assert (contadorR ok))
     (assert (nrestricciones ?nrest ?nrest-final))
@@ -424,7 +420,7 @@
     (printout t crlf)
 )
 
-(defrule inferencia-competencias
+(defrule inferencia-competencias "Infiere conocimiento sobre las competencias"
     ?hecho <- (inf-comp $?compe p)
     ?pref <- (respref (es_restriccion FALSE) (competencias_preferidas $?cp))
 
@@ -443,7 +439,7 @@
     (retract ?hecho)
 )
 
-(defrule inferencia-especialidad
+(defrule inferencia-especialidad "Infiere conocimiento sobre la especialidad actual (si la hay)"
     ?hecho <- (inf-esp $?nasigEs p $?espeCur)
     (dni ?dni)
     ?alumn <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped) (especialidad ?esp))
@@ -628,7 +624,7 @@
 )
 
 
-(deffunction curso-a-int
+(deffunction curso-a-int "Convierte el formato symbol del curso en la ontología a un entero"
     (?cur)
 
     (switch ?cur
@@ -639,7 +635,7 @@
     )
 )
 
-(defrule inferencia-curso
+(defrule inferencia-curso "Infiere conocimiento sobre el curso actual"
     ?hecho <- (inf-curso)
     (dni ?dni)
     ?alumn <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped))

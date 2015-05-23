@@ -11,7 +11,7 @@
 )
 
 
-(deftemplate asig-rec "Asignatura recomendada con sus motivos (a partir de todas las reglas)"
+(deftemplate asig-rec "Asignatura candidata a ser recomendada con sus motivos (a partir de todas las reglas)"
     (slot asign)
     (multislot motivosR (default (create$)))
     (multislot motivosP (default (create$)))
@@ -20,7 +20,7 @@
     (slot prioridad)
 )
 
-(deftemplate nueva-rec "Nueva asignatura recomendada por una regla"
+(deftemplate nueva-rec "Nueva asignatura candidata a ser recomendada (por una regla)"
     (slot asign)
     (slot motivo)
     (slot es-pref)
@@ -35,7 +35,6 @@
     )
     (return TRUE)
 )
-
 
 
 
@@ -65,45 +64,19 @@
                 (bind ?hI (nth$ ?j ?horasI))
                 (if (member ?hI (send ?asig get-horarios)) then
                     (bind ?motivo (str-cat "horario preferido-" (send ?hI get-horario)))
-                    (assert (nueva-rec (asign ?asig) (motivo ?motivo) (es-pref ?es_pref) (prioridad 1))) ;poner un motivo más user-friendly
+                    (assert (nueva-rec (asign ?asig) (motivo ?motivo) (es-pref ?es_pref) (prioridad 1)))
                 )
             )
         )
     )
 )
 
-(defrule escoge-horario-preferido
+(defrule escoge-horario-preferido "Escoge asignaturas según su horario de impartición"
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (horario-preferidoR $?tdR) (horario-preferidoP $?tdP))
     =>
     (horario-preferido FALSE ?tdR)
     (horario-preferido TRUE ?tdP)
-)
-
-(deffunction tiempo-dedicacion
-    (?td ?es_pref)
-    
-    (if (neq ?td nil) then
-        (if (eq ?td "alto")
-            then (bind ?max 100)
-            else (if (eq ?td "medio") then (bind ?max 60)
-            else (bind ?max 33)
-        ))
-
-        (bind ?ins-asigs (find-all-instances ((?ins Asignatura)) (<= (+ (send ?ins get-horas_teoria) (send ?ins get-horas_lab) (send ?ins get-horas_prob)) ?max)))
-        (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-            (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo tiempo-dedicacion) (es-pref ?es_pref))) ;poner un motivo más user-friendly
-        )
-    )
-)
-
-(defrule escoge-tiempo-dedicacion
-    (ent-asigs)
-    ?prob-abs <- (problema-abstracto (tiempo-dedicacionR ?tdR) (tiempo-dedicacionP ?tdP))
-    =>
-    
-    ;(tiempo-dedicacion ?tdR FALSE)
-    ;(tiempo-dedicacion ?tdP TRUE)
 )
 
 (deffunction completar-esp
@@ -115,12 +88,12 @@
 
         (loop-for-count (?i 1 (length$ ?asigs)) do
             (bind ?motivo (str-cat "completar especialidad-" (send ?esp get-nombre_esp)))
-            (assert (nueva-rec (asign (nth$ ?i ?asigs)) (motivo ?motivo) (es-pref ?es_pref) (prioridad 1))) ;poner un motivo más user-friendly
+            (assert (nueva-rec (asign (nth$ ?i ?asigs)) (motivo ?motivo) (es-pref ?es_pref) (prioridad 1))) 
         )
     )
 )
 
-(defrule escoge-interes-compl-esp
+(defrule escoge-interes-compl-esp "Escoge asignaturas según se desee completar una especialidad"
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (especialidadR ?espR) (especialidadP ?espP))
     =>
@@ -141,14 +114,14 @@
                 (bind ?tI (nth$ ?j ?it))
                 (if (member ?tI (send ?asig get-temas)) then
                     (bind ?motivo (str-cat "intereses tematicos-" (send ?tI get-nombre_tema)))
-                    (assert (nueva-rec (asign ?asig) (motivo ?motivo) (es-pref ?es_pref) (prioridad 1))) ;poner un motivo más user-friendly
+                    (assert (nueva-rec (asign ?asig) (motivo ?motivo) (es-pref ?es_pref) (prioridad 1))) 
                 )
             )
         )
     )
 )
 
-(defrule escoge-intereses-tematicos
+(defrule escoge-intereses-tematicos "Escoge asignaturas según los intereses de temas especializados"
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (intereses-tematicosR $?itR) (intereses-tematicosP $?itP))
     =>
@@ -171,14 +144,14 @@
                     (bind ?nombre (send ?cI get-nombre_comp))
                     (bind ?nivel (send ?cI get-nivel))
                     (bind ?motivo (str-cat (str-cat "intereses competencias-" ?nombre) (str-cat "-" ?nivel)))
-                    (assert (nueva-rec (asign ?asig) (motivo ?motivo) (es-pref ?es_pref) (prioridad 1))) ;poner un motivo más user-friendly
+                    (assert (nueva-rec (asign ?asig) (motivo ?motivo) (es-pref ?es_pref) (prioridad 1)))
                 )
             )
         )
     )
 )
 
-(defrule escoge-intereses-competencias
+(defrule escoge-intereses-competencias "Escoge asignaturas según los intereses de competencias"
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (competenciasR $?comRes) (competenciasP $?comPref))
 
@@ -196,19 +169,19 @@
         (bind $?asigs-faciles (find-all-instances ((?ins Asignatura)) (not(member ?ins ?asigs-dificiles))))
 
         (loop-for-count (?i 1 (length$ ?asigs-faciles)) do
-            (assert (nueva-rec (asign (nth$ ?i ?asigs-faciles)) (motivo "dificultad-Facil") (es-pref ?es_pref) (prioridad 1))) ;poner un motivo más user-friendly
+            (assert (nueva-rec (asign (nth$ ?i ?asigs-faciles)) (motivo "dificultad-Facil") (es-pref ?es_pref) (prioridad 1)))
         )
         
         (if (eq ?dif dificil)
             then
             (loop-for-count (?i 1 (length$ ?asigs-dificiles)) do
-                (assert (nueva-rec (asign (nth$ ?i ?asigs-dificiles)) (motivo "dificultad-Dificil") (es-pref ?es_pref) (prioridad 1))) ;poner un motivo más user-friendly
+                (assert (nueva-rec (asign (nth$ ?i ?asigs-dificiles)) (motivo "dificultad-Dificil") (es-pref ?es_pref) (prioridad 1)))
             )
         )
     )
 )
 
-(defrule escoge-dificultad
+(defrule escoge-dificultad "Escoge asignaturas según la dificultad inferida"
     (ent-asigs)
     ?prob-abs <- (problema-abstracto (dificultadR ?difRes) (dificultadP ?difPref))
     
@@ -231,7 +204,7 @@
     (return FALSE)
 )
 
-(defrule escoge-curso
+(defrule escoge-curso "Escoge asignaturas del curso actual y del siguiente, potencialmente"
     (ent-asigs)
     (dni ?dni)
     ?al <- (object (is-a Alumno) (id ?dni))
@@ -276,7 +249,7 @@
     (bind ?ins-asigs (find-all-instances ((?ins Especializada)) (member ?e ?ins:especialidad_asig)))
 
     (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo sigue-esp-principal) (es-pref TRUE) (prioridad 10))) ;poner un motivo más user-friendly
+        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo sigue-esp-principal) (es-pref TRUE) (prioridad 10))) 
     )
 )
 
@@ -295,7 +268,7 @@
             (bind ?asig (send ?conv get-asignatura_conv))
             (if (not (ha-aprobado ?al ?asig))
                 then
-                (assert (nueva-rec (asign ?asig) (motivo asignatura-suspensa) (es-pref TRUE) (prioridad 1))) ;poner un motivo más user-friendly
+                (assert (nueva-rec (asign ?asig) (motivo asignatura-suspensa) (es-pref TRUE) (prioridad 1))) 
             )
         )
     )
