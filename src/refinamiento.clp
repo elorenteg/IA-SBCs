@@ -272,7 +272,8 @@
         (bind ?sum-horas 0)
         (loop-for-count (?j 1 (length$ ?grupo)) do
             ;divido las horas totales entre 18 semanas lectivas, porque la res/pref está en horas semanales
-            (bind ?sum-horas (+ ?sum-horas (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_teoria) 18)))
+            (bind ?as (send (nth$ ?j ?grupo) get-asig))
+            (bind ?sum-horas (+ ?sum-horas (/ (- (* 25 (send ?as get-num_creditos)) (+ (send ?as get-horas_teoria) (send ?as get-horas_lab) (send ?as get-horas_prob))) 18)))
         )
 
         (bind ?sum-horas-lab 0)
@@ -295,6 +296,7 @@
             (if (or (and (eq ?ma nil) (= (length$ ?grupo) ?maP)) 
                     (and (neq ?ma nil) (= (length$ ?grupo) ?ma)))
                 then
+                (assert (horas-aut ?sum-horas))
                 ;;; Comprobación de preferencias
 
                 (if (and (neq nil ?maP) (= ?maP (length$ ?grupo))) then
@@ -377,10 +379,12 @@
     (import respref deftemplate preferencias)
     (import respref deffunction find-index)
     (import respref deffunction muestra-nombres-competencias)
+    (import respref deffunction div-decimal)
     (import asociacion deffunction ha-aprobado)
     (import refinamiento deftemplate solucion)
     (import refinamiento deftemplate no-solution)
     (import refinamiento deftemplate candidatas)
+    (import refinamiento deftemplate horas-aut)
     (export ?ALL)
 )
 
@@ -568,25 +572,16 @@
     )
 )
 
-(deffunction div-decimal "Devuelve la división de ?num entre ?den con ?ndec decimales"
-    (?num ?den ?ndec)
-
-    (bind ?factor (** 10 ?ndec))
-    (bind ?int (div ?num ?den)) ;supongo que ?den != 0
-    (bind ?fract (- (/ ?num ?den) ?int))
-
-    (return (+ ?int (/ (integer (* ?fract ?factor)) ?factor)))
-)
-
 (defrule muestra-solucion "Muestra la recomendación obtenida y más información relevante"
     (solucion $?list)
     (candidatas $?cand)
     (dni ?dni)
     ?al <- (object (is-a Alumno) (id ?dni))
+    (horas-aut ?sum-horas)
 
     =>
 
-    (printout t "La recomendacion del sistema conllevaria un tiempo de dedicacion:" crlf)
+    (printout t "La recomendacion del sistema conllevaria un tiempo de dedicacion semanal:" crlf)
     
     (bind ?horasT 0)
     (bind ?horasLP 0)
@@ -599,7 +594,7 @@
         (bind ?horasT (+ ?horasT ?hT))
         (bind ?horasLP (+ ?horasLP ?hL ?hP))
     )
-    (printout t " * Horas de dedicacion: " (div-decimal ?horasT 18 2) " h" crlf)
+    (printout t " * Horas de dedicacion autonoma: " (div-decimal ?sum-horas 1 2) " h" crlf)
     (printout t " * Horas de laboratorio: " (div-decimal ?horasLP 18 2) " h" crlf)
     (printout t crlf)
     

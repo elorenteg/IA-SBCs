@@ -262,6 +262,7 @@
     (bind ?nhoras-teo 0) ; numero de horas de teoria cursadas
     (bind ?nhoras-lab 0) ; numero de horas de lab cursadas
     (bind ?nhoras-pro 0) ; numero de horas de problemas cursadas
+    (bind ?nhoras-aut 0) ; numero de horas de aprendizaje autónomo/dirigido
     (bind $?cuatris (create$)) ; cuatris en los que ha cursado alguna asignatura
     (bind $?nasigCu (create$)) ; numero de asignaturas por cada cuatri cursado (mismas posiciones que $?cuatris)
     (bind $?temas (create$)) ; temas de las asignaturas cursadas
@@ -299,7 +300,7 @@
         (bind ?nota (send ?not get-nota))
 
         (bind ?nasig (+ ?nasig 1))
-        (bind ?ncred (+ ?nasig ?cred))
+        (bind ?ncred (+ ?ncred ?cred))
         (bind ?nhoras-teo (+ ?nhoras-teo ?horT))
         (bind ?nhoras-lab (+ ?nhoras-lab ?horL))
         (bind ?nhoras-pro (+ ?nhoras-pro ?horP))
@@ -384,15 +385,13 @@
             (if (< ?nota ?peor-nota-dificil) then (bind ?peor-nota-dificil ?nota))
         )
     )
-    (bind ?nhoras-teo (/ ?nhoras-teo 18))
-    (bind ?nhoras-lab (/ ?nhoras-lab 18))
-    (bind ?nhoras-pro (/ ?nhoras-pro 18))
+    (bind ?nhoras-aut (- (* ?ncred 25) (+ ?nhoras-teo ?nhoras-lab ?nhoras-pro)))
 
     (assert (inf-comp $?compe p))
     (assert (inf-tema $?temas p $?afins))
     (assert (inf-esp $?nasigEs p $?espeCur))
     (assert (inf-horario $?horarioC p $?cuatris))
-    (assert (inf-horas ?nhoras-teo ?nhoras-lab ?nhoras-pro $?cuatris))
+    (assert (inf-horas ?nhoras-aut ?nhoras-teo ?nhoras-lab ?nhoras-pro $?cuatris))
     (assert (inf-nasig ?nasig p $?cuatris))
     (assert (inf-dif ?nfacil ?ndificil ?sfacil ?sdificil ?peor-nota-dificil))
     (assert (inf-curso))
@@ -530,8 +529,18 @@
     (retract ?hecho)
 )
 
+(deffunction div-decimal "Devuelve la división de ?num entre ?den con ?ndec decimales"
+    (?num ?den ?ndec)
+
+    (bind ?factor (** 10 ?ndec))
+    (bind ?int (div ?num ?den)) ;supongo que ?den != 0
+    (bind ?fract (- (/ ?num ?den) ?int))
+
+    (return (+ ?int (/ (integer (* ?fract ?factor)) ?factor)))
+)
+
 (defrule inferencia-horas "Infiere restricciones/preferencias segun el expediente"
-    ?hecho <- (inf-horas ?nhoras-teo ?nhoras-lab ?nhoras-pro $?cuatris)
+    ?hecho <- (inf-horas ?nhoras-aut ?nhoras-teo ?nhoras-lab ?nhoras-pro $?cuatris)
     (dni ?dni)
     ?alumn <- (object (is-a Alumno) (id ?dni) (expediente_alumno ?exped))
     ?pref <- (respref (es_restriccion FALSE) (max_horas_trabajo ?mht) (max_horas_lab ?mhl))
@@ -539,17 +548,17 @@
     =>
     (if (eq ?mht nil)
         then
-        ; media de horas de teoria/cuatri
-        (bind ?mediaHT (div ?nhoras-teo (length$ ?cuatris)))
-        (bind ?pref (modify ?pref (max_horas_trabajo ?mediaHT)))
-        (printout t " * Max horas dedicacion semanal: " ?mediaHT crlf)
+        ; media de horas de aprendizaje autónomo y dirigido/cuatri
+        (bind ?mediaHAA (/ ?nhoras-aut (* 18 (length$ ?cuatris))))
+        (bind ?pref (modify ?pref (max_horas_trabajo ?mediaHAA)))
+        (printout t " * Max horas dedicacion semanal: " (div-decimal ?mediaHAA 1 2) " h" crlf)
     )
     (if (eq ?mhl nil)
         then
         ; media de horas de lab y prob/cuatri
-        (bind ?mediaHL (div (+ ?nhoras-lab ?nhoras-pro) (length$ ?cuatris)))
+        (bind ?mediaHL (+ (/ ?nhoras-lab (* 18 (length$ ?cuatris))) (/ ?nhoras-pro (* 18 (length$ ?cuatris)))))
         (bind ?pref (modify ?pref (max_horas_lab ?mediaHL)))
-        (printout t " * Max horas lab/prob semanal: " ?mediaHL crlf)
+        (printout t " * Max horas lab/prob semanal: " (div-decimal ?mediaHL 1 2) " h" crlf)
     )
 
     (assert(inf-horas ok))
