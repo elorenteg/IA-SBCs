@@ -1,12 +1,35 @@
 
 \subsection{Tercer juego de pruebas} \label{sec:prueba-3}
 
-%%% TODO : Explicación del juego de pruebas y análisis de lo que se espera.
+El tercer juego de pruebas es esencialmente la continuación natural del 
+anterior. En este caso, se considera una persona que ha seguido bastante 
+el plan de estudios propuesto por la FIB, aprobando todas las asignaturas en 
+su primera convocatoria, gracias a su dedicación exclusiva a la universidad. 
+Esta persona ha completado todas las asignaturas obligatorias excepto una 
+y ya ha cursado tres asignaturas de la especialidad de computación. Como en 
+los casos anteriores, esta persona no ofrece restricciones ni preferencias de 
+forma explícita y deja esta tarea para el sistema de recomendación.
+
+Teniendo en cuenta las asignaturas cursadas previamente, se espera que el 
+sistema ofrezca una recomendación compuesta mayoritariamente por asignaturas 
+de la especialidad de computación (por la que el alumno en cuestión ya ha 
+demostrado interés). También sería lógico recomendar la asignatura obligatoria 
+que le queda o, incluso, alguna optativa que guarde cierta relación con las 
+asignaturas de la especialidad cursadas (si el sistema es capaz de inferir 
+algún tema de particular interés a partir de estas).
+
+Con esta entrada, pues, se pretende comprobar el tratamiento que el sistema 
+construido es capaz de dar a los distintos tipos de asignatura (en particular, 
+a las asignaturas de una especialidad concreta y a las optativas). Además, 
+el hecho de incluir asignaturas de especialidad en este caso añade otro factor 
+a tener en cuenta por el sistema: los temas de interés del alumno.
 
 \lstinputlisting[caption={Salida original del tercer juego de pruebas.},%
         label={lst:prueba-3}]%
     {resultado-3.txt}
 
+El \autoref{lst:prueba-3} muestra la salida del programa obtenida con este 
+juego de pruebas.
 %%% TODO : Análisis del resultado obtenido y comparativa con lo esperado.
 
 
