@@ -1,4 +1,4 @@
-; Wed May 20 00:34:50 CEST 2015
+; Sun May 24 17:44:20 CEST 2015
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -2967,6 +2967,7 @@
 
 ([ontologia_Class70000] of  Alumno
 
+	(especialidad [ontologia_Class68])
 	(expediente_alumno [ontologia_Class70001])
 	(id 555))
 
@@ -3147,6 +3148,7 @@
 
 ([ontologia_Class70026] of  Alumno
 
+	(especialidad [ontologia_Class68])
 	(expediente_alumno [ontologia_Class70027])
 	(id 666))
 
