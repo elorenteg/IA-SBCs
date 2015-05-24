@@ -1,12 +1,51 @@
 
 \subsection{Cuarto juego de pruebas} \label{sec:prueba-4}
 
-%%% TODO : Explicación del juego de pruebas y análisis de lo que se espera.
+En este cuarto juego de pruebas, se plantea el caso de un alumno que se 
+encuentra cursando la especialidad de ingeniería del software. Sin embargo, 
+esta persona está involucrada en actividades ajenas a la universidad que solo 
+le permiten acudir a clase en horario de mañana (a pesar de que las 
+asignaturas de su especialidad solo están disponibles por la tarde durante el 
+cuatrimestre). Aun así, este sujeto dispone de una gran capacidad de trabajo 
+y, por lo tanto, puede asumir la carga de trabajo correspondiente a una 
+dedicación completa a la universidad.
+
+Sin ser consciente de los horarios, la persona en cuestión utiliza el sistema 
+para obtener una recomendación de asignaturas expresando explícitamente su 
+interés en matricularse de asignaturas de la especialidad de ingeniería del 
+software y sobre temas con una cierta relación con esta especialidad que le 
+han interesado. Asimismo, muestra preferencia por algunas competencias 
+transversales.
+
+En estas circunstancias, se espera que el sistema sea capaz de recomendar 
+asignaturas optativas (o bien asignaturas de otras especialidades que puedan 
+satisfacer de algún modo las preferencias del alumno) relacionadas con los 
+temas que interesan y que desarrollen las competencias transversales deseadas 
+por esta persona. El sistema de inferencia debería determinar que se puede 
+recomendar un gran número de asignaturas sin preocuparse demasiado por la 
+carga de trabajo.
+
+Con este juego de pruebas, pues, se puede comprobar el correcto 
+comportamiento del sistema cuando se enfrenta a una mezcla de preferencias y 
+restricciones explícitas además del proceso de inferencia.
 
 \lstinputlisting[caption={Salida original del cuarto juego de pruebas.},%
-        label={lst:prueba-4}]%
-    {resultado-4.txt}
+        label={lst:prueba-4a}]%
+    {resultado-4a.txt}
 
+El \autoref{lst:prueba-4a} muestra los resultados obtenidos. 
 %%% TODO : Análisis del resultado obtenido y comparativa con lo esperado.
+
+\lstinputlisting[caption={Salida original de la versión alternativa del %
+        cuarto juego de pruebas.}, label={lst:prueba-4b}]%
+    {resultado-4b.txt}
+
+Se ha considerado también una versión alternativa de este juego de pruebas 
+para poner a prueba la robustez del sistema. En esta otra versión, el alumno 
+impone como restricciones que tiene que completar la especialidad de 
+ingeniería del software y que las asignaturas recomendadas deben estar 
+disponibles en horario de tarde. Por lo tanto, no existe ninguna recomendación 
+posible que se adecúe a los criterios requeridos y, por lo tanto, el sistema 
+informa de esta situación, tal y como muestra el \autoref{lst:prueba-4b}.
 
 
