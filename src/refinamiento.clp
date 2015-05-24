@@ -22,6 +22,12 @@
     (slot grado)
 )
 
+(deftemplate prefs-grupo "Contiene información sobre si se cumplen las preferencias de grupo"
+    (slot cumple-max_asigns)
+    (slot cumple-max_horas_trabajo)
+    (slot cumple-max_horas_lab)
+)
+
 (deffunction ha-cursado "Retorna si el alumno ?al ha cursado la asignatura ?a"
     (?al ?a)
 
@@ -241,6 +247,7 @@
     =>
     (assert (no-solution))
     (assert (backtrack 1 (create$)))
+    (assert (prefs-grupo (cumple-max_asigns FALSE) (cumple-max_horas_trabajo FALSE) (cumple-max_horas_lab FALSE)))
     (retract ?hecho)
 )
 
@@ -253,6 +260,7 @@
     ?al <- (object (is-a Alumno) (id ?dni))
     ?rest <- (respref (es_restriccion TRUE) (max_asigns ?ma) (max_horas_trabajo ?mht) (max_horas_lab ?mhl))
     ?pref <- (respref (es_restriccion FALSE) (max_asigns ?maP) (max_horas_trabajo ?mhtP) (max_horas_lab ?mhlP))
+    ?pg <- (prefs-grupo)
 
     =>
 
@@ -297,33 +305,18 @@
                     (and (neq ?ma nil) (= (length$ ?grupo) ?ma)))
                 then
                 (assert (horas-aut ?sum-horas))
+                
                 ;;; Comprobación de preferencias
-
                 (if (and (neq nil ?maP) (= ?maP (length$ ?grupo))) then
-                    ;cumple preferencia de max_asigs -> añadir motivo?
-                    
-                    ;(loop-for-count (?j 1 (length$ ?grupo)) do
-                    ;    (bind ?m (send (nth$ ?j ?grupo) get-motivosP))
-                    ;    (send (nth$ ?j ?grupo) put-motivosP (insert$ ?m 1 (str-cat "num. asignaturas: " ?maP)))
-                    ;)
+                    (bind ?pg (modify ?pg (cumple-max_asigns TRUE)))
                 )
 
-                (bind ?sum-horasP 0)
-                (loop-for-count (?j 1 (length$ ?grupo)) do
-                    (bind ?sum-horasP (+ ?sum-horasP (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_teoria) 18)))
+                (if (<= ?sum-horas ?mhtP) then
+                    (bind ?pg (modify ?pg (cumple-max_horas_trabajo TRUE)))
                 )
 
-                (bind ?sum-horas-labP 0)
-                (loop-for-count (?j 1 (length$ ?grupo)) do
-                    (bind ?sum-horas-labP (+ ?sum-horas-labP (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_lab) 18) (/ (send (send (nth$ ?j ?grupo) get-asig) get-horas_prob) 18)))
-                )
-
-                (if (<= ?sum-horasP ?mhtP) then
-                    ;cumple preferencia de max_horas_trabajo
-                )
-
-                (if (<= ?sum-horas-labP ?mhlP) then
-                    ;cumple preferencia de max_horas_lab
+                (if (<= ?sum-horas-lab ?mhlP) then
+                    (bind ?pg (modify ?pg (cumple-max_horas_lab TRUE)))
                 )
 
                 (retract ?hecho1)
@@ -385,6 +378,7 @@
     (import refinamiento deftemplate no-solution)
     (import refinamiento deftemplate candidatas)
     (import refinamiento deftemplate horas-aut)
+    (import refinamiento deftemplate prefs-grupo)
     (export ?ALL)
 )
 
@@ -578,10 +572,14 @@
     (dni ?dni)
     ?al <- (object (is-a Alumno) (id ?dni))
     (horas-aut ?sum-horas)
-
+    (prefs-grupo (cumple-max_asigns ?cma) (cumple-max_horas_trabajo ?cmht) (cumple-max_horas_lab ?cmhl))
     =>
 
-    (printout t "La recomendacion del sistema conllevaria un tiempo de dedicacion semanal:" crlf)
+    (printout t "La recomendacion del sistema consta de " (length$ ?list) " asignatura")
+    (if (> (length$ ?list) 1) then (printout t "s"))
+    (printout t " (")
+    (if (eq ?cma FALSE) then (printout t "no "))
+    (printout t "cumple preferencia), " crlf "y conllevaria los siguientes tiempos de dedicacion semanal:" crlf)
     
     (bind ?horasT 0)
     (bind ?horasLP 0)
@@ -594,9 +592,13 @@
         (bind ?horasT (+ ?horasT ?hT))
         (bind ?horasLP (+ ?horasLP ?hL ?hP))
     )
-    (printout t " * Horas de dedicacion autonoma: " (div-decimal ?sum-horas 1 2) " h" crlf)
-    (printout t " * Horas de laboratorio: " (div-decimal ?horasLP 18 2) " h" crlf)
-    (printout t crlf)
+    (printout t " * Horas de dedicacion autonoma: " (div-decimal ?sum-horas 1 2) " h  (")
+    (if (eq ?cmht FALSE) then (printout t "no "))
+    (printout t "cumple la preferencia)" crlf)
+    (printout t " * Horas de laboratorio/problemas: " (div-decimal ?horasLP 18 2) " h  (")
+    (if (eq ?cmhl FALSE) then (printout t "no "))
+    (printout t "cumple la preferencia)" crlf)
+    (printout t crlf crlf)
     
     (loop-for-count (?i 1 (length$ ?list)) do
         (bind ?asig (nth$ ?i ?list))
@@ -619,7 +621,7 @@
     
     (if (> (length$ ?resto) 0)
         then
-        (printout t "El sistema tambien encontro las siguientes asignaturas para recomendar" crlf)
+        (printout t "El sistema tambien encontro las siguientes asignaturas para recomendar:" crlf)
         (bind ?primer TRUE)
         (loop-for-count (?i 1 (length$ ?resto)) do
             (bind ?asig (nth$ ?i ?resto))
