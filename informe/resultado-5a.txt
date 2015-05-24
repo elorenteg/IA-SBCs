@@ -1,0 +1,47 @@
+=====================================================================
+=                            Inferencia                             =
+=====================================================================
+
+Los siguientes dados se han inferido a partir de su Expediente:
+ * Curso: 3
+ * Dificultad: Dificil
+ * Su especialidad matriculada: Computacion
+ * Max horas dedicacion semanal: 18.75 h
+ * Max horas lab/prob semanal: 6.43 h
+ * Temas: Seguridad, Aplicaciones web, Geometria computacional, Targetas graficas, Tratamiento de imagenes, Programacion, Matematicas, Fisica, Arquitectura de computadores, Estadistica, Bases de datos, Ingenieria de software, Redes, Protocolos, Graficos, Aplicaciones mobiles, Disenyo de algoritmos
+ * Tipo de horario: Tarde
+
+=====================================================================
+=                           Recomendacion                           =
+=====================================================================
+
+Restricciones aplicadas a la solucion:
+ * Max. horas de dedicacion semanales: 20
+ * Max. horas de laboratorio/problemas semanales: 6
+ * Tipo de horario: Tarde
+ * Temas de interes: Inteligencia artifical, Logica
+
+Preferencias aplicadas a la solucion:
+ * Num. asignaturas a matricular: 2
+ * Competencias transversales: Razonamiento, Trabajo en equipo
+
+La recomendacion del sistema consta de 2 asignaturas (cumple preferencia), 
+y conllevaria los siguientes tiempos de dedicacion semanal:
+ * Horas de dedicacion autonoma: 9.88 h  (cumple la preferencia)
+ * Horas de laboratorio/problemas: 3.33 h  (cumple la preferencia)
+
+
+IA (altamente-recomendable): 
+ * Sigue plan de estudios: curso 3
+ * Dificultad: Facil
+ * Tipo de Horario: Tarde
+ * Especialidad: Computacion
+ * Temas: Programacion
+ * Competencias: Trabajo en equipo nivel 3
+
+LI (recomendable): 
+ * Sigue plan de estudios: curso 3
+ * Tipo de Horario: Tarde
+ * Especialidad: Computacion
+ * Temas: Programacion
+ 

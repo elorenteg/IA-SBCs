@@ -1,0 +1,48 @@
+=====================================================================
+=                            Inferencia                             =
+=====================================================================
+
+Los siguientes dados se han inferido a partir de su Expediente:
+ * Curso: 3
+ * Dificultad: Dificil
+ * Su especialidad matriculada: Computacion
+ * Max horas dedicacion semanal: 25.45 h
+ * Max horas lab/prob semanal: 8.47 h
+
+=====================================================================
+=                           Recomendacion                           =
+=====================================================================
+
+Restricciones aplicadas a la solucion:
+ * Max. horas de dedicacion semanales: 30
+ * Max. horas de laboratorio/problemas semanales: 10
+ * Competencias transversales: Tercera lengua
+
+Preferencias aplicadas a la solucion:
+ * Num. asignaturas a matricular: 4
+ * Tipo de horario: Manyana
+ * Temas de interes: Disenyo de algoritmos, Videojuegos, Calculo numerico, Tratamiento de datos
+ * Competencias transversales: Trabajo en equipo, Uso solvente de los recursos de informacion
+
+La recomendacion del sistema consta de 4 asignaturas (cumple preferencia), 
+y conllevaria los siguientes tiempos de dedicacion semanal:
+ * Horas de dedicacion autonoma: 19.88 h  (cumple la preferencia)
+ * Horas de laboratorio/problemas: 6.36 h  (cumple la preferencia)
+
+
+APSS (recomendable): 
+ * Sigue plan de estudios: curso 4
+ * Dificultad: Facil
+
+WSE (recomendable): 
+ * Sigue plan de estudios: curso 4
+ * Dificultad: Facil
+
+ASDP (recomendable): 
+ * Sigue plan de estudios: curso 4
+ * Dificultad: Facil
+
+GEOC (recomendable): 
+ * Sigue plan de estudios: curso 4
+ * Temas: Disenyo de algoritmos
+ 

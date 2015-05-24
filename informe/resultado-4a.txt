@@ -1,0 +1,53 @@
+=====================================================================
+=                            Inferencia                             =
+=====================================================================
+
+Los siguientes dados se han inferido a partir de su Expediente:
+ * Curso: 3
+ * Dificultad: Dificil
+ * Su especialidad matriculada: Ingenieria del software
+ * Num max asignaturas: 4
+ * Max horas dedicacion semanal: 26.67 h
+ * Max horas lab/prob semanal: 8.43 h
+ * Tipo de horario: Tarde
+
+=====================================================================
+=                           Recomendacion                           =
+=====================================================================
+
+Restricciones aplicadas a la solucion:
+ * Tipo de horario: Manyana
+
+Preferencias aplicadas a la solucion:
+ * Temas de interes: Aplicaciones web, Aplicaciones mobiles, Software libre
+ * Especialidad: Ingenieria del software
+ * Competencias transversales: Comunicacion eficaz oral y escrita, Emprendeduria e innovacion
+
+La recomendacion del sistema consta de 4 asignaturas (cumple preferencia), 
+y conllevaria los siguientes tiempos de dedicacion semanal:
+ * Horas de dedicacion autonoma: 20.11 h  (cumple la preferencia)
+ * Horas de laboratorio/problemas: 5.72 h  (cumple la preferencia)
+
+
+AD (recomendable): 
+ * Sigue plan de estudios: curso 3
+ * Dificultad: Facil
+ * Temas: Aplicaciones web, Aplicaciones mobiles
+
+IM (recomendable): 
+ * Sigue plan de estudios: curso 3
+ * Dificultad: Facil
+ * Temas: Aplicaciones mobiles
+
+CPD (recomendable): 
+ * Sigue plan de estudios: curso 3
+ * Dificultad: Facil
+ * Competencias: Comunicacion eficaz oral y escrita nivel 3
+
+PAR (recomendable): 
+ * Sigue plan de estudios: curso 3
+ * Dificultad: Facil
+ * Tipo de Horario: Tarde
+
+El sistema tambien encontro las siguientes asignaturas para recomendar:
+TXC, SOA, SI, PI, ASO, PDS, PCA, XC2

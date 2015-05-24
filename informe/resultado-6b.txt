@@ -6,48 +6,52 @@ Los siguientes dados se han inferido a partir de su Expediente:
  * Curso: 3
  * Dificultad: Dificil
  * Su especialidad matriculada: Computacion
- * Num max asignaturas: 3
- * Max horas dedicacion semanal: 18.75 h
- * Max horas lab/prob semanal: 6.43 h
- * Tipo de horario: Tarde
+ * Max horas dedicacion semanal: 25.45 h
+ * Max horas lab/prob semanal: 8.47 h
 
 =====================================================================
 =                           Recomendacion                           =
 =====================================================================
 
-Restricciones aplicadas a la solucion:
- * Tipo de horario: Tarde
-
 Preferencias aplicadas a la solucion:
- * Temas de interes: Inteligencia artifical, Logica
- * Competencias transversales: Razonamiento, Trabajo en equipo
+ * Num. asignaturas a matricular: 5
+ * Tipo de horario: Manyana
+ * Temas de interes: Disenyo de algoritmos, Videojuegos, Calculo numerico, Tratamiento de datos
+ * Competencias transversales: Tercera lengua, Trabajo en equipo, Uso solvente de los recursos de informacion
 
-La recomendacion del sistema consta de 3 asignaturas (cumple preferencia), 
+La recomendacion del sistema consta de 5 asignaturas (cumple preferencia), 
 y conllevaria los siguientes tiempos de dedicacion semanal:
- * Horas de dedicacion autonoma: 15.0 h  (cumple la preferencia)
- * Horas de laboratorio/problemas: 5.0 h  (cumple la preferencia)
+ * Horas de dedicacion autonoma: 25.72 h  (no cumple la preferencia)
+ * Horas de laboratorio/problemas: 8.0 h  (cumple la preferencia)
 
 
-IA (altamente-recomendable): 
+CAIM (recomendable): 
  * Sigue plan de estudios: curso 3
  * Dificultad: Facil
- * Tipo de Horario: Tarde
  * Especialidad: Computacion
- * Temas: Inteligencia artifical
- * Competencias: Trabajo en equipo nivel 3
+ * Temas: Tratamiento de datos
 
-CL (altamente-recomendable): 
+APA (recomendable): 
  * Sigue plan de estudios: curso 3
  * Dificultad: Facil
- * Tipo de Horario: Tarde
  * Especialidad: Computacion
- * Competencias: Trabajo en equipo nivel 3
+ * Temas: Tratamiento de datos
 
-CN (recomendable): 
+AA (recomendable): 
  * Sigue plan de estudios: curso 3
  * Dificultad: Facil
- * Tipo de Horario: Tarde
+ * Especialidad: Computacion
+ * Temas: Disenyo de algoritmos
+
+CSI (recomendable): 
+ * Sigue plan de estudios: curso 3
+ * Dificultad: Facil
+ * Temas: Tratamiento de datos
+
+SID (recomendable): 
+ * Sigue plan de estudios: curso 3
+ * Dificultad: Facil
  * Especialidad: Computacion
 
 El sistema tambien encontro las siguientes asignaturas para recomendar:
-CAIM, APA, AA, LI, PAR, SOAD, SIM, ABD, CAP
+ADEI, IM, CPD, AD, TXC, SOA, SI

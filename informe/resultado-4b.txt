@@ -1,0 +1,26 @@
+=====================================================================
+=                            Inferencia                             =
+=====================================================================
+
+Los siguientes dados se han inferido a partir de su Expediente:
+ * Curso: 3
+ * Dificultad: Dificil
+ * Competencias: Sostenibilidad y compromiso social, Actitud frente al trabajo, Tercera lengua, Uso solvente de los recursos de informacion, Emprendeduria e innovacion, Comunicacion eficaz oral y escrita, Razonamiento, Aprendizaje autonomo, Trabajo en equipo
+ * Su especialidad matriculada: Ingenieria del software
+ * Num max asignaturas: 4
+ * Max horas dedicacion semanal: 26.67 h
+ * Max horas lab/prob semanal: 8.43 h
+ * Tipo de horario: Tarde
+
+=====================================================================
+=                           Recomendacion                           =
+=====================================================================
+
+Restricciones aplicadas a la solucion:
+ * Tipo de horario: Manyana
+ * Especialidad: Ingenieria del software
+
+Preferencias aplicadas a la solucion:
+ * Temas de interes: Aplicaciones web, Aplicaciones mobiles, Software libre
+
+El sistema no ha encontrado una solucion acorde a sus restricciones/preferencias
