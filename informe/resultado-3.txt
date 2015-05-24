@@ -1,0 +1,56 @@
+=====================================================================
+=                            Inferencia                             =
+=====================================================================
+
+Los siguientes dados se han inferido a partir de su Expediente:
+ * Curso: 3
+ * Dificultad: Dificil
+ * Competencias: Razonamiento, Comunicacion eficaz oral y escrita, Uso solvente de los recursos de informacion, Aprendizaje autonomo, Trabajo en equipo, Emprendeduria e innovacion, Actitud frente al trabajo, Tercera lengua, Sostenibilidad y compromiso social
+ * Su especialidad matriculada: Computacion
+ * Num max asignaturas: 4
+ * Max horas dedicacion semanal: 24.52 h
+ * Max horas lab/prob semanal: 8.18 h
+ * Temas: Seguridad, Aplicaciones web, Inteligencia artifical, Geometria computacional, Targetas graficas, Tratamiento de imagenes, Matematicas, Fisica, Arquitectura de computadores, Programacion, Ingenieria de software, Redes, Protocolos, Disenyo de algoritmos, Estadistica, Lenguajes de programacion, Logica, Graficos, Aplicaciones mobiles, Organizacion de empresas, Bases de datos
+ * Tipo de horario: Tarde
+
+=====================================================================
+=                           Recomendacion                           =
+=====================================================================
+
+La recomendacion del sistema consta de 4 asignaturas (cumple preferencia), 
+y conllevaria los siguientes tiempos de dedicacion semanal:
+ * Horas de dedicacion autonoma: 20.0 h  (cumple la preferencia)
+ * Horas de laboratorio/problemas: 5.83 h  (cumple la preferencia)
+
+
+IA (altamente-recomendable): 
+ * Sigue plan de estudios: curso 3
+ * Dificultad: Facil
+ * Tipo de Horario: Tarde
+ * Especialidad: Computacion
+ * Temas: Programacion, Lenguajes de programacion, Inteligencia artifical
+ * Competencias: Trabajo en equipo nivel 3, Emprendeduria e innovacion nivel 3
+
+CL (altamente-recomendable): 
+ * Sigue plan de estudios: curso 3
+ * Dificultad: Facil
+ * Tipo de Horario: Tarde
+ * Especialidad: Computacion
+ * Temas: Lenguajes de programacion, Programacion
+ * Competencias: Trabajo en equipo nivel 3
+
+G (altamente-recomendable): 
+ * Sigue plan de estudios: curso 3
+ * Tipo de Horario: Tarde
+ * Especialidad: Computacion
+ * Temas: Lenguajes de programacion, Graficos, Programacion
+ * Competencias: Sostenibilidad y compromiso social nivel 3
+
+IM (altamente-recomendable): 
+ * Sigue plan de estudios: curso 3
+ * Dificultad: Facil
+ * Temas: Protocolos, Aplicaciones mobiles, Redes
+ * Competencias: Sostenibilidad y compromiso social nivel 3
+
+El sistema tambien encontro las siguientes asignaturas para recomendar:
+CPD, AD, SOAD, GPS, SIM, CAP, ER, DBD

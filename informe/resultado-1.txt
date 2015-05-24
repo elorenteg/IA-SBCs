@@ -1,2 +1,53 @@
-En este archivo debería haber la salida exacta del programa con el primer juego de pruebas. ¿Funcionó? ¡Sí!
-Así, esta se incluye en el documento PDF generado con LaTeX.
+=====================================================================
+=                            Inferencia                             =
+=====================================================================
+
+Los siguientes dados se han inferido a partir de su Expediente:
+ * Curso: 1
+ * Dificultad: Facil
+ * Competencias: Razonamiento, Aprendizaje autonomo, Comunicacion eficaz oral y escrita, Uso solvente de los recursos de informacion
+ * No se puede inferir una especialidad
+ * Num max asignaturas: 4
+ * Max horas dedicacion semanal: 25.27 h
+ * Max horas lab/prob semanal: 9.0 h
+ * Temas: Matematicas, Programacion, Fisica, Arquitectura de computadores
+ * Tipo de horario: Manyana
+
+=====================================================================
+=                           Recomendacion                           =
+=====================================================================
+
+La recomendacion del sistema consta de 4 asignaturas (cumple preferencia), 
+y conllevaria los siguientes tiempos de dedicacion semanal:
+ * Horas de dedicacion autonoma: 25.55 h  (no cumple la preferencia)
+ * Horas de laboratorio/problemas: 8.11 h  (cumple la preferencia)
+
+
+IC (altamente-recomendable): 
+ * Asignatura suspendida
+ * Sigue plan de estudios: curso 1
+ * Dificultad: Facil
+ * Tipo de Horario: Manyana
+ * Temas: Arquitectura de computadores
+ * Competencias: Uso solvente de los recursos de informacion nivel 1
+
+PRO1 (altamente-recomendable): 
+ * Asignatura suspendida
+ * Sigue plan de estudios: curso 1
+ * Tipo de Horario: Manyana
+ * Temas: Programacion
+ * Competencias: Aprendizaje autonomo nivel 1
+
+M2 (recomendable): 
+ * Sigue plan de estudios: curso 1
+ * Tipo de Horario: Manyana
+ * Temas: Matematicas
+ * Competencias: Aprendizaje autonomo nivel 1
+
+M1 (recomendable): 
+ * Sigue plan de estudios: curso 1
+ * Tipo de Horario: Manyana
+ * Temas: Matematicas
+
+El sistema tambien encontro las siguientes asignaturas para recomendar:
+EC, PRO2, EEE

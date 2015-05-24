@@ -1,0 +1,51 @@
+=====================================================================
+=                            Inferencia                             =
+=====================================================================
+
+Los siguientes dados se han inferido a partir de su Expediente:
+ * Curso: 1
+ * Dificultad: Dificil
+ * Competencias: Razonamiento, Aprendizaje autonomo, Uso solvente de los recursos de informacion, Comunicacion eficaz oral y escrita, Sostenibilidad y compromiso social, Trabajo en equipo
+ * No se puede inferir una especialidad
+ * Num max asignaturas: 4
+ * Max horas dedicacion semanal: 25.41 h
+ * Max horas lab/prob semanal: 8.26 h
+ * Temas: Matematicas, Programacion, Arquitectura de computadores, Fisica
+ * Tipo de horario: Tarde
+
+=====================================================================
+=                           Recomendacion                           =
+=====================================================================
+
+La recomendacion del sistema consta de 4 asignaturas (cumple preferencia), 
+y conllevaria los siguientes tiempos de dedicacion semanal:
+ * Horas de dedicacion autonoma: 21.22 h  (cumple la preferencia)
+ * Horas de laboratorio/problemas: 7.44 h  (cumple la preferencia)
+
+
+SO (altamente-recomendable): 
+ * Sigue plan de estudios: curso 2
+ * Dificultad: Facil
+ * Tipo de Horario: Tarde
+ * Temas: Arquitectura de computadores, Programacion
+
+PE (altamente-recomendable): 
+ * Sigue plan de estudios: curso 2
+ * Dificultad: Facil
+ * Tipo de Horario: Tarde
+ * Temas: Matematicas
+ * Competencias: Razonamiento nivel 2
+
+EDA (recomendable): 
+ * Sigue plan de estudios: curso 2
+ * Tipo de Horario: Tarde
+ * Temas: Programacion
+ * Competencias: Uso solvente de los recursos de informacion nivel 2
+
+BD (recomendable): 
+ * Sigue plan de estudios: curso 2
+ * Dificultad: Facil
+ * Tipo de Horario: Tarde
+
+El sistema tambien encontro las siguientes asignaturas para recomendar:
+EEE, CI, TGA, ROB, SLDS, ASMI, DCS, CDI
