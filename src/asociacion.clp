@@ -85,10 +85,11 @@
     (if (not(eq ?esp nil))
         then
         (bind ?asigs (find-all-instances ((?ins Especializada)) (member ?esp ?ins:especialidad_asig)))
+        (if (eq ?es_pref FALSE) then (bind ?prio 10) else (bind ?prio 1))
 
         (loop-for-count (?i 1 (length$ ?asigs)) do
             (bind ?motivo (str-cat "completar especialidad-" (send ?esp get-nombre_esp)))
-            (assert (nueva-rec (asign (nth$ ?i ?asigs)) (motivo ?motivo) (es-pref ?es_pref) (prioridad 1))) 
+            (assert (nueva-rec (asign (nth$ ?i ?asigs)) (motivo ?motivo) (es-pref ?es_pref) (prioridad ?prio))) 
         )
     )
 )
@@ -238,19 +239,6 @@
         )
     )
 
-)
-
-(defrule escoge-especialidad-principal "Escoge asignaturas de la especialidad principal"
-    (ent-asigs)
-    (dni ?dni)
-    ?al <- (object (is-a Alumno) (id ?dni) (especialidad ?e))
-    (test (neq ?e [nil]))
-    =>
-    (bind ?ins-asigs (find-all-instances ((?ins Especializada)) (member ?e ?ins:especialidad_asig)))
-
-    (loop-for-count (?i 1 (length$ ?ins-asigs)) do
-        (assert (nueva-rec (asign (nth$ ?i ?ins-asigs)) (motivo sigue-esp-principal) (es-pref TRUE) (prioridad 10))) 
-    )
 )
 
 (defrule escoge-suspendidas "Escoge asignaturas suspendidas"
