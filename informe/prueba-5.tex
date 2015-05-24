@@ -1,12 +1,49 @@
 
 \subsection{Quinto juego de pruebas} \label{sec:prueba-5}
 
-%%% TODO : Explicación del juego de pruebas y análisis de lo que se espera.
+El quinto sujeto de pruebas es alguien que trabaja a la vez que estudia. Por 
+ello, se trata de una persona con una baja disponibilidad temporal para la 
+universidad y con dificultades para asumir grandes cargas de trabajo. Esta 
+persona ha iniciado ya la especialidad de computación, pero solo ha 
+completado un par de asignaturas de esta porque en los últimos cuatrimestres 
+ha podido matricularse de muy pocas asignaturas. Por otro lado, el alumno 
+tiene mucho interés en algunos temas relacionados con la especialidad de 
+computación y, además, le gustaría desarrollar algunas competencias 
+transversales en concreto.
 
-\lstinputlisting[caption={Salida original del quinto juego de pruebas.},%
-        label={lst:prueba-5}]%
-    {resultado-5.txt}
+Consideramos dos versiones de este juego de pruebas. En la primera de ellas, 
+el alumno impone restricciones para garantizar que la recomendación que 
+obtiene supone una carga de trabajo reducida y que se tratan los temas que 
+más le apasionan. En la segunda, en cambio, el alumno confía en el sistema de 
+inferencia para detectar su baja disponibilidad (teniendo en cuenta la carga 
+de trabajo asumida en los cuatrimestres previos) y simplemente expresa como 
+preferencias los temas y las competencias transversales que le interesan, 
+dando así una mayor libertad al sistema de recomendación. En ambas versiones,
+las asignaturas recomendadas tienen que ofrecerse en horario de tarde, ya que 
+esta persona trabaja en una empresa por la mañana.
 
+Este juego de pruebas pretende contrastar las recomendaciones obtenidas cuando 
+se imponen restricciones estrictas respecto a cuando se deja que el sistema 
+infiera preferencias basadas en el conocimiento pasado. En el primero de los 
+casos, se espera que la recomendación se adecúe totalmente a las 
+necesidades del alumno aunque sea bastante limitada; en el segundo caso, en 
+contraposición, se espera obtener una recomendación más amplia pero menos 
+precisa.
+
+\lstinputlisting[caption={Salida original de la versión con restricciones del %
+        quinto juego de pruebas.}, label={lst:prueba-5a}]%
+    {resultado-5a.txt}
+
+El \autoref{lst:prueba-5a} muestra la salida obtenida con la versión más 
+restrictiva de este juego de pruebas.
+%%% TODO : Análisis del resultado obtenido y comparativa con lo esperado.
+
+\lstinputlisting[caption={Salida original de la versión con preferencias e % 
+        inferencia del quinto juego de pruebas.}, label={lst:prueba-5b}]%
+    {resultado-5b.txt}
+
+El \autoref{lst:prueba-5b} muestra la salida obtenida con la versión menos 
+restrictiva de este juego de pruebas.
 %%% TODO : Análisis del resultado obtenido y comparativa con lo esperado.
 
 
