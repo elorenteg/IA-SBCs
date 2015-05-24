@@ -409,7 +409,10 @@
     
     (if (not (eq (str-compare "" ?string) 0))
         then
-        (printout t " * " ?titulo ": " ?string crlf)
+        (if (eq (str-compare ?idMot "sigue plan estudios") 0)
+            then (printout t " * " ?titulo ": curso " ?string crlf)
+            else (printout t " * " ?titulo ": " ?string crlf)
+        )
     )
 )
 
