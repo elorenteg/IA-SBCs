@@ -125,16 +125,14 @@ a tener en cuenta. Es decir, para cada restricción o preferencia disponible,
 se evalúan los parámetros que la caracterizan y, según unos rangos, se 
 sustituyen por valores más genéricos (con un dominio mucho más reducido). 
 
-En particular, el volumen de trabajo asumible se califica como \textit{alto}, 
-\textit{medio} o \textit{bajo} según si el número máximo de asignaturas a 
-matricular es superior a cinco, entre tres y cuatro o como mucho dos, 
-respectivamente. Similarmente, el número de horas de dedicación semanales se 
-divide en \textit{alto}, \textit{medio} y \textit{bajo}. 
-El resto de conocimiento del problema, como por ejemplo la dificultad 
-asumible, la especialidad que se cursa y si es importante completarla, la 
-disponibilidad horaria o los temas de interés, no se abstrae: se trata de 
-parámetros que no se pueden agrupar de forma más general y que son necesarios 
-de esta forma para el proceso de asociación posterior.
+Para nuestro problema no abstraemos ningún dato. El volumen de trabajo y el tiempo 
+de dedicación como tratan sobre un conjunto de asignaturas recomendadas, en la fase 
+de asociación no nos servirá tener valores abstractos \textit{alto}, \textit{medio} 
+o \textit{bajo} que no usaremos. El resto de conocimiento del problema, como por ejemplo 
+la dificultad asumible, la especialidad que se cursa y si es importante completarla, 
+la disponibilidad horaria o los temas de interés, no se abstrae: se trata de parámetros 
+que no se pueden agrupar de forma más general y que son necesarios de esta forma para 
+el proceso de asociación posterior.
 
 En el subproblema de asociación, esencialmente se comprueban algunas 
 restricciones por asignatura y se calcula qué preferencias satisface cada 
