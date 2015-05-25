@@ -1,19 +1,92 @@
 
 \subsection{Sexto juego de pruebas} \label{sec:prueba-6}
 
-%%% TODO : Explicación del juego de pruebas y análisis de lo que se espera.
+Este último sujeto de prueba es una persona en su último curso del grado. 
+Esta persona ha completado todas las asignaturas obligatorias y todas las de 
+la especialidad de computación siguiendo el plan de estudios propuesto por 
+la FIB y, además, obteniendo calificaciones bastante buenas. Por ello, este 
+alumno desea que se le recomienden asignaturas optativas acordes a sus gustos 
+y que desarrollen las competencias transversales que todavía no ha obtenido. 
+Además, este alumno ya empieza a pensar en su futuro fuera de la universidad 
+y, por lo tanto, tiene algunas preocupaciones adicionales. 
+
+Consideramos también dos versiones de este juego de pruebas. En la primera de 
+ellas, el alumno está especialmente preocupado por su insuficiente 
+conocimiento del inglés y el impacto que esto podría tener en su futuro 
+laboral. Por este motivo, impone como restricción estricta que las asignaturas 
+de las que quiere matricularse desarrollen la competencia transversal de la 
+tercera lengua. Además, prefiere no tener una carga de trabajo excesiva para 
+poder ir pensando en el trabajo de final de grado, así que impone algunas 
+restricciones (no muy restrictivas) en cuanto a la dedicación a la 
+universidad. Además de ello, el alumno muestra un cierto interés por algunos 
+temas concretos. Por contra, en la segunda versión, el alumno se plantea la 
+posibilidad de desarrollar el trabajo de final de grado en inglés y, por lo 
+tanto, ya no es tan importante que las asignaturas trabajen la tercera lengua. 
+En este caso, pues, la restricción sobre la competencia transversal pasa a 
+ser una preferencia y ya no se imponen restricciones sobre la carga de trabajo
+asumible.
+
+Teniendo en cuenta la situación del alumno, se espera que se recomienden 
+principalmente asignaturas optativas (o de alguna especialidad que se puedan 
+cursar en concepto de optativas) sobre algunos de los temas que interesan al 
+alumno y que desarrollen algunas de las competencias transversales preferidas, 
+dando una especial importancia a la competencia de la tercera lengua en la 
+primera versión.
+
+Con este juego de pruebas, pues, se intenta confirmar el distinto 
+comportamiento del sistema frente a entradas más o menos restrictivas, 
+reforzando así los resultados observados en el juego de pruebas anterior. 
+Además, este caso es sustancialmente distinto a los anteriores porque este 
+alumno se encuentra ya cerca del final del plan de estudios y, por lo tanto, 
+solo se pueden tener en cuenta asignaturas optativas, de otras especialidades 
+o incluso alguna de la especialidad de computación que no se haya cursado. Es 
+decir, el conjunto de asignaturas a tener en cuenta es mucho más reducido (a 
+pesar de que no hay restricciones impuestas por el plan de estudios sobre 
+requisitos o la necesidad de completar una especialidad).
 
 \lstinputlisting[caption={Salida original de la primera versión del sexto %
         juego de pruebas.}, label={lst:prueba-6a}]%
     {resultado-6a.txt}
 
-%%% TODO : Análisis del resultado obtenido y comparativa con lo esperado.
+Los resultados obtenidos con la primera versión de este juego de pruebas se 
+muestran en \autoref{lst:prueba-6a}. Se observa que, en este caso, el sistema 
+ha dado mucha prioridad a las asignaturas que desarrollan la tercera lengua 
+y ha sugerido una recomendación muy conservadora en este sentido. Así, las 
+cuatro asignaturas recomendadas son optativas y tres de ellas están enfocadas 
+básicamente a habilidades importantes para el mundo laboral y cursadas en 
+inglés. Sin embargo, esto ha hecho que prácticamente se ignoren los temas de 
+interés del alumno (solamente la asignatura de geometría computacional tiene 
+en cuenta los intereses temáticos) y el resto de competencias transversales.
+En definitiva, se trata de una recomendación más limitada de lo esperado en 
+un principio, pero se puede entender por la importancia que da el sistema a 
+las restricciones.
 
 \lstinputlisting[caption={Salida original de la segunda versión del sexto % 
         juego de pruebas.}, label={lst:prueba-6b}]%
     {resultado-6b.txt}
 
-%%% TODO : Análisis del resultado obtenido y comparativa con lo esperado.
+El \autoref{lst:prueba-6b} muestra los resultados obtenidos con la versión 
+menos restrictiva. En este caso, como era de esperar, se da una mayor 
+importancia a los intereses temáticos del alumno y, en consecuencia, se 
+recomiendan muchas asignaturas de la especialidad de computación basadas en 
+los temas listados en las preferencias. En este caso, sin embargo, 
+prácticamente se han ignorado las competencias transversales preferidas y, 
+además, hay un cierto solapamiento entre las asignaturas recomendadas (tres de 
+ellas se recomiendan por tratar el tema de tratamiento de datos).
+Esto se debe a las limitaciones del sistema a la hora de considerar los 
+subconjuntos de asignaturas válidos para la recomendación (puesto que hay un 
+gran número de ellos y, por lo tanto, el sistema aplica razonamientos 
+heurísticos y voraces para obtener recomendaciones válidas en un tiempo 
+factible a la práctica) y a su mayor facilidad para evaluar las asignaturas de 
+forma individual. A pesar de todo, la recomendación presentada sigue siendo 
+aceptable.
+
+Con este juego de pruebas más complicado, hemos observado algunas limitaciones 
+del sistema de recomendación. Así, en casos más complejos o con mayores 
+restricciones, el sistema recomienda muchas asignaturas parecidas entre ellas 
+y no considera algunas de las preferencias. Aun así, es capaz de ofrecer 
+recomendaciones aceptables, aunque no sean las mejores posibles desde el punto 
+de vista de un experto.
 
 
 
