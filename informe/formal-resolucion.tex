@@ -105,7 +105,6 @@ cuatrimestre el alumno cursó todas las asignaturas en un mismo horario, se
 asume que ese es su horario preferido. Asimismo, si el alumno ya está cursando
 una especialidad del grado y, de hecho, ya le quedan muy pocas asignaturas 
 para completarla, se infiere que es prioritario terminarla.
-% TODO : ¿Cuántas son 'muy pocas'? Habría que sustituir esta última frase por la regla exacta.
 En cuanto a las competencias transversales, se asume que el alumno da 
 prioridad a aquellas que se desarrollan en las asignaturas que ha cursado 
 hasta el momento. Del mismo modo, se infiere que el 
@@ -130,9 +129,7 @@ En particular, el volumen de trabajo asumible se califica como \textit{alto},
 \textit{medio} o \textit{bajo} según si el número máximo de asignaturas a 
 matricular es superior a cinco, entre tres y cuatro o como mucho dos, 
 respectivamente. Similarmente, el número de horas de dedicación semanales se 
-divide en \textit{alto}, \textit{medio} y \textit{bajo} según si es superior 
-a XXX, está entre XXX y XXX o es menor o igual que XXX. 
-% TODO : Hay que sustituir los XXX por el número que sea.
+divide en \textit{alto}, \textit{medio} y \textit{bajo}. 
 El resto de conocimiento del problema, como por ejemplo la dificultad 
 asumible, la especialidad que se cursa y si es importante completarla, la 
 disponibilidad horaria o los temas de interés, no se abstrae: se trata de 
@@ -182,12 +179,10 @@ de la especialidad (si procede) y el cumplimiento de los correquisitos de las
 asignaturas recomendadas. Teniendo en cuenta toda esta información concreta, 
 se genera la recomendación final, constituida por un máximo de seis 
 asignaturas que se adecúan en la medida de lo posible a las preferencias del 
-alumno. Se asegura la satisfacción de todas las restricciones en esta 
-recomendación. En caso de que sea imposible ofrecer una recomendación con 
-todas las restricciones impuestas, se advierte al alumno de ello.
-% TODO : Probablemente habría que explicar mejor cómo se mira qué asignaturas 
-%        son las mejores (por ejemplo: suma ponderada de preferencias 
-%        cumplidas).
+alumno. Es decir, se intenta que se cumpla el máximo número posible de 
+preferencias. Además, se asegura la satisfacción de todas las restricciones 
+en esta recomendación. En caso de que sea imposible ofrecer una recomendación 
+con todas las restricciones impuestas, se advierte al alumno de ello.
 
 
 
