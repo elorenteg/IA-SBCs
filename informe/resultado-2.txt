@@ -1,6 +1,110 @@
-=====================================================================
-=                            Inferencia                             =
-=====================================================================
+=============================================================
+=     Sistema de recomendacion de asignaturas de la FIB     =
+=============================================================
+
+>> Introduzca su identificador (DNI): [0, 9999] 222
+A continuacion se le formularan una serie de preguntas sobre sus
+preferencias/restricciones para poder recomendarle asignaturas
+
+Introduccion de PREFERENCIAS
+>> Cual es el numero maximo de asignaturas a matricular? [1, 6] (opcional) -
+>> Cual es el numero maximo de horas de dedicacion semanales? [0, 50] (opcional) -
+>> Cual es el numero maximo de horas de laboratorio/problemas semanales? [0, 50] (opcional) -
+>> Que horario se ajusta mejor a su disponibilidad? [manyana tarde cualquiera] (opcional) -
+>> Que especialidad desea matricular? (opcional) 
+  (1) Tecnologias de la informacion
+  (2) Sistemas de informacion
+  (3) Ingenieria del software
+  (4) Ingenieria de computadores
+  (5) Computacion
+Indique un numero [1, 5] -
+>> Que temas especializados le interesan? (opcional) 
+  (1) Logica
+  (2) Geometria computacional
+  (3) Tratamiento de datos
+  (4) Investigacion operativa
+  (5) Graficos
+  (6) Lenguajes de programacion
+  (7) Calculo numerico
+  (8) Inteligencia artifical
+  (9) Videojuegos
+  (10) Tratamiento de imagenes
+  (11) Targetas graficas
+  (12) Software libre
+  (13) Robotica
+  (14) Criptografia
+  (15) Aplicaciones mobiles
+  (16) Seguridad
+  (17) Protocolos
+  (18) Aplicaciones web
+  (19) Procesadores
+  (20) Sistemas operativos
+  (21) Disenyo de algoritmos
+  (22) Sistemas de informacion
+Indique los numeros separados por un espacio [1, 22] -
+>> Cuales son sus competencias favoritas? (opcional) 
+  (1) Actitud frente al trabajo
+  (2) Aprendizaje autonomo
+  (3) Comunicacion eficaz oral y escrita
+  (4) Emprendeduria e innovacion
+  (5) Razonamiento
+  (6) Sostenibilidad y compromiso social
+  (7) Tercera lengua
+  (8) Trabajo en equipo
+  (9) Uso solvente de los recursos de informacion
+Indique los numeros separados por un espacio [1, 9] -
+
+Introduccion de RESTRICCIONES
+>> Cual es el numero maximo de asignaturas a matricular? [1, 6] (opcional) -
+>> Cual es el numero maximo de horas de dedicacion semanales? [0, 50] (opcional) -
+>> Cual es el numero maximo de horas de laboratorio/problemas semanales? [0, 50] (opcional) -
+>> Que horario se ajusta mejor a su disponibilidad? [manyana tarde cualquiera] (opcional) -
+>> Que especialidad desea matricular? (opcional) 
+  (1) Tecnologias de la informacion
+  (2) Sistemas de informacion
+  (3) Ingenieria del software
+  (4) Ingenieria de computadores
+  (5) Computacion
+Indique un numero [1, 5] -
+>> Que temas especializados le interesan? (opcional) 
+  (1) Logica
+  (2) Geometria computacional
+  (3) Tratamiento de datos
+  (4) Investigacion operativa
+  (5) Graficos
+  (6) Lenguajes de programacion
+  (7) Calculo numerico
+  (8) Inteligencia artifical
+  (9) Videojuegos
+  (10) Tratamiento de imagenes
+  (11) Targetas graficas
+  (12) Software libre
+  (13) Robotica
+  (14) Criptografia
+  (15) Aplicaciones mobiles
+  (16) Seguridad
+  (17) Protocolos
+  (18) Aplicaciones web
+  (19) Procesadores
+  (20) Sistemas operativos
+  (21) Disenyo de algoritmos
+  (22) Sistemas de informacion
+Indique los numeros separados por un espacio [1, 22] -
+>> Cuales son sus competencias favoritas? (opcional) 
+  (1) Actitud frente al trabajo
+  (2) Aprendizaje autonomo
+  (3) Comunicacion eficaz oral y escrita
+  (4) Emprendeduria e innovacion
+  (5) Razonamiento
+  (6) Sostenibilidad y compromiso social
+  (7) Tercera lengua
+  (8) Trabajo en equipo
+  (9) Uso solvente de los recursos de informacion
+Indique los numeros separados por un espacio [1, 9] -
+
+=============================================================
+=                        Inferencia                         =
+=============================================================
 
 Los siguientes dados se han inferido a partir de su Expediente:
  * Curso: 1
@@ -13,9 +117,9 @@ Los siguientes dados se han inferido a partir de su Expediente:
  * Temas: Matematicas, Programacion, Arquitectura de computadores, Fisica
  * Tipo de horario: Tarde
 
-=====================================================================
-=                           Recomendacion                           =
-=====================================================================
+=============================================================
+=                       Recomendacion                       =
+=============================================================
 
 La recomendacion del sistema consta de 4 asignaturas (cumple preferencia), 
 y conllevaria los siguientes tiempos de dedicacion semanal:
