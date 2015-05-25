@@ -80,9 +80,9 @@
     (bind ?abs (modify ?abs (dificultadR nil)))
     (if (eq (str-compare ?difPref "Facil") 0)
         then
-        (bind ?abs (modify ?abs (dificultadP "media")))
+        (bind ?abs (modify ?abs (dificultadP facil)))
         else
-        (bind ?abs (modify ?abs (dificultadP "alta")))
+        (bind ?abs (modify ?abs (dificultadP dificil)))
     )
 
     (assert(abs-dificultad ok))
