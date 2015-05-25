@@ -69,22 +69,25 @@ El \autoref{lst:prueba-6b} muestra los resultados obtenidos con la versión
 menos restrictiva. En este caso, como era de esperar, se da una mayor 
 importancia a los intereses temáticos del alumno y, en consecuencia, se 
 recomiendan muchas asignaturas de la especialidad de computación basadas en 
-los temas listados en las preferencias. En este caso, sin embargo, 
-prácticamente se han ignorado las competencias transversales preferidas y, 
-además, hay un cierto solapamiento entre las asignaturas recomendadas (tres de 
-ellas se recomiendan por tratar el tema de tratamiento de datos).
-Esto se debe a las limitaciones del sistema a la hora de considerar los 
-subconjuntos de asignaturas válidos para la recomendación (puesto que hay un 
-gran número de ellos y, por lo tanto, el sistema aplica razonamientos 
-heurísticos y voraces para obtener recomendaciones válidas en un tiempo 
-factible a la práctica) y a su mayor facilidad para evaluar las asignaturas de 
-forma individual. A pesar de todo, la recomendación presentada sigue siendo 
-aceptable.
+los temas listados en las preferencias. En este caso, sin embargo, las 
+competencias transversales preferidas han tenido un peso prácticamente nulo 
+en la recomendación porque la mayoría de ellas ya se habían obtenido con 
+las asignaturas cursadas previamente (y el sistema ha sido capaz de detectarlo 
+a partir del expediente). Además, hay un cierto solapamiento entre las 
+asignaturas recomendadas (tres de ellas se recomiendan por tratar el tema de 
+tratamiento de datos). Esto se debe a las limitaciones del sistema a la hora 
+de considerar los subconjuntos de asignaturas válidos para la recomendación 
+(puesto que hay un gran número de ellos y, por lo tanto, el sistema aplica 
+razonamientos heurísticos y voraces para obtener recomendaciones válidas en 
+un tiempo factible a la práctica) y a su mayor facilidad para evaluar las 
+asignaturas de forma individual. A pesar de todo, la recomendación presentada 
+sigue siendo aceptable.
 
 Con este juego de pruebas más complicado, hemos observado algunas limitaciones 
 del sistema de recomendación. Así, en casos más complejos o con mayores 
 restricciones, el sistema recomienda muchas asignaturas parecidas entre ellas 
-y no considera algunas de las preferencias. Aun así, es capaz de ofrecer 
+y puede obviar algunas de las preferencias (porque se prioriza el número de 
+preferencias satisfechas por asignatura). Aun así, es capaz de ofrecer 
 recomendaciones aceptables, aunque no sean las mejores posibles desde el punto 
 de vista de un experto.
 
