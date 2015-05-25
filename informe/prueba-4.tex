@@ -33,8 +33,26 @@ restricciones explícitas además del proceso de inferencia.
         label={lst:prueba-4a}]%
     {resultado-4a.txt}
 
-El \autoref{lst:prueba-4a} muestra los resultados obtenidos. 
-%%% TODO : Análisis del resultado obtenido y comparativa con lo esperado.
+El \autoref{lst:prueba-4a} muestra los resultados obtenidos. Como se esperaba, 
+el sistema ha recomendado principalmente asignaturas de otras especialidades 
+(tecnologías de la información e ingeniería de computadores) en calidad de 
+optativas para suplir la imposibilidad de cursar asignaturas de la 
+especialidad de ingeniería del software en el horario deseado. Estas 
+asignaturas, además, tratan los temas de interés que el usuario ha introducido 
+como preferencias o bien desarrollan alguna de las competencias transversales 
+deseadas. Además, se ha recomendado la única asignatura obligatoria que el 
+alumno todavía no había cursado. La recomendación obtenida, pues, parece muy 
+razonable teniendo en cuenta las fuertes restricciones con las que se ha 
+encontrado el sistema en este caso. A pesar de todo, el sistema ha marcado 
+estas asignaturas simplemente como recomendables (y no como altamente 
+recomendables) porque encuentra relativamente pocos motivos para recomendarlas 
+(aunque no haya otras asignaturas candidatas más acordes a los criterios 
+evaluados). Esto alerta de que podría haber otras recomendaciones igualmente 
+válidas en este caso.
+
+Con este juego de pruebas, podemos concluir que el sistema es capaz de 
+adaptarse y ofrecer un buen comportamiento incluso ante casos complejos en los 
+que no hay una opción claramente superior.
 
 \lstinputlisting[caption={Salida original de la versión alternativa del %
         cuarto juego de pruebas.}, label={lst:prueba-4b}]%
