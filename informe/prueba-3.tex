@@ -3,12 +3,13 @@
 
 El tercer juego de pruebas es esencialmente la continuación natural del 
 anterior. En este caso, se considera una persona que ha seguido bastante 
-el plan de estudios propuesto por la FIB, aprobando todas las asignaturas en 
-su primera convocatoria, gracias a su dedicación exclusiva a la universidad. 
-Esta persona ha completado todas las asignaturas obligatorias excepto una 
-y ya ha cursado tres asignaturas de la especialidad de computación. Como en 
-los casos anteriores, esta persona no ofrece restricciones ni preferencias de 
-forma explícita y deja esta tarea para el sistema de recomendación.
+fielmente el plan de estudios propuesto por la FIB, aprobando todas las 
+asignaturas en su primera convocatoria gracias a su dedicación exclusiva a la 
+universidad. Esta persona ha completado todas las asignaturas obligatorias 
+excepto una y ya ha cursado tres asignaturas de la especialidad de 
+computación. Como en los casos anteriores, esta persona no ofrece 
+restricciones ni preferencias de forma explícita y deja esta tarea para el 
+sistema de recomendación.
 
 Teniendo en cuenta las asignaturas cursadas previamente, se espera que el 
 sistema ofrezca una recomendación compuesta mayoritariamente por asignaturas 
@@ -29,7 +30,33 @@ a tener en cuenta por el sistema: los temas de interés del alumno.
     {resultado-3.txt}
 
 El \autoref{lst:prueba-3} muestra la salida del programa obtenida con este 
-juego de pruebas.
-%%% TODO : Análisis del resultado obtenido y comparativa con lo esperado.
+juego de pruebas. En este caso, el sistema recomienda tres asignaturas de la 
+especialidad de computación: dos de ellas son obligatorias y la otra es 
+complementaria (se trata de la asignatura de compiladores; parece razonable 
+que el sistema la considere adecuada para el alumno porque ha cursado la 
+asignatura de lenguajes de programación previamente y ambas asignaturas están 
+estrechamente relacionadas). Esta parte de la recomendación, pues, es muy 
+parecida a lo que esperábamos al diseñar este juego de pruebas. Sin embargo, 
+puede resultar sorprendente que la última asignatura de la recomendación sea 
+una asignatura de la especialidad de tecnologías de la información (que se 
+recomienda aquí en calidad de optativa). Esto se debe a que, por la falta de 
+información proporcionada por el alumno, el sistema ha inferido temas de 
+interés a partir de las asignaturas cursadas, la gran mayoría de las cuales 
+son obligatorias. Y, casualmente, ha resultado que los temas tratados en la 
+asignatura de internet móbil son parecidos a los temas tratados en algunas 
+asignaturas cursadas por el alumno, por lo cual el sistema ha juzgado que 
+esa asignatura podría interesarle. Quizás hubiera sido más acertado recomendar
+la asignatura de paralelismo (la única asignatura obligatoria que le queda) 
+u otra asignatura de la especialidad de computación, en vista de la falta de 
+información acerca de los gustos del alumno.
+
+En conclusión, la recomendación obtenida para este juego de pruebas es 
+bastante buena en general (se recomiendan bastantes asignaturas de la 
+especialidad cursada por el alumno e incluso se razona de forma acertada 
+sobre las preferencias del alumno mostradas con las pocas asignaturas de 
+especialidad completadas) pero se desvía ligeramente de lo esperado porque se 
+ha forzado al sistema a inferir la mayor parte del conocimiento (y el proceso 
+de inferencia puede dar lugar a equívocos en casos puntuales porque no hay 
+forma perfecta de sacar conclusiones siempre correctas). 
 
 
