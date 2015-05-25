@@ -35,15 +35,42 @@ precisa.
     {resultado-5a.txt}
 
 El \autoref{lst:prueba-5a} muestra la salida obtenida con la versión más 
-restrictiva de este juego de pruebas.
-%%% TODO : Análisis del resultado obtenido y comparativa con lo esperado.
+restrictiva de este juego de pruebas. En esta versión, el usuario ha impuesto 
+restricciones explícitas para señalar su baja disponibilidad y que desea que 
+las asignaturas que matricule traten sobre lógica e inteligencia artificial. 
+Además de esto, expresa su preferencia por matricularse de un máximo de tres 
+asignaturas y por desarrollar las competencias transversales de trabajo en 
+equipo y de razonamiento. Por lo tanto, la recomendación ofrecida por el 
+sistema es muy acertada: las dos asignaturas recomendadas son de la 
+especialidad cursada por el alumno y, entre las dos, tratan los dos temas y 
+desarrollan las dos competencias transversales por los que ha mostrado 
+interés. Además, se respetan la disponibilidad horaria y la imposibilidad de 
+asumir cargas de trabajo intensas. 
+
+En este caso, pues, el sistema responde a la perfección a las necesidades del 
+alumno, aunque es muy conservador en la recomendación debido a las 
+restricciones impuestas.
 
 \lstinputlisting[caption={Salida original de la versión con preferencias e % 
         inferencia del quinto juego de pruebas.}, label={lst:prueba-5b}]%
     {resultado-5b.txt}
 
 El \autoref{lst:prueba-5b} muestra la salida obtenida con la versión menos 
-restrictiva de este juego de pruebas.
-%%% TODO : Análisis del resultado obtenido y comparativa con lo esperado.
+restrictiva de este juego de pruebas. A diferencia de la versión anterior, en 
+esta el usuario expresa sus intereses temáticos y las limitaciones debidas a 
+su trabajo como preferencias (y no como restricciones). Por este motivo, la 
+recomendación ofrecida en este caso es menos conservadora y, tal vez, menos 
+precisa también. En este caso, se recomiendan tres asignaturas de la 
+especialidad de computación bastante relacionadas con los temas y competencias 
+transversales de interés, pero no se incluye ninguna asignatura de lógica 
+(porque no es un requisito, sino una preferencia simplemente). 
+
+En conclusión, observamos que el sistema ofrece recomendaciones más precisas 
+pero conservadoras (en el sentido que la cantidad de asignaturas que se tienen 
+en cuenta para la recomendación es bastante más limitada) cuando se imponen 
+más restricciones. En cambio, cuando estas limitaciones se expresan como 
+preferencias, el sistema es capaz de tener en cuenta más asignaturas para la 
+recomendación y, por ello, también puede ofrecer una recomendación que cumpla 
+menos criterios de los deseados.
 
 
