@@ -14,16 +14,12 @@
 (deftemplate problema-abstracto "Conjunto de características que definen un problema abstracto"
     (slot dificultadR (allowed-strings "alta" "media"))
     (slot dificultadP (allowed-strings "alta" "media"))
-    (slot volumen-trabajoR (allowed-strings "alto" "medio" "bajo"))
-    (slot volumen-trabajoP (allowed-strings "alto" "medio" "bajo"))
     (multislot intereses-tematicosR (type INSTANCE))
     (multislot intereses-tematicosP (type INSTANCE))
     (slot especialidadR (type INSTANCE))
     (slot especialidadP (type INSTANCE))
     (multislot competenciasR (type INSTANCE))
     (multislot competenciasP (type INSTANCE))
-    (slot tiempo-dedicacionR (allowed-strings "alto" "medio" "bajo"))
-    (slot tiempo-dedicacionP (allowed-strings "alto" "medio" "bajo"))
     (multislot horario-preferidoR (allowed-strings "manyana" "tarde") (default (create$)))
     (multislot horario-preferidoP (allowed-strings "manyana" "tarde") (default (create$)))
     (slot curso-estudios) ;curso del plan de estudios
